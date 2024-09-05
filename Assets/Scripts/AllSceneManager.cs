@@ -20,11 +20,6 @@ public class AllSceneManager : MonoBehaviour
 
     void Scene()
     {
-        if (inputManager.IsTrgger(InputManager.INPUTPATTERN.RESET))
-        {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        }
-
         // ウィンドウを閉じる
         if (Input.GetKeyDown(KeyCode.Escape))
         {

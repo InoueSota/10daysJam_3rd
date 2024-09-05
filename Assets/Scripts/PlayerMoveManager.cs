@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class PlayerMoveManager : MonoBehaviour
 {
+    // 自コンポーネント取得
+    private PlayerManager playerManager;
+
     // 入力
     private InputManager inputManager;
     private bool isPushLeft;
@@ -46,6 +49,7 @@ public class PlayerMoveManager : MonoBehaviour
 
     void Start()
     {
+        playerManager = GetComponent<PlayerManager>();
         inputManager = GetComponent<InputManager>();
 
         halfSize.x = transform.localScale.x * 0.5f;
@@ -53,7 +57,9 @@ public class PlayerMoveManager : MonoBehaviour
         cameraHalfSize.x = Camera.main.ScreenToWorldPoint(new(Screen.width, 0f, 0f)).x;
         cameraHalfSize.y = Camera.main.ScreenToWorldPoint(new(0f, Screen.height, 0f)).y;
         originPosition = transform.position;
-
+    }
+    public void Initialize()
+    {
         transform.position = originPosition;
         isJumping = false;
         isHovering = false;
@@ -62,17 +68,20 @@ public class PlayerMoveManager : MonoBehaviour
 
     void Update()
     {
-        GetInput();
+        if (playerManager.GetIsActive())
+        {
+            GetInput();
 
-        nextPosition = transform.position;
+            nextPosition = transform.position;
 
-        Move();
-        Jump();
-        Hovering();
-        Gravity();
-        ClampInCamera();
+            Move();
+            Jump();
+            Hovering();
+            Gravity();
+            ClampInCamera();
 
-        transform.position = nextPosition;
+            transform.position = nextPosition;
+        }
     }
 
     void CheckDirection()
