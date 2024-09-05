@@ -315,4 +315,13 @@ public class PlayerMoveManager : MonoBehaviour
             isTriggerJump = true;
         }
     }
+    
+    public bool GetIsGround()
+    {
+        if (isJumping || isHovering || isGravity)
+        {
+            return false;
+        }
+        return true;
+    }
 }

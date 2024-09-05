@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
@@ -9,6 +10,7 @@ public class GameManager : MonoBehaviour
     private InputManager inputManager;
     private bool isTriggerReset;
     private bool isTriggerSpecial;
+    private bool isTriggerJump;
 
     // ƒtƒ‰ƒO—Þ
     private bool isStart;
@@ -70,7 +72,7 @@ public class GameManager : MonoBehaviour
     }
     void Clear()
     {
-        if (isTriggerSpecial && !isClear)
+        if (!isClear)
         {
             bool isFinish = true;
 
@@ -91,6 +93,13 @@ public class GameManager : MonoBehaviour
                 groupClear.SetActive(true);
                 GlobalVariables.isClear = true;
                 isClear = true;
+            }
+        }
+        else
+        {
+            if (isTriggerJump)
+            {
+                SceneManager.LoadScene("SelectScene");
             }
         }
     }
@@ -130,6 +139,7 @@ public class GameManager : MonoBehaviour
     {
         isTriggerReset = false;
         isTriggerSpecial = false;
+        isTriggerJump = false;
 
         if (inputManager.IsTrgger(InputManager.INPUTPATTERN.RESET))
         {
@@ -138,6 +148,10 @@ public class GameManager : MonoBehaviour
         if (inputManager.IsTrgger(InputManager.INPUTPATTERN.SPECIAL))
         {
             isTriggerSpecial = true;
+        }
+        if (inputManager.IsTrgger(InputManager.INPUTPATTERN.JUMP))
+        {
+            isTriggerJump = true;
         }
     }
 }

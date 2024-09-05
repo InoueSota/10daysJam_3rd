@@ -4,12 +4,16 @@ using UnityEngine;
 
 public class CropLineManager : MonoBehaviour
 {
+    // 他コンポーネント取得
+    private PlayerMoveManager playerMoveManager;
+
     // 入力
     private InputManager inputManager;
     private bool isTriggerSpecial;
 
     void Start()
     {
+        playerMoveManager = transform.parent.GetComponent<PlayerMoveManager>();
         inputManager = GetComponent<InputManager>();
     }
 
@@ -25,7 +29,7 @@ public class CropLineManager : MonoBehaviour
 
     void Destruction()
     {
-        if (isTriggerSpecial)
+        if (isTriggerSpecial && playerMoveManager.GetIsGround())
         {
             foreach (GameObject obj in GameObject.FindGameObjectsWithTag("Object"))
             {
