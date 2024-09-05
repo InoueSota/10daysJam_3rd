@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class AllObjectManager : MonoBehaviour
 {
+    [SerializeField] private bool isActive = true;
+
     public enum ObjectType
     {
         GROUND,
         BLOCK,
-        GOAL
+        ITEM
     }
     [SerializeField] private ObjectType objectType;
 
@@ -22,6 +24,15 @@ public class AllObjectManager : MonoBehaviour
 
     }
 
+    public void SetIsActive(bool _isActive)
+    {
+        isActive = _isActive;
+    }
+
+    public bool GetIsActive()
+    {
+        return isActive;
+    }
     public ObjectType GetObjectType()
     {
         return objectType;

@@ -4,9 +4,63 @@ using UnityEngine;
 
 public class CropLineManager : MonoBehaviour
 {
+    // 入力
+    private InputManager inputManager;
+    private bool isTriggerSpecial;
+
+    void Start()
+    {
+        inputManager = GetComponent<InputManager>();
+    }
+
     void LateUpdate()
     {
+        GetInput();
+
         transform.localPosition = new(0f, -1f, 0f);
         transform.position = new(0f, transform.position.y, transform.position.z);
+
+        Destruction();
+    }
+
+    void Destruction()
+    {
+        if (isTriggerSpecial)
+        {
+            foreach (GameObject obj in GameObject.FindGameObjectsWithTag("Object"))
+            {
+                AllObjectManager hitAllObjectManager = obj.GetComponent<AllObjectManager>();
+
+                if (hitAllObjectManager.GetObjectType() != AllObjectManager.ObjectType.GROUND)
+                {
+                    // Y軸判定
+                    float yBetween = Mathf.Abs(transform.position.y - obj.transform.position.y);
+
+                    if (yBetween < 0.2f)
+                    {
+                        // 衝突対象がブロック
+                        if (hitAllObjectManager.GetObjectType() == AllObjectManager.ObjectType.BLOCK)
+                        {
+                            obj.GetComponent<BlockManager>().SetIsActive(false);
+                        }
+                        // 衝突対象がアイテム
+                        else if (hitAllObjectManager.GetObjectType() == AllObjectManager.ObjectType.ITEM)
+                        {
+                            obj.GetComponent<ItemManager>().SetIsActive(false);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    void GetInput()
+    {
+        isTriggerSpecial = false;
+
+        if (inputManager.IsTrgger(InputManager.INPUTPATTERN.SPECIAL))
+        {
+            isTriggerSpecial = true;
+        }
     }
 }

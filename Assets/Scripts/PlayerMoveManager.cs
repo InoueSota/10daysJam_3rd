@@ -9,7 +9,6 @@ public class PlayerMoveManager : MonoBehaviour
     private bool isPushLeft;
     private bool isPushRight;
     private bool isTriggerJump;
-    private bool isTriggerSpecial;
 
     // 基本情報
     private Vector2 halfSize;
@@ -74,8 +73,6 @@ public class PlayerMoveManager : MonoBehaviour
         ClampInCamera();
 
         transform.position = nextPosition;
-
-        Destruction();
     }
 
     void CheckDirection()
@@ -112,7 +109,7 @@ public class PlayerMoveManager : MonoBehaviour
         {
             foreach (GameObject obj in GameObject.FindGameObjectsWithTag("Object"))
             {
-                if (obj.GetComponent<AllObjectManager>().GetObjectType() != AllObjectManager.ObjectType.GOAL)
+                if (obj.GetComponent<AllObjectManager>().GetIsActive() && obj.GetComponent<AllObjectManager>().GetObjectType() != AllObjectManager.ObjectType.ITEM)
                 {
                     // X軸判定
                     float xBetween = Mathf.Abs(nextPosition.x - obj.transform.position.x);
@@ -167,7 +164,7 @@ public class PlayerMoveManager : MonoBehaviour
             // ブロックとの衝突判定
             foreach (GameObject obj in GameObject.FindGameObjectsWithTag("Object"))
             {
-                if (obj.GetComponent<AllObjectManager>().GetObjectType() != AllObjectManager.ObjectType.GOAL)
+                if (obj.GetComponent<AllObjectManager>().GetIsActive() && obj.GetComponent<AllObjectManager>().GetObjectType() != AllObjectManager.ObjectType.ITEM)
                 {
                     // X軸判定
                     float xBetween = Mathf.Abs(nextPosition.x - obj.transform.position.x);
@@ -209,7 +206,7 @@ public class PlayerMoveManager : MonoBehaviour
 
                 foreach (GameObject obj in GameObject.FindGameObjectsWithTag("Object"))
                 {
-                    if (obj.GetComponent<AllObjectManager>().GetObjectType() != AllObjectManager.ObjectType.GOAL)
+                    if (obj.GetComponent<AllObjectManager>().GetIsActive() && obj.GetComponent<AllObjectManager>().GetObjectType() != AllObjectManager.ObjectType.ITEM)
                     {
                         // X軸判定
                         float xBetween = Mathf.Abs(nextPosition.x - obj.transform.position.x);
@@ -247,7 +244,7 @@ public class PlayerMoveManager : MonoBehaviour
             // ブロックとの衝突判定
             foreach (GameObject obj in GameObject.FindGameObjectsWithTag("Object"))
             {
-                if (obj.GetComponent<AllObjectManager>().GetObjectType() != AllObjectManager.ObjectType.GOAL)
+                if (obj.GetComponent<AllObjectManager>().GetIsActive() && obj.GetComponent<AllObjectManager>().GetObjectType() != AllObjectManager.ObjectType.ITEM)
                 {
                     // X軸判定
                     float xBetween = Mathf.Abs(nextPosition.x - obj.transform.position.x);
@@ -287,32 +284,11 @@ public class PlayerMoveManager : MonoBehaviour
         }
     }
 
-    void Destruction()
-    {
-        if (isTriggerSpecial)
-        {
-            foreach (GameObject obj in GameObject.FindGameObjectsWithTag("Object"))
-            {
-                if (obj.GetComponent<AllObjectManager>().GetObjectType() != AllObjectManager.ObjectType.GROUND)
-                {
-                    // Y軸判定
-                    float yBetween = nextPosition.y - obj.transform.position.y;
-
-                    if (obj.transform.position.y < transform.position.y && yBetween < 1.2f)
-                    {
-                        Destroy(obj);
-                    }
-                }
-            }
-        }
-    }
-
     void GetInput()
     {
         isPushLeft = false;
         isPushRight = false;
         isTriggerJump = false;
-        isTriggerSpecial = false;
 
         if (inputManager.IsPush(InputManager.INPUTPATTERN.HORIZONTAL))
         {
@@ -328,10 +304,6 @@ public class PlayerMoveManager : MonoBehaviour
         if (inputManager.IsTrgger(InputManager.INPUTPATTERN.JUMP))
         {
             isTriggerJump = true;
-        }
-        if (inputManager.IsTrgger(InputManager.INPUTPATTERN.SPECIAL))
-        {
-            isTriggerSpecial = true;
         }
     }
 }

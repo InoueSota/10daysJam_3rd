@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7724256103582310173}
   - component: {fileID: 5692576765418918134}
+  - component: {fileID: 6061526980565390764}
   - component: {fileID: 499805280029202463}
   - component: {fileID: -590181196529971908}
   - component: {fileID: 9221378865115243701}
@@ -55,6 +56,18 @@ MonoBehaviour:
   hangTime: 0.1
   gravityMax: 12
   addGravity: 25
+--- !u!114 &6061526980565390764
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1471785792338881480}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ecc5453bfbcc70499df303ed6f97c66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!212 &499805280029202463
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -97,7 +110,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 534255251afddde4f97a97fed21b8139, type: 3}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Color: {r: 0.5058824, g: 0.9607843, b: 0.76862746, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -176,6 +189,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2350575980884333927}
   - component: {fileID: 3856647538800460399}
+  - component: {fileID: 366297282509921815}
   - component: {fileID: 5798250660066523600}
   m_Layer: 0
   m_Name: Line
@@ -209,6 +223,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6d9a4a8a269115c439b7932d6d4a7e33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &366297282509921815
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1724889177994435730}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 566330ec0e290304d8c19efcb901eabf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!212 &5798250660066523600
@@ -253,7 +279,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 57ee9c26e10c325469655f911a32fa4a, type: 3}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Color: {r: 0.5058824, g: 0.9607843, b: 0.76862746, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
