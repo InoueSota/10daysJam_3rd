@@ -19,6 +19,7 @@ public class ItemManager : MonoBehaviour
     {
         spriteRenderer.enabled = true;
         allObjectManager.SetIsActive(spriteRenderer.enabled);
+        allObjectManager.Initialize();
     }
 
     // Á–Åˆ—

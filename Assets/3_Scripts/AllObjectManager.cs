@@ -10,16 +10,18 @@ public class AllObjectManager : MonoBehaviour
     {
         GROUND,
         BLOCK,
-        ITEM
+        ITEM,
+        DRIPSTONE
     }
     [SerializeField] private ObjectType objectType;
 
     [Header("HP")]
     [SerializeField] private int hp;
+    private int maxHp;
 
     void Start()
     {
-
+        maxHp = hp;
     }
 
     void Update()
@@ -28,6 +30,10 @@ public class AllObjectManager : MonoBehaviour
     }
 
     // Setter
+    public void Initialize()
+    {
+        hp = maxHp;
+    }
     public void Damage()
     {
         hp--;
