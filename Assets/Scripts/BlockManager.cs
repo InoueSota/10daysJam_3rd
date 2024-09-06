@@ -29,9 +29,15 @@ public class BlockManager : MonoBehaviour
         if (_isActive)
         {
             spriteRenderer.enabled = true;
+            allObjectManager.SetIsActive(spriteRenderer.enabled);
+
+            transform.localScale = Vector3.one;
+            spriteRenderer.color = Color.white;
         }
         else
         {
+            allObjectManager.SetIsActive(false);
+
             //
             // Ç±Ç±Ç™è¡Ç≥ÇÍÇΩèuä‘
             //blockDestory.BlockDestroy(spriteRenderer.enabled);
@@ -49,8 +55,6 @@ public class BlockManager : MonoBehaviour
                 spriteRenderer.enabled = false;
             });
             //
-
         }
-        allObjectManager.SetIsActive(spriteRenderer.enabled);
     }
 }
