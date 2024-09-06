@@ -19,6 +19,7 @@ public class BlockManager : MonoBehaviour
     // ‰Šú‰»ˆ—
     void Initialize()
     {
+        spriteRenderer.enabled = true;
         allObjectManager.SetIsActive(spriteRenderer.enabled);
 
         transform.localScale = Vector3.one;
@@ -50,7 +51,6 @@ public class BlockManager : MonoBehaviour
     {
         if (_isActive)
         {
-            spriteRenderer.enabled = true;
             Initialize();
         }
         else
