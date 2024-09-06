@@ -83,6 +83,14 @@ public class GameManager : MonoBehaviour
                 if (allObjectManager.GetObjectType() == AllObjectManager.ObjectType.BLOCK && allObjectManager.GetIsActive())
                 {
                     isFinish = false;
+                    break;
+                }
+
+                // 全てのアイテムが破壊されたかの判定
+                else if (allObjectManager.GetObjectType() == AllObjectManager.ObjectType.ITEM && allObjectManager.GetIsActive())
+                {
+                    isFinish = false;
+                    break;
                 }
             }
 

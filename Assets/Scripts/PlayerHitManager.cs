@@ -23,11 +23,6 @@ public class PlayerHitManager : MonoBehaviour
         itemCount = 0;
     }
 
-    void LateUpdate()
-    {
-
-    }
-
     void OnTriggerEnter2D(Collider2D collision)
     {
         OnTrigger2D(collision);
