@@ -126,7 +126,16 @@ public class PlayerMoveManager : MonoBehaviour
 
                     // YŽ²”»’è
                     float yBetween = Mathf.Abs(nextPosition.y - obj.transform.position.y);
-                    float yDoubleSize = halfSize.y + 0.45f;
+                    float yDoubleSize;
+
+                    if (isJumping)
+                    {
+                        yDoubleSize = halfSize.y + 0.5f;
+                    }
+                    else
+                    {
+                        yDoubleSize = halfSize.y + 0.35f;
+                    }
 
                     if (yBetween < yDoubleSize && xBetween < xDoubleSize)
                     {
