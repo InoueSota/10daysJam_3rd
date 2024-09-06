@@ -6,15 +6,23 @@ public class CropLineManager : MonoBehaviour
 {
     // 他コンポーネント取得
     private PlayerMoveManager playerMoveManager;
-
+    
     // 入力
     private InputManager inputManager;
     private bool isTriggerSpecial;
-
+    //カラー
+    private SpriteRenderer spriteRenderer;
+    private GameObject Player;
     void Start()
     {
         playerMoveManager = transform.parent.GetComponent<PlayerMoveManager>();
         inputManager = GetComponent<InputManager>();
+
+        //プレイヤーのカラー取得しラインの色をプレイヤーと同じに
+        Player = GameObject.FindWithTag("Player");
+
+        spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
+        spriteRenderer.color = Player.GetComponent<SpriteRenderer>().color;
     }
 
     void LateUpdate()
