@@ -11,6 +11,7 @@ public class AllObjectManager : MonoBehaviour
         GROUND,
         BLOCK,
         ITEM,
+        DRIPSTONEBLOCK,
         DRIPSTONE
     }
     [SerializeField] private ObjectType objectType;
@@ -22,11 +23,6 @@ public class AllObjectManager : MonoBehaviour
     void Start()
     {
         maxHp = hp;
-    }
-
-    void Update()
-    {
-
     }
 
     // Setter

@@ -122,16 +122,28 @@ public class GameManager : MonoBehaviour
             {
                 AllObjectManager allObjectManager = obj.GetComponent<AllObjectManager>();
 
-                // ブロック初期化
-                if (allObjectManager.GetObjectType() == AllObjectManager.ObjectType.BLOCK)
+                switch (allObjectManager.GetObjectType())
                 {
-                    obj.GetComponent<BlockManager>().SetIsActive(true);
-                }
+                    case AllObjectManager.ObjectType.BLOCK:
 
-                // アイテム初期化
-                else if (allObjectManager.GetObjectType() == AllObjectManager.ObjectType.ITEM)
-                {
-                    obj.GetComponent<ItemManager>().SetIsActive(true);
+                        obj.GetComponent<BlockManager>().SetIsActive(true);
+
+                        break;
+                    case AllObjectManager.ObjectType.ITEM:
+
+                        obj.GetComponent<ItemManager>().SetIsActive(true);
+
+                        break;
+                    case AllObjectManager.ObjectType.DRIPSTONEBLOCK:
+
+                        obj.GetComponent<BlockManager>().SetIsActive(true);
+
+                        break;
+                    case AllObjectManager.ObjectType.DRIPSTONE:
+
+                        obj.GetComponent<DripStoneManager>().SetIsActive(true);
+
+                        break;
                 }
             }
 

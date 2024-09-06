@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: -6533700695049329269}
   - component: {fileID: 4090162405295387848}
   m_Layer: 0
-  m_Name: DripStone
+  m_Name: DripStoneBlock
   m_TagString: Object
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -124,8 +124,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1600881885407515786}
   - component: {fileID: 3404635394798870612}
-  - component: {fileID: 5576395407825186294}
   - component: {fileID: 4677550183919489173}
+  - component: {fileID: 3080944183749273397}
   m_Layer: 0
   m_Name: DripStone
   m_TagString: Object
@@ -163,18 +163,6 @@ MonoBehaviour:
   isActive: 1
   objectType: 4
   hp: 1
---- !u!114 &5576395407825186294
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6532416040067846520}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 53dbc0eb174e00d47b7ebd27fef4954d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!212 &4677550183919489173
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -227,3 +215,17 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &3080944183749273397
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6532416040067846520}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e7cdb4a774589d478ac96acdc55e696, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fallPowerMax: 12
+  addFallPower: 25
