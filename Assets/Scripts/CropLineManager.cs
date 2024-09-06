@@ -42,15 +42,18 @@ public class CropLineManager : MonoBehaviour
 
                     if (yBetween < 0.2f)
                     {
-                        // 衝突対象がブロック
-                        if (hitAllObjectManager.GetObjectType() == AllObjectManager.ObjectType.BLOCK)
+                        switch (hitAllObjectManager.GetObjectType())
                         {
-                            obj.GetComponent<BlockManager>().SetIsActive(false);
-                        }
-                        // 衝突対象がアイテム
-                        else if (hitAllObjectManager.GetObjectType() == AllObjectManager.ObjectType.ITEM)
-                        {
-                            obj.GetComponent<ItemManager>().SetIsActive(false);
+                            case AllObjectManager.ObjectType.BLOCK:
+
+                                obj.GetComponent<BlockManager>().SetIsActive(false);
+
+                                break;
+                            case AllObjectManager.ObjectType.ITEM:
+
+                                obj.GetComponent<ItemManager>().SetIsActive(false);
+
+                                break;
                         }
                     }
                 }
