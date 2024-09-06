@@ -46,12 +46,12 @@ public class CropLineManager : MonoBehaviour
                         {
                             case AllObjectManager.ObjectType.BLOCK:
 
-                                obj.GetComponent<BlockManager>().SetIsActive(false);
+                                obj.GetComponent<BlockManager>().Damage();
 
                                 break;
                             case AllObjectManager.ObjectType.ITEM:
 
-                                obj.GetComponent<ItemManager>().SetIsActive(false);
+                                obj.GetComponent<ItemManager>().Damage();
 
                                 break;
                         }

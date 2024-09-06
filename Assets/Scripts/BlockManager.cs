@@ -47,6 +47,16 @@ public class BlockManager : MonoBehaviour
         });
     }
 
+    // Setter
+    public void Damage()
+    {
+        allObjectManager.Damage();
+
+        if (allObjectManager.GetHp() <= 0)
+        {
+            SetIsActive(false);
+        }
+    }
     public void SetIsActive(bool _isActive)
     {
         if (_isActive)

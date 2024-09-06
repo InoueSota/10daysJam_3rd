@@ -14,16 +14,39 @@ public class ItemManager : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
+    // ‰Šú‰»ˆ—
+    void Initialize()
+    {
+        spriteRenderer.enabled = true;
+        allObjectManager.SetIsActive(spriteRenderer.enabled);
+    }
+
+    // Á–Åˆ—
+    void Destruction()
+    {
+        spriteRenderer.enabled = false;
+        allObjectManager.SetIsActive(spriteRenderer.enabled);
+    }
+
+    // Setter
+    public void Damage()
+    {
+        allObjectManager.Damage();
+
+        if (allObjectManager.GetHp() <= 0)
+        {
+            SetIsActive(false);
+        }
+    }
     public void SetIsActive(bool _isActive)
     {
         if (_isActive)
         {
-            spriteRenderer.enabled = true;
+            Initialize();
         }
         else
         {
-            spriteRenderer.enabled = false;
+            Destruction();
         }
-        allObjectManager.SetIsActive(spriteRenderer.enabled);
     }
 }

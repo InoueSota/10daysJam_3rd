@@ -14,6 +14,9 @@ public class AllObjectManager : MonoBehaviour
     }
     [SerializeField] private ObjectType objectType;
 
+    [Header("HP")]
+    [SerializeField] private int hp;
+
     void Start()
     {
 
@@ -24,11 +27,21 @@ public class AllObjectManager : MonoBehaviour
 
     }
 
+    // Setter
+    public void Damage()
+    {
+        hp--;
+    }
     public void SetIsActive(bool _isActive)
     {
         isActive = _isActive;
     }
-
+    
+    // Getter
+    public int GetHp()
+    {
+        return hp;
+    }
     public bool GetIsActive()
     {
         return isActive;

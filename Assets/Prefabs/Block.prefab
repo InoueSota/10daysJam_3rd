@@ -49,6 +49,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isActive: 1
   objectType: 1
+  hp: 1
 --- !u!114 &-6533700695049329269
 MonoBehaviour:
   m_ObjectHideFlags: 0
