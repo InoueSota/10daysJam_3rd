@@ -8,7 +8,6 @@ public class BlockManager : MonoBehaviour
     // 自コンポーネント取得
     private AllObjectManager allObjectManager;
     private SpriteRenderer spriteRenderer;
-    private S_BlockDestory blockDestory;
 
     void Start()
     {
