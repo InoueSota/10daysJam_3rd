@@ -9,19 +9,41 @@ public class BlockManager : MonoBehaviour
     private AllObjectManager allObjectManager;
     private SpriteRenderer spriteRenderer;
     private S_BlockDestory blockDestory;
+
     void Start()
     {
         allObjectManager = GetComponent<AllObjectManager>();
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
-    void LateUpdate()
+    // 初期化処理
+    void Initialize()
     {
-        // 消えているとき
-        if (!spriteRenderer.enabled)
-        {
+        allObjectManager.SetIsActive(spriteRenderer.enabled);
 
-        }
+        transform.localScale = Vector3.one;
+        spriteRenderer.color = Color.white;
+    }
+
+    // 消滅処理
+    void Destruction()
+    {
+        allObjectManager.SetIsActive(false);
+
+        //blockDestory.BlockDestroy(spriteRenderer.enabled);
+        //Sequenceのインスタンスを作成
+        var sequence = DOTween.Sequence();
+
+        //Appendで動作を追加していく
+        sequence.Append(transform.DOScale(Vector3.zero, 0.5f).SetEase(Ease.OutBack));
+        //Joinはひとつ前の動作と同時に実行される
+        sequence.Join(this.transform.DORotate(Vector3.forward * 180, 0.5f, RotateMode.LocalAxisAdd).SetEase(Ease.InBack));
+        //sequence.Join(this.GetComponent<SpriteRenderer>().DOFade(endValue: 0, duration: 0.5f).SetEase(Ease.InQuad));
+
+        sequence.Play().OnComplete(() =>
+        {
+            spriteRenderer.enabled = false;
+        });
     }
 
     public void SetIsActive(bool _isActive)
@@ -29,32 +51,11 @@ public class BlockManager : MonoBehaviour
         if (_isActive)
         {
             spriteRenderer.enabled = true;
-            allObjectManager.SetIsActive(spriteRenderer.enabled);
-
-            transform.localScale = Vector3.one;
-            spriteRenderer.color = Color.white;
+            Initialize();
         }
         else
         {
-            allObjectManager.SetIsActive(false);
-
-            //
-            // ここが消された瞬間
-            //blockDestory.BlockDestroy(spriteRenderer.enabled);
-            //Sequenceのインスタンスを作成
-            var sequence = DOTween.Sequence();
-
-            //Appendで動作を追加していく
-            sequence.Append(transform.DOScale(Vector3.zero, 0.5f).SetEase(Ease.OutBack));
-            //Joinはひとつ前の動作と同時に実行される
-            sequence.Join(this.transform.DORotate(Vector3.forward * 180, 0.5f, RotateMode.LocalAxisAdd).SetEase(Ease.InBack));
-            //sequence.Join(this.GetComponent<SpriteRenderer>().DOFade(endValue: 0, duration: 0.5f).SetEase(Ease.InQuad));
-
-            sequence.Play().OnComplete(() =>
-            {
-                spriteRenderer.enabled = false;
-            });
-            //
+            Destruction();
         }
     }
 }
