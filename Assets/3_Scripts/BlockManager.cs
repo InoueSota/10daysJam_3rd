@@ -20,9 +20,10 @@ public class BlockManager : MonoBehaviour
     {
         spriteRenderer.enabled = true;
         allObjectManager.SetIsActive(spriteRenderer.enabled);
+        allObjectManager.Initialize();
 
         transform.localScale = Vector3.one;
-        spriteRenderer.color = Color.white;
+        spriteRenderer.color = new(spriteRenderer.color.r, spriteRenderer.color.g, spriteRenderer.color.b, 1f);
     }
 
     // è¡ñ≈èàóù
