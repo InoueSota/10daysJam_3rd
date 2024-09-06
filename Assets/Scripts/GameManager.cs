@@ -9,7 +9,6 @@ public class GameManager : MonoBehaviour
     // “ü—Í
     private InputManager inputManager;
     private bool isTriggerReset;
-    private bool isTriggerSpecial;
     private bool isTriggerJump;
 
     // ƒtƒ‰ƒO—Þ
@@ -138,16 +137,11 @@ public class GameManager : MonoBehaviour
     void GetInput()
     {
         isTriggerReset = false;
-        isTriggerSpecial = false;
         isTriggerJump = false;
 
         if (inputManager.IsTrgger(InputManager.INPUTPATTERN.RESET))
         {
             isTriggerReset = true;
-        }
-        if (inputManager.IsTrgger(InputManager.INPUTPATTERN.SPECIAL))
-        {
-            isTriggerSpecial = true;
         }
         if (inputManager.IsTrgger(InputManager.INPUTPATTERN.JUMP))
         {
