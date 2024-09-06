@@ -177,7 +177,7 @@ public class PlayerMoveManager : MonoBehaviour
                 {
                     // XŽ²”»’è
                     float xBetween = Mathf.Abs(nextPosition.x - obj.transform.position.x);
-                    float xDoubleSize = halfSize.x + 0.45f;
+                    float xDoubleSize = halfSize.x + 0.35f;
 
                     // YŽ²”»’è
                     float yBetween = Mathf.Abs(nextPosition.y - obj.transform.position.y);
@@ -219,7 +219,7 @@ public class PlayerMoveManager : MonoBehaviour
                     {
                         // XŽ²”»’è
                         float xBetween = Mathf.Abs(nextPosition.x - obj.transform.position.x);
-                        float xDoubleSize = halfSize.x + 0.45f;
+                        float xDoubleSize = halfSize.x + 0.35f;
 
                         // YŽ²”»’è
                         float yBetween = Mathf.Abs(nextPosition.y - obj.transform.position.y);
@@ -257,7 +257,7 @@ public class PlayerMoveManager : MonoBehaviour
                 {
                     // XŽ²”»’è
                     float xBetween = Mathf.Abs(nextPosition.x - obj.transform.position.x);
-                    float xDoubleSize = halfSize.x + 0.45f;
+                    float xDoubleSize = halfSize.x + 0.35f;
 
                     // YŽ²”»’è
                     float yBetween = Mathf.Abs(nextPosition.y - obj.transform.position.y);
