@@ -9,10 +9,29 @@ public class BlockManager : MonoBehaviour
     private AllObjectManager allObjectManager;
     private SpriteRenderer spriteRenderer;
 
+    // Šî–{î•ñ
+    private Vector3 originScale;
+    private Quaternion originRotate;
+
     void Start()
     {
         allObjectManager = GetComponent<AllObjectManager>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+
+        originScale = transform.localScale;
+        originRotate = transform.localRotation;
+    }
+
+    void LateUpdate()
+    {
+        if (allObjectManager.GetHp() >= 2)
+        {
+            spriteRenderer.color = Color.red;
+        }
+        else
+        {
+            spriteRenderer.color = Color.white;
+        }
     }
 
     // ‰Šú‰»ˆ—
@@ -22,7 +41,8 @@ public class BlockManager : MonoBehaviour
         allObjectManager.SetIsActive(spriteRenderer.enabled);
         allObjectManager.Initialize();
 
-        transform.localScale = Vector3.one;
+        transform.localScale = originScale;
+        transform.localRotation = originRotate;
         spriteRenderer.color = new(spriteRenderer.color.r, spriteRenderer.color.g, spriteRenderer.color.b, 1f);
     }
 
