@@ -47,7 +47,7 @@ public class BlockManager : MonoBehaviour
             //Append‚Å“®ì‚ğ’Ç‰Á‚µ‚Ä‚¢‚­
             sequence.Append(transform.DOScale(Vector3.zero, 0.5f).SetEase(Ease.OutBack));
             //Join‚Í‚Ğ‚Æ‚Â‘O‚Ì“®ì‚Æ“¯‚ÉÀs‚³‚ê‚é
-            sequence.Join(this.transform.DORotate(Vector3.forward * 200, 0.5f, RotateMode.LocalAxisAdd).SetEase(Ease.OutElastic));
+            sequence.Join(this.transform.DORotate(Vector3.forward * 90, 0.5f, RotateMode.LocalAxisAdd).SetEase(Ease.OutElastic));
             sequence.Join(this.GetComponent<SpriteRenderer>().DOFade(endValue: 0, duration: 0.5f).SetEase(Ease.InQuad));
 
             sequence.Play().OnComplete(() =>
