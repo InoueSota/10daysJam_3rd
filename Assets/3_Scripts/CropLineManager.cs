@@ -73,6 +73,11 @@ public class CropLineManager : MonoBehaviour
                                 obj.GetComponent<DripStoneManager>().Damage();
 
                                 break;
+                            case AllObjectManager.ObjectType.BOMB:
+
+                                obj.GetComponent<BombManager>().Damage();
+
+                                break;
                         }
                     }
                 }

@@ -13,6 +13,9 @@ public class BombManager : MonoBehaviour
     private Vector3 originScale;
     private Quaternion originRotate;
 
+    // Bomb限定
+    [SerializeField] private float explosionRange;
+
     void Start()
     {
         allObjectManager = GetComponent<AllObjectManager>();
@@ -49,22 +52,8 @@ public class BombManager : MonoBehaviour
     // 消滅処理
     void Destruction()
     {
-        allObjectManager.SetIsActive(false);
-
-        //blockDestory.BlockDestroy(spriteRenderer.enabled);
-        //Sequenceのインスタンスを作成
-        var sequence = DOTween.Sequence();
-
-        //Appendで動作を追加していく
-        sequence.Append(transform.DOScale(Vector3.zero, 0.5f).SetEase(Ease.OutBack));
-        //Joinはひとつ前の動作と同時に実行される
-        sequence.Join(this.transform.DORotate(Vector3.forward * 180, 0.5f, RotateMode.LocalAxisAdd).SetEase(Ease.InBack));
-        //sequence.Join(this.GetComponent<SpriteRenderer>().DOFade(endValue: 0, duration: 0.5f).SetEase(Ease.InQuad));
-
-        sequence.Play().OnComplete(() =>
-        {
-            spriteRenderer.enabled = false;
-        });
+        spriteRenderer.enabled = false;
+        allObjectManager.SetIsActive(spriteRenderer.enabled);
     }
 
     // Setter
