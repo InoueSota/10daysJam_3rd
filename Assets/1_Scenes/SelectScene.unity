@@ -534,7 +534,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e43be980bc17e0a4eafee23fc707d791, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stageMax: 2
+  stageMax: 6
   stageNumberText: {fileID: 437381795}
   leftTriangleObj: {fileID: 515232412}
   rightTriangleObj: {fileID: 1961853974}
