@@ -22,9 +22,9 @@ public class DestructionManager : MonoBehaviour
                 _obj.GetComponent<ItemManager>().Damage();
 
                 break;
-            case AllObjectManager.ObjectType.GRASS:
+            case AllObjectManager.ObjectType.GRASSPARENT:
 
-                // ‚—‚—‚—
+                _obj.GetComponent<GrassParentScript>().Damage();
 
                 break;
             case AllObjectManager.ObjectType.DRIPSTONEBLOCK:
@@ -58,11 +58,6 @@ public class DestructionManager : MonoBehaviour
             case AllObjectManager.ObjectType.ICICLE:
 
                 _obj.GetComponent<IcicleManager>().Damage();
-
-                break;
-            case AllObjectManager.ObjectType.GRASSPARENT:
-
-                _obj.GetComponent<GrassParentScript>().Damage();
 
                 break;
         }

@@ -135,9 +135,9 @@ public class GameManager : MonoBehaviour
                         obj.GetComponent<ItemManager>().SetIsActive(true);
 
                         break;
-                    case AllObjectManager.ObjectType.GRASS:
+                    case AllObjectManager.ObjectType.GRASSPARENT:
 
-                        // ‚—‚—‚—
+                        obj.GetComponent<GrassParentScript>().SetIsActive(true);
 
                         break;
                     case AllObjectManager.ObjectType.DRIPSTONE:
@@ -153,11 +153,6 @@ public class GameManager : MonoBehaviour
                     case AllObjectManager.ObjectType.ICICLE:
 
                         obj.GetComponent<IcicleManager>().SetIsActive(true);
-
-                        break;
-                            case AllObjectManager.ObjectType.GRASSPARENT:
-
-                        obj.GetComponent<GrassParentScript>().SetIsActive(true);
 
                         break;
                 }
