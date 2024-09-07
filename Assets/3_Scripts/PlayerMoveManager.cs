@@ -289,9 +289,9 @@ public class PlayerMoveManager : MonoBehaviour
     {
         // ç∂í[Çí¥Ç¶ÇΩÇ©
         float thisLeftX = nextPosition.x - halfSize.x;
-        if (thisLeftX < -cameraHalfSize.x + 1f)
+        if (thisLeftX < -cameraHalfSize.x)
         {
-            nextPosition.x = -cameraHalfSize.x + halfSize.x + 1f;
+            nextPosition.x = -cameraHalfSize.x + halfSize.x;
         }
 
         // âEí[Çí¥Ç¶ÇΩÇ©
