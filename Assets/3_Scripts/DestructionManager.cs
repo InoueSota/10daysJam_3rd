@@ -22,6 +22,11 @@ public class DestructionManager : MonoBehaviour
                 _obj.GetComponent<ItemManager>().Damage();
 
                 break;
+            case AllObjectManager.ObjectType.GRASS:
+
+                // ‚—‚—‚—
+
+                break;
             case AllObjectManager.ObjectType.DRIPSTONEBLOCK:
 
                 if (_obj.transform.GetChild(0).GetComponent<AllObjectManager>().GetIsActive())
