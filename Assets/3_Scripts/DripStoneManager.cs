@@ -117,6 +117,25 @@ public class DripStoneManager : MonoBehaviour
                         }
                     }
                 }
+                else if (obj.GetComponent<AllObjectManager>().GetIsActive() && obj.GetComponent<AllObjectManager>().GetObjectType() == AllObjectManager.ObjectType.ITEM)
+                {
+                    // XŽ²”»’è
+                    float xBetween = Mathf.Abs(nextPosition.x - obj.transform.position.x);
+                    float xDoubleSize = halfSize.x + 0.25f;
+
+                    // YŽ²”»’è
+                    float yBetween = Mathf.Abs(nextPosition.y - obj.transform.position.y);
+                    float yDoubleSize = halfSize.y + 0.3f;
+
+                    if (xBetween < xDoubleSize && yBetween < yDoubleSize)
+                    {
+                        if (nextPosition.y > obj.transform.position.y)
+                        {
+                            obj.GetComponent<ItemManager>().Damage();
+                            break;
+                        }
+                    }
+                }
             }
         }
     }
