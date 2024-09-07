@@ -45,7 +45,7 @@ public class CropLineManager : MonoBehaviour
             {
                 AllObjectManager hitAllObjectManager = obj.GetComponent<AllObjectManager>();
 
-                if (hitAllObjectManager.GetObjectType() != AllObjectManager.ObjectType.GROUND)
+                if (hitAllObjectManager.GetObjectType() != AllObjectManager.ObjectType.GROUND && hitAllObjectManager.GetIsActive())
                 {
                     // YŽ²”»’è
                     float yBetween = Mathf.Abs(transform.position.y - obj.transform.position.y);

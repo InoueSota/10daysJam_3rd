@@ -32,7 +32,7 @@ public class BombManager : MonoBehaviour
         {
             AllObjectManager hitAllObjectManager = obj.GetComponent<AllObjectManager>();
 
-            if (obj != gameObject && hitAllObjectManager.GetObjectType() != AllObjectManager.ObjectType.GROUND)
+            if (obj != gameObject && hitAllObjectManager.GetObjectType() != AllObjectManager.ObjectType.GROUND && hitAllObjectManager.GetIsActive())
             {
                 // XŽ²”»’è
                 float xBetween = Mathf.Abs(transform.position.x - obj.transform.position.x);
@@ -99,10 +99,10 @@ public class BombManager : MonoBehaviour
     {
         allObjectManager.Damage();
 
-        if (allObjectManager.GetHp() <= 0)
+        if (allObjectManager.GetIsActive() && allObjectManager.GetHp() <= 0)
         {
-            Explosion();
             SetIsActive(false);
+            Explosion();
         }
     }
     public void SetIsActive(bool _isActive)

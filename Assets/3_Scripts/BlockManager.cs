@@ -51,7 +51,6 @@ public class BlockManager : MonoBehaviour
     {
         allObjectManager.SetIsActive(false);
 
-        //blockDestory.BlockDestroy(spriteRenderer.enabled);
         //Sequenceのインスタンスを作成
         var sequence = DOTween.Sequence();
 
@@ -72,7 +71,7 @@ public class BlockManager : MonoBehaviour
     {
         allObjectManager.Damage();
 
-        if (allObjectManager.GetHp() <= 0)
+        if (allObjectManager.GetIsActive() && allObjectManager.GetHp() <= 0)
         {
             SetIsActive(false);
         }
