@@ -78,15 +78,8 @@ public class GameManager : MonoBehaviour
             {
                 AllObjectManager allObjectManager = obj.GetComponent<AllObjectManager>();
 
-                // 全てのブロックが破壊されたかの判定
-                if (allObjectManager.GetObjectType() == AllObjectManager.ObjectType.BLOCK && allObjectManager.GetIsActive())
-                {
-                    isFinish = false;
-                    break;
-                }
-
-                // 全てのアイテムが破壊されたかの判定
-                else if (allObjectManager.GetObjectType() == AllObjectManager.ObjectType.ITEM && allObjectManager.GetIsActive())
+                // Ground以外の全てのオブジェクトが破壊されたかの判定
+                if (allObjectManager.GetObjectType() != AllObjectManager.ObjectType.GROUND && allObjectManager.GetIsActive())
                 {
                     isFinish = false;
                     break;
@@ -141,6 +134,11 @@ public class GameManager : MonoBehaviour
                     case AllObjectManager.ObjectType.DRIPSTONE:
 
                         obj.GetComponent<DripStoneManager>().SetIsActive(true);
+
+                        break;
+                    case AllObjectManager.ObjectType.BOMB:
+
+                        obj.GetComponent<BombManager>().SetIsActive(true);
 
                         break;
                 }

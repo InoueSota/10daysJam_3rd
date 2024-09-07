@@ -25,15 +25,53 @@ public class BombManager : MonoBehaviour
         originRotate = transform.localRotation;
     }
 
-    void LateUpdate()
+    // ”š”­
+    void Explosion()
     {
-        if (allObjectManager.GetHp() >= 2)
+        foreach (GameObject obj in GameObject.FindGameObjectsWithTag("Object"))
         {
-            spriteRenderer.color = Color.red;
-        }
-        else
-        {
-            spriteRenderer.color = Color.white;
+            AllObjectManager hitAllObjectManager = obj.GetComponent<AllObjectManager>();
+
+            if (obj != gameObject && hitAllObjectManager.GetObjectType() != AllObjectManager.ObjectType.GROUND)
+            {
+                // XŽ²”»’è
+                float xBetween = Mathf.Abs(transform.position.x - obj.transform.position.x);
+                // YŽ²”»’è
+                float yBetween = Mathf.Abs(transform.position.y - obj.transform.position.y);
+
+                if (xBetween < explosionRange && yBetween < explosionRange)
+                {
+                    switch (hitAllObjectManager.GetObjectType())
+                    {
+                        case AllObjectManager.ObjectType.BLOCK:
+
+                            obj.GetComponent<BlockManager>().Damage();
+
+                            break;
+                        case AllObjectManager.ObjectType.ITEM:
+
+                            obj.GetComponent<ItemManager>().Damage();
+
+                            break;
+                        case AllObjectManager.ObjectType.DRIPSTONEBLOCK:
+
+                            obj.transform.GetChild(0).GetComponent<DripStoneManager>().FallInitialize();
+                            obj.GetComponent<BlockManager>().Damage();
+
+                            break;
+                        case AllObjectManager.ObjectType.DRIPSTONE:
+
+                            obj.GetComponent<DripStoneManager>().Damage();
+
+                            break;
+                        case AllObjectManager.ObjectType.BOMB:
+
+                            obj.GetComponent<BombManager>().Damage();
+
+                            break;
+                    }
+                }
+            }
         }
     }
 
@@ -63,6 +101,7 @@ public class BombManager : MonoBehaviour
 
         if (allObjectManager.GetHp() <= 0)
         {
+            Explosion();
             SetIsActive(false);
         }
     }
