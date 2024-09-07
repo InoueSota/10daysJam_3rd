@@ -5,6 +5,9 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    // 自コンポーネント取得
+    private StageObjectManager stageObjectManager;
+
     // 入力
     private InputManager inputManager;
     private bool isTriggerReset;
@@ -32,6 +35,8 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        stageObjectManager = GetComponent<StageObjectManager>();
+        stageObjectManager.SetPlayerManager(playerManager);
         inputManager = GetComponent<InputManager>();
 
         readyTimer = 3.25f;
@@ -63,6 +68,7 @@ public class GameManager : MonoBehaviour
             readyTimer -= Time.deltaTime;
             if (readyTimer <= 0f)
             {
+                stageObjectManager.SetCanCheck(true);
                 playerManager.SetIsActive(true);
                 isStart = true;
             }
@@ -110,6 +116,7 @@ public class GameManager : MonoBehaviour
             playerManager.Initialize();
 
             // ステージオブジェクト初期化
+            stageObjectManager.Initialize();
             foreach (GameObject obj in GameObject.FindGameObjectsWithTag("Object"))
             {
                 AllObjectManager allObjectManager = obj.GetComponent<AllObjectManager>();
