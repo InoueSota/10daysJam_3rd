@@ -155,6 +155,11 @@ public class GameManager : MonoBehaviour
                         obj.GetComponent<IcicleManager>().SetIsActive(true);
 
                         break;
+                            case AllObjectManager.ObjectType.GRASSPARENT:
+
+                        obj.GetComponent<GrassParentScript>().SetIsActive(true);
+
+                        break;
                 }
             }
 
