@@ -7,6 +7,7 @@ public class BombManager : MonoBehaviour
 {
     // 自コンポーネント取得
     private AllObjectManager allObjectManager;
+    private DestructionManager destructionManager;
     private SpriteRenderer spriteRenderer;
 
     // 基本情報
@@ -19,6 +20,7 @@ public class BombManager : MonoBehaviour
     void Start()
     {
         allObjectManager = GetComponent<AllObjectManager>();
+        destructionManager = GetComponent<DestructionManager>();
         spriteRenderer = GetComponent<SpriteRenderer>();
 
         originScale = transform.localScale;
@@ -41,35 +43,7 @@ public class BombManager : MonoBehaviour
 
                 if (xBetween < explosionRange && yBetween < explosionRange)
                 {
-                    switch (hitAllObjectManager.GetObjectType())
-                    {
-                        case AllObjectManager.ObjectType.BLOCK:
-
-                            obj.GetComponent<BlockManager>().Damage();
-
-                            break;
-                        case AllObjectManager.ObjectType.ITEM:
-
-                            obj.GetComponent<ItemManager>().Damage();
-
-                            break;
-                        case AllObjectManager.ObjectType.DRIPSTONEBLOCK:
-
-                            obj.transform.GetChild(0).GetComponent<DripStoneManager>().FallInitialize();
-                            obj.GetComponent<BlockManager>().Damage();
-
-                            break;
-                        case AllObjectManager.ObjectType.DRIPSTONE:
-
-                            obj.GetComponent<DripStoneManager>().Damage();
-
-                            break;
-                        case AllObjectManager.ObjectType.BOMB:
-
-                            obj.GetComponent<BombManager>().Damage();
-
-                            break;
-                    }
+                    destructionManager.Destruction(obj);
                 }
             }
         }
@@ -88,7 +62,7 @@ public class BombManager : MonoBehaviour
     }
 
     // 消滅処理
-    void Destruction()
+    void Disappear()
     {
         spriteRenderer.enabled = false;
         allObjectManager.SetIsActive(spriteRenderer.enabled);
@@ -113,7 +87,7 @@ public class BombManager : MonoBehaviour
         }
         else
         {
-            Destruction();
+            Disappear();
         }
     }
 }

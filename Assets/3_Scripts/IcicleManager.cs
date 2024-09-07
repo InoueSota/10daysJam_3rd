@@ -6,6 +6,7 @@ public class IcicleManager : MonoBehaviour
 {
     // 自コンポーネント取得
     private AllObjectManager allObjectManager;
+    private DestructionManager destructionManager;
     private SpriteRenderer spriteRenderer;
 
     // 他コンポーネント取得
@@ -32,6 +33,7 @@ public class IcicleManager : MonoBehaviour
     void Start()
     {
         allObjectManager = GetComponent<AllObjectManager>();
+        destructionManager = GetComponent<DestructionManager>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         parentTransform = transform.parent.transform;
         halfSize.x = transform.localScale.x * 0.5f;
@@ -79,35 +81,7 @@ public class IcicleManager : MonoBehaviour
                     {
                         if (nextPosition.y > obj.transform.position.y)
                         {
-                            switch (hitAllObjectManager.GetObjectType())
-                            {
-                                case AllObjectManager.ObjectType.BLOCK:
-
-                                    obj.GetComponent<BlockManager>().Damage();
-
-                                    break;
-                                case AllObjectManager.ObjectType.ITEM:
-
-                                    obj.GetComponent<ItemManager>().Damage();
-
-                                    break;
-                                case AllObjectManager.ObjectType.DRIPSTONEBLOCK:
-
-                                    obj.transform.GetChild(0).GetComponent<DripStoneManager>().FallInitialize();
-                                    obj.GetComponent<BlockManager>().Damage();
-
-                                    break;
-                                case AllObjectManager.ObjectType.DRIPSTONE:
-
-                                    obj.GetComponent<DripStoneManager>().Damage();
-
-                                    break;
-                                case AllObjectManager.ObjectType.BOMB:
-
-                                    obj.GetComponent<BombManager>().Damage();
-
-                                    break;
-                            }
+                            destructionManager.Destruction(obj);
                             Damage();
                             break;
                         }
@@ -133,7 +107,7 @@ public class IcicleManager : MonoBehaviour
     }
 
     // 消滅処理
-    void Destruction()
+    void Disappear()
     {
         spriteRenderer.enabled = false;
         allObjectManager.SetIsActive(spriteRenderer.enabled);
@@ -158,7 +132,7 @@ public class IcicleManager : MonoBehaviour
         }
         else
         {
-            Destruction();
+            Disappear();
         }
     }
     public void FallInitialize()

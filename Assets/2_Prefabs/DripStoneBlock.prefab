@@ -126,6 +126,7 @@ GameObject:
   - component: {fileID: 3404635394798870612}
   - component: {fileID: 4677550183919489173}
   - component: {fileID: 3080944183749273397}
+  - component: {fileID: 790381963509009204}
   m_Layer: 0
   m_Name: DripStone
   m_TagString: Object
@@ -229,3 +230,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fallPowerMax: 12
   addFallPower: 25
+--- !u!114 &790381963509009204
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6532416040067846520}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85113d115efa35445bca9a26b4cf150f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

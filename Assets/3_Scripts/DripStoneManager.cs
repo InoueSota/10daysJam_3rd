@@ -156,7 +156,7 @@ public class DripStoneManager : MonoBehaviour
     }
 
     // è¡ñ≈èàóù
-    void Destruction()
+    void Disappear()
     {
         spriteRenderer.enabled = false;
         allObjectManager.SetIsActive(spriteRenderer.enabled);
@@ -181,7 +181,7 @@ public class DripStoneManager : MonoBehaviour
         }
         else
         {
-            Destruction();
+            Disappear();
         }
     }
     public void FallInitialize()
