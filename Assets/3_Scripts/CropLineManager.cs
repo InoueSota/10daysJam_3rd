@@ -66,7 +66,10 @@ public class CropLineManager : MonoBehaviour
                                 break;
                             case AllObjectManager.ObjectType.DRIPSTONEBLOCK:
 
-                                obj.transform.GetChild(0).GetComponent<DripStoneManager>().FallInitialize();
+                                if (obj.transform.GetChild(0).GetComponent<AllObjectManager>().GetIsActive())
+                                {
+                                    obj.transform.GetChild(0).GetComponent<DripStoneManager>().FallInitialize();
+                                }
                                 obj.GetComponent<BlockManager>().Damage();
 
                                 break;

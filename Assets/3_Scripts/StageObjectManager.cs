@@ -13,6 +13,7 @@ public class StageObjectManager : MonoBehaviour
         public bool isMoving;
     }
     private StageObject dripStone;
+    private StageObject icicle;
 
     private PlayerManager playerManager;
 
