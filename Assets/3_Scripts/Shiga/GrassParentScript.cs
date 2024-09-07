@@ -60,12 +60,14 @@ public class GrassParentScript : MonoBehaviour
                 //‘å‚«‚³
                 Vector3 grassScale = Vector3.one;
 
-                grassScale.x = 16.0f / 1.5f;
-                grassScale.y = 16.0f / 8.0f;
+                float oneDot = 1.0f / 16.0f;
+
+                grassScale.x = oneDot * 1.5f;
+                grassScale.y = oneDot * 8.0f;
 
 
                 GameObject parent = this.gameObject;
-
+                //
                 if(grass != null)
                 {
                     parent = grass.gameObject; 
