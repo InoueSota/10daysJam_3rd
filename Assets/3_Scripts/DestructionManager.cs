@@ -12,6 +12,10 @@ public class DestructionManager : MonoBehaviour
 
                 _obj.GetComponent<BlockManager>().Damage();
 
+                if (0 < _obj.transform.childCount && _obj.transform.GetChild(0).GetComponent<AllObjectManager>().GetIsActive())
+                {
+                    _obj.transform.GetChild(0).GetComponent<GrassParentScript>().Damage();
+                }
                 break;
             case AllObjectManager.ObjectType.ITEM:
 
@@ -49,6 +53,11 @@ public class DestructionManager : MonoBehaviour
             case AllObjectManager.ObjectType.ICICLE:
 
                 _obj.GetComponent<IcicleManager>().Damage();
+
+                break;
+            case AllObjectManager.ObjectType.GRASSPARENT:
+
+                _obj.GetComponent<GrassParentScript>().Damage();
 
                 break;
         }

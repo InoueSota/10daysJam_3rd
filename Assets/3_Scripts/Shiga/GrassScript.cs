@@ -25,6 +25,7 @@ public class GrassScript : MonoBehaviour
     private Vector3 eulerAngle_ = Vector3.zero;
 
     GrassScript parent;
+    GrassParentScript baseParent;
     SpriteRenderer sprite = null;
     BoxCollider2D collider=null;
 
@@ -32,12 +33,15 @@ public class GrassScript : MonoBehaviour
     void Start()
     {
         parent = transform.parent.GetComponent<GrassScript>();
-        
+        sprite = GetComponent<SpriteRenderer>();
+
     }
 
     // Update is called once per frame
     void Update()
     {
+
+        sprite.enabled = baseParent.GetActive();
 
 
         returnPow += returnPowAcc * Time.deltaTime * droopingPer;
@@ -129,8 +133,11 @@ public class GrassScript : MonoBehaviour
         }
     }
 
-    public void Init(Vector3 pos , Vector3 scale, float droopingPer_)
+    public void Init(Vector3 pos , Vector3 scale, float droopingPer_, GrassParentScript baseParent_)
     {
+
+        baseParent = baseParent_;
+
         droopingPer = droopingPer_;
 
         this.transform.localPosition = pos;
