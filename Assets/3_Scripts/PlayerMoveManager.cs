@@ -324,7 +324,7 @@ public class PlayerMoveManager : MonoBehaviour
             isTriggerJump = true;
         }
     }
-    
+
     public bool GetIsGround()
     {
         if (isJumping || isHovering || isGravity)
@@ -340,7 +340,7 @@ public class PlayerMoveManager : MonoBehaviour
         // ¶-1 ‰E 1 
 
         //‰E
-        if (moveDirection.x > 0 )
+        if (moveDirection.x > 0)
         {
             return 1;
         }
@@ -360,15 +360,11 @@ public class PlayerMoveManager : MonoBehaviour
     }
 
     public bool IsMoving()
-{
-    if (isPushLeft || isPushRight)
     {
-        return true;
-    }
-    else
-    {
+        if (isPushLeft || isPushRight)
+        {
+            return true;
+        }
         return false;
-    }
-        return true;
     }
 }

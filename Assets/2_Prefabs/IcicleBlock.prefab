@@ -125,7 +125,7 @@ GameObject:
   - component: {fileID: 1600881885407515786}
   - component: {fileID: 3404635394798870612}
   - component: {fileID: 4677550183919489173}
-  - component: {fileID: 3080944183749273397}
+  - component: {fileID: 4246786568798352268}
   - component: {fileID: 5510491987228482123}
   m_Layer: 0
   m_Name: Icicle
@@ -216,7 +216,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &3080944183749273397
+--- !u!114 &4246786568798352268
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -225,7 +225,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6532416040067846520}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5e7cdb4a774589d478ac96acdc55e696, type: 3}
+  m_Script: {fileID: 11500000, guid: 1689391ce16e02b4c8c9dc474cad86ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   fallPowerMax: 12

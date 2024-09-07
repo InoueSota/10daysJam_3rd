@@ -42,8 +42,6 @@ public class CropLineManager : MonoBehaviour
     {
         if (isTriggerSpecial && playerMoveManager.GetIsGround())
         {
-
-
             foreach (GameObject obj in GameObject.FindGameObjectsWithTag("Object"))
             {
                 AllObjectManager hitAllObjectManager = obj.GetComponent<AllObjectManager>();
