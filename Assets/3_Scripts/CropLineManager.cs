@@ -4,19 +4,22 @@ using UnityEngine;
 
 public class CropLineManager : MonoBehaviour
 {
+    // 自コンポーネント取得
+    private DestructionManager destructionManager;
+    private InputManager inputManager;
+    private bool isTriggerSpecial;
+
     // 他コンポーネント取得
     private PlayerMoveManager playerMoveManager;
     
-    // 入力
-    private InputManager inputManager;
-    private bool isTriggerSpecial;
     //カラー
     private SpriteRenderer spriteRenderer;
     private GameObject Player;
     void Start()
     {
-        playerMoveManager = transform.parent.GetComponent<PlayerMoveManager>();
+        destructionManager = GetComponent<DestructionManager>();
         inputManager = GetComponent<InputManager>();
+        playerMoveManager = transform.parent.GetComponent<PlayerMoveManager>();
 
         //プレイヤーのカラー取得しラインの色をプレイヤーと同じに
         Player = GameObject.FindWithTag("Player");
@@ -45,42 +48,14 @@ public class CropLineManager : MonoBehaviour
             {
                 AllObjectManager hitAllObjectManager = obj.GetComponent<AllObjectManager>();
 
-                if (hitAllObjectManager.GetObjectType() != AllObjectManager.ObjectType.GROUND)
+                if (hitAllObjectManager.GetObjectType() != AllObjectManager.ObjectType.GROUND && hitAllObjectManager.GetIsActive())
                 {
                     // Y軸判定
                     float yBetween = Mathf.Abs(transform.position.y - obj.transform.position.y);
 
                     if (yBetween < 0.2f)
                     {
-                        switch (hitAllObjectManager.GetObjectType())
-                        {
-                            case AllObjectManager.ObjectType.BLOCK:
-
-                                obj.GetComponent<BlockManager>().Damage();
-
-                                break;
-                            case AllObjectManager.ObjectType.ITEM:
-
-                                obj.GetComponent<ItemManager>().Damage();
-
-                                break;
-                            case AllObjectManager.ObjectType.DRIPSTONEBLOCK:
-
-                                obj.transform.GetChild(0).GetComponent<DripStoneManager>().FallInitialize();
-                                obj.GetComponent<BlockManager>().Damage();
-
-                                break;
-                            case AllObjectManager.ObjectType.DRIPSTONE:
-
-                                obj.GetComponent<DripStoneManager>().Damage();
-
-                                break;
-                            case AllObjectManager.ObjectType.BOMB:
-
-                                obj.GetComponent<BombManager>().Damage();
-
-                                break;
-                        }
+                        destructionManager.Destruction(obj);
                     }
                 }
             }

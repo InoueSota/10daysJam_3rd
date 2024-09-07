@@ -2,10 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DripStoneManager : MonoBehaviour
+public class IcicleManager : MonoBehaviour
 {
     // 自コンポーネント取得
     private AllObjectManager allObjectManager;
+    private DestructionManager destructionManager;
     private SpriteRenderer spriteRenderer;
 
     // 他コンポーネント取得
@@ -32,6 +33,7 @@ public class DripStoneManager : MonoBehaviour
     void Start()
     {
         allObjectManager = GetComponent<AllObjectManager>();
+        destructionManager = GetComponent<DestructionManager>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         parentTransform = transform.parent.transform;
         halfSize.x = transform.localScale.x * 0.5f;
@@ -53,41 +55,7 @@ public class DripStoneManager : MonoBehaviour
 
     void Fall()
     {
-        if (!isFalling)
-        {
-            // ブロックとの衝突判定
-            bool noBlock = true;
-
-            foreach (GameObject obj in GameObject.FindGameObjectsWithTag("Object"))
-            {
-                if (obj != gameObject && obj.GetComponent<AllObjectManager>().GetIsActive() && obj.GetComponent<AllObjectManager>().GetObjectType() != AllObjectManager.ObjectType.ITEM)
-                {
-                    // X軸判定
-                    float xBetween = Mathf.Abs(nextPosition.x - obj.transform.position.x);
-                    float xDoubleSize = halfSize.x + 0.25f;
-
-                    // Y軸判定
-                    float yBetween = Mathf.Abs(nextPosition.y - obj.transform.position.y);
-                    float yDoubleSize = halfSize.y + 0.5f;
-
-                    if (yBetween <= yDoubleSize && xBetween < xDoubleSize)
-                    {
-                        if (nextPosition.y > obj.transform.position.y)
-                        {
-                            noBlock = false;
-                            break;
-                        }
-                    }
-                }
-            }
-
-            if (noBlock)
-            {
-                fallPower = 0f;
-                isFalling = true;
-            }
-        }
-        else
+        if (isFalling)
         {
             fallPower += addFallPower * Time.deltaTime;
 
@@ -97,7 +65,9 @@ public class DripStoneManager : MonoBehaviour
             // ブロックとの衝突判定
             foreach (GameObject obj in GameObject.FindGameObjectsWithTag("Object"))
             {
-                if (obj != gameObject && obj.GetComponent<AllObjectManager>().GetIsActive() && obj.GetComponent<AllObjectManager>().GetObjectType() != AllObjectManager.ObjectType.ITEM)
+                AllObjectManager hitAllObjectManager = obj.GetComponent<AllObjectManager>();
+
+                if (obj != gameObject && hitAllObjectManager.GetIsActive() && hitAllObjectManager.GetObjectType() != AllObjectManager.ObjectType.ITEM)
                 {
                     // X軸判定
                     float xBetween = Mathf.Abs(nextPosition.x - obj.transform.position.x);
@@ -111,27 +81,8 @@ public class DripStoneManager : MonoBehaviour
                     {
                         if (nextPosition.y > obj.transform.position.y)
                         {
-                            nextPosition.y = obj.transform.position.y + 0.5f + halfSize.y;
-                            isFalling = false;
-                            break;
-                        }
-                    }
-                }
-                else if (obj.GetComponent<AllObjectManager>().GetIsActive() && obj.GetComponent<AllObjectManager>().GetObjectType() == AllObjectManager.ObjectType.ITEM)
-                {
-                    // X軸判定
-                    float xBetween = Mathf.Abs(nextPosition.x - obj.transform.position.x);
-                    float xDoubleSize = halfSize.x + 0.25f;
-
-                    // Y軸判定
-                    float yBetween = Mathf.Abs(nextPosition.y - obj.transform.position.y);
-                    float yDoubleSize = halfSize.y + 0.3f;
-
-                    if (xBetween < xDoubleSize && yBetween < yDoubleSize)
-                    {
-                        if (nextPosition.y > obj.transform.position.y)
-                        {
-                            obj.GetComponent<ItemManager>().Damage();
+                            destructionManager.Destruction(obj);
+                            Damage();
                             break;
                         }
                     }

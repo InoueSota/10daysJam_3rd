@@ -8,24 +8,19 @@ public class StageObjectManager : MonoBehaviour
     private bool canCheck;
     private bool noMovingObjects;
 
+    enum ObjectType
+    {
+        DRIPSTONE,
+        ICICLE
+    }
+
     class StageObject
     {
         public bool isMoving;
-    }
-    private StageObject dripStone;
 
-    private PlayerManager playerManager;
-
-    void Start()
-    {
-        dripStone = new StageObject();
-    }
-
-    void Update()
-    {
-        if (canCheck)
+        public void CheckMoving(StageObject _stageObject, ObjectType _objectType)
         {
-            if (dripStone.isMoving)
+            if (_stageObject.isMoving)
             {
                 bool isFinishMoving = true;
 
@@ -33,26 +28,54 @@ public class StageObjectManager : MonoBehaviour
                 {
                     AllObjectManager allObjectManager = obj.GetComponent<AllObjectManager>();
 
-                    switch (allObjectManager.GetObjectType())
+                    // DripStone
+                    if (_objectType == ObjectType.DRIPSTONE && allObjectManager.GetObjectType() == AllObjectManager.ObjectType.DRIPSTONE)
                     {
-                        case AllObjectManager.ObjectType.DRIPSTONE:
-
-                            if (obj.GetComponent<DripStoneManager>().GetIsFalling())
-                            {
-                                isFinishMoving = false;
-                                break;
-                            }
+                        if (obj.GetComponent<DripStoneManager>().GetIsFalling())
+                        {
+                            isFinishMoving = false;
                             break;
+                        }
+                    }
+                    // ICICLE
+                    else if (_objectType == ObjectType.ICICLE && allObjectManager.GetObjectType() == AllObjectManager.ObjectType.ICICLE)
+                    {
+                        if (obj.GetComponent<IcicleManager>().GetIsFalling())
+                        {
+                            isFinishMoving = false;
+                            break;
+                        }
                     }
                 }
 
                 if (isFinishMoving)
                 {
-                    dripStone.isMoving = false;
+                    _stageObject.isMoving = false;
                 }
             }
+        }
+    }
+    private StageObject dripStone;
+    private StageObject icicle;
+
+    private PlayerManager playerManager;
+
+    void Start()
+    {
+        dripStone = new StageObject();
+        icicle = new StageObject();
+    }
+
+    void Update()
+    {
+        if (canCheck)
+        {
+            // 動作中のオブジェクトをチェックする
+            dripStone.CheckMoving(dripStone, ObjectType.DRIPSTONE);
+            icicle.CheckMoving(icicle, ObjectType.ICICLE);
 
             noMovingObjects = !dripStone.isMoving;
+            noMovingObjects = !icicle.isMoving;
             playerManager.SetIsActive(noMovingObjects);
         }
     }

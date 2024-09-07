@@ -34,7 +34,7 @@ public class ItemManager : MonoBehaviour
     {
         allObjectManager.Damage();
 
-        if (allObjectManager.GetHp() <= 0)
+        if (allObjectManager.GetIsActive() && allObjectManager.GetHp() <= 0)
         {
             SetIsActive(false);
         }

@@ -124,6 +124,8 @@ public class GameManager : MonoBehaviour
                 switch (allObjectManager.GetObjectType())
                 {
                     case AllObjectManager.ObjectType.BLOCK:
+                    case AllObjectManager.ObjectType.DRIPSTONEBLOCK:
+                    case AllObjectManager.ObjectType.ICICLEBLOCK:
 
                         obj.GetComponent<BlockManager>().SetIsActive(true);
 
@@ -131,11 +133,6 @@ public class GameManager : MonoBehaviour
                     case AllObjectManager.ObjectType.ITEM:
 
                         obj.GetComponent<ItemManager>().SetIsActive(true);
-
-                        break;
-                    case AllObjectManager.ObjectType.DRIPSTONEBLOCK:
-
-                        obj.GetComponent<BlockManager>().SetIsActive(true);
 
                         break;
                     case AllObjectManager.ObjectType.DRIPSTONE:
@@ -146,6 +143,11 @@ public class GameManager : MonoBehaviour
                     case AllObjectManager.ObjectType.BOMB:
 
                         obj.GetComponent<BombManager>().SetIsActive(true);
+
+                        break;
+                    case AllObjectManager.ObjectType.ICICLE:
+
+                        obj.GetComponent<IcicleManager>().SetIsActive(true);
 
                         break;
                 }
