@@ -13,6 +13,9 @@ public class BombManager : MonoBehaviour
     private Vector3 originScale;
     private Quaternion originRotate;
 
+    // Bomb限定
+    [SerializeField] private float explosionRange;
+
     void Start()
     {
         allObjectManager = GetComponent<AllObjectManager>();
@@ -22,15 +25,53 @@ public class BombManager : MonoBehaviour
         originRotate = transform.localRotation;
     }
 
-    void LateUpdate()
+    // 爆発
+    void Explosion()
     {
-        if (allObjectManager.GetHp() >= 2)
+        foreach (GameObject obj in GameObject.FindGameObjectsWithTag("Object"))
         {
-            spriteRenderer.color = Color.red;
-        }
-        else
-        {
-            spriteRenderer.color = Color.white;
+            AllObjectManager hitAllObjectManager = obj.GetComponent<AllObjectManager>();
+
+            if (obj != gameObject && hitAllObjectManager.GetObjectType() != AllObjectManager.ObjectType.GROUND)
+            {
+                // X軸判定
+                float xBetween = Mathf.Abs(transform.position.x - obj.transform.position.x);
+                // Y軸判定
+                float yBetween = Mathf.Abs(transform.position.y - obj.transform.position.y);
+
+                if (xBetween < explosionRange && yBetween < explosionRange)
+                {
+                    switch (hitAllObjectManager.GetObjectType())
+                    {
+                        case AllObjectManager.ObjectType.BLOCK:
+
+                            obj.GetComponent<BlockManager>().Damage();
+
+                            break;
+                        case AllObjectManager.ObjectType.ITEM:
+
+                            obj.GetComponent<ItemManager>().Damage();
+
+                            break;
+                        case AllObjectManager.ObjectType.DRIPSTONEBLOCK:
+
+                            obj.transform.GetChild(0).GetComponent<DripStoneManager>().FallInitialize();
+                            obj.GetComponent<BlockManager>().Damage();
+
+                            break;
+                        case AllObjectManager.ObjectType.DRIPSTONE:
+
+                            obj.GetComponent<DripStoneManager>().Damage();
+
+                            break;
+                        case AllObjectManager.ObjectType.BOMB:
+
+                            obj.GetComponent<BombManager>().Damage();
+
+                            break;
+                    }
+                }
+            }
         }
     }
 
@@ -49,22 +90,8 @@ public class BombManager : MonoBehaviour
     // 消滅処理
     void Destruction()
     {
-        allObjectManager.SetIsActive(false);
-
-        //blockDestory.BlockDestroy(spriteRenderer.enabled);
-        //Sequenceのインスタンスを作成
-        var sequence = DOTween.Sequence();
-
-        //Appendで動作を追加していく
-        sequence.Append(transform.DOScale(Vector3.zero, 0.5f).SetEase(Ease.OutBack));
-        //Joinはひとつ前の動作と同時に実行される
-        sequence.Join(this.transform.DORotate(Vector3.forward * 180, 0.5f, RotateMode.LocalAxisAdd).SetEase(Ease.InBack));
-        //sequence.Join(this.GetComponent<SpriteRenderer>().DOFade(endValue: 0, duration: 0.5f).SetEase(Ease.InQuad));
-
-        sequence.Play().OnComplete(() =>
-        {
-            spriteRenderer.enabled = false;
-        });
+        spriteRenderer.enabled = false;
+        allObjectManager.SetIsActive(spriteRenderer.enabled);
     }
 
     // Setter
@@ -74,6 +101,7 @@ public class BombManager : MonoBehaviour
 
         if (allObjectManager.GetHp() <= 0)
         {
+            Explosion();
             SetIsActive(false);
         }
     }

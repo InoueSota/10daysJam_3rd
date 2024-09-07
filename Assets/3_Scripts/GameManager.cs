@@ -5,6 +5,9 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    // 自コンポーネント取得
+    private StageObjectManager stageObjectManager;
+
     // 入力
     private InputManager inputManager;
     private bool isTriggerReset;
@@ -32,6 +35,8 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        stageObjectManager = GetComponent<StageObjectManager>();
+        stageObjectManager.SetPlayerManager(playerManager);
         inputManager = GetComponent<InputManager>();
 
         readyTimer = 3.25f;
@@ -63,6 +68,7 @@ public class GameManager : MonoBehaviour
             readyTimer -= Time.deltaTime;
             if (readyTimer <= 0f)
             {
+                stageObjectManager.SetCanCheck(true);
                 playerManager.SetIsActive(true);
                 isStart = true;
             }
@@ -78,15 +84,8 @@ public class GameManager : MonoBehaviour
             {
                 AllObjectManager allObjectManager = obj.GetComponent<AllObjectManager>();
 
-                // 全てのブロックが破壊されたかの判定
-                if (allObjectManager.GetObjectType() == AllObjectManager.ObjectType.BLOCK && allObjectManager.GetIsActive())
-                {
-                    isFinish = false;
-                    break;
-                }
-
-                // 全てのアイテムが破壊されたかの判定
-                else if (allObjectManager.GetObjectType() == AllObjectManager.ObjectType.ITEM && allObjectManager.GetIsActive())
+                // Ground以外の全てのオブジェクトが破壊されたかの判定
+                if (allObjectManager.GetObjectType() != AllObjectManager.ObjectType.GROUND && allObjectManager.GetIsActive())
                 {
                     isFinish = false;
                     break;
@@ -117,6 +116,7 @@ public class GameManager : MonoBehaviour
             playerManager.Initialize();
 
             // ステージオブジェクト初期化
+            stageObjectManager.Initialize();
             foreach (GameObject obj in GameObject.FindGameObjectsWithTag("Object"))
             {
                 AllObjectManager allObjectManager = obj.GetComponent<AllObjectManager>();
@@ -141,6 +141,11 @@ public class GameManager : MonoBehaviour
                     case AllObjectManager.ObjectType.DRIPSTONE:
 
                         obj.GetComponent<DripStoneManager>().SetIsActive(true);
+
+                        break;
+                    case AllObjectManager.ObjectType.BOMB:
+
+                        obj.GetComponent<BombManager>().SetIsActive(true);
 
                         break;
                 }

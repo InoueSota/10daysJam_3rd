@@ -8,6 +8,9 @@ public class DripStoneManager : MonoBehaviour
     private AllObjectManager allObjectManager;
     private SpriteRenderer spriteRenderer;
 
+    // 他コンポーネント取得
+    private StageObjectManager stageObjectManager;
+
     // 親オブジェクト
     private Transform parentTransform;
 
@@ -130,6 +133,7 @@ public class DripStoneManager : MonoBehaviour
         fallPower = 0f;
         isFallActive = false;
         isFalling = false;
+        stageObjectManager = null;
     }
 
     // 消滅処理
@@ -166,5 +170,13 @@ public class DripStoneManager : MonoBehaviour
         transform.parent = null;
         isFallActive = true;
         isFalling = true;
+        stageObjectManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<StageObjectManager>();
+        stageObjectManager.SetIsMoving(AllObjectManager.ObjectType.DRIPSTONE, true);
+    }
+
+    // Getter
+    public bool GetIsFalling()
+    {
+        return isFalling;
     }
 }

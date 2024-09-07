@@ -39,6 +39,8 @@ public class CropLineManager : MonoBehaviour
     {
         if (isTriggerSpecial && playerMoveManager.GetIsGround())
         {
+
+
             foreach (GameObject obj in GameObject.FindGameObjectsWithTag("Object"))
             {
                 AllObjectManager hitAllObjectManager = obj.GetComponent<AllObjectManager>();
@@ -71,6 +73,11 @@ public class CropLineManager : MonoBehaviour
                             case AllObjectManager.ObjectType.DRIPSTONE:
 
                                 obj.GetComponent<DripStoneManager>().Damage();
+
+                                break;
+                            case AllObjectManager.ObjectType.BOMB:
+
+                                obj.GetComponent<BombManager>().Damage();
 
                                 break;
                         }
