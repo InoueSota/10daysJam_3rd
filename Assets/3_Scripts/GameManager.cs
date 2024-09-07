@@ -50,6 +50,23 @@ public class GameManager : MonoBehaviour
         GlobalVariables.isGetItem1 = false;
         GlobalVariables.isGetItem2 = false;
     }
+    void DestroyOutOfCameraObj()
+    {
+        Vector2 cameraSize;
+        cameraSize.x = Camera.main.ScreenToWorldPoint(new(Screen.width, 0f, 0f)).x;
+        cameraSize.y = Camera.main.ScreenToWorldPoint(new(0f, Screen.height, 0f)).y;
+
+        foreach (GameObject obj in GameObject.FindGameObjectsWithTag("Object"))
+        {
+            float xAbsValue = Mathf.Abs(obj.transform.position.x);
+            float yAbsValue = Mathf.Abs(obj.transform.position.y);
+
+            if (xAbsValue > cameraSize.x || yAbsValue > cameraSize.y)
+            {
+                Destroy(obj);
+            }
+        }
+    }
 
     void Update()
     {
@@ -68,6 +85,8 @@ public class GameManager : MonoBehaviour
             readyTimer -= Time.deltaTime;
             if (readyTimer <= 0f)
             {
+                // 画面外のオブジェクトを破壊する
+                DestroyOutOfCameraObj();
                 stageObjectManager.SetCanCheck(true);
                 playerManager.SetIsActive(true);
                 isStart = true;
