@@ -10,12 +10,27 @@ public class DestructionManager : MonoBehaviour
         {
             case AllObjectManager.ObjectType.BLOCK:
 
-                _obj.GetComponent<BlockManager>().Damage();
+                BlockManager blockManager = _obj.GetComponent<BlockManager>();
 
-                if (0 < _obj.transform.childCount && _obj.transform.GetChild(0).GetComponent<AllObjectManager>().GetIsActive())
+                switch (blockManager.GetBlockType())
                 {
-                    _obj.transform.GetChild(0).GetComponent<GrassParentScript>().Damage();
+                    case BlockManager.BlockType.NORMAL:
+                        _obj.GetComponent<BlockManager>().Damage();
+                        break;
+                    case BlockManager.BlockType.GRASS:
+                        if (_obj.transform.GetChild(0).GetComponent<AllObjectManager>().GetIsActive()) { _obj.transform.GetChild(0).GetComponent<GrassParentScript>().Damage(); }
+                        _obj.GetComponent<BlockManager>().Damage();
+                        break;
+                    case BlockManager.BlockType.DRIPSTONE:
+                        if (_obj.transform.GetChild(0).GetComponent<AllObjectManager>().GetIsActive()) { _obj.transform.GetChild(0).GetComponent<DripStoneManager>().FallInitialize(); }
+                        _obj.GetComponent<BlockManager>().Damage();
+                        break;
+                    case BlockManager.BlockType.ICICLE:
+                        if (_obj.transform.GetChild(0).GetComponent<AllObjectManager>().GetIsActive()) { _obj.transform.GetChild(0).GetComponent<IcicleManager>().FallInitialize(); }
+                        _obj.GetComponent<BlockManager>().Damage();
+                        break;
                 }
+
                 break;
             case AllObjectManager.ObjectType.ITEM:
 
@@ -27,15 +42,6 @@ public class DestructionManager : MonoBehaviour
                 _obj.GetComponent<GrassParentScript>().Damage();
 
                 break;
-            case AllObjectManager.ObjectType.DRIPSTONEBLOCK:
-
-                if (_obj.transform.GetChild(0).GetComponent<AllObjectManager>().GetIsActive())
-                {
-                    _obj.transform.GetChild(0).GetComponent<DripStoneManager>().FallInitialize();
-                }
-                _obj.GetComponent<BlockManager>().Damage();
-
-                break;
             case AllObjectManager.ObjectType.DRIPSTONE:
 
                 _obj.GetComponent<DripStoneManager>().Damage();
@@ -44,15 +50,6 @@ public class DestructionManager : MonoBehaviour
             case AllObjectManager.ObjectType.BOMB:
 
                 _obj.GetComponent<BombManager>().Damage();
-
-                break;
-            case AllObjectManager.ObjectType.ICICLEBLOCK:
-
-                if (_obj.transform.GetChild(0).GetComponent<AllObjectManager>().GetIsActive())
-                {
-                    _obj.transform.GetChild(0).GetComponent<IcicleManager>().FallInitialize();
-                }
-                _obj.GetComponent<BlockManager>().Damage();
 
                 break;
             case AllObjectManager.ObjectType.ICICLE:

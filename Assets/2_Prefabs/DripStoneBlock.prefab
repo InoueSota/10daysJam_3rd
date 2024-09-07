@@ -48,7 +48,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isActive: 1
-  objectType: 4
+  objectType: 1
   hp: 1
 --- !u!114 &-6533700695049329269
 MonoBehaviour:
@@ -62,6 +62,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53dbc0eb174e00d47b7ebd27fef4954d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  blockType: 2
 --- !u!212 &4090162405295387848
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -162,7 +163,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isActive: 1
-  objectType: 5
+  objectType: 4
   hp: 1
 --- !u!212 &4677550183919489173
 SpriteRenderer:

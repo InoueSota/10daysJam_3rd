@@ -12,10 +12,8 @@ public class AllObjectManager : MonoBehaviour
         BLOCK,
         ITEM,
         GRASSPARENT,
-        DRIPSTONEBLOCK,
         DRIPSTONE,
         BOMB,
-        ICICLEBLOCK,
         ICICLE
     }
     [SerializeField] private ObjectType objectType;

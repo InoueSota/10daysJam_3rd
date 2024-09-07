@@ -124,8 +124,6 @@ public class GameManager : MonoBehaviour
                 switch (allObjectManager.GetObjectType())
                 {
                     case AllObjectManager.ObjectType.BLOCK:
-                    case AllObjectManager.ObjectType.DRIPSTONEBLOCK:
-                    case AllObjectManager.ObjectType.ICICLEBLOCK:
 
                         obj.GetComponent<BlockManager>().SetIsActive(true);
 

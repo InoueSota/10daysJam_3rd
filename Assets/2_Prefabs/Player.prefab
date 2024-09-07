@@ -65,7 +65,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxSpeed: 4
-  maxAcceleration: 3
+  maxAcceleration: 2
   accelerationTime: 1
   easeType: 3
   jumpDistance: 2
