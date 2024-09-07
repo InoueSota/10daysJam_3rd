@@ -135,6 +135,11 @@ public class GameManager : MonoBehaviour
                         obj.GetComponent<ItemManager>().SetIsActive(true);
 
                         break;
+                    case AllObjectManager.ObjectType.GRASS:
+
+                        // ‚—‚—‚—
+
+                        break;
                     case AllObjectManager.ObjectType.DRIPSTONE:
 
                         obj.GetComponent<DripStoneManager>().SetIsActive(true);

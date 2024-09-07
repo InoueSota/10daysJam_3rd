@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class PlayerMoveManager : MonoBehaviour
 {
@@ -24,7 +25,11 @@ public class PlayerMoveManager : MonoBehaviour
     // 横移動
     [Header("横移動")]
     [SerializeField] private float maxSpeed;
-    public float moveSpeed;
+    [SerializeField] private float maxAcceleration;
+    private float moveSpeed;
+    private float acceleration;
+    //private Sequence accelerationSequence = DOVirtual.Sequence();
+
     private Vector3 moveDirection;
 
     // ジャンプ
@@ -84,11 +89,22 @@ public class PlayerMoveManager : MonoBehaviour
         }
     }
 
+    void Acceleration()
+    {
+        if (moveSpeed == 0f && (isPushLeft || isPushRight))
+        {
+            //accelerationSequence.Append(DOVirtual.Float(0f, maxAcceleration, 1f, (value) => { acceleration = value; }).SetEase(Ease.InCirc));
+            //accelerationSequence.Play();
+        }
+    }
     void CheckDirection()
     {
+        // 加速
+        Acceleration();
+
         if (isPushLeft || isPushRight)
         {
-            moveSpeed = maxSpeed;
+            moveSpeed = maxSpeed + acceleration;
 
             if (isPushLeft)
             {
@@ -159,6 +175,7 @@ public class PlayerMoveManager : MonoBehaviour
         // ジャンプ開始と初期化
         if (!isJumping && !isHovering && !isGravity && isTriggerJump)
         {
+            //accelerationSequence.Kill();
             jumpTarget = nextPosition.y + jumpDistance;
             isJumping = true;
         }
@@ -324,7 +341,6 @@ public class PlayerMoveManager : MonoBehaviour
             isTriggerJump = true;
         }
     }
-
     public bool GetIsGround()
     {
         if (isJumping || isHovering || isGravity)
@@ -333,7 +349,6 @@ public class PlayerMoveManager : MonoBehaviour
         }
         return true;
     }
-
     public int GetDirection()
     {
         //向きを取得
@@ -351,14 +366,11 @@ public class PlayerMoveManager : MonoBehaviour
 
         return 0;
     }
-
     public float GetSpeed()
     {
         //移動速度を取得 
-
         return moveSpeed;
     }
-
     public bool IsMoving()
     {
         if (isPushLeft || isPushRight)
