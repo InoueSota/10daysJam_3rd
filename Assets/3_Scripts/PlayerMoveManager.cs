@@ -358,20 +358,17 @@ public class PlayerMoveManager : MonoBehaviour
 
         return moveSpeed;
     }
+
+    public bool IsMoving()
+{
+    if (isPushLeft || isPushRight)
+    {
         return true;
     }
-
-    public bool IsMoving() 
+    else
     {
-        if (isPushLeft || isPushRight)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-
-            
+        return false;
+    }
+        return true;
     }
 }
