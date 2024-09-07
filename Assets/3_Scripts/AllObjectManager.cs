@@ -11,6 +11,7 @@ public class AllObjectManager : MonoBehaviour
         GROUND,
         BLOCK,
         ITEM,
+        GRASS,
         DRIPSTONEBLOCK,
         DRIPSTONE,
         BOMB,
