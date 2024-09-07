@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -35,7 +34,7 @@ public class GameManager : MonoBehaviour
     {
         inputManager = GetComponent<InputManager>();
 
-        readyTimer = 2f;
+        readyTimer = 3.25f;
 
         // –¼‘O‘ã“ü
         GlobalVariables.retryStageName = thisStageName;
