@@ -37,6 +37,20 @@ public class DestructionManager : MonoBehaviour
                 _obj.GetComponent<BombManager>().Damage();
 
                 break;
+            case AllObjectManager.ObjectType.ICICLEBLOCK:
+
+                if (_obj.transform.GetChild(0).GetComponent<AllObjectManager>().GetIsActive())
+                {
+                    _obj.transform.GetChild(0).GetComponent<IcicleManager>().FallInitialize();
+                }
+                _obj.GetComponent<BlockManager>().Damage();
+
+                break;
+            case AllObjectManager.ObjectType.ICICLE:
+
+                _obj.GetComponent<IcicleManager>().Damage();
+
+                break;
         }
     }
 }
