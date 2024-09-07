@@ -9,8 +9,7 @@ public class GrassScript : MonoBehaviour
     [Header("ç≈ëÂäpìx")]
     [SerializeField] private float droopAngle = 15f;
 
-    [Header("ì|ÇÍÇÈóÕÇÃâeãøóÕ")]
-    [SerializeField] private float droopingPer = 1;
+    private float droopingPer = 1;
 
     [Header("ÉvÉåÉCÉÑÅ[Ç…ìñÇΩÇ¡ÇΩéûÇÃóhÇÍó¶")]
     [SerializeField] private float playerHitDroopingPow = 1;
@@ -22,18 +21,24 @@ public class GrassScript : MonoBehaviour
     [SerializeField] private float returnPowAcc  = 60;
     [SerializeField] private float returnPow = 0;
 
-    [SerializeField] private float rot = 0;
+    [SerializeField] private float rot = 0,totalRot;
     private Vector3 eulerAngle_ = Vector3.zero;
 
+    GrassScript parent;
+    SpriteRenderer sprite = null;
+    BoxCollider2D collider=null;
 
     // Start is called before the first frame update
     void Start()
     {
+        parent = transform.parent.GetComponent<GrassScript>();
+        
     }
 
     // Update is called once per frame
     void Update()
     {
+
 
         returnPow += returnPowAcc * Time.deltaTime * droopingPer;
 
@@ -56,9 +61,18 @@ public class GrassScript : MonoBehaviour
         //rot = rot % 90;
 
 
+        if (parent != null)
+        {
+            totalRot = parent.GetTotalRot();
+            totalRot += rot;
+        }
+        else
+        {
+            totalRot = rot;
+        }
 
-        eulerAngle_.z = rot;
-        this.transform.localEulerAngles = eulerAngle_;
+        eulerAngle_.z = totalRot;
+        this.transform.eulerAngles = eulerAngle_;
     }
 
     //ì|ÇÍÇÈóÕÇâ¡Ç¶ÇÈ
@@ -115,18 +129,36 @@ public class GrassScript : MonoBehaviour
         }
     }
 
-    public void Init(Vector3 pos , Vector3 scale)
+    public void Init(Vector3 pos , Vector3 scale, float droopingPer_)
     {
+        droopingPer = droopingPer_;
+
         this.transform.localPosition = pos;
 
-        Vector3 localScale = scale;
-        Vector3 parentLossyScale = this.transform.parent.lossyScale;
+        sprite = this.GetComponent<SpriteRenderer>();
+        collider = this.GetComponent<BoxCollider2D>();
 
-        this.transform.localScale  = new Vector3(
-         localScale.x / parentLossyScale.x,
-         localScale.y / parentLossyScale.y,
-         localScale.z / parentLossyScale.z);
+        sprite.size = scale;
+        collider.size = scale;
+        scale.x = 0.0f;
+        collider.offset = scale * 0.5f;
+
     }
 
+    public float GetTotalRot()
+    {
+        return totalRot;
+    }
 
+    public float GetLength()
+    {
+        return sprite.size.y;
+    }
+
+    public float GetWide()
+    {
+        return sprite.size.x;
+    }
 }
+
+    

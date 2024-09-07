@@ -18,11 +18,22 @@ public class GrassParentScript : MonoBehaviour
     private float shiftPer = 0;
 
     [Header("長さの比率")]
-    [SerializeField, Range(0.0f, 1.0f)] private float grassLengthPerMax = 0.5f;
-    private float grassLengthPer = 0.5f;
+    [SerializeField, Range(0.0f, 1.0f)] private float grassLengthPer = 0.5f;
+
+    [Header("長さの比率のランダム範囲")]
+    [SerializeField, Range(0.0f, 1.0f)] private float grassLengthPerRandom = 0.1f;
 
     [Header("関節数")]
     [SerializeField] private int jointCount = 5;
+
+    [Header("ベースの長さ")]
+    [SerializeField] private float length = 7f;
+
+    [Header("ベースの長さのランダム範囲")]
+    [SerializeField] private float lengthRandom = 1f;
+
+    [Header("倒れる力の影響力の減少率")]
+    [SerializeField, Range(0.0f, 1.0f)] private float droopingPer = 0.7f;
 
     // Start is called before the first frame update
     void Start()
@@ -42,19 +53,37 @@ public class GrassParentScript : MonoBehaviour
 
         for (int grassNum = 0; grassNum < grassCount; grassNum++)
         {
-            
+
             GrassScript grass = null;
 
             for (int jointNum = 0; jointNum < jointCount; jointNum++)
             {
                 //召喚位置
                 Vector3 growPos = Vector3.zero;
-                growPos.y = offSetY;
+
+
                 // 本数による距離間
                 float grassDistance = 1.0f / grassCount;
 
-                //最初を半分ずらしてはやす
-                growPos.x = (grassDistance * 0.5f + grassDistance * (grassNum)) - 0.5f - shiftPer;
+                if (jointNum == 0)
+                {
+                    growPos.y = offSetY;
+                    //最初を半分ずらしてはやす
+
+                    shiftPer= Random.Range(-shiftPerMax,shiftPerMax) * grassDistance ;
+
+                    growPos.x = (grassDistance * 0.5f + grassDistance * (grassNum)) - 0.5f - shiftPer;
+                }
+                else
+                {
+                    growPos.y = grass.GetLength();
+
+                    float wide = grass.GetWide() * 0.5f;
+
+                    growPos.x = Random.Range(-wide, wide);
+                }
+
+
 
 
                 //大きさ
@@ -62,23 +91,28 @@ public class GrassParentScript : MonoBehaviour
 
                 float oneDot = 1.0f / 16.0f;
 
-                grassScale.x = oneDot * 1.5f;
-                grassScale.y = oneDot * 8.0f;
+                float trueGrassLengthPer = grassLengthPer + Random.Range(-grassLengthPerRandom, grassLengthPerRandom);
+                float trueLength = length + Random.Range(-lengthRandom, lengthRandom);
+
+                grassScale.x = oneDot * 2.0f * Mathf.Pow(trueGrassLengthPer, jointNum);
+                grassScale.y = oneDot * trueLength * Mathf.Pow(trueGrassLengthPer, jointNum);
 
 
                 GameObject parent = this.gameObject;
-                //
-                if(grass != null)
+
+                if (jointNum != 0)
                 {
-                    parent = grass.gameObject; 
+                    parent = grass.gameObject;
                 }
 
                 grass = Instantiate(grassPrefab, Vector3.zero, Quaternion.identity);
 
                 grass.transform.parent = parent.transform;
 
-                grass.Init(growPos, grassScale);
+                grass.Init(growPos, grassScale,Mathf.Pow(droopingPer,jointNum));
             }
+
+
         }
     }
 
