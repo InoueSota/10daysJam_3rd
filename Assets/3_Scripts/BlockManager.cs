@@ -47,7 +47,7 @@ public class BlockManager : MonoBehaviour
     }
 
     // Á–Åˆ—
-    void Destruction()
+    void Disappear()
     {
         allObjectManager.SetIsActive(false);
 
@@ -84,7 +84,7 @@ public class BlockManager : MonoBehaviour
         }
         else
         {
-            Destruction();
+            Disappear();
         }
     }
 }
