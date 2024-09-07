@@ -12,6 +12,7 @@ public class PlayerMoveManager : MonoBehaviour
     private InputManager inputManager;
     private bool isPushLeft;
     private bool isPushRight;
+    private bool isTriggerHorizontal;
     private bool isTriggerJump;
 
     // 基本情報
@@ -26,9 +27,11 @@ public class PlayerMoveManager : MonoBehaviour
     [Header("横移動")]
     [SerializeField] private float maxSpeed;
     [SerializeField] private float maxAcceleration;
+    [SerializeField] private float accelerationTime;
+    [SerializeField] private Ease easeType;
     private float moveSpeed;
     private float acceleration;
-    //private Sequence accelerationSequence = DOVirtual.Sequence();
+    private Tweener accelerationTweener;
 
     private Vector3 moveDirection;
 
@@ -91,10 +94,9 @@ public class PlayerMoveManager : MonoBehaviour
 
     void Acceleration()
     {
-        if (moveSpeed == 0f && (isPushLeft || isPushRight))
+        if (GetIsGround() && isTriggerHorizontal && !isTriggerJump)
         {
-            //accelerationSequence.Append(DOVirtual.Float(0f, maxAcceleration, 1f, (value) => { acceleration = value; }).SetEase(Ease.InCirc));
-            //accelerationSequence.Play();
+            accelerationTweener = DOVirtual.Float(0f, maxAcceleration, accelerationTime, (value) => { acceleration = value; }).SetEase(easeType);
         }
     }
     void CheckDirection()
@@ -175,7 +177,8 @@ public class PlayerMoveManager : MonoBehaviour
         // ジャンプ開始と初期化
         if (!isJumping && !isHovering && !isGravity && isTriggerJump)
         {
-            //accelerationSequence.Kill();
+            accelerationTweener.Kill();
+            acceleration = 0f;
             jumpTarget = nextPosition.y + jumpDistance;
             isJumping = true;
         }
@@ -294,6 +297,7 @@ public class PlayerMoveManager : MonoBehaviour
                         if (nextPosition.y > obj.transform.position.y)
                         {
                             nextPosition.y = obj.transform.position.y + 0.5f + halfSize.y;
+                            accelerationTweener = DOVirtual.Float(0f, maxAcceleration, accelerationTime, (value) => { acceleration = value; }).SetEase(easeType);
                             isGravity = false;
                             break;
                         }
@@ -323,6 +327,7 @@ public class PlayerMoveManager : MonoBehaviour
     {
         isPushLeft = false;
         isPushRight = false;
+        isTriggerHorizontal = false;
         isTriggerJump = false;
 
         if (inputManager.IsPush(InputManager.INPUTPATTERN.HORIZONTAL))
@@ -335,6 +340,10 @@ public class PlayerMoveManager : MonoBehaviour
             {
                 isPushRight = true;
             }
+        }
+        if (inputManager.IsTrgger(InputManager.INPUTPATTERN.HORIZONTAL))
+        {
+            isTriggerHorizontal = true;
         }
         if (inputManager.IsTrgger(InputManager.INPUTPATTERN.JUMP))
         {

@@ -48,7 +48,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isActive: 1
-  objectType: 5
+  objectType: 6
   hp: 1
 --- !u!114 &-1374804616269790047
 MonoBehaviour:
