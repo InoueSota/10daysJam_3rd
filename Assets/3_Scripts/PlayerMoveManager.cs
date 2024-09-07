@@ -24,7 +24,7 @@ public class PlayerMoveManager : MonoBehaviour
     // ‰¡ˆÚ“®
     [Header("‰¡ˆÚ“®")]
     [SerializeField] private float maxSpeed;
-    private float moveSpeed;
+    public float moveSpeed;
     private Vector3 moveDirection;
 
     // ƒWƒƒƒ“ƒv
@@ -332,5 +332,19 @@ public class PlayerMoveManager : MonoBehaviour
             return false;
         }
         return true;
+    }
+
+    public bool IsMoving() 
+    {
+        if (isPushLeft || isPushRight)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+
+            
     }
 }
