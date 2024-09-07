@@ -28,10 +28,10 @@ public class PlayerMoveManager : MonoBehaviour
     [SerializeField] private float maxSpeed;
     [SerializeField] private float maxAcceleration;
     [SerializeField] private float accelerationTime;
-    [SerializeField] private Ease easeType;
     private float moveSpeed;
     private float acceleration;
-    private Tweener accelerationTweener;
+    private float accelerationTimer;
+    private bool canAcceleration;
 
     private Vector3 moveDirection;
 
@@ -92,18 +92,8 @@ public class PlayerMoveManager : MonoBehaviour
         }
     }
 
-    void Acceleration()
-    {
-        if (GetIsGround() && isTriggerHorizontal && !isTriggerJump)
-        {
-            accelerationTweener = DOVirtual.Float(0f, maxAcceleration, accelerationTime, (value) => { acceleration = value; }).SetEase(easeType);
-        }
-    }
     void CheckDirection()
     {
-        // 加速
-        Acceleration();
-
         if (isPushLeft || isPushRight)
         {
             moveSpeed = maxSpeed + acceleration;
@@ -122,10 +112,28 @@ public class PlayerMoveManager : MonoBehaviour
             moveSpeed = 0f;
         }
     }
+    void Acceleration()
+    {
+        if (GetIsGround() && isTriggerHorizontal && !isTriggerJump)
+        {
+            accelerationTimer = accelerationTime;
+            canAcceleration = true;
+        }
+
+        if (canAcceleration)
+        {
+            accelerationTimer -= Time.deltaTime;
+            accelerationTimer = Mathf.Clamp(accelerationTimer, 0f, accelerationTime);
+            acceleration = Mathf.Lerp(maxAcceleration, 0f, accelerationTimer / accelerationTime);
+        }
+    }
     void Move()
     {
         // 移動方向の修正
         CheckDirection();
+
+        // 加速
+        Acceleration();
 
         // 移動
         float deltaMoveSpeed = moveSpeed * Time.deltaTime;
@@ -177,8 +185,7 @@ public class PlayerMoveManager : MonoBehaviour
         // ジャンプ開始と初期化
         if (!isJumping && !isHovering && !isGravity && isTriggerJump)
         {
-            accelerationTweener.Kill();
-            acceleration = 0f;
+            canAcceleration = false;
             jumpTarget = nextPosition.y + jumpDistance;
             isJumping = true;
         }
@@ -297,7 +304,8 @@ public class PlayerMoveManager : MonoBehaviour
                         if (nextPosition.y > obj.transform.position.y)
                         {
                             nextPosition.y = obj.transform.position.y + 0.5f + halfSize.y;
-                            accelerationTweener = DOVirtual.Float(0f, maxAcceleration, accelerationTime, (value) => { acceleration = value; }).SetEase(easeType);
+                            accelerationTimer = accelerationTime;
+                            canAcceleration = true;
                             isGravity = false;
                             break;
                         }
