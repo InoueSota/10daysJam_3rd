@@ -77,6 +77,8 @@ public class StageObjectManager : MonoBehaviour
             noMovingObjects = !dripStone.isMoving;
             noMovingObjects = !icicle.isMoving;
             playerManager.SetIsActive(noMovingObjects);
+
+            //ブロックの隙間を埋める用の関数
         }
     }
 
