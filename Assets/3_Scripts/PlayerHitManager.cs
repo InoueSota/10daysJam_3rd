@@ -42,19 +42,8 @@ public class PlayerHitManager : MonoBehaviour
                 // アイテム非表示処理
                 hitItemManager.SetIsActive(false);
 
-                // アイテム獲得フラグ変更
-                if (itemCount <= 0)
-                {
-                    GlobalVariables.isGetItem1 = true;
-                }
-                else if (itemCount <= 1)
-                {
-                    GlobalVariables.isGetItem2 = true;
-                }
-                else if (itemCount <= 2)
-                {
-                    GlobalVariables.isGetItem3 = true;
-                }
+                // アイテム獲得量加算
+                GlobalVariables.getItemCnt = itemCount;
                 itemCount++;
             }
         }

@@ -47,8 +47,7 @@ public class GameManager : MonoBehaviour
 
         // グローバル変数の初期化
         GlobalVariables.isClear = false;
-        GlobalVariables.isGetItem1 = false;
-        GlobalVariables.isGetItem2 = false;
+        GlobalVariables.getItemCnt = 0;
     }
     void DestroyOutOfCameraObj()
     {
@@ -104,11 +103,30 @@ public class GameManager : MonoBehaviour
             {
                 AllObjectManager allObjectManager = obj.GetComponent<AllObjectManager>();
 
-                // Ground以外の全てのオブジェクトが破壊されたかの判定
-                if (allObjectManager.GetObjectType() != AllObjectManager.ObjectType.GROUND && allObjectManager.GetIsActive())
+                if (allObjectManager.GetObjectType() != AllObjectManager.ObjectType.GROUND)
                 {
-                    isFinish = false;
-                    break;
+                    // Ground以外の全てのオブジェクトが破壊されたかの判定
+                    if (allObjectManager.GetObjectType() != AllObjectManager.ObjectType.ITEM && allObjectManager.GetIsActive())
+                    {
+                        isFinish = false;
+                        break;
+                    }
+                    // アイテム判定
+                    else if (allObjectManager.GetObjectType() == AllObjectManager.ObjectType.ITEM)
+                    {
+                        // まだステージにアイテムが残っている
+                        if (allObjectManager.GetIsActive())
+                        {
+                            isFinish = false;
+                            break;
+                        }
+                        // アイテムを破壊してしまっている
+                        else if (allObjectManager.GetHp() <= 0)
+                        {
+                            isFinish = false;
+                            break;
+                        }
+                    }
                 }
             }
 
@@ -178,8 +196,7 @@ public class GameManager : MonoBehaviour
 
             // グローバル変数の初期化
             GlobalVariables.isClear = false;
-            GlobalVariables.isGetItem1 = false;
-            GlobalVariables.isGetItem2 = false;
+            GlobalVariables.getItemCnt = 0;
         }
     }
 
