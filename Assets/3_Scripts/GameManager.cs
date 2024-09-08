@@ -47,8 +47,7 @@ public class GameManager : MonoBehaviour
 
         // ƒOƒ[ƒoƒ‹•Ï”‚Ì‰Šú‰»
         GlobalVariables.isClear = false;
-        GlobalVariables.isGetItem1 = false;
-        GlobalVariables.isGetItem2 = false;
+        GlobalVariables.getItemCnt = 0;
     }
     void DestroyOutOfCameraObj()
     {
@@ -123,6 +122,17 @@ public class GameManager : MonoBehaviour
         {
             if (isTriggerJump)
             {
+                PlayerClass player = new PlayerClass();
+                player.param = new ParamClass();
+
+                player.name = "Json";
+                player.param.hp = 1000;
+                player.param.atk = 80;
+                player.param.def = 120;
+
+
+                string json = JsonUtility.ToJson(player);
+
                 SceneManager.LoadScene("SelectScene");
             }
         }

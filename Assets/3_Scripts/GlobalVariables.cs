@@ -6,9 +6,7 @@ public class GlobalVariables : MonoBehaviour
 {
     // ƒtƒ‰ƒO—Þ
     public static bool isClear = false;
-    public static bool isGetItem1 = false;
-    public static bool isGetItem2 = false;
-    public static bool isGetItem3 = false;
+    public static int getItemCnt = 0;
 
     // –¼‘O—Þ
     public static string retryStageName = "Stage1";
