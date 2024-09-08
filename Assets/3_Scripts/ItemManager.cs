@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,10 +9,26 @@ public class ItemManager : MonoBehaviour
     private AllObjectManager allObjectManager;
     private SpriteRenderer spriteRenderer;
 
+    //—h‚ç‚·—p
+    private Vector3 originPos;
+    private float angle;
+    [SerializeField] float lenge;
+    
     void Start()
     {
         allObjectManager = GetComponent<AllObjectManager>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+
+        //‰ŠúˆÊ’u•Û‘¶
+        originPos = transform.position;
+        angle = 0;
+    }
+
+    private void FixedUpdate()
+    {
+        angle += 0.01f;
+        Vector3 frowPos = new Vector3(originPos.x, originPos.y+ (MathF.Sin(angle)* lenge), originPos.z);
+        transform.position = frowPos;
     }
 
     // ‰Šú‰»ˆ—
