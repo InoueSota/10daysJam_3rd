@@ -36,7 +36,7 @@ public class AllObjectManager : MonoBehaviour
     {
         hp--;
     }
-    public void SetIsActive(bool _isActive)
+    public void SetIsActive (bool _isActive)
     {
         isActive = _isActive;
     }
