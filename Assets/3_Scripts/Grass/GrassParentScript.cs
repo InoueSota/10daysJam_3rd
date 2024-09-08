@@ -39,13 +39,12 @@ public class GrassParentScript : MonoBehaviour
 
     [SerializeField] ParticleSystem particle = null;
 
-    private bool isActive = true;
+    [SerializeField] private bool isActive = true;
 
     // Start is called before the first frame update
     void Start()
     {
         allObjectManager = GetComponent<AllObjectManager>();
-
         GrassGrow();
     }
 
@@ -67,11 +66,11 @@ public class GrassParentScript : MonoBehaviour
 
                 if (yBetween <= 0.2f && xBetween <= 0.2f)
                 {
-                    canMake = false;
+                    isActive = false;
                     break;
                 }
             }
-        }
+        } 
 
         if (canMake)
         {
@@ -172,23 +171,39 @@ public class GrassParentScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-        if (Input.GetKeyDown(KeyCode.I))
+        if (isActive == false)
         {
-            Initialize();
-        }
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            Disappear();
-        }
+            bool canMake = true;
 
+            foreach (GameObject obj in GameObject.FindGameObjectsWithTag("Object"))
+            {
+                if (obj != gameObject && obj.GetComponent<AllObjectManager>().GetIsActive() && obj.GetComponent<AllObjectManager>().GetObjectType() != AllObjectManager.ObjectType.ITEM)
+                {
+                    // XŽ²”»’è
+                    float xBetween = Mathf.Abs(transform.position.x - obj.transform.position.x);
+
+                    // YŽ²”»’è
+                    float yBetween = Mathf.Abs(transform.position.y - obj.transform.position.y);
+
+                    if (yBetween <= 0.2f && xBetween <= 0.2f)
+                    {
+                        canMake = false;
+                        break;
+                    }
+                }
+            }
+
+            if(canMake == true)
+            {
+                isActive = true;
+            }
+        }
     }
     void Initialize()
     {
-        isActive = true;
+        isActive = false;
         allObjectManager.SetIsActive(isActive);
         allObjectManager.Initialize();
-
     }
 
     void Disappear()
@@ -196,7 +211,7 @@ public class GrassParentScript : MonoBehaviour
         isActive = false;
         allObjectManager.SetIsActive(isActive);
         Instantiate(particle,this.transform.position,Quaternion.identity);
-
+        Debug.Log("Fuck");
     }
 
     void NotPlace()
