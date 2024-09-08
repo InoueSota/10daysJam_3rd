@@ -54,4 +54,13 @@ public class AllObjectManager : MonoBehaviour
     {
         return objectType;
     }
+    public bool GetIsHitObject()
+    {
+        if (objectType == ObjectType.ITEM ||
+            objectType == ObjectType.GRASSPARENT)
+        {
+            return false;
+        }
+        return true;
+    }
 }
