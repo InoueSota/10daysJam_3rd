@@ -13,6 +13,7 @@ public class ItemManager : MonoBehaviour
     private Vector3 originPos;
     private float angle;
     [SerializeField] float lenge;
+    [SerializeField] float flowSpeed;
     
     void Start()
     {
@@ -26,7 +27,7 @@ public class ItemManager : MonoBehaviour
 
     private void FixedUpdate()
     {
-        angle += 0.01f;
+        angle += flowSpeed;
         Vector3 frowPos = new Vector3(originPos.x, originPos.y+ (MathF.Sin(angle)* lenge), originPos.z);
         transform.position = frowPos;
     }
