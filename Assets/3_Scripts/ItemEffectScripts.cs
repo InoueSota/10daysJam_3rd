@@ -40,7 +40,8 @@ public class ItemEffectScripts : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!item.GetIsActive()&& !isOne)
+        
+        if (!item.GetIsActive()&& !isOne && item.GetHp() <= 0)
         {
             Debug.Log("breakitem");
             //front

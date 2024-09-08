@@ -46,6 +46,9 @@ public class BlockManager : MonoBehaviour
     // ‰Šú‰»ˆ—
     void Initialize()
     {
+
+        //‘S‚Ä‚ÌÀs‚ğ~‚ß‚é•û–@
+        DOTween.KillAll();
         spriteRenderer.enabled = true;
         allObjectManager.SetIsActive(spriteRenderer.enabled);
         allObjectManager.Initialize();
