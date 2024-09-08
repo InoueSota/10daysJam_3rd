@@ -40,6 +40,7 @@ public class GrassParentScript : MonoBehaviour
     [SerializeField] ParticleSystem particle = null;
 
     [SerializeField] private bool isActive = true;
+    private bool isGrew = false;
 
     // Start is called before the first frame update
     void Start()
@@ -66,7 +67,7 @@ public class GrassParentScript : MonoBehaviour
 
                 if (yBetween <= 0.2f && xBetween <= 0.2f)
                 {
-                    isActive = false;
+                    isGrew = false;
                     break;
                 }
             }
@@ -76,7 +77,6 @@ public class GrassParentScript : MonoBehaviour
         {
             for (int grassNum = 0; grassNum < grassCount; grassNum++)
             {
-
                 GrassScript grass = null;
 
                 for (int jointNum = 0; jointNum < jointCount; jointNum++)
@@ -148,11 +148,14 @@ public class GrassParentScript : MonoBehaviour
 
     public void Damage()
     {
-        allObjectManager.Damage();
-
-        if (allObjectManager.GetHp() <= 0)
+        if (isGrew == true)
         {
-            SetIsActive(false);
+            allObjectManager.Damage();
+
+            if (allObjectManager.GetHp() <= 0)
+            {
+                SetIsActive(false);
+            }
         }
     }
 
@@ -171,7 +174,7 @@ public class GrassParentScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (isActive == false)
+        if (isGrew == false)
         {
             bool canMake = true;
 
@@ -195,34 +198,40 @@ public class GrassParentScript : MonoBehaviour
 
             if(canMake == true)
             {
-                isActive = true;
+                isGrew = true;
             }
         }
     }
     void Initialize()
     {
-        isActive = false;
+        isGrew = false;
+        isActive = true;
         allObjectManager.SetIsActive(isActive);
         allObjectManager.Initialize();
     }
 
     void Disappear()
     {
+        isGrew = false;
         isActive = false;
         allObjectManager.SetIsActive(isActive);
         Instantiate(particle,this.transform.position,Quaternion.identity);
-        Debug.Log("Fuck");
     }
 
     void NotPlace()
     {
-        isActive = false;
+        isGrew = false;
         allObjectManager.SetIsActive(isActive);
     }
 
         public bool GetActive()
     {
         return isActive;
+    }
+
+    public bool GetGrew()
+    {
+        return isGrew;
     }
 
 }

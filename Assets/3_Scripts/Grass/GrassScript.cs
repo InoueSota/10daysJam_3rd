@@ -41,7 +41,7 @@ public class GrassScript : MonoBehaviour
     void Update()
     {
 
-        sprite.enabled = baseParent.GetActive();
+        sprite.enabled = baseParent.GetGrew();
 
 
         returnPow += returnPowAcc * Time.deltaTime * droopingPer;
