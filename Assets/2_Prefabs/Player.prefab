@@ -52,6 +52,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c9f21439d908574e8b9dc03486d6feb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ui_Crop: {fileID: 4179638356995153019}
 --- !u!114 &5692576765418918134
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -64,10 +65,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 122a5ba352037e04aa644ca0a53923a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isClampInCamera: 1
   maxSpeed: 4
   maxAcceleration: 2
   accelerationTime: 1
-  easeType: 1
+  acceleration: 0
   jumpDistance: 2
   jumpSpeed: 10
   hangTime: 0.1
