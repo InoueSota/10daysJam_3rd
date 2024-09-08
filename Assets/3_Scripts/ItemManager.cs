@@ -8,7 +8,7 @@ public class ItemManager : MonoBehaviour
     // 自コンポーネント取得
     private AllObjectManager allObjectManager;
     private SpriteRenderer spriteRenderer;
-
+    private ItemEffectScripts sitemEffectScripts;
     //揺らす用
     private Vector3 originPos;
     private float angle;
@@ -19,7 +19,7 @@ public class ItemManager : MonoBehaviour
     {
         allObjectManager = GetComponent<AllObjectManager>();
         spriteRenderer = GetComponent<SpriteRenderer>();
-
+        sitemEffectScripts=GetComponent<ItemEffectScripts>();
         //初期位置保存
         originPos = transform.position;
         angle = 0;
@@ -38,6 +38,7 @@ public class ItemManager : MonoBehaviour
         spriteRenderer.enabled = true;
         allObjectManager.SetIsActive(spriteRenderer.enabled);
         allObjectManager.Initialize();
+        sitemEffectScripts.Initialized();
     }
 
     // 消滅処理
@@ -68,4 +69,6 @@ public class ItemManager : MonoBehaviour
             Destruction();
         }
     }
+
+    
 }
