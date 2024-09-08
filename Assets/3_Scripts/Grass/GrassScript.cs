@@ -27,7 +27,7 @@ public class GrassScript : MonoBehaviour
     GrassScript parent;
     GrassParentScript baseParent;
     SpriteRenderer sprite = null;
-    BoxCollider2D collider=null;
+    BoxCollider2D boxCollider2D =null;
 
     // Start is called before the first frame update
     void Start()
@@ -143,12 +143,12 @@ public class GrassScript : MonoBehaviour
         this.transform.localPosition = pos;
 
         sprite = this.GetComponent<SpriteRenderer>();
-        collider = this.GetComponent<BoxCollider2D>();
+        boxCollider2D = this.GetComponent<BoxCollider2D>();
 
         sprite.size = scale;
-        collider.size = scale;
+        boxCollider2D.size = scale;
         scale.x = 0.0f;
-        collider.offset = scale * 0.5f;
+        boxCollider2D.offset = scale * 0.5f;
 
     }
 

@@ -70,7 +70,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isActive: 1
-  objectType: 8
+  objectType: 3
   hp: 1
 --- !u!212 &2877009593328672331
 SpriteRenderer:

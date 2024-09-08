@@ -13,6 +13,15 @@ public class BlockManager : MonoBehaviour
     private Vector3 originScale;
     private Quaternion originRotate;
 
+    public enum BlockType
+    {
+        NORMAL,
+        GRASS,
+        DRIPSTONE,
+        ICICLE
+    }
+    [SerializeField] private BlockType blockType = BlockType.NORMAL;
+
     void Start()
     {
         allObjectManager = GetComponent<AllObjectManager>();
@@ -86,5 +95,11 @@ public class BlockManager : MonoBehaviour
         {
             Disappear();
         }
+    }
+
+    // Getter
+    public BlockType GetBlockType()
+    {
+        return blockType;
     }
 }

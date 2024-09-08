@@ -50,6 +50,23 @@ public class GameManager : MonoBehaviour
         GlobalVariables.isGetItem1 = false;
         GlobalVariables.isGetItem2 = false;
     }
+    void DestroyOutOfCameraObj()
+    {
+        Vector2 cameraSize;
+        cameraSize.x = Camera.main.ScreenToWorldPoint(new(Screen.width, 0f, 0f)).x;
+        cameraSize.y = Camera.main.ScreenToWorldPoint(new(0f, Screen.height, 0f)).y;
+
+        foreach (GameObject obj in GameObject.FindGameObjectsWithTag("Object"))
+        {
+            float xAbsValue = Mathf.Abs(obj.transform.position.x);
+            float yAbsValue = Mathf.Abs(obj.transform.position.y);
+
+            if (xAbsValue > cameraSize.x || yAbsValue > cameraSize.y)
+            {
+                Destroy(obj);
+            }
+        }
+    }
 
     void Update()
     {
@@ -68,6 +85,8 @@ public class GameManager : MonoBehaviour
             readyTimer -= Time.deltaTime;
             if (readyTimer <= 0f)
             {
+                // 画面外のオブジェクトを破壊する
+                DestroyOutOfCameraObj();
                 stageObjectManager.SetCanCheck(true);
                 playerManager.SetIsActive(true);
                 isStart = true;
@@ -124,8 +143,6 @@ public class GameManager : MonoBehaviour
                 switch (allObjectManager.GetObjectType())
                 {
                     case AllObjectManager.ObjectType.BLOCK:
-                    case AllObjectManager.ObjectType.DRIPSTONEBLOCK:
-                    case AllObjectManager.ObjectType.ICICLEBLOCK:
 
                         obj.GetComponent<BlockManager>().SetIsActive(true);
 
@@ -135,9 +152,9 @@ public class GameManager : MonoBehaviour
                         obj.GetComponent<ItemManager>().SetIsActive(true);
 
                         break;
-                    case AllObjectManager.ObjectType.GRASS:
+                    case AllObjectManager.ObjectType.GRASSPARENT:
 
-                        // ｗｗｗ
+                        obj.GetComponent<GrassParentScript>().SetIsActive(true);
 
                         break;
                     case AllObjectManager.ObjectType.DRIPSTONE:
@@ -153,11 +170,6 @@ public class GameManager : MonoBehaviour
                     case AllObjectManager.ObjectType.ICICLE:
 
                         obj.GetComponent<IcicleManager>().SetIsActive(true);
-
-                        break;
-                            case AllObjectManager.ObjectType.GRASSPARENT:
-
-                        obj.GetComponent<GrassParentScript>().SetIsActive(true);
 
                         break;
                 }
