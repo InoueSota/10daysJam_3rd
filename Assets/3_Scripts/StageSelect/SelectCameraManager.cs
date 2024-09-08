@@ -51,4 +51,17 @@ public class SelectCameraManager : MonoBehaviour
 
         nextPosition.x += (targetX - nextPosition.x) * (chasePower * Time.deltaTime);
     }
+
+    // Setter
+    public void SetTargetX(float _targetX)
+    {
+        targetX = _targetX;
+        transform.position = new(targetX, transform.position.y, transform.position.z);
+    }
+
+    // Getter
+    public float GetTargetX()
+    {
+        return targetX;
+    }
 }

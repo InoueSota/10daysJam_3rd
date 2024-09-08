@@ -47,7 +47,6 @@ public class GameManager : MonoBehaviour
 
         // グローバル変数の初期化
         GlobalVariables.isClear = false;
-        GlobalVariables.getItemCnt = 0;
     }
     void DestroyOutOfCameraObj()
     {
@@ -196,7 +195,6 @@ public class GameManager : MonoBehaviour
 
             // グローバル変数の初期化
             GlobalVariables.isClear = false;
-            GlobalVariables.getItemCnt = 0;
         }
     }
 
