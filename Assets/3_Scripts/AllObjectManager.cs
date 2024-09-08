@@ -36,7 +36,7 @@ public class AllObjectManager : MonoBehaviour
     {
         hp--;
     }
-    public void SetIsActive(bool _isActive)
+    public void SetIsActive (bool _isActive)
     {
         isActive = _isActive;
     }
@@ -53,5 +53,14 @@ public class AllObjectManager : MonoBehaviour
     public ObjectType GetObjectType()
     {
         return objectType;
+    }
+    public bool GetIsHitObject()
+    {
+        if (objectType == ObjectType.ITEM ||
+            objectType == ObjectType.GRASSPARENT)
+        {
+            return false;
+        }
+        return true;
     }
 }

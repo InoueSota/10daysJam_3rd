@@ -156,7 +156,7 @@ public class PlayerMoveManager : MonoBehaviour
 
                 if (xCameraBetween < cameraHalfSize.x)
                 {
-                    if (obj.GetComponent<AllObjectManager>().GetIsActive() && obj.GetComponent<AllObjectManager>().GetObjectType() != AllObjectManager.ObjectType.ITEM)
+                    if (obj.GetComponent<AllObjectManager>().GetIsActive() && obj.GetComponent<AllObjectManager>().GetIsHitObject())
                     {
                         // XŽ²”»’è
                         float xBetween = Mathf.Abs(nextPosition.x - obj.transform.position.x);
@@ -228,7 +228,7 @@ public class PlayerMoveManager : MonoBehaviour
 
                 if (xCameraBetween < cameraHalfSize.x)
                 {
-                    if (obj.GetComponent<AllObjectManager>().GetIsActive() && obj.GetComponent<AllObjectManager>().GetObjectType() != AllObjectManager.ObjectType.ITEM)
+                    if (obj.GetComponent<AllObjectManager>().GetIsActive() && obj.GetComponent<AllObjectManager>().GetIsHitObject())
                     {
                         // XŽ²”»’è
                         float xBetween = Mathf.Abs(nextPosition.x - obj.transform.position.x);
@@ -276,7 +276,7 @@ public class PlayerMoveManager : MonoBehaviour
 
                     if (xCameraBetween < cameraHalfSize.x)
                     {
-                        if (obj.GetComponent<AllObjectManager>().GetIsActive() && obj.GetComponent<AllObjectManager>().GetObjectType() != AllObjectManager.ObjectType.ITEM)
+                        if (obj.GetComponent<AllObjectManager>().GetIsActive() && obj.GetComponent<AllObjectManager>().GetIsHitObject())
                         {
                             // XŽ²”»’è
                             float xBetween = Mathf.Abs(nextPosition.x - obj.transform.position.x);
@@ -320,7 +320,7 @@ public class PlayerMoveManager : MonoBehaviour
 
                 if (xCameraBetween < cameraHalfSize.x)
                 {
-                    if (obj.GetComponent<AllObjectManager>().GetIsActive() && obj.GetComponent<AllObjectManager>().GetObjectType() != AllObjectManager.ObjectType.ITEM)
+                    if (obj.GetComponent<AllObjectManager>().GetIsActive() && obj.GetComponent<AllObjectManager>().GetIsHitObject())
                     {
                         // XŽ²”»’è
                         float xBetween = Mathf.Abs(nextPosition.x - obj.transform.position.x);
