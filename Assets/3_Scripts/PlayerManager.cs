@@ -7,7 +7,7 @@ public class PlayerManager : MonoBehaviour
     // 自コンポーネント取得
     private PlayerMoveManager moveManager;
     private PlayerHitManager hitManager;
-
+    [SerializeField] private UICropScript ui_Crop;
     // 移動フラグ
     private bool isActive;
     private bool canJump = true;
@@ -16,6 +16,7 @@ public class PlayerManager : MonoBehaviour
     {
         moveManager = GetComponent<PlayerMoveManager>();
         hitManager = GetComponent<PlayerHitManager>();
+
     }
 
     // Setter
@@ -30,6 +31,7 @@ public class PlayerManager : MonoBehaviour
     public void Initialize()
     {
         moveManager.Initialize();
+        ui_Crop.Initialize();
     }
 
     // Getter

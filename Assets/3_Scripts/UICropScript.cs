@@ -57,4 +57,13 @@ public class UICropScript : MonoBehaviour
         }
 
     }
+
+    public void Initialize()
+    {
+        //“®‚«‚Æ‚ß‚é
+        DOTween.KillAll();
+        isOne = false;
+        coolTime = 0;
+        transform.localScale = Vector3.one;
+    }
 }
