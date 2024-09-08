@@ -87,6 +87,7 @@ public class GameManager : MonoBehaviour
                 // 画面外のオブジェクトを破壊する
                 DestroyOutOfCameraObj();
                 stageObjectManager.SetCanCheck(true);
+                stageObjectManager.Initialize();
                 playerManager.SetIsActive(true);
                 isStart = true;
             }
