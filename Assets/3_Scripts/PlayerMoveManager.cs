@@ -15,6 +15,8 @@ public class PlayerMoveManager : MonoBehaviour
     private bool isTriggerHorizontal;
     private bool isTriggerJump;
 
+    [SerializeField] private bool isClampInCamera = true;
+
     // 基本情報
     private Vector2 halfSize;
     private Vector2 cameraHalfSize;
@@ -29,7 +31,7 @@ public class PlayerMoveManager : MonoBehaviour
     [SerializeField] private float maxAcceleration;
     [SerializeField] private float accelerationTime;
     private float moveSpeed;
-    private float acceleration;
+    [SerializeField] private float acceleration;
     private float accelerationTimer;
     private bool canAcceleration;
 
@@ -86,7 +88,12 @@ public class PlayerMoveManager : MonoBehaviour
             Jump();
             Hovering();
             Gravity();
-            ClampInCamera();
+
+            // カメラ内に収める処理を行うか判定する。ステージセレクトではカメラ内に収めない。
+            if (isClampInCamera)
+            {
+                ClampInCamera();
+            }
 
             transform.position = nextPosition;
         }
@@ -144,36 +151,42 @@ public class PlayerMoveManager : MonoBehaviour
         {
             foreach (GameObject obj in GameObject.FindGameObjectsWithTag("Object"))
             {
-                if (obj.GetComponent<AllObjectManager>().GetIsActive() && obj.GetComponent<AllObjectManager>().GetObjectType() != AllObjectManager.ObjectType.ITEM)
+                // X軸判定
+                float xCameraBetween = Mathf.Abs(nextPosition.x - obj.transform.position.x);
+
+                if (xCameraBetween < cameraHalfSize.x)
                 {
-                    // X軸判定
-                    float xBetween = Mathf.Abs(nextPosition.x - obj.transform.position.x);
-                    float xDoubleSize = halfSize.x + 0.5f;
-
-                    // Y軸判定
-                    float yBetween = Mathf.Abs(nextPosition.y - obj.transform.position.y);
-                    float yDoubleSize;
-
-                    if (isJumping)
+                    if (obj.GetComponent<AllObjectManager>().GetIsActive() && obj.GetComponent<AllObjectManager>().GetObjectType() != AllObjectManager.ObjectType.ITEM)
                     {
-                        yDoubleSize = halfSize.y + 0.5f;
-                    }
-                    else
-                    {
-                        yDoubleSize = halfSize.y + 0.35f;
-                    }
+                        // X軸判定
+                        float xBetween = Mathf.Abs(nextPosition.x - obj.transform.position.x);
+                        float xDoubleSize = halfSize.x + 0.5f;
 
-                    if (yBetween < yDoubleSize && xBetween < xDoubleSize)
-                    {
-                        if (obj.transform.position.x < nextPosition.x)
+                        // Y軸判定
+                        float yBetween = Mathf.Abs(nextPosition.y - obj.transform.position.y);
+                        float yDoubleSize;
+
+                        if (isJumping)
                         {
-                            nextPosition.x = obj.transform.position.x + 0.5f + halfSize.x;
-                            break;
+                            yDoubleSize = halfSize.y + 0.5f;
                         }
                         else
                         {
-                            nextPosition.x = obj.transform.position.x - 0.5f - halfSize.x;
-                            break;
+                            yDoubleSize = halfSize.y + 0.35f;
+                        }
+
+                        if (yBetween < yDoubleSize && xBetween < xDoubleSize)
+                        {
+                            if (obj.transform.position.x < nextPosition.x)
+                            {
+                                nextPosition.x = obj.transform.position.x + 0.5f + halfSize.x;
+                                break;
+                            }
+                            else
+                            {
+                                nextPosition.x = obj.transform.position.x - 0.5f - halfSize.x;
+                                break;
+                            }
                         }
                     }
                 }
@@ -183,8 +196,9 @@ public class PlayerMoveManager : MonoBehaviour
     void Jump()
     {
         // ジャンプ開始と初期化
-        if (!isJumping && !isHovering && !isGravity && isTriggerJump)
+        if (playerManager.GetCanJump() && !isJumping && !isHovering && !isGravity && isTriggerJump)
         {
+            acceleration = 0f;
             canAcceleration = false;
             jumpTarget = nextPosition.y + jumpDistance;
             isJumping = true;
@@ -209,23 +223,29 @@ public class PlayerMoveManager : MonoBehaviour
             // ブロックとの衝突判定
             foreach (GameObject obj in GameObject.FindGameObjectsWithTag("Object"))
             {
-                if (obj.GetComponent<AllObjectManager>().GetIsActive() && obj.GetComponent<AllObjectManager>().GetObjectType() != AllObjectManager.ObjectType.ITEM)
+                // X軸判定
+                float xCameraBetween = Mathf.Abs(nextPosition.x - obj.transform.position.x);
+
+                if (xCameraBetween < cameraHalfSize.x)
                 {
-                    // X軸判定
-                    float xBetween = Mathf.Abs(nextPosition.x - obj.transform.position.x);
-                    float xDoubleSize = halfSize.x + 0.35f;
-
-                    // Y軸判定
-                    float yBetween = Mathf.Abs(nextPosition.y - obj.transform.position.y);
-                    float yDoubleSize = halfSize.y + 0.5f;
-
-                    if (xBetween < xDoubleSize && yBetween < yDoubleSize)
+                    if (obj.GetComponent<AllObjectManager>().GetIsActive() && obj.GetComponent<AllObjectManager>().GetObjectType() != AllObjectManager.ObjectType.ITEM)
                     {
-                        if (nextPosition.y < obj.transform.position.y)
+                        // X軸判定
+                        float xBetween = Mathf.Abs(nextPosition.x - obj.transform.position.x);
+                        float xDoubleSize = halfSize.x + 0.35f;
+
+                        // Y軸判定
+                        float yBetween = Mathf.Abs(nextPosition.y - obj.transform.position.y);
+                        float yDoubleSize = halfSize.y + 0.5f;
+
+                        if (xBetween < xDoubleSize && yBetween < yDoubleSize)
                         {
-                            nextPosition.y = obj.transform.position.y - 0.5f - halfSize.y;
-                            isJumping = false;
-                            break;
+                            if (nextPosition.y < obj.transform.position.y)
+                            {
+                                nextPosition.y = obj.transform.position.y - 0.5f - halfSize.y;
+                                isJumping = false;
+                                break;
+                            }
                         }
                     }
                 }
@@ -251,22 +271,28 @@ public class PlayerMoveManager : MonoBehaviour
 
                 foreach (GameObject obj in GameObject.FindGameObjectsWithTag("Object"))
                 {
-                    if (obj.GetComponent<AllObjectManager>().GetIsActive() && obj.GetComponent<AllObjectManager>().GetObjectType() != AllObjectManager.ObjectType.ITEM)
+                    // X軸判定
+                    float xCameraBetween = Mathf.Abs(nextPosition.x - obj.transform.position.x);
+
+                    if (xCameraBetween < cameraHalfSize.x)
                     {
-                        // X軸判定
-                        float xBetween = Mathf.Abs(nextPosition.x - obj.transform.position.x);
-                        float xDoubleSize = halfSize.x + 0.35f;
-
-                        // Y軸判定
-                        float yBetween = Mathf.Abs(nextPosition.y - obj.transform.position.y);
-                        float yDoubleSize = halfSize.y + 0.5f;
-
-                        if (yBetween <= yDoubleSize && xBetween < xDoubleSize)
+                        if (obj.GetComponent<AllObjectManager>().GetIsActive() && obj.GetComponent<AllObjectManager>().GetObjectType() != AllObjectManager.ObjectType.ITEM)
                         {
-                            if (nextPosition.y > obj.transform.position.y)
+                            // X軸判定
+                            float xBetween = Mathf.Abs(nextPosition.x - obj.transform.position.x);
+                            float xDoubleSize = halfSize.x + 0.35f;
+
+                            // Y軸判定
+                            float yBetween = Mathf.Abs(nextPosition.y - obj.transform.position.y);
+                            float yDoubleSize = halfSize.y + 0.5f;
+
+                            if (yBetween <= yDoubleSize && xBetween < xDoubleSize)
                             {
-                                noBlock = false;
-                                break;
+                                if (nextPosition.y > obj.transform.position.y)
+                                {
+                                    noBlock = false;
+                                    break;
+                                }
                             }
                         }
                     }
@@ -289,25 +315,31 @@ public class PlayerMoveManager : MonoBehaviour
             // ブロックとの衝突判定
             foreach (GameObject obj in GameObject.FindGameObjectsWithTag("Object"))
             {
-                if (obj.GetComponent<AllObjectManager>().GetIsActive() && obj.GetComponent<AllObjectManager>().GetObjectType() != AllObjectManager.ObjectType.ITEM)
+                // X軸判定
+                float xCameraBetween = Mathf.Abs(nextPosition.x - obj.transform.position.x);
+
+                if (xCameraBetween < cameraHalfSize.x)
                 {
-                    // X軸判定
-                    float xBetween = Mathf.Abs(nextPosition.x - obj.transform.position.x);
-                    float xDoubleSize = halfSize.x + 0.35f;
-
-                    // Y軸判定
-                    float yBetween = Mathf.Abs(nextPosition.y - obj.transform.position.y);
-                    float yDoubleSize = halfSize.y + 0.5f;
-
-                    if (xBetween < xDoubleSize && yBetween < yDoubleSize)
+                    if (obj.GetComponent<AllObjectManager>().GetIsActive() && obj.GetComponent<AllObjectManager>().GetObjectType() != AllObjectManager.ObjectType.ITEM)
                     {
-                        if (nextPosition.y > obj.transform.position.y)
+                        // X軸判定
+                        float xBetween = Mathf.Abs(nextPosition.x - obj.transform.position.x);
+                        float xDoubleSize = halfSize.x + 0.35f;
+
+                        // Y軸判定
+                        float yBetween = Mathf.Abs(nextPosition.y - obj.transform.position.y);
+                        float yDoubleSize = halfSize.y + 0.5f;
+
+                        if (xBetween < xDoubleSize && yBetween < yDoubleSize)
                         {
-                            nextPosition.y = obj.transform.position.y + 0.5f + halfSize.y;
-                            accelerationTimer = accelerationTime;
-                            canAcceleration = true;
-                            isGravity = false;
-                            break;
+                            if (nextPosition.y > obj.transform.position.y)
+                            {
+                                nextPosition.y = obj.transform.position.y + 0.5f + halfSize.y;
+                                accelerationTimer = accelerationTime;
+                                canAcceleration = true;
+                                isGravity = false;
+                                break;
+                            }
                         }
                     }
                 }

@@ -6,26 +6,30 @@ public class CropLineManager : MonoBehaviour
 {
     // 自コンポーネント取得
     private DestructionManager destructionManager;
+    private SpriteRenderer spriteRenderer;
     private InputManager inputManager;
     private bool isTriggerSpecial;
 
     // 他コンポーネント取得
     private PlayerMoveManager playerMoveManager;
-    
-    //カラー
-    private SpriteRenderer spriteRenderer;
-    private GameObject Player;
+
+    // カメラ関係
+    private Transform cameraTransform;
+    private float cameraHalfSizeX;
+
     void Start()
     {
         destructionManager = GetComponent<DestructionManager>();
+        spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
         inputManager = GetComponent<InputManager>();
         playerMoveManager = transform.parent.GetComponent<PlayerMoveManager>();
 
-        //プレイヤーのカラー取得しラインの色をプレイヤーと同じに
-        Player = GameObject.FindWithTag("Player");
+        // カメラ関係
+        cameraTransform = GameObject.FindGameObjectWithTag("MainCamera").transform;
+        cameraHalfSizeX = Camera.main.ScreenToWorldPoint(new(Screen.width, 0f, 0f)).x;
 
-        spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
-        spriteRenderer.color = Player.GetComponent<SpriteRenderer>().color;
+        //プレイヤーのカラー取得しラインの色をプレイヤーと同じに
+        spriteRenderer.color = transform.parent.GetComponent<SpriteRenderer>().color;
     }
 
     void LateUpdate()
@@ -33,7 +37,7 @@ public class CropLineManager : MonoBehaviour
         GetInput();
 
         transform.localPosition = new(0f, -1f, 0f);
-        transform.position = new(0f, transform.position.y, transform.position.z);
+        transform.position = new(cameraTransform.position.x, transform.position.y, transform.position.z);
 
         Destruction();
     }
@@ -44,16 +48,23 @@ public class CropLineManager : MonoBehaviour
         {
             foreach (GameObject obj in GameObject.FindGameObjectsWithTag("Object"))
             {
-                AllObjectManager hitAllObjectManager = obj.GetComponent<AllObjectManager>();
+                // X軸判定
+                float xCameraBetween = Mathf.Abs(transform.position.x - obj.transform.position.x);
 
-                if (hitAllObjectManager.GetObjectType() != AllObjectManager.ObjectType.GROUND && hitAllObjectManager.GetIsActive())
+                if (xCameraBetween < cameraHalfSizeX)
                 {
-                    // Y軸判定
-                    float yBetween = Mathf.Abs(transform.position.y - obj.transform.position.y);
+                    AllObjectManager hitAllObjectManager = obj.GetComponent<AllObjectManager>();
 
-                    if (yBetween < 0.2f)
+                    if (hitAllObjectManager.GetObjectType() != AllObjectManager.ObjectType.GROUND && hitAllObjectManager.GetIsActive())
                     {
-                        destructionManager.Destruction(obj);
+
+                        // Y軸判定
+                        float yBetween = Mathf.Abs(transform.position.y - obj.transform.position.y);
+
+                        if (yBetween < 0.2f)
+                        {
+                            destructionManager.Destruction(obj);
+                        }
                     }
                 }
             }
