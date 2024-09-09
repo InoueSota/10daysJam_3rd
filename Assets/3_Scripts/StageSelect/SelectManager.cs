@@ -18,9 +18,19 @@ public class SelectManager : MonoBehaviour
     private int stageNumber;
     private string[] stageName;
 
+    [Header("ステージ数テキスト")]
+    [SerializeField] private GameObject stageNumberPrefab;
+    [SerializeField] private Transform stageNumberParent;
+
     [Header("ステージ名テキスト")]
+    [SerializeField] private GameObject stageNamePrefab;
     [SerializeField] private Transform stageNameParent;
-    private Text[] stageNameTexts;
+    [SerializeField] private string[] stageNames;
+
+    [Header("ステージイメージ画像")]
+    [SerializeField] private GameObject stageImagePrefab;
+    [SerializeField] private Transform stageImageParent;
+    [SerializeField] private Sprite[] stageImageSprite;
 
     [Header("ステージ選択間隔の時間")]
     [SerializeField] private float selectIntervalTime;
@@ -55,7 +65,6 @@ public class SelectManager : MonoBehaviour
         // ステージ遷移先に関する情報の初期化
         stageName = new string[stageMax];
         stageGateManagers = new StageGateManager[stageMax];
-        stageNameTexts = new Text[stageMax];
         for (int i = 1; i < stageMax + 1; i++)
         {
             // ゲートの子オブジェクト取得
@@ -64,12 +73,20 @@ public class SelectManager : MonoBehaviour
             stageGateManagers[i - 1] = stageGateTransform.GetComponent<StageGateManager>();
 
             // テキストの子オブジェクト
-            stageNameTexts[i - 1] = stageNameParent.GetChild(i - 1).GetComponent<Text>();
-            stageNameTexts[i - 1].transform.position = new(stageGateTransform.position.x, stageGateTransform.position.y + 0.75f, stageGateTransform.position.z);
+            GameObject stageNumberText = Instantiate(stageNumberPrefab, new(stageGateTransform.position.x, stageGateTransform.position.y + 1f, stageGateTransform.position.z), Quaternion.identity);
+            stageNumberText.transform.SetParent(stageNumberParent);
+            GameObject stageNameText = Instantiate(stageNamePrefab, new(stageGateTransform.position.x, stageGateTransform.position.y, stageGateTransform.position.z), Quaternion.identity);
+            stageNameText.transform.SetParent(stageNameParent);
+            stageNameText.GetComponent<Text>().text = stageNames[i - 1];
+
+            // イメージ画像の子オブジェクト
+            GameObject stageImage = Instantiate(stageImagePrefab, new(stageGateTransform.position.x, stageGateTransform.position.y - 3.5f, stageGateTransform.position.z), Quaternion.identity);
+            stageImage.transform.SetParent(stageImageParent);
+            stageImage.GetComponent<Image>().sprite = stageImageSprite[i - 1];
 
             // ステージ名取得
             stageName[i - 1] = "Stage" + i.ToString();
-            stageNameTexts[i - 1].text = stageName[i - 1];
+            stageNumberText.GetComponent<Text>().text = stageName[i - 1];
         }
 
         // GlobalVariablesから変数を取得する
