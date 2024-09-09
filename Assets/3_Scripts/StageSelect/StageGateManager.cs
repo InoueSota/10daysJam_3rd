@@ -1,36 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class StageGateManager : MonoBehaviour
 {
-    // 自コンポーネント取得
-    private SpriteRenderer spriteRenderer;
-
-    [Header("遷移先ステージ名")]
-    [SerializeField] private string stageName;
-
-    [Header("ステージ名のテキスト")]
-    [SerializeField] private Text stageNameText;
-
-    void Start()
+    public enum Chapter
     {
-        spriteRenderer = GetComponent<SpriteRenderer>();
-        if (stageNameText)
-        {
-            stageNameText.transform.position = new(transform.position.x, transform.position.y + 0.75f, transform.position.z);
-            stageNameText.text = stageName;
-        }
+        GRASSLAND,
+        CAVE,
+        DESERT,
+        SNOWFIELD,
+        CEMETERY
     }
+    [Header("該当チャプター")]
+    [SerializeField] private Chapter chapter;
 
-    void Update()
+    public Chapter GetChapter()
     {
-        
-    }
-
-    public string GetStageName()
-    {
-        return stageName;
+        return chapter;
     }
 }

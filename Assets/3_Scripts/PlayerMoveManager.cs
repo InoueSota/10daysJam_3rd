@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using DG.Tweening;
 
 public class PlayerMoveManager : MonoBehaviour
 {
@@ -14,8 +13,6 @@ public class PlayerMoveManager : MonoBehaviour
     private bool isPushRight;
     private bool isTriggerHorizontal;
     private bool isTriggerJump;
-
-    [SerializeField] private bool isClampInCamera = true;
 
     // 基本情報
     private Vector2 halfSize;
@@ -89,11 +86,7 @@ public class PlayerMoveManager : MonoBehaviour
             Hovering();
             Gravity();
 
-            // カメラ内に収める処理を行うか判定する。ステージセレクトではカメラ内に収めない。
-            if (isClampInCamera)
-            {
-                ClampInCamera();
-            }
+            ClampInCamera();
 
             transform.position = nextPosition;
         }
