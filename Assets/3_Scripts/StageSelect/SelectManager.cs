@@ -54,7 +54,7 @@ public class SelectManager : MonoBehaviour
 
     void ChangeScene()
     {
-        if (stageName != null && isTriggerSpecial)
+        if (stageName != null && isTriggerSpecial && !transition.isTransNow)
         {
             GlobalVariables.enterPosition = playerManager.transform.position;
             GlobalVariables.enterTargetPosition = selectCameraManager.GetTargetPosition();
@@ -64,7 +64,7 @@ public class SelectManager : MonoBehaviour
             transition.SetTransition(stageName);
             //SceneManager.LoadScene(stageName);
         }
-        if (isTriggerCancel)
+        if (isTriggerCancel&&!transition.isTransNow)
         {
             GlobalVariables.enterPosition = playerManager.transform.position;
             GlobalVariables.enterTargetPosition = selectCameraManager.GetTargetPosition();
