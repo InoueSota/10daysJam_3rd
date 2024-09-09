@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
 
     // “ü—Í
     private InputManager inputManager;
+    private bool isTriggerCancel;
     private bool isTriggerReset;
     private bool isTriggerspecial;
 
@@ -148,7 +149,7 @@ public class GameManager : MonoBehaviour
     }
     void Restart()
     {
-        if (isTriggerReset && isStart && !isClear)
+        if (isTriggerCancel && isStart && !isClear)
         {
             // ƒvƒŒƒCƒ„[‰Šú‰»
             playerManager.Initialize();
@@ -203,6 +204,7 @@ public class GameManager : MonoBehaviour
     {
         isTriggerReset = false;
         isTriggerspecial = false;
+        isTriggerCancel = false;
 
         if (inputManager.IsTrgger(InputManager.INPUTPATTERN.RESET))
         {
@@ -211,6 +213,10 @@ public class GameManager : MonoBehaviour
         if (inputManager.IsTrgger(InputManager.INPUTPATTERN.SPECIAL))
         {
             isTriggerspecial = true;
+        }
+        if (inputManager.IsTrgger(InputManager.INPUTPATTERN.CANCEL))
+        {
+            isTriggerCancel = true;
         }
     }
 }

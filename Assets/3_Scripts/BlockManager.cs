@@ -33,14 +33,7 @@ public class BlockManager : MonoBehaviour
 
     void LateUpdate()
     {
-        if (allObjectManager.GetHp() >= 2)
-        {
-            spriteRenderer.color = Color.red;
-        }
-        else
-        {
-            spriteRenderer.color = Color.white;
-        }
+
     }
 
     // ‰Šú‰»ˆ—
