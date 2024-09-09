@@ -402,8 +402,8 @@ MonoBehaviour:
   middleEase_Out: 23
   backEase_In: 30
   backEase_Out: 28
-  frontEaseScale: {x: 1.5, y: 0.5, z: 0}
-  middlEeaseScale: {x: 1.5, y: 0.5, z: 0}
+  frontEaseScale: {x: 3, y: 0.5, z: 0}
+  middlEeaseScale: {x: 3, y: 0.5, z: 0}
   backEaseScale: {x: 3, y: 0.5, z: 0}
   frontEaseTime: 0.5
   frontEaseOutTime: 0.2
