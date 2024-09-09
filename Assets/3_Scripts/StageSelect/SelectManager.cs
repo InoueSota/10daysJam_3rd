@@ -60,7 +60,7 @@ public class SelectManager : MonoBehaviour
             GlobalVariables.enterTargetPosition = selectCameraManager.GetTargetPosition();
             GlobalVariables.enterDepth = selectCameraManager.GetDepth();
             GlobalVariables.enterFrameColor = targetColor;
-            SceneManager.LoadScene(stageName);
+            //SceneManager.LoadScene(stageName);
             transition.SetTransition(stageName);
             //SceneManager.LoadScene(stageName);
         }
@@ -70,7 +70,7 @@ public class SelectManager : MonoBehaviour
             GlobalVariables.enterTargetPosition = selectCameraManager.GetTargetPosition();
             GlobalVariables.enterDepth = selectCameraManager.GetDepth();
             GlobalVariables.enterFrameColor = targetColor;
-            SceneManager.LoadScene("TitleScene");
+            //SceneManager.LoadScene("TitleScene");
             transition.SetTransition("TitleScene");
             //SceneManager.LoadScene("TitleScene");
         }
