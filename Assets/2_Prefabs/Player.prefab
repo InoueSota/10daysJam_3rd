@@ -68,7 +68,7 @@ MonoBehaviour:
   isClampInCamera: 1
   maxSpeed: 4
   maxAcceleration: 2
-  accelerationTime: 1
+  accelerationTime: 0.6
   acceleration: 0
   jumpDistance: 2
   jumpSpeed: 10

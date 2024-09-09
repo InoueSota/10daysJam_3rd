@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class StageGateManager : MonoBehaviour
 {
@@ -10,48 +11,16 @@ public class StageGateManager : MonoBehaviour
     [Header("遷移先ステージ名")]
     [SerializeField] private string stageName;
 
-    private enum StageTheme
-    {
-        GRASSLAND,
-        CAVE,
-        JUNGLE,
-        SNOWFIELD,
-        DARKNESS
-    }
-    [Header("ステージのテーマ")]
-    [SerializeField] private StageTheme stageTheme;
-
-    [Header("テーマごとの画像")]
-    [SerializeField] private Sprite grassLandSprite;
-    [SerializeField] private Sprite caveSprite;
-    [SerializeField] private Sprite jungleSprite;
-    [SerializeField] private Sprite snowFieldSprite;
-    [SerializeField] private Sprite darknessSprite;
+    [Header("ステージ名のテキスト")]
+    [SerializeField] private Text stageNameText;
 
     void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
-        ChangeSprite();
-    }
-    void ChangeSprite()
-    {
-        switch (stageTheme)
+        if (stageNameText)
         {
-            case StageTheme.GRASSLAND:
-                spriteRenderer.sprite = grassLandSprite;
-                break;
-            case StageTheme.CAVE:
-                spriteRenderer.sprite = caveSprite;
-                break;
-            case StageTheme.JUNGLE:
-                spriteRenderer.sprite = jungleSprite;
-                break;
-            case StageTheme.SNOWFIELD:
-                spriteRenderer.sprite = snowFieldSprite;
-                break;
-            case StageTheme.DARKNESS:
-                spriteRenderer.sprite = darknessSprite;
-                break;
+            stageNameText.transform.position = new(transform.position.x, transform.position.y + 1f, transform.position.z);
+            stageNameText.text = stageName;
         }
     }
 
