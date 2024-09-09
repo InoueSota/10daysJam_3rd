@@ -8,13 +8,15 @@ public class TitleManager : MonoBehaviour
     // 入力
     private InputManager inputManager;
     private bool isTriggerJump;
-
+    //他コンポーネント取得
+    S_Transition transition;
     // 遷移シーン先名
     [SerializeField] private string nextScene;
 
     void Start()
     {
         inputManager = GetComponent<InputManager>();
+        transition = GameObject.FindWithTag("trans").GetComponent<S_Transition>();
     }
 
     void Update()
@@ -28,7 +30,9 @@ public class TitleManager : MonoBehaviour
     {
         if (isTriggerJump)
         {
-            SceneManager.LoadScene(nextScene);
+            //トランジション処理
+            transition.SetTransition(nextScene);
+            //SceneManager.LoadScene(nextScene);
         }
     }
 

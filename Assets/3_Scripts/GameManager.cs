@@ -7,7 +7,8 @@ public class GameManager : MonoBehaviour
 {
     // 自コンポーネント取得
     private StageObjectManager stageObjectManager;
-
+    //他コンポーネント取得
+    S_Transition transition;
     // 入力
     private InputManager inputManager;
     private bool isTriggerReset;
@@ -38,6 +39,7 @@ public class GameManager : MonoBehaviour
         stageObjectManager = GetComponent<StageObjectManager>();
         stageObjectManager.SetPlayerManager(playerManager);
         inputManager = GetComponent<InputManager>();
+        transition = GameObject.FindWithTag("trans").GetComponent<S_Transition>();
 
         readyTimer = 3.25f;
 
@@ -124,7 +126,9 @@ public class GameManager : MonoBehaviour
         {
             if (isTriggerJump)
             {
-                SceneManager.LoadScene("SelectScene");
+                //トランジション処理
+                transition.SetTransition("SelectScene");
+                //SceneManager.LoadScene("SelectScene");
             }
         }
     }

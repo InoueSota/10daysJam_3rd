@@ -9,7 +9,8 @@ public class SelectManager : MonoBehaviour
     private InputManager inputManager;
     private bool isTriggerJump;
     private bool isTriggerCancel;
-
+    //他コンポーネント取得
+    S_Transition transition;
     // 選択するステージ名
     private string stageName;
 
@@ -20,6 +21,8 @@ public class SelectManager : MonoBehaviour
     {
         inputManager = GetComponent<InputManager>();
         playerManager.SetIsActive(true);
+
+        transition = GameObject.FindWithTag("trans").GetComponent<S_Transition>();
     }
 
     void Update()
@@ -33,11 +36,13 @@ public class SelectManager : MonoBehaviour
     {
         if (stageName != null && isTriggerJump)
         {
-            SceneManager.LoadScene(stageName);
+            transition.SetTransition(stageName);
+            //SceneManager.LoadScene(stageName);
         }
         if (isTriggerCancel)
         {
-            SceneManager.LoadScene("TitleScene");
+            transition.SetTransition("TitleScene");
+            //SceneManager.LoadScene("TitleScene");
         }
     }
 
