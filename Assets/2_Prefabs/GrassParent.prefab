@@ -47,8 +47,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   grassPrefab: {fileID: 5979816951110624969, guid: 95af2708842d0624f830d1d5e51d015e, type: 3}
-  offSetY: 0.5
-  grassCount: 6
+  offSetY: -0.5
+  grassCount: 5
   shiftPerMax: 0.2
   grassLengthPer: 0.694
   grassLengthPerRandom: 0.071
@@ -57,6 +57,7 @@ MonoBehaviour:
   lengthRandom: 1
   droopingPer: 0.7
   particle: {fileID: 5100953819094702239, guid: f7c29f990a9585e419105927109d0a70, type: 3}
+  isActive: 1
 --- !u!114 &7839731952376963818
 MonoBehaviour:
   m_ObjectHideFlags: 0

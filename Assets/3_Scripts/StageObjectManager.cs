@@ -65,7 +65,8 @@ public class StageObjectManager : MonoBehaviour
     {
         dripStone = new StageObject();
         icicle = new StageObject();
-       
+        BlockGapFillerLoad();
+        BlockGapFiller();
     }
 
     void Update()

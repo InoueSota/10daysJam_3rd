@@ -42,6 +42,8 @@ public class GrassParentScript : MonoBehaviour
     [SerializeField] private bool isActive = true;
     private bool isGrew = false;
 
+    private bool isGrewed = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -75,6 +77,7 @@ public class GrassParentScript : MonoBehaviour
 
         if (canMake)
         {
+
             for (int grassNum = 0; grassNum < grassCount; grassNum++)
             {
                 GrassScript grass = null;
@@ -148,7 +151,7 @@ public class GrassParentScript : MonoBehaviour
 
     public void Damage()
     {
-        if (isGrew == true)
+        if (isGrew == true )
         {
             allObjectManager.Damage();
 
@@ -174,7 +177,7 @@ public class GrassParentScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (isGrew == false)
+        if (isGrew == false && isGrewed == false)
         {
             bool canMake = true;
 
@@ -199,11 +202,13 @@ public class GrassParentScript : MonoBehaviour
             if(canMake == true)
             {
                 isGrew = true;
+                isGrewed = true;
             }
         }
     }
     void Initialize()
     {
+        isGrewed = false;
         isGrew = false;
         isActive = true;
         allObjectManager.SetIsActive(isActive);
