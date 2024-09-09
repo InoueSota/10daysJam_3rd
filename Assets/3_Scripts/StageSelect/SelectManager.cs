@@ -58,6 +58,9 @@ public class SelectManager : MonoBehaviour
         }
         if (isTriggerCancel)
         {
+            GlobalVariables.enterPosition = playerManager.transform.position;
+            GlobalVariables.enterTargetPosition = selectCameraManager.GetTargetPosition();
+            GlobalVariables.enterDepth = selectCameraManager.GetDepth();
             SceneManager.LoadScene("TitleScene");
         }
     }

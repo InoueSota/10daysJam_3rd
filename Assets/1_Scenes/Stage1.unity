@@ -134,18 +134,6 @@ PrefabInstance:
       propertyPath: m_Text
       value: Stage 1
       objectReference: {fileID: 0}
-    - target: {fileID: 3145942484633496062, guid: a81eee3d580c0df42b1ed12599e71bfd, type: 3}
-      propertyPath: m_Color.b
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3145942484633496062, guid: a81eee3d580c0df42b1ed12599e71bfd, type: 3}
-      propertyPath: m_Color.g
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3145942484633496062, guid: a81eee3d580c0df42b1ed12599e71bfd, type: 3}
-      propertyPath: m_Color.r
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 3145942485870970736, guid: a81eee3d580c0df42b1ed12599e71bfd, type: 3}
       propertyPath: m_PresetInfoIsWorld
       value: 1

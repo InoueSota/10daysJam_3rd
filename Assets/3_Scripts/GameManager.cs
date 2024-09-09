@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour
     // “ü—Í
     private InputManager inputManager;
     private bool isTriggerReset;
-    private bool isTriggerJump;
+    private bool isTriggerspecial;
 
     // ƒtƒ‰ƒO—Þ
     private bool isStart;
@@ -140,7 +140,7 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            if (isTriggerJump)
+            if (isTriggerspecial)
             {
                 SceneManager.LoadScene("SelectScene");
             }
@@ -202,15 +202,15 @@ public class GameManager : MonoBehaviour
     void GetInput()
     {
         isTriggerReset = false;
-        isTriggerJump = false;
+        isTriggerspecial = false;
 
         if (inputManager.IsTrgger(InputManager.INPUTPATTERN.RESET))
         {
             isTriggerReset = true;
         }
-        if (inputManager.IsTrgger(InputManager.INPUTPATTERN.JUMP))
+        if (inputManager.IsTrgger(InputManager.INPUTPATTERN.SPECIAL))
         {
-            isTriggerJump = true;
+            isTriggerspecial = true;
         }
     }
 }
