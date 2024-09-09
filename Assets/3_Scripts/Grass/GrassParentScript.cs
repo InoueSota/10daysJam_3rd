@@ -36,6 +36,7 @@ public class GrassParentScript : MonoBehaviour
     [SerializeField, Range(0.0f, 1.0f)] private float droopingPer = 0.7f;
 
     private AllObjectManager allObjectManager;
+    private AllObjectManager parentObjectManager;
 
     [SerializeField] ParticleSystem particle = null;
 
@@ -48,6 +49,7 @@ public class GrassParentScript : MonoBehaviour
     void Start()
     {
         allObjectManager = GetComponent<AllObjectManager>();
+        parentObjectManager = transform.parent.GetComponent<AllObjectManager>();
         GrassGrow();
     }
 
@@ -177,6 +179,13 @@ public class GrassParentScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(parentObjectManager.GetIsActive() == false && isActive == true)
+        {
+            Disappear();
+            return;
+        }
+
+
         if (isGrew == false && isGrewed == false)
         {
             bool canMake = true;
