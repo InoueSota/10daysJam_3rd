@@ -36,15 +36,20 @@ public class GrassParentScript : MonoBehaviour
     [SerializeField, Range(0.0f, 1.0f)] private float droopingPer = 0.7f;
 
     private AllObjectManager allObjectManager;
+    private AllObjectManager parentObjectManager;
 
     [SerializeField] ParticleSystem particle = null;
 
     [SerializeField] private bool isActive = true;
+    private bool isGrew = false;
+
+    private bool isGrewed = false;
 
     // Start is called before the first frame update
     void Start()
     {
         allObjectManager = GetComponent<AllObjectManager>();
+        parentObjectManager = transform.parent.GetComponent<AllObjectManager>();
         GrassGrow();
     }
 
@@ -66,7 +71,7 @@ public class GrassParentScript : MonoBehaviour
 
                 if (yBetween <= 0.2f && xBetween <= 0.2f)
                 {
-                    isActive = false;
+                    isGrew = false;
                     break;
                 }
             }
@@ -74,9 +79,9 @@ public class GrassParentScript : MonoBehaviour
 
         if (canMake)
         {
+
             for (int grassNum = 0; grassNum < grassCount; grassNum++)
             {
-
                 GrassScript grass = null;
 
                 for (int jointNum = 0; jointNum < jointCount; jointNum++)
@@ -148,11 +153,14 @@ public class GrassParentScript : MonoBehaviour
 
     public void Damage()
     {
-        allObjectManager.Damage();
-
-        if (allObjectManager.GetHp() <= 0)
+        if (isGrew == true )
         {
-            SetIsActive(false);
+            allObjectManager.Damage();
+
+            if (allObjectManager.GetHp() <= 0)
+            {
+                SetIsActive(false);
+            }
         }
     }
 
@@ -171,7 +179,14 @@ public class GrassParentScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (isActive == false)
+        if(parentObjectManager.GetIsActive() == false && isActive == true)
+        {
+            Disappear();
+            return;
+        }
+
+
+        if (isGrew == false && isGrewed == false)
         {
             bool canMake = true;
 
@@ -195,34 +210,42 @@ public class GrassParentScript : MonoBehaviour
 
             if(canMake == true)
             {
-                isActive = true;
+                isGrew = true;
+                isGrewed = true;
             }
         }
     }
     void Initialize()
     {
-        isActive = false;
+        isGrewed = false;
+        isGrew = false;
+        isActive = true;
         allObjectManager.SetIsActive(isActive);
         allObjectManager.Initialize();
     }
 
     void Disappear()
     {
+        isGrew = false;
         isActive = false;
         allObjectManager.SetIsActive(isActive);
         Instantiate(particle,this.transform.position,Quaternion.identity);
-        Debug.Log("Fuck");
     }
 
     void NotPlace()
     {
-        isActive = false;
+        isGrew = false;
         allObjectManager.SetIsActive(isActive);
     }
 
         public bool GetActive()
     {
         return isActive;
+    }
+
+    public bool GetGrew()
+    {
+        return isGrew;
     }
 
 }

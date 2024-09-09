@@ -31,7 +31,7 @@ public class PlayerMoveManager : MonoBehaviour
     [SerializeField] private float maxAcceleration;
     [SerializeField] private float accelerationTime;
     private float moveSpeed;
-    [SerializeField] private float acceleration;
+    private float acceleration;
     private float accelerationTimer;
     private bool canAcceleration;
 

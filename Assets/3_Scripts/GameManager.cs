@@ -11,8 +11,9 @@ public class GameManager : MonoBehaviour
     S_Transition transition;
     // 入力
     private InputManager inputManager;
+    private bool isTriggerCancel;
     private bool isTriggerReset;
-    private bool isTriggerJump;
+    private bool isTriggerspecial;
 
     // フラグ類
     private bool isStart;
@@ -49,8 +50,6 @@ public class GameManager : MonoBehaviour
 
         // グローバル変数の初期化
         GlobalVariables.isClear = false;
-        GlobalVariables.isGetItem1 = false;
-        GlobalVariables.isGetItem2 = false;
     }
     void DestroyOutOfCameraObj()
     {
@@ -106,13 +105,33 @@ public class GameManager : MonoBehaviour
             {
                 AllObjectManager allObjectManager = obj.GetComponent<AllObjectManager>();
 
-                // Ground以外の全てのオブジェクトが破壊されたかの判定
-                if (allObjectManager.GetObjectType() != AllObjectManager.ObjectType.GROUND && allObjectManager.GetIsActive())
+                if (allObjectManager.GetObjectType() != AllObjectManager.ObjectType.GROUND)
                 {
-                    isFinish = false;
-                    break;
+                    // Ground以外の全てのオブジェクトが破壊されたかの判定
+                    if (allObjectManager.GetObjectType() != AllObjectManager.ObjectType.ITEM && allObjectManager.GetIsActive())
+                    {
+                        isFinish = false;
+                        break;
+                    }
+                    // アイテム判定
+                    else if (allObjectManager.GetObjectType() == AllObjectManager.ObjectType.ITEM)
+                    {
+                        // まだステージにアイテムが残っている
+                        if (allObjectManager.GetIsActive())
+                        {
+                            isFinish = false;
+                            break;
+                        }
+                        // アイテムを破壊してしまっている
+                        else if (allObjectManager.GetHp() <= 0)
+                        {
+                            isFinish = false;
+                            break;
+                        }
+                    }
                 }
             }
+
 
             // クリアフラグをtrueにする
             if (isFinish)
@@ -124,7 +143,7 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            if (isTriggerJump)
+            if (isTriggerspecial)
             {
                 //トランジション処理
                 transition.SetTransition("SelectScene");
@@ -134,7 +153,7 @@ public class GameManager : MonoBehaviour
     }
     void Restart()
     {
-        if (isTriggerReset && isStart && !isClear)
+        if (isTriggerCancel && isStart && !isClear)
         {
             // プレイヤー初期化
             playerManager.Initialize();
@@ -182,23 +201,26 @@ public class GameManager : MonoBehaviour
 
             // グローバル変数の初期化
             GlobalVariables.isClear = false;
-            GlobalVariables.isGetItem1 = false;
-            GlobalVariables.isGetItem2 = false;
         }
     }
 
     void GetInput()
     {
         isTriggerReset = false;
-        isTriggerJump = false;
+        isTriggerspecial = false;
+        isTriggerCancel = false;
 
         if (inputManager.IsTrgger(InputManager.INPUTPATTERN.RESET))
         {
             isTriggerReset = true;
         }
-        if (inputManager.IsTrgger(InputManager.INPUTPATTERN.JUMP))
+        if (inputManager.IsTrgger(InputManager.INPUTPATTERN.SPECIAL))
         {
-            isTriggerJump = true;
+            isTriggerspecial = true;
+        }
+        if (inputManager.IsTrgger(InputManager.INPUTPATTERN.CANCEL))
+        {
+            isTriggerCancel = true;
         }
     }
 }

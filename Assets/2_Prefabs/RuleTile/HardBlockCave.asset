@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9d1514134bc4fbd41bb739b1b9a49231, type: 3}
-  m_Name: HardBlock
+  m_Name: HardBlockCave
   m_EditorClassIdentifier: 
   m_DefaultSprite: {fileID: 21300000, guid: 534255251afddde4f97a97fed21b8139, type: 3}
   m_DefaultGameObject: {fileID: 0}
@@ -19,7 +19,7 @@ MonoBehaviour:
   - m_Id: 0
     m_Sprites:
     - {fileID: 0}
-    m_GameObject: {fileID: 944074398774364433, guid: ef442ffe58497ca4b8d446c3ab43fe1a, type: 3}
+    m_GameObject: {fileID: 944074398774364433, guid: 129d2b549b850894cbc5ca7040444dee, type: 3}
     m_MinAnimationSpeed: 1
     m_MaxAnimationSpeed: 1
     m_PerlinScale: 0.5
