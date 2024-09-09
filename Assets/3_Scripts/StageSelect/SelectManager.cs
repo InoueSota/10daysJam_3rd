@@ -10,6 +10,8 @@ public class SelectManager : MonoBehaviour
     private bool isTriggerCancel;
     private bool isPushLeft;
     private bool isPushRight;
+    private bool isPushUp;
+    private bool isPushDown;
 
     // 他コンポーネント取得
     S_Transition transition;
@@ -18,6 +20,9 @@ public class SelectManager : MonoBehaviour
     [SerializeField] private int stageMax;
     private int stageNumber;
     private string[] stageName;
+
+    [Header("チャプター区切り")]
+    [SerializeField] private int[] chapterSection;
 
     [Header("ステージ数テキスト")]
     [SerializeField] private GameObject stageNumberPrefab;
@@ -119,7 +124,7 @@ public class SelectManager : MonoBehaviour
     {
         selectIntervalTimer -= Time.deltaTime;
 
-        if (selectIntervalTimer <= 0f && (isPushLeft || isPushRight))
+        if (selectIntervalTimer <= 0f && (isPushLeft || isPushRight || isPushUp || isPushDown))
         {
             // ステージ番号を減算する
             if (isPushLeft)
@@ -145,6 +150,70 @@ public class SelectManager : MonoBehaviour
                 else
                 {
                     stageNumber++;
+                }
+            }
+            else if (isPushUp || isPushDown)
+            {
+                // 現在のステージ数を参照し、チャプターを取得する
+                // 「墓地」を選択
+                if (stageNumber >= chapterSection[4])
+                {
+                    if (isPushUp)
+                    {
+                        stageNumber = stageMax - 1;
+                    }
+                    else if (isPushDown)
+                    {
+                        stageNumber = chapterSection[3];
+                    }
+                }
+                // 「雪原」を選択
+                else if (stageNumber >= chapterSection[3])
+                {
+                    if (isPushUp)
+                    {
+                        stageNumber = chapterSection[4];
+                    }
+                    else if (isPushDown)
+                    {
+                        stageNumber = chapterSection[2];
+                    }
+                }
+                // 「砂漠」を選択
+                else if (stageNumber >= chapterSection[2])
+                {
+                    if (isPushUp)
+                    {
+                        stageNumber = chapterSection[3];
+                    }
+                    else if (isPushDown)
+                    {
+                        stageNumber = chapterSection[1];
+                    }
+                }
+                // 「洞窟」を選択
+                else if (stageNumber >= chapterSection[1])
+                {
+                    if (isPushUp)
+                    {
+                        stageNumber = chapterSection[2];
+                    }
+                    else if (isPushDown)
+                    {
+                        stageNumber = chapterSection[0];
+                    }
+                }
+                // 「草原」を選択
+                else if (stageNumber >= chapterSection[0])
+                {
+                    if (isPushUp)
+                    {
+                        stageNumber = chapterSection[1];
+                    }
+                    else if (isPushDown)
+                    {
+                        stageNumber = 0;
+                    }
                 }
             }
             selectCameraManager.SetTargetPosition(stageGateManagers[stageNumber].transform.position.x);
@@ -194,10 +263,16 @@ public class SelectManager : MonoBehaviour
         isTriggerCancel = false;
         isPushLeft = false;
         isPushRight = false;
+        isPushUp = false;
+        isPushDown = false;
 
         if (inputManager.IsTrgger(InputManager.INPUTPATTERN.JUMP))
         {
             isTriggerJump = true;
+        }
+        if (inputManager.IsTrgger(InputManager.INPUTPATTERN.CANCEL))
+        {
+            isTriggerCancel = true;
         }
         if (inputManager.IsPush(InputManager.INPUTPATTERN.HORIZONTAL))
         {
@@ -210,9 +285,16 @@ public class SelectManager : MonoBehaviour
                 isPushRight = true;
             }
         }
-        if (inputManager.IsTrgger(InputManager.INPUTPATTERN.CANCEL))
+        if (inputManager.IsPush(InputManager.INPUTPATTERN.VERTICAL))
         {
-            isTriggerCancel = true;
+            if (inputManager.ReturnInputValue(InputManager.INPUTPATTERN.VERTICAL) > 0f)
+            {
+                isPushUp = true;
+            }
+            else
+            {
+                isPushDown = true;
+            }
         }
     }
 

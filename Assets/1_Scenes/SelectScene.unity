@@ -1452,6 +1452,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stageMax: 15
+  chapterSection: 0000000007000000090000000b0000000d000000
   stageNumberPrefab: {fileID: 4801203756051358010, guid: 97332d0ec2b22cf42ab1c8c7948411bc, type: 3}
   stageNumberParent: {fileID: 8241099445431098949}
   stageNamePrefab: {fileID: 1646044954251110074, guid: c99d0acd67d3be34a857e99b7166d08f, type: 3}
