@@ -197,9 +197,15 @@ public class GameManager : MonoBehaviour
                         break;
                 }
             }
+            //エッフェル塔
+            foreach (GameObject obj in GameObject.FindGameObjectsWithTag("effect"))
+            {
+                //残ってるエフェクトを消す処理
+                Destroy(obj);
 
-            // グローバル変数の初期化
-            GlobalVariables.isClear = false;
+            }
+                // グローバル変数の初期化
+                GlobalVariables.isClear = false;
         }
     }
 

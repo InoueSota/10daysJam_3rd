@@ -12,10 +12,14 @@ public class CropLineManager : MonoBehaviour
 
     // 他コンポーネント取得
     private PlayerMoveManager playerMoveManager;
+   // [SerializeField] private CropEffect cropEffect;
 
     // カメラ関係
     private Transform cameraTransform;
     private float cameraHalfSizeX;
+
+    public bool isCroping;
+    public bool isBlockBreak;
 
     void Start()
     {
@@ -46,6 +50,7 @@ public class CropLineManager : MonoBehaviour
     {
         if (isTriggerSpecial && playerMoveManager.GetIsGround())
         {
+            isCroping = true;
             foreach (GameObject obj in GameObject.FindGameObjectsWithTag("Object"))
             {
                 // X軸判定
@@ -63,7 +68,10 @@ public class CropLineManager : MonoBehaviour
 
                         if (yBetween < 0.2f)
                         {
+                            //ブロック壊したら
+                            isBlockBreak = true;
                             destructionManager.Destruction(obj);
+                            
                         }
                     }
                 }
@@ -78,6 +86,10 @@ public class CropLineManager : MonoBehaviour
         if (inputManager.IsTrgger(InputManager.INPUTPATTERN.SPECIAL))
         {
             isTriggerSpecial = true;
+        }
+        else {
+            isCroping = false;
+            isBlockBreak = false;
         }
     }
 }

@@ -7,6 +7,7 @@ TagManager:
   - Object
   - StageGate
   - trans
+  - effect
   layers:
   - Default
   - TransparentFX
