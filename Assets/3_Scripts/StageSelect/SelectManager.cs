@@ -10,7 +10,8 @@ public class SelectManager : MonoBehaviour
     private InputManager inputManager;
     private bool isTriggerSpecial;
     private bool isTriggerCancel;
-
+    //他コンポーネント取得
+    S_Transition transition;
     // 選択するステージ名
     private string stageName;
 
@@ -39,6 +40,8 @@ public class SelectManager : MonoBehaviour
         selectCameraManager.SetDepth(GlobalVariables.enterDepth);
         targetColor = GlobalVariables.enterFrameColor;
         frameImage.color = GlobalVariables.enterFrameColor;
+
+        transition = GameObject.FindWithTag("trans").GetComponent<S_Transition>();
     }
 
     void Update()
@@ -57,7 +60,9 @@ public class SelectManager : MonoBehaviour
             GlobalVariables.enterTargetPosition = selectCameraManager.GetTargetPosition();
             GlobalVariables.enterDepth = selectCameraManager.GetDepth();
             GlobalVariables.enterFrameColor = targetColor;
-            SceneManager.LoadScene(stageName);
+            //SceneManager.LoadScene(stageName);
+            transition.SetTransition(stageName);
+            //SceneManager.LoadScene(stageName);
         }
         if (isTriggerCancel)
         {
@@ -65,7 +70,9 @@ public class SelectManager : MonoBehaviour
             GlobalVariables.enterTargetPosition = selectCameraManager.GetTargetPosition();
             GlobalVariables.enterDepth = selectCameraManager.GetDepth();
             GlobalVariables.enterFrameColor = targetColor;
-            SceneManager.LoadScene("TitleScene");
+            //SceneManager.LoadScene("TitleScene");
+            transition.SetTransition("TitleScene");
+            //SceneManager.LoadScene("TitleScene");
         }
     }
     void ChangeByDepth()

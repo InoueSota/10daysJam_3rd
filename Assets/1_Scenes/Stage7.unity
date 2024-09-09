@@ -130,6 +130,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 8182911871245206240, guid: 01413edb6ceb3764c8e8c5614eb5b9cd, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 1773075144}
     - target: {fileID: 8182911871245206241, guid: 01413edb6ceb3764c8e8c5614eb5b9cd, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -612,6 +616,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ac0b6fa099510de40be19a801118c9b9, type: 3}
+--- !u!20 &1773075144 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 1927215938267834287, guid: ac0b6fa099510de40be19a801118c9b9, type: 3}
+  m_PrefabInstance: {fileID: 1773075143}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1880280820
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1812,9 +1821,12 @@ Tilemap:
   m_TileObjectToInstantiateArray:
   - m_RefCount: 19
     m_Data: {fileID: 944074398774364433, guid: ddb25f81636bdbe4283a554ff9e256aa, type: 3}
+  - m_RefCount: 19
+    m_Data: {fileID: 944074398774364433, guid: ddb25f81636bdbe4283a554ff9e256aa, type: 3}
   - m_RefCount: 0
     m_Data: {fileID: 0}
   - m_RefCount: 50
+    m_Data: {fileID: 944074398774364433, guid: 7ce0d9676901d2147a55facb53af58b9, type: 3}
     m_Data: {fileID: 944074398774364433, guid: 6a1c99a1f60509340ad7b5fa1beaa2e8, type: 3}
   m_AnimationFrameRate: 1
   m_Color: {r: 1, g: 1, b: 1, a: 1}
