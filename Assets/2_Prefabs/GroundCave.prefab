@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8081842103481366437}
   - component: {fileID: 7599560762841482093}
   m_Layer: 0
-  m_Name: Ground
+  m_Name: GroundCave
   m_TagString: Object
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -74,7 +74,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: ab210fb82c6764442b0fcf6991183ebd, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ee9d4f7af63054f418f73297463861d2, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
