@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -198,9 +197,15 @@ public class GameManager : MonoBehaviour
                         break;
                 }
             }
+            //エッフェル塔
+            foreach (GameObject obj in GameObject.FindGameObjectsWithTag("effect"))
+            {
+                //残ってるエフェクトを消す処理
+                Destroy(obj);
 
-            // グローバル変数の初期化
-            GlobalVariables.isClear = false;
+            }
+                // グローバル変数の初期化
+                GlobalVariables.isClear = false;
         }
     }
 

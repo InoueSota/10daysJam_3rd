@@ -68,7 +68,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 122a5ba352037e04aa644ca0a53923a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isClampInCamera: 1
   maxSpeed: 4
   maxAcceleration: 2
   accelerationTime: 0.6
@@ -329,6 +328,7 @@ GameObject:
   - component: {fileID: 2350575980884333927}
   - component: {fileID: 3856647538800460399}
   - component: {fileID: 366297282509921815}
+  - component: {fileID: 569663827588338139}
   - component: {fileID: 5798250660066523600}
   - component: {fileID: 1312384028372350824}
   m_Layer: 0
@@ -365,6 +365,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d9a4a8a269115c439b7932d6d4a7e33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isCroping: 0
+  isBlockBreak: 0
 --- !u!114 &366297282509921815
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -377,6 +379,39 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 566330ec0e290304d8c19efcb901eabf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &569663827588338139
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1724889177994435730}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 387361ac06ea1dd4c877beeea4e57b2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Player: {fileID: 1471785792338881480}
+  lineManager: {fileID: 3856647538800460399}
+  Front: {fileID: 792675729714559586, guid: b89f5b26ee6e0a5478dd56cf53f6ab9b, type: 3}
+  Middle: {fileID: 1705790703735586722, guid: 66e309634e6358244b372f755d8121b5, type: 3}
+  Back: {fileID: 7368147221310960136, guid: 6b14900cc9f8cc24bbfe4fc475c8b338, type: 3}
+  frontEase_In: 25
+  frontEase_Out: 24
+  middleEase_In: 24
+  middleEase_Out: 23
+  backEase_In: 30
+  backEase_Out: 28
+  frontEaseScale: {x: 3, y: 0.5, z: 0}
+  middlEeaseScale: {x: 3, y: 0.5, z: 0}
+  backEaseScale: {x: 3, y: 0.5, z: 0}
+  frontEaseTime: 0.5
+  frontEaseOutTime: 0.2
+  middleEaseTime: 0.1
+  middleEaseOutTime: 0.1
+  backEaseTime: 0.2
+  backEaseOutTime: 0.1
+  isOne: 0
 --- !u!212 &5798250660066523600
 SpriteRenderer:
   m_ObjectHideFlags: 0

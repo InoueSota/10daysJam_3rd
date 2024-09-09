@@ -1,27 +1,56 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class SelectManager : MonoBehaviour
 {
-    // 自コンポーネント取得
+    // 入力
     private InputManager inputManager;
-    private bool isTriggerSpecial;
+    private bool isTriggerJump;
     private bool isTriggerCancel;
-    //他コンポーネント取得
+    private bool isPushLeft;
+    private bool isPushRight;
+    private bool isPushUp;
+    private bool isPushDown;
+
+    // 他コンポーネント取得
     S_Transition transition;
-    // 選択するステージ名
-    private string stageName;
+
+    [Header("ステージ最大数")]
+    [SerializeField] private int stageMax;
+    private int stageNumber;
+    private string[] stageName;
+
+    [Header("チャプター区切り")]
+    [SerializeField] private int[] chapterSection;
+
+    [Header("ステージ数テキスト")]
+    [SerializeField] private GameObject stageNumberPrefab;
+    [SerializeField] private Transform stageNumberParent;
+
+    [Header("ステージ名テキスト")]
+    [SerializeField] private GameObject stageNamePrefab;
+    [SerializeField] private Transform stageNameParent;
+    [SerializeField] private string[] stageNames;
+
+    [Header("ステージイメージ画像")]
+    [SerializeField] private GameObject stageImagePrefab;
+    [SerializeField] private Transform stageImageParent;
+    [SerializeField] private Sprite[] stageImageSprite;
+
+    [Header("ステージ選択間隔の時間")]
+    [SerializeField] private float selectIntervalTime;
+    private float selectIntervalTimer;
+
+    [Header("ゲート")]
+    [SerializeField] private float stageGateSpace;
+    [SerializeField] private Transform stageGateParent;
+    private StageGateManager[] stageGateManagers;
 
     [Header("カメラ")]
     [SerializeField] private SelectCameraManager selectCameraManager;
 
-    [Header("プレイヤー")]
-    [SerializeField] private PlayerManager playerManager;
-
-    [Header("フレーム")]
+    [Header("上部フレーム")]
     [SerializeField] private Image frameImage;
     [SerializeField] private Color[] themeColor;
     [SerializeField] private float colorChasePower;
@@ -31,15 +60,52 @@ public class SelectManager : MonoBehaviour
     [SerializeField] private Text themeText;
     [SerializeField] private string[] themeTitle;
 
+    [Header("UI")]
+    [SerializeField] private Image leftTriangle;
+    [SerializeField] private Image rightTriangle;
+    [SerializeField] private Image backGround;
+    [SerializeField] private Color[] backGroundColor;
+    private Color backGroundTargetColor;
+
     void Start()
     {
         inputManager = GetComponent<InputManager>();
-        playerManager.SetIsActive(true);
-        playerManager.transform.position = GlobalVariables.enterPosition;
-        selectCameraManager.SetTargetPosition(GlobalVariables.enterTargetPosition);
-        selectCameraManager.SetDepth(GlobalVariables.enterDepth);
-        targetColor = GlobalVariables.enterFrameColor;
-        frameImage.color = GlobalVariables.enterFrameColor;
+
+        // ステージ遷移先に関する情報の初期化
+        stageName = new string[stageMax];
+        stageGateManagers = new StageGateManager[stageMax];
+        for (int i = 1; i < stageMax + 1; i++)
+        {
+            // ゲートの子オブジェクト取得
+            Transform stageGateTransform = stageGateParent.GetChild(i - 1).transform;
+            stageGateTransform.position = new((i - 1) * stageGateSpace, stageGateTransform.position.y, stageGateTransform.position.z);
+            stageGateManagers[i - 1] = stageGateTransform.GetComponent<StageGateManager>();
+
+            // テキストの子オブジェクト
+            GameObject stageNumberText = Instantiate(stageNumberPrefab, new(stageGateTransform.position.x, stageGateTransform.position.y + 1f, stageGateTransform.position.z), Quaternion.identity);
+            stageNumberText.transform.SetParent(stageNumberParent);
+            GameObject stageNameText = Instantiate(stageNamePrefab, new(stageGateTransform.position.x, stageGateTransform.position.y, stageGateTransform.position.z), Quaternion.identity);
+            stageNameText.transform.SetParent(stageNameParent);
+            stageNameText.GetComponent<Text>().text = stageNames[i - 1];
+
+            // イメージ画像の子オブジェクト
+            GameObject stageImage = Instantiate(stageImagePrefab, new(stageGateTransform.position.x, stageGateTransform.position.y - 3.5f, stageGateTransform.position.z), Quaternion.identity);
+            stageImage.transform.SetParent(stageImageParent);
+            stageImage.GetComponent<Image>().sprite = stageImageSprite[i - 1];
+
+            // ステージ名取得
+            stageName[i - 1] = "Stage" + i.ToString();
+            stageNumberText.GetComponent<Text>().text = stageName[i - 1];
+        }
+
+        // GlobalVariablesから変数を取得する
+        stageNumber = GlobalVariables.selectStageNumber;
+
+        // 該当のStageGateから各objを修正する
+        selectCameraManager.SetPosition(stageGateManagers[stageNumber].transform.position.x);
+        themeText.text = themeTitle[(int)stageGateManagers[stageNumber].GetChapter()];
+        frameImage.color = themeColor[(int)stageGateManagers[stageNumber].GetChapter()];
+        targetColor = themeColor[(int)stageGateManagers[stageNumber].GetChapter()];
 
         transition = GameObject.FindWithTag("trans").GetComponent<S_Transition>();
     }
@@ -48,63 +114,188 @@ public class SelectManager : MonoBehaviour
     {
         GetInput();
 
+        ChangeSelectStage();
         ChangeScene();
-        ChangeByDepth();
+        ChangeChapter();
+        UiManager();
     }
 
-    void ChangeScene()
+    void ChangeSelectStage()
     {
-        if (stageName != null && isTriggerSpecial && !transition.isTransNow)
+        selectIntervalTimer -= Time.deltaTime;
+
+        if (selectIntervalTimer <= 0f && (isPushLeft || isPushRight || isPushUp || isPushDown))
         {
-            GlobalVariables.enterPosition = playerManager.transform.position;
-            GlobalVariables.enterTargetPosition = selectCameraManager.GetTargetPosition();
-            GlobalVariables.enterDepth = selectCameraManager.GetDepth();
-            GlobalVariables.enterFrameColor = targetColor;
-            //SceneManager.LoadScene(stageName);
-            transition.SetTransition(stageName);
-            //SceneManager.LoadScene(stageName);
-        }
-        if (isTriggerCancel&&!transition.isTransNow)
-        {
-            GlobalVariables.enterPosition = playerManager.transform.position;
-            GlobalVariables.enterTargetPosition = selectCameraManager.GetTargetPosition();
-            GlobalVariables.enterDepth = selectCameraManager.GetDepth();
-            GlobalVariables.enterFrameColor = targetColor;
-            //SceneManager.LoadScene("TitleScene");
-            transition.SetTransition("TitleScene");
-            //SceneManager.LoadScene("TitleScene");
+            // ステージ番号を減算する
+            if (isPushLeft)
+            {
+                // すでに最小番号を選択していたら、最大番号にする
+                if (stageNumber == 0)
+                {
+                    stageNumber = stageMax - 1;
+                }
+                else
+                {
+                    stageNumber--;
+                }
+            }
+            // ステージ番号を加算する
+            else if (isPushRight)
+            {
+                // すでに最大番号を選択していたら、最小番号にする
+                if (stageNumber == stageMax - 1)
+                {
+                    stageNumber = 0;
+                }
+                else
+                {
+                    stageNumber++;
+                }
+            }
+            else if (isPushUp || isPushDown)
+            {
+                // 現在のステージ数を参照し、チャプターを取得する
+                // 「墓地」を選択
+                if (stageNumber >= chapterSection[4])
+                {
+                    if (isPushUp)
+                    {
+                        stageNumber = stageMax - 1;
+                    }
+                    else if (isPushDown)
+                    {
+                        stageNumber = chapterSection[3];
+                    }
+                }
+                // 「雪原」を選択
+                else if (stageNumber >= chapterSection[3])
+                {
+                    if (isPushUp)
+                    {
+                        stageNumber = chapterSection[4];
+                    }
+                    else if (isPushDown)
+                    {
+                        stageNumber = chapterSection[2];
+                    }
+                }
+                // 「砂漠」を選択
+                else if (stageNumber >= chapterSection[2])
+                {
+                    if (isPushUp)
+                    {
+                        stageNumber = chapterSection[3];
+                    }
+                    else if (isPushDown)
+                    {
+                        stageNumber = chapterSection[1];
+                    }
+                }
+                // 「洞窟」を選択
+                else if (stageNumber >= chapterSection[1])
+                {
+                    if (isPushUp)
+                    {
+                        stageNumber = chapterSection[2];
+                    }
+                    else if (isPushDown)
+                    {
+                        stageNumber = chapterSection[0];
+                    }
+                }
+                // 「草原」を選択
+                else if (stageNumber >= chapterSection[0])
+                {
+                    if (isPushUp)
+                    {
+                        stageNumber = chapterSection[1];
+                    }
+                    else if (isPushDown)
+                    {
+                        stageNumber = 0;
+                    }
+                }
+            }
+            selectCameraManager.SetTargetPosition(stageGateManagers[stageNumber].transform.position.x);
+            selectIntervalTimer = selectIntervalTime;
         }
     }
-    void ChangeByDepth()
+    void ChangeChapter()
     {
-        themeText.text = themeTitle[selectCameraManager.GetDepth()];
-        targetColor = themeColor[selectCameraManager.GetDepth()];
+        themeText.text = themeTitle[(int)stageGateManagers[stageNumber].GetChapter()];
+        targetColor = themeColor[(int)stageGateManagers[stageNumber].GetChapter()];
         frameImage.color += (targetColor - frameImage.color) * (colorChasePower * Time.deltaTime);
     }
-
-    // Setter
-    public void SetEnterStage(string _stageName)
+    void ChangeScene()
     {
-        stageName = _stageName;
+        if (isTriggerJump && !transition.isTransNow)
+        {
+            GlobalVariables.selectStageNumber = stageNumber;
+            transition.SetTransition(stageName[stageNumber]);
+        }
+        if (isTriggerCancel)
+        {
+            GlobalVariables.selectStageNumber = stageNumber;
+            transition.SetTransition("TitleScene");
+        }
     }
-    public void SetLeaveStage()
+    void UiManager()
     {
-        stageName = null;
+        leftTriangle.color = frameImage.color;
+        rightTriangle.color = frameImage.color;
+        backGroundTargetColor = backGroundColor[(int)stageGateManagers[stageNumber].GetChapter()];
+        backGround.color += (backGroundTargetColor - backGround.color) * (colorChasePower * Time.deltaTime);
+
+        if (!isPushLeft)
+        {
+            leftTriangle.color = new(frameImage.color.r, frameImage.color.g, frameImage.color.b, 0.5f);
+        }
+        if (!isPushRight)
+        {
+            rightTriangle.color = new(frameImage.color.r, frameImage.color.g, frameImage.color.b, 0.5f);
+        }
     }
 
     // Getter
     void GetInput()
     {
-        isTriggerSpecial = false;
+        isTriggerJump = false;
         isTriggerCancel = false;
+        isPushLeft = false;
+        isPushRight = false;
+        isPushUp = false;
+        isPushDown = false;
 
-        if (inputManager.IsTrgger(InputManager.INPUTPATTERN.SPECIAL))
+        if (inputManager.IsTrgger(InputManager.INPUTPATTERN.JUMP))
         {
-            isTriggerSpecial = true;
+            isTriggerJump = true;
         }
         if (inputManager.IsTrgger(InputManager.INPUTPATTERN.CANCEL))
         {
             isTriggerCancel = true;
         }
+        if (inputManager.IsPush(InputManager.INPUTPATTERN.HORIZONTAL))
+        {
+            if (inputManager.ReturnInputValue(InputManager.INPUTPATTERN.HORIZONTAL) < 0f)
+            {
+                isPushLeft = true;
+            }
+            else
+            {
+                isPushRight = true;
+            }
+        }
+        if (inputManager.IsPush(InputManager.INPUTPATTERN.VERTICAL))
+        {
+            if (inputManager.ReturnInputValue(InputManager.INPUTPATTERN.VERTICAL) > 0f)
+            {
+                isPushUp = true;
+            }
+            else
+            {
+                isPushDown = true;
+            }
+        }
     }
+
 }
