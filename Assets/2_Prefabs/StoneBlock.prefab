@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: -7867750131249883206}
   - component: {fileID: -6533700695049329269}
   - component: {fileID: 4090162405295387848}
+  - component: {fileID: 7371151997073562326}
   m_Layer: 0
   m_Name: StoneBlock
   m_TagString: Object
@@ -115,6 +116,20 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &7371151997073562326
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 944074398774364433}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c79cc946b1831fb4685b411f7b365011, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  particle:
+  - {fileID: 5100953819094702239, guid: 18c387b80d95b8a4aa803e4cde1b899e, type: 3}
 --- !u!1001 &1282511663558893558
 PrefabInstance:
   m_ObjectHideFlags: 0

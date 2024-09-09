@@ -2,12 +2,14 @@ using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.ParticleSystem;
 
 public class BlockManager : MonoBehaviour
 {
     // 自コンポーネント取得
     private AllObjectManager allObjectManager;
     private SpriteRenderer spriteRenderer;
+    private ParticleInstantiateScript  particle;
 
     // 基本情報
     private Vector3 originScale;
@@ -26,6 +28,7 @@ public class BlockManager : MonoBehaviour
     {
         allObjectManager = GetComponent<AllObjectManager>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        particle = GetComponent<ParticleInstantiateScript>();
 
         originScale = transform.localScale;
         originRotate = transform.localRotation;
@@ -56,6 +59,12 @@ public class BlockManager : MonoBehaviour
     {
         allObjectManager.SetIsActive(false);
 
+        //破壊パーティクル生成
+        if (particle != null)
+        {
+            particle.RunParticle(0);
+        }
+
         //Sequenceのインスタンスを作成
         var sequence = DOTween.Sequence();
 
@@ -79,6 +88,10 @@ public class BlockManager : MonoBehaviour
         if (allObjectManager.GetIsActive() && allObjectManager.GetHp() <= 0)
         {
             SetIsActive(false);
+        }
+        else
+        {
+            particle.RunParticle(1);
         }
     }
     public void SetIsActive(bool _isActive)
