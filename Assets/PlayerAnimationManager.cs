@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class PlayerAnimationManager : MonoBehaviour
 {
@@ -8,38 +9,27 @@ public class PlayerAnimationManager : MonoBehaviour
     PlayerMoveManager player;
     Animator animator;
 
-    [SerializeField] GameObject[] playerSprites;
+    [SerializeField] GameObject playerGraphic;
 
-    int direction = 1;
-    int preDirection;
+    Vector3 scale = Vector3.one;
 
     // Start is called before the first frame update
     void Start()
     {
         player = GetComponent<PlayerMoveManager>();
         animator = GetComponent<Animator>();
-        direction = player.GetDirection();
 
     }
 
     // Update is called once per frame
     void Update()
     {
-        int direction_ = player.GetDirection();
+        int direction = player.GetDirection();
 
-        if (direction_ != 0 )
+        if (direction != 0)
         {
-            preDirection = direction;
-            direction = direction_;
-
-            if (direction != preDirection)
-            {
-                for (int i = 0; i < playerSprites.Length; i++)
-                {
-                    playerSprites[i].transform.localScale *= -1;
-                    playerSprites[i].transform.localPosition *= -1;
-                }
-            }
+            scale.x = direction;
+            playerGraphic.transform.localScale = scale;
         }
 
 

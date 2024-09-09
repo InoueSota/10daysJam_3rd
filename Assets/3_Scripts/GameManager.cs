@@ -142,7 +142,7 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            if (isTriggerspecial)
+            if (isTriggerspecial && !transition.isTransNow)
             {
                 //ƒgƒ‰ƒ“ƒWƒVƒ‡ƒ“ˆ—
                 transition.SetTransition("SelectScene");

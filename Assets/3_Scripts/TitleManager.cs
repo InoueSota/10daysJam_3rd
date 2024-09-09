@@ -28,7 +28,7 @@ public class TitleManager : MonoBehaviour
 
     void ChangeScene()
     {
-        if (isTriggerJump)
+        if (isTriggerJump && !transition.isTransNow)
         {
             //ƒgƒ‰ƒ“ƒWƒVƒ‡ƒ“ˆ—
             transition.SetTransition(nextScene);

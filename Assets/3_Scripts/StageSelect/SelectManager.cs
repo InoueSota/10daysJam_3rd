@@ -136,7 +136,7 @@ public class SelectManager : MonoBehaviour
     }
     void ChangeScene()
     {
-        if (isTriggerJump)
+        if (isTriggerJump && !transition.isTransNow)
         {
             GlobalVariables.selectStageNumber = stageNumber;
             transition.SetTransition(stageName[stageNumber]);
