@@ -57,6 +57,9 @@ public class SelectManager : MonoBehaviour
     [Header("UI")]
     [SerializeField] private Image leftTriangle;
     [SerializeField] private Image rightTriangle;
+    [SerializeField] private Image backGround;
+    [SerializeField] private Color[] backGroundColor;
+    private Color backGroundTargetColor;
 
     void Start()
     {
@@ -170,6 +173,8 @@ public class SelectManager : MonoBehaviour
     {
         leftTriangle.color = frameImage.color;
         rightTriangle.color = frameImage.color;
+        backGroundTargetColor = backGroundColor[(int)stageGateManagers[stageNumber].GetChapter()];
+        backGround.color += (backGroundTargetColor - backGround.color) * (colorChasePower * Time.deltaTime); ;
 
         if (!isPushLeft)
         {
