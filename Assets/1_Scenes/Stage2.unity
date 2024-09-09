@@ -300,7 +300,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3145942484633496062, guid: a81eee3d580c0df42b1ed12599e71bfd, type: 3}
       propertyPath: m_Text
-      value: Stage2
+      value: Stage 2
       objectReference: {fileID: 0}
     - target: {fileID: 3145942485870970738, guid: a81eee3d580c0df42b1ed12599e71bfd, type: 3}
       propertyPath: m_Pivot.x

@@ -19,7 +19,7 @@ public class StageGateManager : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         if (stageNameText)
         {
-            stageNameText.transform.position = new(transform.position.x, transform.position.y + 1f, transform.position.z);
+            stageNameText.transform.position = new(transform.position.x, transform.position.y + 0.75f, transform.position.z);
             stageNameText.text = stageName;
         }
     }
