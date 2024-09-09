@@ -13,5 +13,6 @@ public class GlobalVariables : MonoBehaviour
 
     // ç¿ïWóﬁ
     public static Vector3 enterPosition = new(-7f, -1.5f, 0f);
-    public static float enterTargetX = 0f;
+    public static Vector3 enterTargetPosition = new(0f, 0.34375f, -10f);
+    public static int enterDepth= 0;
 }
