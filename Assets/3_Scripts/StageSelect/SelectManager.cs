@@ -1,6 +1,3 @@
-using DG.Tweening;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -37,7 +34,7 @@ public class SelectManager : MonoBehaviour
     [Header("カメラ")]
     [SerializeField] private SelectCameraManager selectCameraManager;
 
-    [Header("フレーム")]
+    [Header("上部フレーム")]
     [SerializeField] private Image frameImage;
     [SerializeField] private Color[] themeColor;
     [SerializeField] private float colorChasePower;
@@ -46,6 +43,10 @@ public class SelectManager : MonoBehaviour
     [Header("テーマ")]
     [SerializeField] private Text themeText;
     [SerializeField] private string[] themeTitle;
+
+    [Header("UI")]
+    [SerializeField] private Image leftTriangle;
+    [SerializeField] private Image rightTriangle;
 
     void Start()
     {
@@ -75,7 +76,7 @@ public class SelectManager : MonoBehaviour
         stageNumber = GlobalVariables.selectStageNumber;
 
         // 該当のStageGateから各objを修正する
-        selectCameraManager.SetPosition(stageGateManagers[stageNumber].transform.position);
+        selectCameraManager.SetPosition(stageGateManagers[stageNumber].transform.position.x);
         themeText.text = themeTitle[(int)stageGateManagers[stageNumber].GetChapter()];
         frameImage.color = themeColor[(int)stageGateManagers[stageNumber].GetChapter()];
         targetColor = themeColor[(int)stageGateManagers[stageNumber].GetChapter()];
@@ -90,6 +91,7 @@ public class SelectManager : MonoBehaviour
         ChangeSelectStage();
         ChangeScene();
         ChangeChapter();
+        UiManager();
     }
 
     void ChangeSelectStage()
@@ -124,7 +126,7 @@ public class SelectManager : MonoBehaviour
                     stageNumber++;
                 }
             }
-            selectCameraManager.SetTargetPosition(stageGateManagers[stageNumber].transform.position);
+            selectCameraManager.SetTargetPosition(stageGateManagers[stageNumber].transform.position.x);
             selectIntervalTimer = selectIntervalTime;
         }
     }
@@ -145,6 +147,20 @@ public class SelectManager : MonoBehaviour
         {
             GlobalVariables.selectStageNumber = stageNumber;
             transition.SetTransition("TitleScene");
+        }
+    }
+    void UiManager()
+    {
+        leftTriangle.color = frameImage.color;
+        rightTriangle.color = frameImage.color;
+
+        if (!isPushLeft)
+        {
+            leftTriangle.color = new(frameImage.color.r, frameImage.color.g, frameImage.color.b, 0.5f);
+        }
+        if (!isPushRight)
+        {
+            rightTriangle.color = new(frameImage.color.r, frameImage.color.g, frameImage.color.b, 0.5f);
         }
     }
 
