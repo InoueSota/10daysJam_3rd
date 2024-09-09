@@ -67,7 +67,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 9b3a346ebdd74ce42b8212d730ffcd5c, type: 3}
+    m_Font: {fileID: 12800000, guid: 475106e80c8555b4cbc6219cf42b4689, type: 3}
     m_FontSize: 256
     m_FontStyle: 0
     m_BestFit: 0
@@ -79,7 +79,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: Stage0
+  m_Text: Stage 0
 --- !u!1 &3145942485027800094
 GameObject:
   m_ObjectHideFlags: 0

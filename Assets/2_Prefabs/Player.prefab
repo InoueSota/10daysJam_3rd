@@ -68,8 +68,7 @@ MonoBehaviour:
   isClampInCamera: 1
   maxSpeed: 4
   maxAcceleration: 2
-  accelerationTime: 1
-  acceleration: 0
+  accelerationTime: 0.6
   jumpDistance: 2
   jumpSpeed: 10
   hangTime: 0.1
@@ -345,7 +344,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5090990240071451401}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.81, z: 0}
+  m_LocalPosition: {x: 0, y: 0.8, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

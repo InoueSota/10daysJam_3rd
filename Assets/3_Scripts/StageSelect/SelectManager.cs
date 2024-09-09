@@ -13,6 +13,9 @@ public class SelectManager : MonoBehaviour
     // 選択するステージ名
     private string stageName;
 
+    [Header("カメラ")]
+    [SerializeField] private SelectCameraManager selectCameraManager;
+
     [Header("プレイヤー")]
     [SerializeField] private PlayerManager playerManager;
 
@@ -20,6 +23,8 @@ public class SelectManager : MonoBehaviour
     {
         inputManager = GetComponent<InputManager>();
         playerManager.SetIsActive(true);
+        playerManager.transform.position = GlobalVariables.enterPosition;
+        selectCameraManager.SetTargetX(GlobalVariables.enterTargetX);
     }
 
     void Update()
@@ -33,6 +38,8 @@ public class SelectManager : MonoBehaviour
     {
         if (stageName != null && isTriggerJump)
         {
+            GlobalVariables.enterPosition = playerManager.transform.position;
+            GlobalVariables.enterTargetX = selectCameraManager.GetTargetX();
             SceneManager.LoadScene(stageName);
         }
         if (isTriggerCancel)
