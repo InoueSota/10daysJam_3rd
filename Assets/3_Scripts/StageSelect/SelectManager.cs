@@ -1,6 +1,3 @@
-using DG.Tweening;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -21,9 +18,19 @@ public class SelectManager : MonoBehaviour
     private int stageNumber;
     private string[] stageName;
 
+    [Header("ステージ数テキスト")]
+    [SerializeField] private GameObject stageNumberPrefab;
+    [SerializeField] private Transform stageNumberParent;
+
     [Header("ステージ名テキスト")]
+    [SerializeField] private GameObject stageNamePrefab;
     [SerializeField] private Transform stageNameParent;
-    private Text[] stageNameTexts;
+    [SerializeField] private string[] stageNames;
+
+    [Header("ステージイメージ画像")]
+    [SerializeField] private GameObject stageImagePrefab;
+    [SerializeField] private Transform stageImageParent;
+    [SerializeField] private Sprite[] stageImageSprite;
 
     [Header("ステージ選択間隔の時間")]
     [SerializeField] private float selectIntervalTime;
@@ -37,7 +44,7 @@ public class SelectManager : MonoBehaviour
     [Header("カメラ")]
     [SerializeField] private SelectCameraManager selectCameraManager;
 
-    [Header("フレーム")]
+    [Header("上部フレーム")]
     [SerializeField] private Image frameImage;
     [SerializeField] private Color[] themeColor;
     [SerializeField] private float colorChasePower;
@@ -47,6 +54,13 @@ public class SelectManager : MonoBehaviour
     [SerializeField] private Text themeText;
     [SerializeField] private string[] themeTitle;
 
+    [Header("UI")]
+    [SerializeField] private Image leftTriangle;
+    [SerializeField] private Image rightTriangle;
+    [SerializeField] private Image backGround;
+    [SerializeField] private Color[] backGroundColor;
+    private Color backGroundTargetColor;
+
     void Start()
     {
         inputManager = GetComponent<InputManager>();
@@ -54,7 +68,6 @@ public class SelectManager : MonoBehaviour
         // ステージ遷移先に関する情報の初期化
         stageName = new string[stageMax];
         stageGateManagers = new StageGateManager[stageMax];
-        stageNameTexts = new Text[stageMax];
         for (int i = 1; i < stageMax + 1; i++)
         {
             // ゲートの子オブジェクト取得
@@ -63,19 +76,27 @@ public class SelectManager : MonoBehaviour
             stageGateManagers[i - 1] = stageGateTransform.GetComponent<StageGateManager>();
 
             // テキストの子オブジェクト
-            stageNameTexts[i - 1] = stageNameParent.GetChild(i - 1).GetComponent<Text>();
-            stageNameTexts[i - 1].transform.position = new(stageGateTransform.position.x, stageGateTransform.position.y + 0.75f, stageGateTransform.position.z);
+            GameObject stageNumberText = Instantiate(stageNumberPrefab, new(stageGateTransform.position.x, stageGateTransform.position.y + 1f, stageGateTransform.position.z), Quaternion.identity);
+            stageNumberText.transform.SetParent(stageNumberParent);
+            GameObject stageNameText = Instantiate(stageNamePrefab, new(stageGateTransform.position.x, stageGateTransform.position.y, stageGateTransform.position.z), Quaternion.identity);
+            stageNameText.transform.SetParent(stageNameParent);
+            stageNameText.GetComponent<Text>().text = stageNames[i - 1];
+
+            // イメージ画像の子オブジェクト
+            GameObject stageImage = Instantiate(stageImagePrefab, new(stageGateTransform.position.x, stageGateTransform.position.y - 3.5f, stageGateTransform.position.z), Quaternion.identity);
+            stageImage.transform.SetParent(stageImageParent);
+            stageImage.GetComponent<Image>().sprite = stageImageSprite[i - 1];
 
             // ステージ名取得
             stageName[i - 1] = "Stage" + i.ToString();
-            stageNameTexts[i - 1].text = stageName[i - 1];
+            stageNumberText.GetComponent<Text>().text = stageName[i - 1];
         }
 
         // GlobalVariablesから変数を取得する
         stageNumber = GlobalVariables.selectStageNumber;
 
         // 該当のStageGateから各objを修正する
-        selectCameraManager.SetPosition(stageGateManagers[stageNumber].transform.position);
+        selectCameraManager.SetPosition(stageGateManagers[stageNumber].transform.position.x);
         themeText.text = themeTitle[(int)stageGateManagers[stageNumber].GetChapter()];
         frameImage.color = themeColor[(int)stageGateManagers[stageNumber].GetChapter()];
         targetColor = themeColor[(int)stageGateManagers[stageNumber].GetChapter()];
@@ -90,6 +111,7 @@ public class SelectManager : MonoBehaviour
         ChangeSelectStage();
         ChangeScene();
         ChangeChapter();
+        UiManager();
     }
 
     void ChangeSelectStage()
@@ -124,7 +146,7 @@ public class SelectManager : MonoBehaviour
                     stageNumber++;
                 }
             }
-            selectCameraManager.SetTargetPosition(stageGateManagers[stageNumber].transform.position);
+            selectCameraManager.SetTargetPosition(stageGateManagers[stageNumber].transform.position.x);
             selectIntervalTimer = selectIntervalTime;
         }
     }
@@ -145,6 +167,22 @@ public class SelectManager : MonoBehaviour
         {
             GlobalVariables.selectStageNumber = stageNumber;
             transition.SetTransition("TitleScene");
+        }
+    }
+    void UiManager()
+    {
+        leftTriangle.color = frameImage.color;
+        rightTriangle.color = frameImage.color;
+        backGroundTargetColor = backGroundColor[(int)stageGateManagers[stageNumber].GetChapter()];
+        backGround.color += (backGroundTargetColor - backGround.color) * (colorChasePower * Time.deltaTime); ;
+
+        if (!isPushLeft)
+        {
+            leftTriangle.color = new(frameImage.color.r, frameImage.color.g, frameImage.color.b, 0.5f);
+        }
+        if (!isPushRight)
+        {
+            rightTriangle.color = new(frameImage.color.r, frameImage.color.g, frameImage.color.b, 0.5f);
         }
     }
 
