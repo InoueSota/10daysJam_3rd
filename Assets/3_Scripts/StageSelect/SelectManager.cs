@@ -37,6 +37,8 @@ public class SelectManager : MonoBehaviour
         playerManager.transform.position = GlobalVariables.enterPosition;
         selectCameraManager.SetTargetPosition(GlobalVariables.enterTargetPosition);
         selectCameraManager.SetDepth(GlobalVariables.enterDepth);
+        targetColor = GlobalVariables.enterFrameColor;
+        frameImage.color = GlobalVariables.enterFrameColor;
     }
 
     void Update()
@@ -54,10 +56,15 @@ public class SelectManager : MonoBehaviour
             GlobalVariables.enterPosition = playerManager.transform.position;
             GlobalVariables.enterTargetPosition = selectCameraManager.GetTargetPosition();
             GlobalVariables.enterDepth = selectCameraManager.GetDepth();
+            GlobalVariables.enterFrameColor = targetColor;
             SceneManager.LoadScene(stageName);
         }
         if (isTriggerCancel)
         {
+            GlobalVariables.enterPosition = playerManager.transform.position;
+            GlobalVariables.enterTargetPosition = selectCameraManager.GetTargetPosition();
+            GlobalVariables.enterDepth = selectCameraManager.GetDepth();
+            GlobalVariables.enterFrameColor = targetColor;
             SceneManager.LoadScene("TitleScene");
         }
     }
