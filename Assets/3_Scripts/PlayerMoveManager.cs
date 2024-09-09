@@ -428,4 +428,19 @@ public class PlayerMoveManager : MonoBehaviour
         }
         return false;
     }
+
+    public bool GetIsJump()
+    {
+        return isJumping;
+    }
+
+    public bool GetIsHovering()
+    {
+        return isHovering;
+    }
+
+    public bool GetIsGravity()
+    {
+        return isGravity;
+    }
 }
