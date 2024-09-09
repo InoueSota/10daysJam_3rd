@@ -129,6 +129,7 @@ public class GameManager : MonoBehaviour
                 }
             }
 
+
             // クリアフラグをtrueにする
             if (isFinish)
             {
