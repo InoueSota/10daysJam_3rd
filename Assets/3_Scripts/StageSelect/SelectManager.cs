@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -174,7 +175,7 @@ public class SelectManager : MonoBehaviour
         leftTriangle.color = frameImage.color;
         rightTriangle.color = frameImage.color;
         backGroundTargetColor = backGroundColor[(int)stageGateManagers[stageNumber].GetChapter()];
-        backGround.color += (backGroundTargetColor - backGround.color) * (colorChasePower * Time.deltaTime); ;
+        backGround.color += (backGroundTargetColor - backGround.color) * (colorChasePower * Time.deltaTime);
 
         if (!isPushLeft)
         {

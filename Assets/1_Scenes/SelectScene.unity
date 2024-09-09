@@ -1392,6 +1392,7 @@ GameObject:
   - component: {fileID: 1090858775}
   - component: {fileID: 1090858774}
   - component: {fileID: 1090858776}
+  - component: {fileID: 1090858777}
   m_Layer: 0
   m_Name: SelectManager
   m_TagString: Untagged
@@ -1517,6 +1518,29 @@ MonoBehaviour:
   - {r: 0, g: 0, b: 0, a: 1}
   - {r: 0, g: 0, b: 0, a: 1}
   - {r: 0, g: 0, b: 0, a: 1}
+--- !u!114 &1090858777
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1090858771}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e56f4a7ec0c771242bb7a84bfae2a61c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  range: 0.05
+  flowSpeed: 0.08
+  groupA: {fileID: 1146254528}
+  leftTriangle: {fileID: 519337058}
+  rightTriangle: {fileID: 47113597}
+  stageNumber: {fileID: 8241099445431098949}
+  stageName: {fileID: 642169485}
+  leftTriangleRange: {x: 20, y: 35}
+  rightTriangleRange: {x: -35, y: -20}
+  stageNumberRange: {x: -65, y: -40}
+  stageNameRange: {x: 60, y: 90}
 --- !u!1001 &1116326622
 PrefabInstance:
   m_ObjectHideFlags: 0
