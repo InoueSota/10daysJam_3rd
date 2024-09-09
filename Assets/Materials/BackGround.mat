@@ -57,5 +57,5 @@ Material:
     - _Width: 0.1
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _SubColor: {r: 0.254717, g: 0.254717, b: 0.254717, a: 1}
+    - _SubColor: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []

@@ -140,7 +140,7 @@ public class S_Transition : MonoBehaviour
         {
             //‚±‚±‚Å‰æ–ÊØ‚è‘Ö‚í‚éˆ—(‰æ–Ê‘JˆÚ‚Å‰æ–Ê‚ªŒ©‚¦‚Ä‚È‚¢êŠ)
             SceneManager.LoadScene(NextSceneName);
-            transObj.transform.position = new Vector3(0, 0, 0);
+            transObj.transform.position = EPos_Out;
             transObj.transform.DOScale(EScale_Out, easeOutTime).SetEase(easeOut).OnComplete(() =>
             {
                 //‰æ–Ê‘JˆÚ‚ª•Â‚¶‚é
