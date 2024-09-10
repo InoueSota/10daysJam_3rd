@@ -54,7 +54,9 @@ public class SelectManager : MonoBehaviour
 
     [Header("テーマ")]
     [SerializeField] private Text themeText;
+    [SerializeField] private Text chapterText;
     [SerializeField] private string[] themeTitle;
+    private string[] chapterTitle;
 
     void Start()
     {
@@ -95,6 +97,13 @@ public class SelectManager : MonoBehaviour
         selectCameraManager.SetPosition(stageGateManagers[stageNumber].transform.position.x);
         themeText.text = themeTitle[(int)stageGateManagers[stageNumber].GetChapter()];
         selectUiManager.Initialize((int)stageGateManagers[stageNumber].GetChapter());
+
+        // チャプター文字列初期化
+        chapterTitle = new string[themeTitle.Length];
+        for (int i = 1; i < themeTitle.Length + 1; i++)
+        {
+            chapterTitle[i - 1] = "チャプター" + i.ToString();
+        }
 
         transition = GameObject.FindWithTag("trans").GetComponent<S_Transition>();
     }
@@ -214,6 +223,7 @@ public class SelectManager : MonoBehaviour
     void ChangeChapter()
     {
         themeText.text = themeTitle[(int)stageGateManagers[stageNumber].GetChapter()];
+        chapterText.text = chapterTitle[(int)stageGateManagers[stageNumber].GetChapter()];
     }
     void ChangeScene()
     {
