@@ -139,6 +139,7 @@ public class S_Transition : MonoBehaviour
         transObj.transform.DOScale(SScale_In, easeInTime).SetEase(easeIn).OnComplete(() =>
         {
             //‚±‚±‚Å‰æ–ÊØ‚è‘Ö‚í‚éˆ—(‰æ–Ê‘JˆÚ‚Å‰æ–Ê‚ªŒ©‚¦‚Ä‚È‚¢êŠ)
+
             SceneManager.LoadScene(NextSceneName);
             transObj.transform.position = EPos_Out;
             transObj.transform.DOScale(EScale_Out, easeOutTime).SetEase(easeOut).OnComplete(() =>
