@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerManager : MonoBehaviour
@@ -9,14 +7,13 @@ public class PlayerManager : MonoBehaviour
     private PlayerHitManager hitManager;
     [SerializeField] private UICropScript ui_Crop;
     // ˆÚ“®ƒtƒ‰ƒO
-    private bool isActive;
+    [SerializeField] private bool isActive;
     private bool canJump = true;
 
     void Start()
     {
         moveManager = GetComponent<PlayerMoveManager>();
         hitManager = GetComponent<PlayerHitManager>();
-
     }
 
     // Setter

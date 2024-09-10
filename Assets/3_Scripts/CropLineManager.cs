@@ -116,4 +116,9 @@ public class CropLineManager : MonoBehaviour
             isBlockBreak = false;
         }
     }
+
+    public bool GetIsCropping()
+    {
+        return isCroping ;
+    }
 }

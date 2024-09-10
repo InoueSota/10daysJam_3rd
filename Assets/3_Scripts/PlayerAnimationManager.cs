@@ -8,6 +8,7 @@ public class PlayerAnimationManager : MonoBehaviour
 
     PlayerMoveManager player;
     Animator animator;
+    [SerializeField] CropLineManager cropLineManager;
 
     [SerializeField] GameObject playerGraphic;
 
@@ -48,6 +49,12 @@ public class PlayerAnimationManager : MonoBehaviour
         if (player.GetIsJump() == false && player.GetIsHovering() == false && player.GetIsGravity() == false)
         {
             animator.SetBool("isJump", false);
+        }
+
+        if(cropLineManager.GetIsCropping() == true)
+        {
+            Debug.Log("a");
+            animator.SetTrigger("crop");
         }
 
 
