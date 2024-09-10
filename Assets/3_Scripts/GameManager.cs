@@ -4,15 +4,14 @@ public class GameManager : MonoBehaviour
 {
     // 自コンポーネント取得
     private StageObjectManager stageObjectManager;
-
-    // 他コンポーネント取得
-    S_Transition transition;
-
-    // 入力
+    private MenuManager menuManager;
     private InputManager inputManager;
     private bool isTriggerCancel;
     private bool isTriggerReset;
     private bool isTriggerspecial;
+
+    // 他コンポーネント取得
+    S_Transition transition;
 
     // フラグ類
     private bool isStart;
@@ -29,7 +28,6 @@ public class GameManager : MonoBehaviour
     // UI
     [Header("UI")]
     [SerializeField] private GameObject groupClear;
-    
 
     // プレイヤー
     [Header("プレイヤー")]
@@ -39,6 +37,7 @@ public class GameManager : MonoBehaviour
     {
         stageObjectManager = GetComponent<StageObjectManager>();
         stageObjectManager.SetPlayerManager(playerManager);
+        menuManager = GetComponent<MenuManager>();
         inputManager = GetComponent<InputManager>();
         transition = GameObject.FindWithTag("trans").GetComponent<S_Transition>();
 
@@ -73,12 +72,29 @@ public class GameManager : MonoBehaviour
     {
         GetInput();
 
+        Menu();
         Ready();
         Clear();
 
-        Restart();
+        if (isTriggerCancel && isStart && !isClear && !menuManager.GetIsMenuActive())
+        {
+            Restart();
+        }
     }
 
+    void Menu()
+    {
+        // メニューを開く / 閉じる
+        if (isTriggerReset && !isClear)
+        {
+            playerManager.SetIsActive(menuManager.GetIsMenuActive());
+            if (isStart)
+            {
+                stageObjectManager.SetCanCheck(menuManager.GetIsMenuActive());
+            }
+            menuManager.SetIsMenuActive();
+        }
+    }
     void Ready()
     {
         if (!isStart)
@@ -88,7 +104,10 @@ public class GameManager : MonoBehaviour
             {
                 // 画面外のオブジェクトを破壊する
                 DestroyOutOfCameraObj();
-                stageObjectManager.SetCanCheck(true);
+                if (!menuManager.GetIsMenuActive())
+                {
+                    stageObjectManager.SetCanCheck(true);
+                }
                 stageObjectManager.Initialize();
                 playerManager.SetIsActive(true);
                 isStart = true;
@@ -151,63 +170,66 @@ public class GameManager : MonoBehaviour
             }
         }
     }
-    void Restart()
+    public void Restart()
     {
-        if (isTriggerCancel && isStart && !isClear)
+        // プレイヤー初期化
+        playerManager.Initialize();
+
+        // ステージオブジェクト初期化
+        stageObjectManager.Initialize();
+        foreach (GameObject obj in GameObject.FindGameObjectsWithTag("Object"))
         {
-            // プレイヤー初期化
-            playerManager.Initialize();
+            AllObjectManager allObjectManager = obj.GetComponent<AllObjectManager>();
 
-            // ステージオブジェクト初期化
-            stageObjectManager.Initialize();
-            foreach (GameObject obj in GameObject.FindGameObjectsWithTag("Object"))
+            switch (allObjectManager.GetObjectType())
             {
-                AllObjectManager allObjectManager = obj.GetComponent<AllObjectManager>();
+                case AllObjectManager.ObjectType.BLOCK:
 
-                switch (allObjectManager.GetObjectType())
-                {
-                    case AllObjectManager.ObjectType.BLOCK:
+                    obj.GetComponent<BlockManager>().SetIsActive(true);
 
-                        obj.GetComponent<BlockManager>().SetIsActive(true);
+                    break;
+                case AllObjectManager.ObjectType.ITEM:
 
-                        break;
-                    case AllObjectManager.ObjectType.ITEM:
+                    obj.GetComponent<ItemManager>().SetIsActive(true);
 
-                        obj.GetComponent<ItemManager>().SetIsActive(true);
+                    break;
+                case AllObjectManager.ObjectType.GRASSPARENT:
 
-                        break;
-                    case AllObjectManager.ObjectType.GRASSPARENT:
+                    obj.GetComponent<GrassParentScript>().SetIsActive(true);
 
-                        obj.GetComponent<GrassParentScript>().SetIsActive(true);
+                    break;
+                case AllObjectManager.ObjectType.DRIPSTONE:
 
-                        break;
-                    case AllObjectManager.ObjectType.DRIPSTONE:
+                    obj.GetComponent<DripStoneManager>().SetIsActive(true);
 
-                        obj.GetComponent<DripStoneManager>().SetIsActive(true);
+                    break;
+                case AllObjectManager.ObjectType.BOMB:
 
-                        break;
-                    case AllObjectManager.ObjectType.BOMB:
+                    obj.GetComponent<BombManager>().SetIsActive(true);
 
-                        obj.GetComponent<BombManager>().SetIsActive(true);
+                    break;
+                case AllObjectManager.ObjectType.ICICLE:
 
-                        break;
-                    case AllObjectManager.ObjectType.ICICLE:
+                    obj.GetComponent<IcicleManager>().SetIsActive(true);
 
-                        obj.GetComponent<IcicleManager>().SetIsActive(true);
-
-                        break;
-                }
+                    break;
             }
-            //エッフェル塔
-            foreach (GameObject obj in GameObject.FindGameObjectsWithTag("effect"))
-            {
-                //残ってるエフェクトを消す処理
-                Destroy(obj);
-
-            }
-                // グローバル変数の初期化
-                GlobalVariables.isClear = false;
         }
+
+        // エッフェル塔
+        foreach (GameObject obj in GameObject.FindGameObjectsWithTag("effect"))
+        {
+            // 残ってるエフェクトを消す処理
+            Destroy(obj);
+
+        }
+        // グローバル変数の初期化
+        GlobalVariables.isClear = false;
+    }
+
+    public void SetPlayerAcitve(bool _isActive)
+    {
+        playerManager.SetIsActive(_isActive);
     }
 
     void GetInput()
