@@ -13,12 +13,16 @@ public class PlayerAnimationManager : MonoBehaviour
 
     Vector3 scale = Vector3.one;
 
+    ParticleInstantiateScript particle;
+    [SerializeField] float walkParticleTimeMax = 0.5f;
+    float walkParticleTime = 0.0f;
+
     // Start is called before the first frame update
     void Start()
     {
         player = GetComponent<PlayerMoveManager>();
         animator = GetComponent<Animator>();
-
+        particle = GetComponent<ParticleInstantiateScript>();
     }
 
     // Update is called once per frame
@@ -45,5 +49,25 @@ public class PlayerAnimationManager : MonoBehaviour
         {
             animator.SetBool("isJump", false);
         }
+
+
+        //particle
+        if (player.IsMoving() && player.GetIsJump() == false && player.GetIsHovering() == false && player.GetIsGravity() == false)
+        {
+            if (walkParticleTime < 0)
+            {
+                particle.RunParticle(0, this.transform.position + Vector3.down * 0.5f);
+                walkParticleTime = walkParticleTimeMax;
+            }
+            else
+            {
+                walkParticleTime -= Time.deltaTime;
+            }
+        }
+        else
+        {
+            walkParticleTime = 0;
+        }
+
     }
 }

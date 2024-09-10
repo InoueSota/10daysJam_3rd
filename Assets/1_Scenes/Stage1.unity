@@ -590,6 +590,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7375255734556442505, guid: 556e414e00bc2ee46b64dfc8122ebd80, type: 3}
+      propertyPath: m_Icon
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7375255734556442505, guid: 556e414e00bc2ee46b64dfc8122ebd80, type: 3}
       propertyPath: m_Name
       value: ParticleParent
       objectReference: {fileID: 0}

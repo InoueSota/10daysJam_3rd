@@ -1,10 +1,12 @@
 using System;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class SelectManager : MonoBehaviour
 {
-    // 入力
+    // 自コンポーネント取得
+    private SelectUiManager selectUiManager;
     private InputManager inputManager;
     private bool isTriggerJump;
     private bool isTriggerCancel;
@@ -50,25 +52,15 @@ public class SelectManager : MonoBehaviour
     [Header("カメラ")]
     [SerializeField] private SelectCameraManager selectCameraManager;
 
-    [Header("上部フレーム")]
-    [SerializeField] private Image frameImage;
-    [SerializeField] private Color[] themeColor;
-    [SerializeField] private float colorChasePower;
-    private Color targetColor;
-
     [Header("テーマ")]
     [SerializeField] private Text themeText;
+    [SerializeField] private Text chapterText;
     [SerializeField] private string[] themeTitle;
-
-    [Header("UI")]
-    [SerializeField] private Image leftTriangle;
-    [SerializeField] private Image rightTriangle;
-    [SerializeField] private Image backGround;
-    [SerializeField] private Color[] backGroundColor;
-    private Color backGroundTargetColor;
+    private string[] chapterTitle;
 
     void Start()
     {
+        selectUiManager = GetComponent<SelectUiManager>();
         inputManager = GetComponent<InputManager>();
 
         // ステージ遷移先に関する情報の初期化
@@ -104,8 +96,14 @@ public class SelectManager : MonoBehaviour
         // 該当のStageGateから各objを修正する
         selectCameraManager.SetPosition(stageGateManagers[stageNumber].transform.position.x);
         themeText.text = themeTitle[(int)stageGateManagers[stageNumber].GetChapter()];
-        frameImage.color = themeColor[(int)stageGateManagers[stageNumber].GetChapter()];
-        targetColor = themeColor[(int)stageGateManagers[stageNumber].GetChapter()];
+        selectUiManager.Initialize((int)stageGateManagers[stageNumber].GetChapter());
+
+        // チャプター文字列初期化
+        chapterTitle = new string[themeTitle.Length];
+        for (int i = 1; i < themeTitle.Length + 1; i++)
+        {
+            chapterTitle[i - 1] = "チャプター" + i.ToString();
+        }
 
         transition = GameObject.FindWithTag("trans").GetComponent<S_Transition>();
     }
@@ -124,7 +122,7 @@ public class SelectManager : MonoBehaviour
     {
         selectIntervalTimer -= Time.deltaTime;
 
-        if (selectIntervalTimer <= 0f && (isPushLeft || isPushRight || isPushUp || isPushDown))
+        if (selectIntervalTimer <= 0f && (isPushLeft || isPushRight || isPushUp || isPushDown) && !transition.isTransNow)
         {
             // ステージ番号を減算する
             if (isPushLeft)
@@ -138,6 +136,7 @@ public class SelectManager : MonoBehaviour
                 {
                     stageNumber--;
                 }
+                selectUiManager.StartTriangleRotate(true);
             }
             // ステージ番号を加算する
             else if (isPushRight)
@@ -151,6 +150,7 @@ public class SelectManager : MonoBehaviour
                 {
                     stageNumber++;
                 }
+                selectUiManager.StartTriangleRotate(false);
             }
             else if (isPushUp || isPushDown)
             {
@@ -223,17 +223,17 @@ public class SelectManager : MonoBehaviour
     void ChangeChapter()
     {
         themeText.text = themeTitle[(int)stageGateManagers[stageNumber].GetChapter()];
-        targetColor = themeColor[(int)stageGateManagers[stageNumber].GetChapter()];
-        frameImage.color += (targetColor - frameImage.color) * (colorChasePower * Time.deltaTime);
+        chapterText.text = chapterTitle[(int)stageGateManagers[stageNumber].GetChapter()];
     }
     void ChangeScene()
     {
         if (isTriggerJump && !transition.isTransNow)
         {
+            selectUiManager.StartCircle();
             GlobalVariables.selectStageNumber = stageNumber;
             transition.SetTransition(stageName[stageNumber]);
         }
-        if (isTriggerCancel)
+        if (isTriggerCancel && !transition.isTransNow)
         {
             GlobalVariables.selectStageNumber = stageNumber;
             transition.SetTransition("TitleScene");
@@ -241,19 +241,8 @@ public class SelectManager : MonoBehaviour
     }
     void UiManager()
     {
-        leftTriangle.color = frameImage.color;
-        rightTriangle.color = frameImage.color;
-        backGroundTargetColor = backGroundColor[(int)stageGateManagers[stageNumber].GetChapter()];
-        backGround.color += (backGroundTargetColor - backGround.color) * (colorChasePower * Time.deltaTime);
-
-        if (!isPushLeft)
-        {
-            leftTriangle.color = new(frameImage.color.r, frameImage.color.g, frameImage.color.b, 0.5f);
-        }
-        if (!isPushRight)
-        {
-            rightTriangle.color = new(frameImage.color.r, frameImage.color.g, frameImage.color.b, 0.5f);
-        }
+        selectUiManager.ChangeByChapter((int)stageGateManagers[stageNumber].GetChapter());
+        selectUiManager.SetTriangleColor(isPushLeft, isPushRight);
     }
 
     // Getter
@@ -297,5 +286,4 @@ public class SelectManager : MonoBehaviour
             }
         }
     }
-
 }
