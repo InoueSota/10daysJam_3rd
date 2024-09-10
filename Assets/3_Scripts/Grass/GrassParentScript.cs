@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
+using static UnityEngine.ParticleSystem;
 
 public class GrassParentScript : MonoBehaviour
 {
@@ -38,7 +39,7 @@ public class GrassParentScript : MonoBehaviour
     private AllObjectManager allObjectManager;
     private AllObjectManager parentObjectManager;
 
-    [SerializeField] ParticleSystem particle = null;
+    private ParticleInstantiateScript particle = null;
 
     [SerializeField] private bool isActive = true;
     private bool isGrew = false;
@@ -50,6 +51,7 @@ public class GrassParentScript : MonoBehaviour
     {
         allObjectManager = GetComponent<AllObjectManager>();
         parentObjectManager = transform.parent.GetComponent<AllObjectManager>();
+        particle = GetComponent<ParticleInstantiateScript>();
         GrassGrow();
     }
 
@@ -229,7 +231,7 @@ public class GrassParentScript : MonoBehaviour
         isGrew = false;
         isActive = false;
         allObjectManager.SetIsActive(isActive);
-        Instantiate(particle,this.transform.position,Quaternion.identity);
+        particle.RunParticle(0);
     }
 
     void NotPlace()
