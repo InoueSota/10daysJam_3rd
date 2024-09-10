@@ -22,7 +22,7 @@ public class MenuManager : MonoBehaviour
     private MenuType menuType = MenuType.RETURN;
 
     // メニュー画面のアクティブフラグ
-    [SerializeField] private bool isMenuActive;
+    private bool isMenuActive;
 
     [Header("メニュー画面背景")]
     [SerializeField] private Image menuBackImage;

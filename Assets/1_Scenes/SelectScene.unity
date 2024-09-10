@@ -1540,8 +1540,8 @@ MonoBehaviour:
   flowSpeed: 0.08
   leftTriangleRange: {x: 20, y: 35}
   rightTriangleRange: {x: -35, y: -20}
-  stageNumberRange: {x: -65, y: -40}
-  stageNameRange: {x: 60, y: 90}
+  stageNumberRange: {x: -65, y: -55}
+  stageNameRange: {x: -80, y: -70}
 --- !u!1001 &1116326622
 PrefabInstance:
   m_ObjectHideFlags: 0
