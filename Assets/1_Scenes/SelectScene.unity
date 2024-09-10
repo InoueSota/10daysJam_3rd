@@ -1495,14 +1495,6 @@ MonoBehaviour:
   stageGateSpace: 15
   stageGateParent: {fileID: 188895880}
   selectCameraManager: {fileID: 1378871061}
-  frameImage: {fileID: 9223089}
-  themeColor:
-  - {r: 0.27, g: 0.75, b: 0, a: 1}
-  - {r: 0.4, g: 0.2, b: 0.1, a: 1}
-  - {r: 0.75, g: 0.5, b: 0.15, a: 1}
-  - {r: 0.2, g: 0.75, b: 0.8, a: 1}
-  - {r: 0.8, g: 0.8, b: 0.8, a: 1}
-  colorChasePower: 5
   themeText: {fileID: 1577744676}
   themeTitle:
   - "\u30A6\u30A7\u30EB\u30AB\u30E0\u8349\u539F"
@@ -1510,17 +1502,6 @@ MonoBehaviour:
   - "\u3055\u3089\u3055\u3089\u7802\u6F20"
   - "\u30B3\u30FC\u30EB\u30C9\u96EA\u539F"
   - "\u307E\u3063\u304F\u3089\u5893\u5730"
-  canvas: {fileID: 975762946}
-  aTransform: {fileID: 532837198}
-  leftTriangle: {fileID: 519337059}
-  rightTriangle: {fileID: 47113598}
-  backGround: {fileID: 1009725762}
-  backGroundColor:
-  - {r: 0.60784316, g: 0.90588236, b: 0.5019608, a: 1}
-  - {r: 0.4509804, g: 0.32941177, b: 0.23529412, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
 --- !u!114 &1090858777
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1533,9 +1514,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e56f4a7ec0c771242bb7a84bfae2a61c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  groupA: {fileID: 1146254528}
+  frameImage: {fileID: 9223089}
+  themeColor:
+  - {r: 0.27058825, g: 0.7411765, b: 0, a: 1}
+  - {r: 0.3679245, g: 0.20158204, b: 0.10898895, a: 1}
+  - {r: 0.68966174, g: 0.7169812, b: 0.23268066, a: 1}
+  - {r: 0.27326453, g: 0.7169812, b: 0.7169812, a: 1}
+  - {r: 0.6509434, g: 0.6509434, b: 0.6509434, a: 1}
+  colorChasePower: 5
   leftTriangle: {fileID: 519337058}
   rightTriangle: {fileID: 47113597}
+  backGroundImage: {fileID: 1009725762}
+  backGroundColor:
+  - {r: 0.60784316, g: 0.90588236, b: 0.5019608, a: 1}
+  - {r: 0.44705883, g: 0.27058825, b: 0.20392157, a: 1}
+  - {r: 0, g: 0, b: 0, a: 1}
+  - {r: 0, g: 0, b: 0, a: 1}
+  - {r: 0, g: 0, b: 0, a: 1}
+  groupA: {fileID: 1146254528}
   stageNumber: {fileID: 8241099445431098949}
   stageName: {fileID: 642169485}
   startCircleAnimator: {fileID: 2062642237}

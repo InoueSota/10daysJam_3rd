@@ -52,24 +52,9 @@ public class SelectManager : MonoBehaviour
     [Header("カメラ")]
     [SerializeField] private SelectCameraManager selectCameraManager;
 
-    [Header("上部フレーム")]
-    [SerializeField] private Image frameImage;
-    [SerializeField] private Color[] themeColor;
-    [SerializeField] private float colorChasePower;
-    private Color targetColor;
-
     [Header("テーマ")]
     [SerializeField] private Text themeText;
     [SerializeField] private string[] themeTitle;
-
-    [Header("UI")]
-    [SerializeField] private Canvas canvas;
-    [SerializeField] private RectTransform aTransform;
-    [SerializeField] private Image leftTriangle;
-    [SerializeField] private Image rightTriangle;
-    [SerializeField] private Image backGround;
-    [SerializeField] private Color[] backGroundColor;
-    private Color backGroundTargetColor;
 
     void Start()
     {
@@ -109,8 +94,7 @@ public class SelectManager : MonoBehaviour
         // 該当のStageGateから各objを修正する
         selectCameraManager.SetPosition(stageGateManagers[stageNumber].transform.position.x);
         themeText.text = themeTitle[(int)stageGateManagers[stageNumber].GetChapter()];
-        frameImage.color = themeColor[(int)stageGateManagers[stageNumber].GetChapter()];
-        targetColor = themeColor[(int)stageGateManagers[stageNumber].GetChapter()];
+        selectUiManager.Initialize((int)stageGateManagers[stageNumber].GetChapter());
 
         transition = GameObject.FindWithTag("trans").GetComponent<S_Transition>();
     }
@@ -230,8 +214,6 @@ public class SelectManager : MonoBehaviour
     void ChangeChapter()
     {
         themeText.text = themeTitle[(int)stageGateManagers[stageNumber].GetChapter()];
-        targetColor = themeColor[(int)stageGateManagers[stageNumber].GetChapter()];
-        frameImage.color += (targetColor - frameImage.color) * (colorChasePower * Time.deltaTime);
     }
     void ChangeScene()
     {
@@ -249,19 +231,8 @@ public class SelectManager : MonoBehaviour
     }
     void UiManager()
     {
-        leftTriangle.color = frameImage.color;
-        rightTriangle.color = frameImage.color;
-        backGroundTargetColor = backGroundColor[(int)stageGateManagers[stageNumber].GetChapter()];
-        backGround.color += (backGroundTargetColor - backGround.color) * (colorChasePower * Time.deltaTime);
-
-        if (!isPushLeft)
-        {
-            leftTriangle.color = new(frameImage.color.r, frameImage.color.g, frameImage.color.b, 0.5f);
-        }
-        if (!isPushRight)
-        {
-            rightTriangle.color = new(frameImage.color.r, frameImage.color.g, frameImage.color.b, 0.5f);
-        }
+        selectUiManager.ChangeByChapter((int)stageGateManagers[stageNumber].GetChapter());
+        selectUiManager.SetTriangleColor(isPushLeft, isPushRight);
     }
 
     // Getter
