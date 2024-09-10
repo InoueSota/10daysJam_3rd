@@ -154,10 +154,10 @@ public class UI_Item : MonoBehaviour
             //Destroy(DestoryObjs[i]);
             //DestoryObjs[i] = null;
         }
-        foreach (GameObject obj in itemPostions)
-        {
-            obj.transform.localPosition.Set(obj.transform.localPosition.x,0.0f, obj.transform.localPosition.z);
-        }
+        //UI
+        itemPostions[0].transform.localPosition = new Vector3(-1, 0, 0);
+        itemPostions[1].transform.localPosition = new Vector3(0, 0, 0);
+        itemPostions[2].transform.localPosition = new Vector3(1, 0, 0);
 
         // List“à‚Ì‚·‚×‚Ä‚ÌUI‚ð”j‰ó‚·‚é
         foreach (GameObject obj in DestoryObjs)
