@@ -165,7 +165,7 @@ public class PlayerMoveManager : MonoBehaviour
                         }
                         else
                         {
-                            yDoubleSize = halfSize.y + 0.35f;
+                            yDoubleSize = halfSize.y + 0.25f;
                         }
 
                         if (yBetween < yDoubleSize && xBetween < xDoubleSize)
@@ -225,7 +225,7 @@ public class PlayerMoveManager : MonoBehaviour
                     {
                         // XŽ²”»’è
                         float xBetween = Mathf.Abs(nextPosition.x - obj.transform.position.x);
-                        float xDoubleSize = halfSize.x + 0.35f;
+                        float xDoubleSize = halfSize.x + 0.25f;
 
                         // YŽ²”»’è
                         float yBetween = Mathf.Abs(nextPosition.y - obj.transform.position.y);
@@ -236,6 +236,8 @@ public class PlayerMoveManager : MonoBehaviour
                             if (nextPosition.y < obj.transform.position.y)
                             {
                                 nextPosition.y = obj.transform.position.y - 0.5f - halfSize.y;
+                                hangTimer = hangTime;
+                                isHovering = true;
                                 isJumping = false;
                                 break;
                             }
@@ -273,7 +275,7 @@ public class PlayerMoveManager : MonoBehaviour
                         {
                             // XŽ²”»’è
                             float xBetween = Mathf.Abs(nextPosition.x - obj.transform.position.x);
-                            float xDoubleSize = halfSize.x + 0.35f;
+                            float xDoubleSize = halfSize.x + 0.25f;
 
                             // YŽ²”»’è
                             float yBetween = Mathf.Abs(nextPosition.y - obj.transform.position.y);
@@ -317,7 +319,7 @@ public class PlayerMoveManager : MonoBehaviour
                     {
                         // XŽ²”»’è
                         float xBetween = Mathf.Abs(nextPosition.x - obj.transform.position.x);
-                        float xDoubleSize = halfSize.x + 0.35f;
+                        float xDoubleSize = halfSize.x + 0.25f;
 
                         // YŽ²”»’è
                         float yBetween = Mathf.Abs(nextPosition.y - obj.transform.position.y);
