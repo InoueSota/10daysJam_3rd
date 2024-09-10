@@ -1,10 +1,12 @@
 using System;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class SelectManager : MonoBehaviour
 {
-    // 入力
+    // 自コンポーネント取得
+    private SelectUiManager selectUiManager;
     private InputManager inputManager;
     private bool isTriggerJump;
     private bool isTriggerCancel;
@@ -61,6 +63,8 @@ public class SelectManager : MonoBehaviour
     [SerializeField] private string[] themeTitle;
 
     [Header("UI")]
+    [SerializeField] private Canvas canvas;
+    [SerializeField] private RectTransform aTransform;
     [SerializeField] private Image leftTriangle;
     [SerializeField] private Image rightTriangle;
     [SerializeField] private Image backGround;
@@ -69,6 +73,7 @@ public class SelectManager : MonoBehaviour
 
     void Start()
     {
+        selectUiManager = GetComponent<SelectUiManager>();
         inputManager = GetComponent<InputManager>();
 
         // ステージ遷移先に関する情報の初期化
@@ -124,7 +129,7 @@ public class SelectManager : MonoBehaviour
     {
         selectIntervalTimer -= Time.deltaTime;
 
-        if (selectIntervalTimer <= 0f && (isPushLeft || isPushRight || isPushUp || isPushDown))
+        if (selectIntervalTimer <= 0f && (isPushLeft || isPushRight || isPushUp || isPushDown) && !transition.isTransNow)
         {
             // ステージ番号を減算する
             if (isPushLeft)
@@ -138,6 +143,7 @@ public class SelectManager : MonoBehaviour
                 {
                     stageNumber--;
                 }
+                selectUiManager.StartTriangleRotate(true);
             }
             // ステージ番号を加算する
             else if (isPushRight)
@@ -151,6 +157,7 @@ public class SelectManager : MonoBehaviour
                 {
                     stageNumber++;
                 }
+                selectUiManager.StartTriangleRotate(false);
             }
             else if (isPushUp || isPushDown)
             {
@@ -230,10 +237,11 @@ public class SelectManager : MonoBehaviour
     {
         if (isTriggerJump && !transition.isTransNow)
         {
+            selectUiManager.StartCircle();
             GlobalVariables.selectStageNumber = stageNumber;
             transition.SetTransition(stageName[stageNumber]);
         }
-        if (isTriggerCancel)
+        if (isTriggerCancel && !transition.isTransNow)
         {
             GlobalVariables.selectStageNumber = stageNumber;
             transition.SetTransition("TitleScene");
@@ -297,5 +305,4 @@ public class SelectManager : MonoBehaviour
             }
         }
     }
-
 }
