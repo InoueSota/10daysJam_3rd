@@ -8,6 +8,7 @@ TagManager:
   - StageGate
   - trans
   - effect
+  - ParticleParent
   layers:
   - Default
   - TransparentFX

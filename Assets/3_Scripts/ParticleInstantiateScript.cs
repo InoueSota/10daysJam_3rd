@@ -6,12 +6,32 @@ public class ParticleInstantiateScript : MonoBehaviour
 {
     // Start is called before the first frame update
     [SerializeField] ParticleSystem[] particle;
+    Transform particleParent;
 
+    void Start()
+    {
+        GameObject particleParentObject = GameObject.FindGameObjectWithTag("ParticleParent");
+
+        if (particleParentObject == null)
+        {
+            Debug.Log("ふぇ～、パーティクルのいれものがないょぉ。プレハブの「ParticleParent」をいれてほしいのぉ。");
+        }
+        else
+        {
+            particleParent = particleParentObject.transform;
+        }
+
+
+        
+    }
     public void RunParticle(int particleNum)
     {
         if (particle[particleNum] != null)
         {
-            Instantiate(particle[particleNum], this.transform.position, Quaternion.identity);
+            ParticleSystem particleObject = Instantiate(particle[particleNum], this.transform.position, Quaternion.identity);
+            if (particleParent != null) {
+                particleObject.gameObject.transform.parent = particleParent;
+            }
         }
     }
 
@@ -19,7 +39,11 @@ public class ParticleInstantiateScript : MonoBehaviour
     {
         if (particle[particleNum] != null)
         {
-            Instantiate(particle[particleNum], particlePos, Quaternion.identity);
+            ParticleSystem particleObject = Instantiate(particle[particleNum], particlePos, Quaternion.identity);
+            if (particleParent != null)
+            {
+                particleObject.gameObject.transform.parent = particleParent;
+            }
         }
     }
 
@@ -27,7 +51,11 @@ public class ParticleInstantiateScript : MonoBehaviour
     {
         if (particle[particleNum] != null)
         {
-            Instantiate(particle[particleNum], particlePos, Quaternion.EulerRotation(rot));
+            ParticleSystem particleObject = Instantiate(particle[particleNum], particlePos, Quaternion.EulerRotation(rot));
+            if (particleParent != null)
+            {
+                particleObject.gameObject.transform.parent = particleParent;
+            }
         }
     }
 
@@ -39,4 +67,6 @@ public class ParticleInstantiateScript : MonoBehaviour
             particleObject.gameObject.transform.parent = this.transform;
         }
     }
+
+    
 }
