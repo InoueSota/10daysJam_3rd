@@ -1496,6 +1496,7 @@ MonoBehaviour:
   stageGateParent: {fileID: 188895880}
   selectCameraManager: {fileID: 1378871061}
   themeText: {fileID: 1577744676}
+  chapterText: {fileID: 225340240}
   themeTitle:
   - "\u30A6\u30A7\u30EB\u30AB\u30E0\u8349\u539F"
   - "\u3068\u3093\u304C\u308A\u6D1E\u7A9F"

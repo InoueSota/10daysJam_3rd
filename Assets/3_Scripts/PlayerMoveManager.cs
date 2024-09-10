@@ -236,6 +236,8 @@ public class PlayerMoveManager : MonoBehaviour
                             if (nextPosition.y < obj.transform.position.y)
                             {
                                 nextPosition.y = obj.transform.position.y - 0.5f - halfSize.y;
+                                hangTimer = hangTime;
+                                isHovering = true;
                                 isJumping = false;
                                 break;
                             }
