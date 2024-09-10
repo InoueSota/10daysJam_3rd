@@ -4,8 +4,10 @@ public class GameManager : MonoBehaviour
 {
     // 自コンポーネント取得
     private StageObjectManager stageObjectManager;
-    //他コンポーネント取得
+
+    // 他コンポーネント取得
     S_Transition transition;
+
     // 入力
     private InputManager inputManager;
     private bool isTriggerCancel;
@@ -27,6 +29,7 @@ public class GameManager : MonoBehaviour
     // UI
     [Header("UI")]
     [SerializeField] private GameObject groupClear;
+    
 
     // プレイヤー
     [Header("プレイヤー")]

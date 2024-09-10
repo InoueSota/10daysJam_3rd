@@ -165,7 +165,7 @@ public class PlayerMoveManager : MonoBehaviour
                         }
                         else
                         {
-                            yDoubleSize = halfSize.y + 0.25f;
+                            yDoubleSize = halfSize.y + 0.15f;
                         }
 
                         if (yBetween < yDoubleSize && xBetween < xDoubleSize)

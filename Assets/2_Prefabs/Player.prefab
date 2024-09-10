@@ -69,8 +69,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 122a5ba352037e04aa644ca0a53923a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxSpeed: 4
-  maxAcceleration: 2
+  maxSpeed: 3.7
+  maxAcceleration: 2.2
   accelerationTime: 0.6
   jumpDistance: 2
   jumpSpeed: 10
@@ -321,7 +321,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 2
+  m_SortingOrder: 3
   m_Sprite: {fileID: 21300000, guid: be9ed084f17eb9f4299aa7b493204a10, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
