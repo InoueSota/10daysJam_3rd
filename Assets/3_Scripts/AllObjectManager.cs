@@ -14,6 +14,7 @@ public class AllObjectManager : MonoBehaviour
         GRASSPARENT,
         DRIPSTONE,
         BOMB,
+        SPLIT,
         ICICLE
     }
     [SerializeField] private ObjectType objectType;
