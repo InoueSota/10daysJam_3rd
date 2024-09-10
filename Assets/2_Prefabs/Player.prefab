@@ -384,6 +384,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d9a4a8a269115c439b7932d6d4a7e33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  soundPrefab: {fileID: 2040439859697582755, guid: 06a3e390c1a9f98438066daf4b9a3087, type: 3}
   isCroping: 0
   isBlockBreak: 0
 --- !u!114 &366297282509921815

@@ -6,10 +6,13 @@ using static UnityEngine.ParticleSystem;
 
 public class BlockManager : MonoBehaviour
 {
+    //[SerializeField] GameObject soundEffect;
+    [SerializeField] float coolTime;
+    bool isOne;
     // 自コンポーネント取得
     private AllObjectManager allObjectManager;
     private SpriteRenderer spriteRenderer;
-    private ParticleInstantiateScript  particle;
+    private ParticleInstantiateScript particle;
 
     // 基本情報
     private Vector3 originScale;
@@ -36,9 +39,14 @@ public class BlockManager : MonoBehaviour
 
     void LateUpdate()
     {
-
+        coolTime -= Time.deltaTime;
+        if (coolTime <= 0 && !isOne && !allObjectManager.GetIsActive())
+        {
+            Debug.Log("aaaa");
+            //GameObject sound = Instantiate(soundEffect);
+            isOne = true;
+        }
     }
-
     // 初期化処理
     void Initialize()
     {
@@ -49,6 +57,7 @@ public class BlockManager : MonoBehaviour
         allObjectManager.SetIsActive(spriteRenderer.enabled);
         allObjectManager.Initialize();
 
+        isOne = false;
         transform.localScale = originScale;
         transform.localRotation = originRotate;
         spriteRenderer.color = new(spriteRenderer.color.r, spriteRenderer.color.g, spriteRenderer.color.b, 1f);
@@ -57,6 +66,8 @@ public class BlockManager : MonoBehaviour
     // 消滅処理
     void Disappear()
     {
+
+
         allObjectManager.SetIsActive(false);
 
         //破壊パーティクル生成
@@ -78,6 +89,7 @@ public class BlockManager : MonoBehaviour
         {
             spriteRenderer.enabled = false;
         });
+
     }
 
     // Setter
@@ -110,5 +122,10 @@ public class BlockManager : MonoBehaviour
     public BlockType GetBlockType()
     {
         return blockType;
+    }
+
+    public void SetNum(float cooltime)
+    {
+        coolTime = cooltime;
     }
 }
