@@ -14,12 +14,16 @@ public class ItemManager : MonoBehaviour
     private float angle;
     [SerializeField] float lenge;
     [SerializeField] float flowSpeed;
-    
+    //壊したときようオブジェクト
+    public GameObject fakeItem;
+    //エフェクト
+    public GameObject GetEffect;
+
     void Start()
     {
         allObjectManager = GetComponent<AllObjectManager>();
         spriteRenderer = GetComponent<SpriteRenderer>();
-        sitemEffectScripts=GetComponent<ItemEffectScripts>();
+        sitemEffectScripts = GetComponent<ItemEffectScripts>();
         //初期位置保存
         originPos = transform.position;
         angle = 0;
@@ -39,6 +43,7 @@ public class ItemManager : MonoBehaviour
         allObjectManager.SetIsActive(spriteRenderer.enabled);
         allObjectManager.Initialize();
         sitemEffectScripts.Initialized();
+        fakeItem.SetActive(true);
     }
 
     // 消滅処理
@@ -69,6 +74,12 @@ public class ItemManager : MonoBehaviour
             Destruction();
         }
     }
-
+    public void SetIsGet()
+    {
+        //ゲットエフェクト出す
+        Debug.Log("アイテムゲットだっぜ！！！");
+        //GameObject geteffect = Instantiate(GetEffect);
+        fakeItem.SetActive(false);
+    }
     
 }
