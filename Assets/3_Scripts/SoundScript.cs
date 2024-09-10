@@ -6,7 +6,7 @@ public class SoundScript : MonoBehaviour
 {
     [SerializeField] AudioSource audioSource;
     [SerializeField] AudioClip audioClip;
-    float coolTime;
+    private float coolTime;
     // Start is called before the first frame update
     void Start()
     {

@@ -9,6 +9,7 @@ public class ItemManager : MonoBehaviour
     private AllObjectManager allObjectManager;
     private SpriteRenderer spriteRenderer;
     private ItemEffectScripts sitemEffectScripts;
+    [SerializeField] UI_Item ui_Item;
     //—h‚ç‚·—p
     private Vector3 originPos;
     private float angle;
@@ -24,6 +25,8 @@ public class ItemManager : MonoBehaviour
         allObjectManager = GetComponent<AllObjectManager>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         sitemEffectScripts = GetComponent<ItemEffectScripts>();
+        ui_Item = GameObject.FindWithTag("items").GetComponent<UI_Item>();
+
         //‰ŠúˆÊ’u•Û‘¶
         originPos = transform.position;
         angle = 0;
@@ -44,6 +47,8 @@ public class ItemManager : MonoBehaviour
         allObjectManager.Initialize();
         sitemEffectScripts.Initialized();
         fakeItem.SetActive(true);
+        //UI‚Ì‰Šú‰»ˆ—
+        ui_Item.Initialize();
     }
 
     // Á–Åˆ—
@@ -81,6 +86,10 @@ public class ItemManager : MonoBehaviour
         GameObject geteffect = Instantiate(GetEffect);
         geteffect.transform.position = gameObject.transform.position;
         fakeItem.SetActive(false);
+
+        //UIˆ—
+        ui_Item.addList();
+
     }
     
 }
