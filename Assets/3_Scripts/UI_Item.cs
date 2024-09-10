@@ -31,6 +31,14 @@ public class UI_Item : MonoBehaviour
     [SerializeField] Ease TypeEase_In;
     [SerializeField] Ease TypeEase_Out;
     private bool isOne_;
+    private bool isOne_Comp;
+
+    //サイン波
+    //揺らす用
+    private Vector3 originPos;
+    [SerializeField] float angle;
+    [SerializeField] float lenge;
+    [SerializeField] float flowSpeed;
 
     // Start is called before the first frame update
     void Start()
@@ -43,6 +51,64 @@ public class UI_Item : MonoBehaviour
 
     // Update is called once per frame
     void Update()
+    {
+
+
+        if (items.Count >= 3 && !isOne_Comp)
+        {
+           
+                Debug.Log("アイテムコンプリート");
+            
+            //アイテムがすべて集まった時
+            transform.DOScale(Vector3.one * 2, 0.6f).SetEase(Ease.OutElastic).OnComplete(() =>
+            {
+                transform.DOScale(Vector3.one, 0.3f).SetEase(Ease.OutElastic);
+            });
+            isOne_Comp = true;
+        }
+        else if (items.Count < 3)
+        {
+            //アイテムがすべて集まってないとき
+            //UI出す処理
+            PushUI();
+        }
+        ////UIの場所にアイテムを埋める処理
+        for (int i = 0; i < items.Count; i++)
+        {
+            if (items[i] && !isOne[i])
+            {
+                //アイテムi個目
+                isOne[i] = true;
+                GameObject gameObject = Instantiate(UI_itemEffedtPrefab);
+                gameObject.transform.parent = itemPostions[i].transform;
+                //gameObject.transform.position = itemPostions[i].transform.position;
+                gameObject.transform.localPosition = Vector3.zero;
+                DestoryObjs.Add(gameObject);
+            }
+        }
+
+
+
+
+
+    }
+
+    private void FixedUpdate()
+    {
+        if (items.Count >= 3 && isOne_Comp)
+        {
+          
+            for (int i = 0; i < items.Count; i++)
+            {                
+                DestoryObjs[i].GetComponent<SpriteRenderer>().color = Color.yellow;
+                angle += flowSpeed;
+                Vector3 frowPos = new Vector3(itemPostions[i].transform.position.x, itemPostions[i].transform.position.y + (MathF.Sin(angle+(i*45)) * lenge), itemPostions[i].transform.position.z);
+                itemPostions[i].transform.position = frowPos;
+            }
+        }
+    }
+
+    private void PushUI()
     {
         //UIを出す処理
         coolTime = Mathf.Clamp(coolTime, -1, 1);
@@ -77,30 +143,6 @@ public class UI_Item : MonoBehaviour
             }
 
         }
-
-
-
-
-
-        ////UIの場所にアイテムを埋める処理
-        for (int i = 0; i < items.Count; i++)
-        {
-            if (items[i] && !isOne[i])
-            {
-                //アイテムi個目
-                isOne[i] = true;
-                GameObject gameObject = Instantiate(UI_itemEffedtPrefab);
-                gameObject.transform.parent = itemPostions[i].transform;
-                //gameObject.transform.position = itemPostions[i].transform.position;
-                gameObject.transform.localPosition = Vector3.zero;
-                DestoryObjs.Add(gameObject);
-            }
-        }
-
-
-
-
-
     }
 
     public void Initialize()
@@ -112,6 +154,11 @@ public class UI_Item : MonoBehaviour
             //Destroy(DestoryObjs[i]);
             //DestoryObjs[i] = null;
         }
+        //UI
+        itemPostions[0].transform.localPosition = new Vector3(-1, 0, 0);
+        itemPostions[1].transform.localPosition = new Vector3(0, 0, 0);
+        itemPostions[2].transform.localPosition = new Vector3(1, 0, 0);
+
         // List内のすべてのUIを破壊する
         foreach (GameObject obj in DestoryObjs)
         {
@@ -124,7 +171,8 @@ public class UI_Item : MonoBehaviour
     {
         items.Add(true);
         coolTime = 1.2f;
-        isOne_ = false; 
+        isOne_ = false;
+        isOne_Comp = false;
         transform.DOScale(Vector3.one, 0.3f).SetEase(Ease.OutElastic);
     }
 

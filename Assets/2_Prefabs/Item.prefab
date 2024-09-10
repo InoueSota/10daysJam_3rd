@@ -51,6 +51,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 297f0c0357122624db098dd99ce17066, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ui_Item: {fileID: 0}
   lenge: 0.1
   flowSpeed: 0.03
   fakeItem: {fileID: 3919220111033676710}
@@ -134,7 +135,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 6
   m_Sprite: {fileID: 1627000453, guid: a3d15cb71c5cd3942a942af0950df720, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

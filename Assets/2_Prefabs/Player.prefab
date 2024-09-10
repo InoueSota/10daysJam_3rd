@@ -966,6 +966,9 @@ MonoBehaviour:
   coolTime: 0
   TypeEase_In: 12
   TypeEase_Out: 11
+  angle: 0
+  lenge: 0.003
+  flowSpeed: 0.03
 --- !u!1 &5553471078766101118
 GameObject:
   m_ObjectHideFlags: 0
