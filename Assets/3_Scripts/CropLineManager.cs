@@ -66,7 +66,7 @@ public class CropLineManager : MonoBehaviour
                 // XŽ²”»’è
                 float xCameraBetween = Mathf.Abs(transform.position.x - obj.transform.position.x);
                 coolTime = 0.01f;
-                coolTime -= Time.deltaTime;
+                coolTime -= 0.02f;
                 if (xCameraBetween < cameraHalfSizeX)
                 {
                     AllObjectManager hitAllObjectManager = obj.GetComponent<AllObjectManager>();
