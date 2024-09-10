@@ -210,6 +210,11 @@ public class GameManager : MonoBehaviour
                     obj.GetComponent<BombManager>().SetIsActive(true);
 
                     break;
+                case AllObjectManager.ObjectType.SPLIT:
+
+                    obj.GetComponent<SplitManager>().SetIsActive(true);
+
+                    break;
                 case AllObjectManager.ObjectType.ICICLE:
 
                     obj.GetComponent<IcicleManager>().SetIsActive(true);

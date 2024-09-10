@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: -6533700695049329269}
   - component: {fileID: 4090162405295387848}
   - component: {fileID: 6418907612831236415}
+  - component: {fileID: 39328762512260300}
+  - component: {fileID: 4141340049599338287}
   m_Layer: 0
   m_Name: GrassBlock
   m_TagString: Object
@@ -64,7 +66,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53dbc0eb174e00d47b7ebd27fef4954d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  soundEffect: {fileID: 2040439859697582755, guid: 06a3e390c1a9f98438066daf4b9a3087, type: 3}
+  coolTime: 0
   blockType: 1
 --- !u!212 &4090162405295387848
 SpriteRenderer:
@@ -132,6 +134,53 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   particle:
   - {fileID: 5100953819094702239, guid: b5846f8e917b2914680892ba3bbc0278, type: 3}
+--- !u!61 &39328762512260300
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 944074398774364433}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
+--- !u!50 &4141340049599338287
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 944074398774364433}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 7
 --- !u!1001 &1592838810141269407
 PrefabInstance:
   m_ObjectHideFlags: 0

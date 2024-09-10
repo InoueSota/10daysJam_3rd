@@ -53,48 +53,54 @@ public class CropLineManager : MonoBehaviour
         Destruction();
     }
 
-
-
     void Destruction()
     {
+        /* ブロックが壊れた音を一括ではなく、順番に鳴らすのに必要な処理
+            int i = 0;
+            coolTime = 0.04f;
+            i++;
+            if (obj.GetComponent<BlockManager>())
+            {
+                obj.GetComponent<BlockManager>().SetNum(i * 0.025867f);
+            }
+        */
+
         if (isTriggerSpecial && playerMoveManager.GetIsGround())
         {
             isCroping = true;
-            int i = 0;
+
             foreach (GameObject obj in GameObject.FindGameObjectsWithTag("Object"))
             {
-                // X軸判定
-                float xCameraBetween = Mathf.Abs(transform.position.x - obj.transform.position.x);
+                AllObjectManager hitAllObjectManager = obj.GetComponent<AllObjectManager>();
 
-
-                //coolTime = 0.04f;                
-                if (xCameraBetween < cameraHalfSizeX)
+                if (hitAllObjectManager.GetObjectType() != AllObjectManager.ObjectType.GROUND && hitAllObjectManager.GetIsActive())
                 {
-                    AllObjectManager hitAllObjectManager = obj.GetComponent<AllObjectManager>();
+                    // Y軸判定
+                    float yBetween = Mathf.Abs(transform.position.y - obj.transform.position.y);
 
-                    if (hitAllObjectManager.GetObjectType() != AllObjectManager.ObjectType.GROUND && hitAllObjectManager.GetIsActive())
+                    if (yBetween < 0.2f)
                     {
-
-                        // Y軸判定
-                        float yBetween = Mathf.Abs(transform.position.y - obj.transform.position.y);
-
-                        if (yBetween < 0.2f)
+                        // Crop時に当たるかどうか判定が入るオブジェクト
+                        if (hitAllObjectManager.GetIsJudgeObject())
                         {
-                            i++;
-                            //ブロック壊したら
+                            if (obj.GetComponent<SplitManager>() && obj.GetComponent<SplitManager>().GetCanHit())
+                            {
+                                // ブロック壊したら
+                                isBlockBreak = true;
+                                // ダメージを与える
+                                obj.GetComponent<SplitManager>().Damage();
+                                // Sounds
+                                cropsound.SoundCrop();
+                            }
+                        }
+                        else
+                        {
+                            // ブロック壊したら
                             isBlockBreak = true;
-                            //if (obj.GetComponent<BlockManager>())
-                            //{
-                            //Debug.Log(i);
-                            //    obj.GetComponent<BlockManager>().SetNum(i * 0.025867f);
-                            //}
+                            // ブロックの種類に応じて処理内容を変化させる
                             destructionManager.Destruction(obj);
-
-                            //sounds
+                            // Sounds
                             cropsound.SoundCrop();
-                            //GameObject brockSound= Instantiate(soundPrefab);
-
-
                         }
                     }
                 }
@@ -119,6 +125,6 @@ public class CropLineManager : MonoBehaviour
 
     public bool GetIsCropping()
     {
-        return isCroping ;
+        return isCroping;
     }
 }
