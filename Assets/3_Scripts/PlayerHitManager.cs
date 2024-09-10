@@ -30,12 +30,13 @@ public class PlayerHitManager : MonoBehaviour
     {
         if (collision.CompareTag("Object"))
         {
-            if (collision.GetComponent<AllObjectManager>().GetObjectType() == AllObjectManager.ObjectType.ITEM)
+            if (collision.GetComponent<AllObjectManager>().GetIsActive()&&collision.GetComponent<AllObjectManager>().GetObjectType() == AllObjectManager.ObjectType.ITEM)
             {
                 ItemManager hitItemManager = collision.GetComponent<ItemManager>();
-                
-                // アイテム非表示処理
+
+                // アイテム非表示処理(ゲットしたときの処理)
                 hitItemManager.SetIsActive(false);
+                
                 hitItemManager.SetIsGet();
             }
         }

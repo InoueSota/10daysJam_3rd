@@ -16,6 +16,9 @@ public class ItemManager : MonoBehaviour
     [SerializeField] float flowSpeed;
     //壊したときようオブジェクト
     public GameObject fakeItem;
+    //エフェクト
+    public GameObject GetEffect;
+
     void Start()
     {
         allObjectManager = GetComponent<AllObjectManager>();
@@ -73,6 +76,9 @@ public class ItemManager : MonoBehaviour
     }
     public void SetIsGet()
     {
+        //ゲットエフェクト出す
+        Debug.Log("アイテムゲットだっぜ！！！");
+        //GameObject geteffect = Instantiate(GetEffect);
         fakeItem.SetActive(false);
     }
     
