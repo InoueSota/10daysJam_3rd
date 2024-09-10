@@ -15,6 +15,8 @@ public class EffectScript : MonoBehaviour
     [SerializeField] float secondOut;
     [Header("オンにすると最後フェードアウトする")]
     [SerializeField] bool isFeed;
+    [Header("オンにするとオブジェクトを保持する")]
+    [SerializeField] bool isNotDestroy;
     // Start is called before the first frame update
     void Start()
     {
@@ -23,7 +25,10 @@ public class EffectScript : MonoBehaviour
         {
             transform.DOScale(easeOutScale, secondOut).SetEase(easeOut).OnComplete(() =>
             {
-                Destroy(gameObject);
+                if (!isNotDestroy)
+                {
+                    Destroy(gameObject);
+                }
             });
             if (isFeed)
             {

@@ -9,6 +9,7 @@ TagManager:
   - trans
   - effect
   - ParticleParent
+  - items
   layers:
   - Default
   - TransparentFX

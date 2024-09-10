@@ -35,8 +35,7 @@ public class PlayerHitManager : MonoBehaviour
                 ItemManager hitItemManager = collision.GetComponent<ItemManager>();
 
                 // アイテム非表示処理(ゲットしたときの処理)
-                hitItemManager.SetIsActive(false);
-                
+                hitItemManager.SetIsActive(false);                
                 hitItemManager.SetIsGet();
             }
         }

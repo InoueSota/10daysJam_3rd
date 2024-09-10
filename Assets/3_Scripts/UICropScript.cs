@@ -28,13 +28,18 @@ public class UICropScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        coolTime += Time.deltaTime;
+        coolTime = Mathf.Clamp(coolTime, -1, 1);
+
         if (moveManager.IsMoving())
         {
             //“®‚¢‚½‚ço‚³‚È‚¢
-            coolTime = 0;
+            coolTime -= Time.deltaTime;
         }
-        if (coolTime > 1.0f)
+        else
+        {
+            coolTime += Time.deltaTime;
+        }
+        if (coolTime > 0.5f)
         {
             //Ž~‚Ü‚Á‚Ä‚P•b—§‚Á‚½Žž
             //ˆê‰ñ‚¾‚¯’Ê‚·
@@ -63,7 +68,7 @@ public class UICropScript : MonoBehaviour
         //“®‚«‚Æ‚ß‚é
         DOTween.KillAll();
         isOne = false;
-        coolTime = 0;
+        coolTime = 1.2f;
         transform.localScale = Vector3.one;
     }
 }
