@@ -52,8 +52,10 @@ public class MenuManager : MonoBehaviour
     {
         gameManager = GetComponent<GameManager>();
         inputManager = GetComponent<InputManager>();
-        transition = GameObject.FindWithTag("trans").GetComponent<S_Transition>();
-
+        if (GameObject.FindWithTag("trans"))
+        {
+            transition = GameObject.FindWithTag("trans").GetComponent<S_Transition>();
+        }
         menuBackOriginColor = new(darkColor.r, darkColor.g, darkColor.b, 0f);
         menuBackTargetColor = menuBackOriginColor;
         menuBackImage.color = menuBackTargetColor;

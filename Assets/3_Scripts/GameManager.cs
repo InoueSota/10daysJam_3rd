@@ -39,8 +39,10 @@ public class GameManager : MonoBehaviour
         stageObjectManager.SetPlayerManager(playerManager);
         menuManager = GetComponent<MenuManager>();
         inputManager = GetComponent<InputManager>();
-        transition = GameObject.FindWithTag("trans").GetComponent<S_Transition>();
-
+        if (GameObject.FindWithTag("trans"))
+        {
+            transition = GameObject.FindWithTag("trans").GetComponent<S_Transition>();
+        }
         readyTimer = 3.25f;
 
         // –¼‘O‘ã“ü

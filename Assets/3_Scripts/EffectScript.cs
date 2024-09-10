@@ -13,7 +13,8 @@ public class EffectScript : MonoBehaviour
     [SerializeField] Vector3 easeOutScale;
     [SerializeField] float secondIn;
     [SerializeField] float secondOut;
-
+    [Header("オンにすると最後フェードアウトする")]
+    [SerializeField] bool isFeed;
     // Start is called before the first frame update
     void Start()
     {
@@ -24,6 +25,10 @@ public class EffectScript : MonoBehaviour
             {
                 Destroy(gameObject);
             });
+            if (isFeed)
+            {
+                transform.GetComponent<SpriteRenderer>().DOFade(endValue: 0, secondOut).SetEase(easeOut);
+            }
         });
     }
 
