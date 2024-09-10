@@ -51,8 +51,9 @@ public class PlayerAnimationManager : MonoBehaviour
             animator.SetBool("isJump", false);
         }
 
-        if(cropLineManager.isCroping == true)
+        if(cropLineManager.GetIsCropping() == true)
         {
+            Debug.Log("a");
             animator.SetTrigger("crop");
         }
 

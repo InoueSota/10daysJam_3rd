@@ -317,6 +317,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d32a714984cf1b1409911539ea119521, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cropLineManager: {fileID: 3856647538800460399}
   playerGraphic: {fileID: 6552557210357286604}
   walkParticleTimeMax: 0.05
 --- !u!114 &2426478090120762133
