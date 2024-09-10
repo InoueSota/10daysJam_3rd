@@ -64,4 +64,12 @@ public class AllObjectManager : MonoBehaviour
         }
         return true;
     }
+    public bool GetIsJudgeObject()
+    {
+        if (objectType == ObjectType.SPLIT)
+        {
+            return true;
+        }
+        return false;
+    }
 }
