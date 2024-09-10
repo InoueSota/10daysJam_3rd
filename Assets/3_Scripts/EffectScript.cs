@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class EffectScript : MonoBehaviour
 {
-    [SerializeField] SpriteRenderer effectSprite;
+    //[SerializeField] SpriteRenderer effectSprite;
     [SerializeField] Ease easeIn;
     [SerializeField] Ease easeOut;
     [SerializeField] Vector3 originScale;
@@ -17,6 +17,7 @@ public class EffectScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
         transform.DOScale(easeInScale, secondIn).SetEase(easeIn).OnComplete(() =>
         {
             transform.DOScale(easeOutScale, secondOut).SetEase(easeOut).OnComplete(() =>
@@ -29,8 +30,11 @@ public class EffectScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
+    }
+    public void Initialize()
+    {
+        Destroy(gameObject);
     }
 
-   
 }

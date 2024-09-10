@@ -17,7 +17,7 @@ public class ItemManager : MonoBehaviour
     //壊したときようオブジェクト
     public GameObject fakeItem;
     //エフェクト
-    public GameObject GetEffect;
+    [SerializeField] GameObject GetEffect;
 
     void Start()
     {
@@ -78,7 +78,8 @@ public class ItemManager : MonoBehaviour
     {
         //ゲットエフェクト出す
         Debug.Log("アイテムゲットだっぜ！！！");
-        //GameObject geteffect = Instantiate(GetEffect);
+        GameObject geteffect = Instantiate(GetEffect);
+        geteffect.transform.position = gameObject.transform.position;
         fakeItem.SetActive(false);
     }
     
