@@ -8,7 +8,7 @@ public class CropEffect : MonoBehaviour
     //Crop取得
     [SerializeField] GameObject Player;
     [SerializeField] CropLineManager lineManager;
-
+    private CropSound cropSound;
     //スプライト
     [SerializeField] GameObject Front;
     [SerializeField] GameObject Middle;
@@ -36,15 +36,17 @@ public class CropEffect : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Front.transform.localScale= new Vector3(1.5f, 0, 0);
+        Front.transform.localScale = new Vector3(1.5f, 0, 0);
         Middle.transform.localScale = new Vector3(1.5f, 0, 0);
         Back.transform.localScale = new Vector3(1.5f, 0, 0);
+        cropSound = GetComponent<CropSound>();
+
     }
 
     // Update is called once per frame
     void Update()
-    {       
-        
+    {
+
         CropBreak();
     }
 
@@ -59,9 +61,9 @@ public class CropEffect : MonoBehaviour
             isOne = true;
             Debug.Log("CropingNow");
             if (lineManager.isBlockBreak)
-            { 
+            {
                 //生成
-                GameObject front = Instantiate(Front);                
+                GameObject front = Instantiate(Front);
                 GameObject back = Instantiate(Back);
                 front.transform.position = new Vector3(Player.transform.position.x, lineManager.transform.position.y, front.transform.position.z);
                 back.transform.position = new Vector3(Player.transform.position.x, lineManager.transform.position.y, back.transform.position.z);
@@ -69,11 +71,12 @@ public class CropEffect : MonoBehaviour
 
                 Debug.Log("isBreakBrock");
                 //front
+                cropSound.SoundCrop();
                 front.transform.DOScale(frontEaseScale, frontEaseTime).SetEase(frontEase_In).OnComplete(() =>
                 {
                     Debug.Log("complate");
-                    front.transform.DOScale(new Vector3(1.3f,0,0), frontEaseOutTime).SetEase(frontEase_Out).OnComplete(() =>
-                    {                       
+                    front.transform.DOScale(new Vector3(1.3f, 0, 0), frontEaseOutTime).SetEase(frontEase_Out).OnComplete(() =>
+                    {
                         isOne = false;
                         Destroy(front);
                     });
@@ -92,6 +95,7 @@ public class CropEffect : MonoBehaviour
 
             }
             //middle
+            cropSound.SoundCropMiss();
             middle.transform.DOScale(middlEeaseScale, middleEaseTime).SetEase(middleEase_In).OnComplete(() =>
             {
                 middle.transform.DOScale(new Vector3(1.3f, 0, 0), middleEaseOutTime).SetEase(middleEase_Out).OnComplete(() =>
@@ -105,5 +109,5 @@ public class CropEffect : MonoBehaviour
         }
     }
 
-   
+
 }

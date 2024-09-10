@@ -4,29 +4,35 @@ using UnityEngine;
 
 public class CropLineManager : MonoBehaviour
 {
+    //soundeffectプレハブ
+    GameObject soundPrefab;
     // 自コンポーネント取得
     private DestructionManager destructionManager;
     private SpriteRenderer spriteRenderer;
     private InputManager inputManager;
     private bool isTriggerSpecial;
+    private CropSound cropsound;
+    
 
     // 他コンポーネント取得
     private PlayerMoveManager playerMoveManager;
-   // [SerializeField] private CropEffect cropEffect;
-
+    // [SerializeField] private CropEffect cropEffect;
     // カメラ関係
     private Transform cameraTransform;
     private float cameraHalfSizeX;
 
     public bool isCroping;
     public bool isBlockBreak;
+    float coolTime;
 
     void Start()
     {
+        cropsound = GetComponent<CropSound>();
         destructionManager = GetComponent<DestructionManager>();
         spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
         inputManager = GetComponent<InputManager>();
         playerMoveManager = transform.parent.GetComponent<PlayerMoveManager>();
+        coolTime = 0;
 
         // カメラ関係
         cameraTransform = GameObject.FindGameObjectWithTag("MainCamera").transform;
@@ -42,20 +48,25 @@ public class CropLineManager : MonoBehaviour
 
         transform.localPosition = new(0f, -1f, 0f);
         transform.position = new(cameraTransform.position.x, transform.position.y, transform.position.z);
+        coolTime -= Time.deltaTime;
 
         Destruction();
     }
+
+
 
     void Destruction()
     {
         if (isTriggerSpecial && playerMoveManager.GetIsGround())
         {
             isCroping = true;
+
             foreach (GameObject obj in GameObject.FindGameObjectsWithTag("Object"))
             {
                 // X軸判定
                 float xCameraBetween = Mathf.Abs(transform.position.x - obj.transform.position.x);
-
+                coolTime = 0.01f;
+                coolTime -= Time.deltaTime;
                 if (xCameraBetween < cameraHalfSizeX)
                 {
                     AllObjectManager hitAllObjectManager = obj.GetComponent<AllObjectManager>();
@@ -66,12 +77,14 @@ public class CropLineManager : MonoBehaviour
                         // Y軸判定
                         float yBetween = Mathf.Abs(transform.position.y - obj.transform.position.y);
 
-                        if (yBetween < 0.2f)
+                        if (yBetween < 0.2f&&coolTime<=0)
                         {
+                            Debug.Log("takusan");
                             //ブロック壊したら
                             isBlockBreak = true;
                             destructionManager.Destruction(obj);
-                            
+                            //sounds
+                            cropsound.SoundCrop();
                         }
                     }
                 }
