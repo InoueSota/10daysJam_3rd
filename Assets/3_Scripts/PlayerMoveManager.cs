@@ -219,10 +219,28 @@ public class PlayerMoveManager : MonoBehaviour
         // ジャンプ開始と初期化
         if (playerManager.GetCanJump() && !isCactus && !isJumping && !isHovering && !isGravity && isTriggerJump)
         {
-            acceleration = 0f;
-            canAcceleration = false;
-            jumpTarget = nextPosition.y + jumpDistance;
-            isJumping = true;
+            foreach (GameObject obj in GameObject.FindGameObjectsWithTag("Object"))
+            {
+                if (nextPosition.y > obj.transform.position.y)
+                {
+                    // X軸判定
+                    float xBetween = Mathf.Abs(nextPosition.x - obj.transform.position.x);
+                    float xDoubleSize = halfSize.x + 0.5f;
+
+                    // Y軸判定
+                    float yBetween = Mathf.Abs(nextPosition.y - obj.transform.position.y);
+                    float yDoubleSize = halfSize.y + 0.51f;
+
+                    if (obj.GetComponent<AllObjectManager>().GetIsActive() && obj.GetComponent<AllObjectManager>().GetIsHitObject())
+                    {
+                        acceleration = 0f;
+                        canAcceleration = false;
+                        jumpTarget = nextPosition.y + jumpDistance;
+                        isJumping = true;
+                        break;
+                    }
+                }
+            }
         }
 
         // ジャンプ処理
@@ -298,10 +316,10 @@ public class PlayerMoveManager : MonoBehaviour
                         float yBetween = Mathf.Abs(nextPosition.y - obj.transform.position.y);
                         float yDoubleSize = halfSize.y + 0.51f;
 
-                        // 衝突対象がサボテンだったら吹っ飛ぶようにする
-                        if (obj.GetComponent<AllObjectManager>().GetIsActive() && obj.GetComponent<AllObjectManager>().GetObjectType() == AllObjectManager.ObjectType.CACTUS)
+                        if (yBetween < yDoubleSize && xBetween < xDoubleSize)
                         {
-                            if (yBetween < yDoubleSize && xBetween < xDoubleSize)
+                            // 衝突対象がサボテンだったら吹っ飛ぶようにする
+                            if (obj.GetComponent<AllObjectManager>().GetIsActive() && obj.GetComponent<AllObjectManager>().GetObjectType() == AllObjectManager.ObjectType.CACTUS)
                             {
                                 cactusTarget = obj.transform.position;
                                 transform.position = nextPosition;
@@ -311,12 +329,7 @@ public class PlayerMoveManager : MonoBehaviour
                                 noBlock = false;
                                 break;
                             }
-                        }
-                        else if (obj.GetComponent<AllObjectManager>().GetIsActive() && obj.GetComponent<AllObjectManager>().GetIsHitObject())
-                        {
-                            xDoubleSize = halfSize.x + 0.25f;
-
-                            if (yBetween <= yDoubleSize && xBetween < xDoubleSize)
+                            else if (obj.GetComponent<AllObjectManager>().GetIsActive() && obj.GetComponent<AllObjectManager>().GetIsHitObject())
                             {
                                 noBlock = false;
                                 break;
@@ -531,7 +544,7 @@ public class PlayerMoveManager : MonoBehaviour
         }
         else
         {
-            float nowDistance =  Vector3.Distance(warpPosition, nextPosition);
+            float nowDistance = Vector3.Distance(warpPosition, nextPosition);
             float nextDistance = Vector3.Distance(_warpPosition, nextPosition);
 
             // 今のままの方が遠いなら新ワープ座標を取得する
