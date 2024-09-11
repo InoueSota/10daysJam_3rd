@@ -39,7 +39,6 @@ public class BlockManager : MonoBehaviour
         coolTime -= Time.deltaTime;
         if (coolTime <= 0 && !isOne && !allObjectManager.GetIsActive())
         {
-            Debug.Log("aaaa");
             //GameObject sound = Instantiate(soundEffect);
             isOne = true;
         }

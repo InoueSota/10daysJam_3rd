@@ -1,5 +1,6 @@
 using DG.Tweening;
 using UnityEngine;
+using static UnityEngine.ParticleSystem;
 
 public class CactusManager : MonoBehaviour
 {
@@ -7,12 +8,14 @@ public class CactusManager : MonoBehaviour
     private AllObjectManager allObjectManager;
     private SpriteRenderer spriteRenderer;
     private Animator animator;
+    private ParticleInstantiateScript particle;
 
     void Start()
     {
         allObjectManager = GetComponent<AllObjectManager>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
+        particle = GetComponent<ParticleInstantiateScript>();
     }
 
     // ‰Šú‰»ˆ—
@@ -26,6 +29,7 @@ public class CactusManager : MonoBehaviour
     // Á–Åˆ—
     void Disappear()
     {
+        particle.RunParticle(1);
         spriteRenderer.enabled = false;
         allObjectManager.SetIsActive(spriteRenderer.enabled);
     }
@@ -53,6 +57,7 @@ public class CactusManager : MonoBehaviour
     }
     public void SetHit()
     {
+        particle.RunParticle(0);
         animator.SetTrigger("hitTrigger");
     }
 }
