@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening.Core.Easing;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -9,6 +10,7 @@ public class PlayerAnimationManager : MonoBehaviour
     PlayerMoveManager player;
     Animator animator;
     [SerializeField] CropLineManager cropLineManager;
+    GameManager gameManager;
 
     [SerializeField] GameObject playerGraphic;
 
@@ -24,6 +26,7 @@ public class PlayerAnimationManager : MonoBehaviour
         player = GetComponent<PlayerMoveManager>();
         animator = GetComponent<Animator>();
         particle = GetComponent<ParticleInstantiateScript>();
+        gameManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
     }
 
     // Update is called once per frame
@@ -37,29 +40,55 @@ public class PlayerAnimationManager : MonoBehaviour
             playerGraphic.transform.localScale = scale;
         }
 
+        bool isWalk= player.IsMoving();
+        bool isJump = player.GetIsJump();
+        bool isHovering = player.GetIsHovering();
+        bool isGravity = player.GetIsGravity();
+        bool isCropping = cropLineManager.GetIsCropping();
+        bool isCactus = player.GetIsCactus();
+        bool isClear = gameManager.GetIsClear();
 
+        animator.SetBool("isWalk", isWalk);
 
-        animator.SetBool("isWalk", player.IsMoving());
-
-        if (player.GetIsJump() == true)
+        if (isJump == true)
         {
             animator.SetBool("isJump", true);
         }
 
-        if (player.GetIsJump() == false && player.GetIsHovering() == false && player.GetIsGravity() == false)
+        if (isJump == false )
         {
             animator.SetBool("isJump", false);
         }
 
-        if(cropLineManager.GetIsCropping() == true)
+        if (isHovering == true || isGravity == true)
         {
-            Debug.Log("a");
+            animator.SetBool("isFall", true);
+        }
+        else
+        {
+            animator.SetBool("isFall", false);
+        }
+
+        if(isCropping == true)
+        {
             animator.SetTrigger("crop");
         }
 
+        if(isCactus == true)
+        {
+            animator.SetBool("isDamage", true);
+        }
+        else
+        {
+            animator.SetBool("isDamage", false);
+        }
+
+        animator.SetBool("isClear", isClear);
+
+
 
         //particle
-        if (player.IsMoving() && player.GetIsJump() == false && player.GetIsHovering() == false && player.GetIsGravity() == false)
+        if (isWalk == true && isJump == false && isHovering == false && isGravity == false)
         {
             if (walkParticleTime < 0)
             {

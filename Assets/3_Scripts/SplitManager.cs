@@ -89,7 +89,10 @@ public class SplitManager : MonoBehaviour
     void Avoid()
     {
         avoidTimer -= Time.deltaTime;
-        if (avoidTimer <= 0f) { isAvoid = false; }
+        if (avoidTimer <= 0f || !isFreeOver)
+        {
+            isAvoid = false;
+        }
 
         // Target‚ÉŒü‚©‚Á‚Ä’Ç‚¢‘±‚¯‚é
         overTransform.position += (overTarget - overTransform.position) * (chasePower * Time.deltaTime);

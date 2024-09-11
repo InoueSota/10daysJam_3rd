@@ -263,4 +263,9 @@ public class GameManager : MonoBehaviour
             isTriggerCancel = true;
         }
     }
+    public bool GetIsClear()
+    {
+        return isClear;
+    }
+    
 }
