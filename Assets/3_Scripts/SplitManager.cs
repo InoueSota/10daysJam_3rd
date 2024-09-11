@@ -152,4 +152,9 @@ public class SplitManager : MonoBehaviour
         }
         return !isFreeOver;
     }
+
+    public bool GetAVoid()
+    {
+        return isAvoid;
+    }
 }
