@@ -162,6 +162,7 @@ MonoBehaviour:
   hangTime: 0.1
   gravityMax: 12
   addGravity: 25
+  cactusAmount: 16
 --- !u!114 &6061526980565390764
 MonoBehaviour:
   m_ObjectHideFlags: 0
