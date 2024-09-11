@@ -37,6 +37,7 @@ public class PlayerMoveManager : MonoBehaviour
 
     [Header("‘Ø‹ó")]
     [SerializeField] private float hangTime;
+    [SerializeField] private float hitHeadHangTime;
     private bool isHovering;
     private float hangTimer;
 
@@ -258,7 +259,7 @@ public class PlayerMoveManager : MonoBehaviour
                         if (nextPosition.y < obj.transform.position.y)
                         {
                             nextPosition.y = obj.transform.position.y - 0.5f - halfSize.y;
-                            hangTimer = hangTime;
+                            hangTimer = hitHeadHangTime;
                             isHovering = true;
                             isJumping = false;
                             break;
