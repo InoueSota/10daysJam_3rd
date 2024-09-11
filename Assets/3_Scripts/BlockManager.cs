@@ -1,8 +1,5 @@
 using DG.Tweening;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using static UnityEngine.ParticleSystem;
 
 public class BlockManager : MonoBehaviour
 {
@@ -23,6 +20,7 @@ public class BlockManager : MonoBehaviour
         NORMAL,
         GRASS,
         DRIPSTONE,
+        CACTUS,
         ICICLE
     }
     [SerializeField] private BlockType blockType = BlockType.NORMAL;

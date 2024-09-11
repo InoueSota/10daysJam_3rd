@@ -103,7 +103,6 @@ public class SplitManager : MonoBehaviour
         allObjectManager.SetIsActive(overSpriteRenderer.enabled);
         allObjectManager.Initialize();
 
-        //isFreeOver = true;
         angle = 0;
     }
 

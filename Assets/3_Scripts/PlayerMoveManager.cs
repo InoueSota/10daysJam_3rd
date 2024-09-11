@@ -1,13 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 
 public class PlayerMoveManager : MonoBehaviour
 {
     // 自コンポーネント取得
     private PlayerManager playerManager;
-
-    // 入力
     private InputManager inputManager;
     private bool isPushLeft;
     private bool isPushRight;
@@ -22,7 +19,6 @@ public class PlayerMoveManager : MonoBehaviour
     private Vector3 originPosition;
     private Vector3 nextPosition;
 
-    // 横移動
     [Header("横移動")]
     [SerializeField] private float maxSpeed;
     [SerializeField] private float maxAcceleration;
@@ -31,28 +27,29 @@ public class PlayerMoveManager : MonoBehaviour
     private float acceleration;
     private float accelerationTimer;
     private bool canAcceleration;
-
     private Vector3 moveDirection;
 
-    // ジャンプ
-    private bool isJumping;
     [Header("ジャンプ")]
     [SerializeField] private float jumpDistance;
     [SerializeField] private float jumpSpeed;
+    private bool isJumping;
     private float jumpTarget;
 
-    // 滞空
-    private bool isHovering;
     [Header("滞空")]
     [SerializeField] private float hangTime;
+    private bool isHovering;
     private float hangTimer;
 
-    // 重力
-    private bool isGravity;
     [Header("重力")]
     [SerializeField] private float gravityMax;
     [SerializeField] private float addGravity;
+    private bool isGravity;
     private float gravityPower;
+
+    [Header("サボテン吹っ飛び")]
+    private Vector3 cactusTarget;
+    private Vector3 cactusDirection;
+    private bool isCactus;
 
     void Start()
     {
@@ -64,6 +61,8 @@ public class PlayerMoveManager : MonoBehaviour
         cameraHalfSize.x = Camera.main.ScreenToWorldPoint(new(Screen.width, 0f, 0f)).x;
         cameraHalfSize.y = Camera.main.ScreenToWorldPoint(new(0f, Screen.height, 0f)).y;
         originPosition = transform.position;
+
+        isCactus = false;
     }
     public void Initialize()
     {
@@ -71,6 +70,8 @@ public class PlayerMoveManager : MonoBehaviour
         isJumping = false;
         isHovering = false;
         isGravity = false;
+        isCactus = false;
+        transform.DOKill();
     }
 
     void Update()
@@ -94,7 +95,7 @@ public class PlayerMoveManager : MonoBehaviour
 
     void CheckDirection()
     {
-        if (isPushLeft || isPushRight)
+        if (!isCactus && (isPushLeft || isPushRight))
         {
             moveSpeed = maxSpeed + acceleration;
 
@@ -149,28 +150,48 @@ public class PlayerMoveManager : MonoBehaviour
 
                 if (xCameraBetween < cameraHalfSize.x)
                 {
-                    if (obj.GetComponent<AllObjectManager>().GetIsActive() && obj.GetComponent<AllObjectManager>().GetIsHitObject())
+                    // X軸判定
+                    float xBetween = Mathf.Abs(nextPosition.x - obj.transform.position.x);
+                    float xDoubleSize = halfSize.x + 0.5f;
+
+                    // Y軸判定
+                    float yBetween = Mathf.Abs(nextPosition.y - obj.transform.position.y);
+                    float yDoubleSize = halfSize.y + 0.5f;
+
+                    // 衝突対象がサボテンだったら吹っ飛ぶようにする
+                    if (obj.GetComponent<AllObjectManager>().GetIsActive() && obj.GetComponent<AllObjectManager>().GetObjectType() == AllObjectManager.ObjectType.BLOCK && obj.GetComponent<BlockManager>().GetBlockType() == BlockManager.BlockType.CACTUS)
                     {
-                        // X軸判定
-                        float xBetween = Mathf.Abs(nextPosition.x - obj.transform.position.x);
-                        float xDoubleSize = halfSize.x + 0.5f;
-
-                        // Y軸判定
-                        float yBetween = Mathf.Abs(nextPosition.y - obj.transform.position.y);
-                        float yDoubleSize;
-
-                        if (isJumping)
+                        if (yBetween < yDoubleSize && xBetween < xDoubleSize)
                         {
-                            yDoubleSize = halfSize.y + 0.5f;
+                            if (nextPosition.x > obj.transform.position.x)
+                            {
+                                nextPosition.x = obj.transform.position.x + 0.5f + halfSize.x;
+                                cactusDirection = Vector3.right;
+                            }
+                            else
+                            {
+                                nextPosition.x = obj.transform.position.x - 0.5f - halfSize.x;
+                                cactusDirection = Vector3.left;
+                            }
+
+                            cactusTarget = obj.transform.position;
+                            transform.position = nextPosition;
+                            nextPosition.y = cactusTarget.y;
+
+                            CactusInitialize();
+                            break;
                         }
-                        else
+                    }
+                    else if (obj.GetComponent<AllObjectManager>().GetIsActive() && obj.GetComponent<AllObjectManager>().GetIsHitObject())
+                    {
+                        if (!isJumping)
                         {
                             yDoubleSize = halfSize.y + 0.15f;
                         }
 
                         if (yBetween < yDoubleSize && xBetween < xDoubleSize)
                         {
-                            if (obj.transform.position.x < nextPosition.x)
+                            if (nextPosition.x > obj.transform.position.x)
                             {
                                 nextPosition.x = obj.transform.position.x + 0.5f + halfSize.x;
                                 break;
@@ -189,7 +210,7 @@ public class PlayerMoveManager : MonoBehaviour
     void Jump()
     {
         // ジャンプ開始と初期化
-        if (playerManager.GetCanJump() && !isJumping && !isHovering && !isGravity && isTriggerJump)
+        if (playerManager.GetCanJump() && !isCactus && !isJumping && !isHovering && !isGravity && isTriggerJump)
         {
             acceleration = 0f;
             canAcceleration = false;
@@ -259,7 +280,7 @@ public class PlayerMoveManager : MonoBehaviour
     {
         if (!isGravity)
         {
-            if (!isJumping && !isHovering)
+            if (!isCactus && !isJumping && !isHovering)
             {
                 // ブロックとの衝突判定
                 bool noBlock = true;
@@ -267,27 +288,37 @@ public class PlayerMoveManager : MonoBehaviour
                 foreach (GameObject obj in GameObject.FindGameObjectsWithTag("Object"))
                 {
                     // X軸判定
-                    float xCameraBetween = Mathf.Abs(nextPosition.x - obj.transform.position.x);
+                    float xBetween = Mathf.Abs(nextPosition.x - obj.transform.position.x);
+                    float xDoubleSize = halfSize.x + 0.25f;
 
-                    if (xCameraBetween < cameraHalfSize.x)
+                    // Y軸判定
+                    float yBetween = Mathf.Abs(nextPosition.y - obj.transform.position.y);
+                    float yDoubleSize = halfSize.y + 0.51f;
+
+                    // 衝突対象がサボテンだったら吹っ飛ぶようにする
+                    if (obj.GetComponent<AllObjectManager>().GetIsActive() && obj.GetComponent<AllObjectManager>().GetObjectType() == AllObjectManager.ObjectType.BLOCK && obj.GetComponent<BlockManager>().GetBlockType() == BlockManager.BlockType.CACTUS)
                     {
-                        if (obj.GetComponent<AllObjectManager>().GetIsActive() && obj.GetComponent<AllObjectManager>().GetIsHitObject())
+                        if (yBetween < yDoubleSize && xBetween < xDoubleSize)
                         {
-                            // X軸判定
-                            float xBetween = Mathf.Abs(nextPosition.x - obj.transform.position.x);
-                            float xDoubleSize = halfSize.x + 0.25f;
+                            cactusTarget = obj.transform.position;
+                            transform.position = nextPosition;
+                            nextPosition.x = cactusTarget.x;
+                            cactusDirection = Vector3.up;
+                            CactusInitialize();
+                            noBlock = false;
+                            break;
+                        }
+                    }
+                    else if (obj.GetComponent<AllObjectManager>().GetIsActive() && obj.GetComponent<AllObjectManager>().GetIsHitObject())
+                    {
+                        xDoubleSize = halfSize.x + 0.25f;
 
-                            // Y軸判定
-                            float yBetween = Mathf.Abs(nextPosition.y - obj.transform.position.y);
-                            float yDoubleSize = halfSize.y + 0.5f;
-
-                            if (yBetween <= yDoubleSize && xBetween < xDoubleSize)
+                        if (yBetween <= yDoubleSize && xBetween < xDoubleSize)
+                        {
+                            if (nextPosition.y > obj.transform.position.y)
                             {
-                                if (nextPosition.y > obj.transform.position.y)
-                                {
-                                    noBlock = false;
-                                    break;
-                                }
+                                noBlock = false;
+                                break;
                             }
                         }
                     }
@@ -340,6 +371,102 @@ public class PlayerMoveManager : MonoBehaviour
                 }
             }
         }
+    }
+    void CactusInitialize()
+    {
+        while (!isCactus)
+        {
+            // ブロックがなかったら次に進める
+            cactusTarget += cactusDirection;
+
+            // 吹っ飛びの終着点等を取得する
+            foreach (GameObject obj in GameObject.FindGameObjectsWithTag("Object"))
+            {
+                // X軸判定
+                float xBetween = Mathf.Abs(cactusTarget.x - obj.transform.position.x);
+                float xDoubleSize = halfSize.x + 0.25f;
+
+                // Y軸判定
+                float yBetween = Mathf.Abs(cactusTarget.y - obj.transform.position.y);
+                float yDoubleSize = halfSize.y + 0.25f;
+
+                if (yBetween < yDoubleSize && xBetween < xDoubleSize)
+                {
+                    // ブロックがあったら１つ手前で止める
+                    if (obj.GetComponent<AllObjectManager>().GetIsActive() && obj.GetComponent<AllObjectManager>().GetIsHitObject())
+                    {
+                        cactusTarget = obj.transform.position;
+                        cactusTarget -= cactusDirection;
+                        isCactus = true;
+                        break;
+                    }
+
+                }
+            }
+
+            // もし画面内にオブジェクトがないのなら画面端で止める
+
+            // 左端を超えたか
+            float thisLeftX = cactusTarget.x - halfSize.x;
+            if (thisLeftX < -cameraHalfSize.x)
+            {
+                cactusTarget.x = -cameraHalfSize.x + halfSize.x;
+                isCactus = true;
+                break;
+            }
+
+            // 右端を超えたか
+            float thisRightX = cactusTarget.x + halfSize.x;
+            if (thisRightX > cameraHalfSize.x)
+            {
+                cactusTarget.x = cameraHalfSize.x - halfSize.x;
+                isCactus = true;
+                break;
+            }
+
+            // 上端を超えたか
+            float thisTopY = cactusTarget.y - halfSize.y;
+            if (thisTopY > cameraHalfSize.y)
+            {
+                cactusTarget.y = cameraHalfSize.y - halfSize.y;
+                isCactus = true;
+                break;
+            }
+
+            // 下端を超えたか
+            float thisBottomY = cactusTarget.y + halfSize.y;
+            if (thisBottomY < -cameraHalfSize.y)
+            {
+                cactusTarget.y = -cameraHalfSize.y + halfSize.y;
+                isCactus = true;
+                break;
+            }
+        }
+
+        // １マス隙間の場合は吹っ飛ばないようにする
+        if (Vector3.Distance(transform.position, cactusTarget) < 1.5f)
+        {
+            nextPosition = transform.position;
+            isCactus = false;
+        }
+        else
+        {
+            transform.position = nextPosition;
+
+            // 吹っ飛び開始
+            transform.DOMove(cactusTarget, 0.5f).SetEase(Ease.OutSine).OnComplete(FinishCactus);
+
+            // 吹っ飛び以外のフラグ類を初期化する
+            acceleration = 0f;
+            canAcceleration = false;
+            isJumping = false;
+            isHovering = false;
+            isGravity = false;
+        }
+    }
+    void FinishCactus()
+    {
+        isCactus = false;
     }
     void ClampInCamera()
     {
