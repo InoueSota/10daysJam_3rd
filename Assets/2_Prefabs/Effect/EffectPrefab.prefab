@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8622986655682554495}
   m_Layer: 0
   m_Name: effect2
-  m_TagString: Untagged
+  m_TagString: effect
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -53,6 +53,7 @@ MonoBehaviour:
   secondIn: 0.5
   secondOut: 0.2
   isFeed: 1
+  isNotDestroy: 0
 --- !u!212 &8622986655682554495
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -118,7 +119,7 @@ GameObject:
   - component: {fileID: 8905073801205748375}
   m_Layer: 0
   m_Name: effect1
-  m_TagString: Untagged
+  m_TagString: effect
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -158,6 +159,7 @@ MonoBehaviour:
   secondIn: 0.5
   secondOut: 0.2
   isFeed: 1
+  isNotDestroy: 0
 --- !u!212 &8905073801205748375
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -264,3 +266,4 @@ MonoBehaviour:
   secondIn: 3
   secondOut: 3
   isFeed: 0
+  isNotDestroy: 0

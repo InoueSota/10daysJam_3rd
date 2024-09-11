@@ -156,23 +156,11 @@ public class SelectManager : MonoBehaviour
             {
                 // 現在のステージ数を参照し、チャプターを取得する
                 // 「墓地」を選択
-                if (stageNumber >= chapterSection[4])
+                if (stageNumber >= chapterSection[3])
                 {
                     if (isPushUp)
                     {
                         stageNumber = stageMax - 1;
-                    }
-                    else if (isPushDown)
-                    {
-                        stageNumber = chapterSection[3];
-                    }
-                }
-                // 「雪原」を選択
-                else if (stageNumber >= chapterSection[3])
-                {
-                    if (isPushUp)
-                    {
-                        stageNumber = chapterSection[4];
                     }
                     else if (isPushDown)
                     {

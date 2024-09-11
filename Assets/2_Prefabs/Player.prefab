@@ -160,6 +160,7 @@ MonoBehaviour:
   jumpDistance: 2
   jumpSpeed: 10
   hangTime: 0.1
+  hitHeadHangTime: 0.3
   gravityMax: 12
   addGravity: 25
   cactusAmount: 16
