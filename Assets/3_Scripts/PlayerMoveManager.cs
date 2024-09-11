@@ -509,6 +509,15 @@ public class PlayerMoveManager : MonoBehaviour
         {
             nextPosition.x = cameraHalfSize.x - halfSize.x;
         }
+
+        // ã’[‚ð’´‚¦‚½‚©
+        if (nextPosition.y > cameraHalfSize.y)
+        {
+            nextPosition.y = cameraHalfSize.y;
+            hangTimer = hangTime;
+            isHovering = true;
+            isJumping = false;
+        }
     }
 
     // Setter
