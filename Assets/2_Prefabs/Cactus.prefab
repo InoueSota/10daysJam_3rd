@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 3692736172607947239}
   - component: {fileID: -8147883860844292163}
   - component: {fileID: 6575792078305803172}
+  - component: {fileID: 4298572276624030351}
   m_Layer: 0
   m_Name: Cactus
   m_TagString: Object
@@ -184,3 +185,18 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &4298572276624030351
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 944074398774364433}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c79cc946b1831fb4685b411f7b365011, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  particle:
+  - {fileID: 3417802387633627870, guid: 09ff9f61aebec8f4ba6def6e7f9e42c2, type: 3}
+  - {fileID: 5100953819094702239, guid: 2529088f14bee4b4d99278c852beae8e, type: 3}
