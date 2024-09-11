@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class StageGateManager : MonoBehaviour
@@ -9,7 +7,6 @@ public class StageGateManager : MonoBehaviour
         GRASSLAND,
         CAVE,
         DESERT,
-        SNOWFIELD,
         CEMETERY
     }
     [Header("該当チャプター")]

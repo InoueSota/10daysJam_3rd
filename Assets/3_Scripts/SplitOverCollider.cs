@@ -29,7 +29,7 @@ public class SplitOverCollider : MonoBehaviour
             {
                 splitManager.SetIsFreeOver(false);
             }
-            else if (!allObjectManager.GetIsActive())
+            else if (allObjectManager.GetObjectType() != AllObjectManager.ObjectType.ITEM && !allObjectManager.GetIsActive())
             {
                 splitManager.SetIsFreeOver(true);
             }
