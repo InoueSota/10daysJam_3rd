@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.ParticleSystem;
 
 public class DripStoneManager : MonoBehaviour
 {
     // 自コンポーネント取得
     private AllObjectManager allObjectManager;
     private SpriteRenderer spriteRenderer;
+    private ParticleInstantiateScript particle;
 
     // 他コンポーネント取得
     private StageObjectManager stageObjectManager;
@@ -33,6 +35,7 @@ public class DripStoneManager : MonoBehaviour
     {
         allObjectManager = GetComponent<AllObjectManager>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        particle = GetComponent<ParticleInstantiateScript>();
         parentTransform = transform.parent.transform;
         halfSize.x = transform.localScale.x * 0.5f;
         halfSize.y = transform.localScale.y * 0.5f;
@@ -160,6 +163,7 @@ public class DripStoneManager : MonoBehaviour
     {
         spriteRenderer.enabled = false;
         allObjectManager.SetIsActive(spriteRenderer.enabled);
+        particle.RunParticle(0);
         isFallActive = false;
     }
 

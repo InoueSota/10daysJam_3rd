@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 3737310926126959941}
   - component: {fileID: 6565524770530356004}
   - component: {fileID: 3993581577753171819}
+  - component: {fileID: 5761338532869794683}
   m_Layer: 0
   m_Name: SplitBlock
   m_TagString: Object
@@ -137,6 +138,20 @@ MonoBehaviour:
   - {fileID: -249983807, guid: a2c6e698fa040504ca17f9a3fb8e0e4d, type: 3}
   - {fileID: -1747641430, guid: a2c6e698fa040504ca17f9a3fb8e0e4d, type: 3}
   overRenderer: {fileID: 7052635621928731824}
+--- !u!114 &5761338532869794683
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 944074398774364433}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c79cc946b1831fb4685b411f7b365011, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  particle:
+  - {fileID: 5100953819094702239, guid: 123ec0dcc9a7e454fa52ce6296a9d0eb, type: 3}
 --- !u!1 &3033372803076210823
 GameObject:
   m_ObjectHideFlags: 0

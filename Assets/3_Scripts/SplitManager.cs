@@ -1,9 +1,11 @@
 using UnityEngine;
+using static UnityEngine.ParticleSystem;
 
 public class SplitManager : MonoBehaviour
 {
     // 自コンポーネント取得
     private AllObjectManager allObjectManager;
+    private ParticleInstantiateScript particle;
 
     [Header("子オブジェクト取得")]
     [SerializeField] private GameObject overObj;
@@ -36,6 +38,7 @@ public class SplitManager : MonoBehaviour
     void Start()
     {
         allObjectManager = GetComponent<AllObjectManager>();
+        particle = GetComponent<ParticleInstantiateScript>();
 
         // 子オブジェクト初期化
         overSpriteRenderer = overObj.GetComponent<SpriteRenderer>();
@@ -115,6 +118,7 @@ public class SplitManager : MonoBehaviour
         overSpriteRenderer.enabled = false;
         underSpriteRenderer.enabled = false;
         allObjectManager.SetIsActive(false);
+        particle.RunParticle(0);
     }
 
     // Setter
