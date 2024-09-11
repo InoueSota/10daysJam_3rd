@@ -53,14 +53,14 @@ Material:
     - _EnableExternalAlpha: 0
     - _HideDistance: 0.5
     - _HideOffset: -0.7
-    - _MaxCircleSize: 1
+    - _MaxCircleSize: 90
     - _MoveDirection: 0
-    - _MoveSpeed: 1
-    - _Rotation: -0.2
-    - _Roughness: 5
+    - _MoveSpeed: 0.5
+    - _Rotation: -2.62
+    - _Roughness: 7
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _Flip: {r: 1, g: 1, b: 1, a: 1}
-    - _MoveDirection: {r: -1, g: 0, b: 0, a: 0}
+    - _MoveDirection: {r: 1, g: 1, b: 0, a: 0}
     - _RendererColor: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []
