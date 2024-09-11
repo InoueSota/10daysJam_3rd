@@ -67,6 +67,11 @@ public class DestructionManager : MonoBehaviour
                 _obj.GetComponent<IcicleManager>().Damage();
 
                 break;
+            case AllObjectManager.ObjectType.DEATHWARP:
+
+                _obj.GetComponent<DeathWarpManager>().Damage();
+
+                break;
         }
     }
 }
