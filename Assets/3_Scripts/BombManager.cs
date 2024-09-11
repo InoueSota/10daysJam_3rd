@@ -2,6 +2,7 @@ using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.ParticleSystem;
 
 public class BombManager : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class BombManager : MonoBehaviour
     private AllObjectManager allObjectManager;
     private DestructionManager destructionManager;
     private SpriteRenderer spriteRenderer;
+    private ParticleInstantiateScript particle;
 
     // äÓñ{èÓïÒ
     private Vector3 originScale;
@@ -22,6 +24,7 @@ public class BombManager : MonoBehaviour
         allObjectManager = GetComponent<AllObjectManager>();
         destructionManager = GetComponent<DestructionManager>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        particle = GetComponent<ParticleInstantiateScript>();
 
         originScale = transform.localScale;
         originRotate = transform.localRotation;
@@ -66,6 +69,7 @@ public class BombManager : MonoBehaviour
     {
         spriteRenderer.enabled = false;
         allObjectManager.SetIsActive(spriteRenderer.enabled);
+        particle.RunParticle(0);
     }
 
     // Setter
