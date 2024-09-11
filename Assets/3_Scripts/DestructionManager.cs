@@ -52,6 +52,11 @@ public class DestructionManager : MonoBehaviour
                 _obj.GetComponent<BombManager>().Damage();
 
                 break;
+            case AllObjectManager.ObjectType.SPLIT:
+
+                _obj.GetComponent<SplitManager>().Damage();
+
+                break;
             case AllObjectManager.ObjectType.ICICLE:
 
                 _obj.GetComponent<IcicleManager>().Damage();

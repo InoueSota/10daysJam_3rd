@@ -27,6 +27,12 @@ public class SplitManager : MonoBehaviour
     [SerializeField] private float range;
     private float angle;
 
+    [Header("”ð‚¯")]
+    [SerializeField] private float avoidHeight;
+    [SerializeField] private float avoidTime;
+    private float avoidTimer;
+    private bool isAvoid;
+
     void Start()
     {
         allObjectManager = GetComponent<AllObjectManager>();
@@ -50,7 +56,14 @@ public class SplitManager : MonoBehaviour
 
     void Update()
     {
-        NoticeFreeOver();
+        if (!isAvoid)
+        {
+            NoticeFreeOver();
+        }
+        else
+        {
+            Avoid();
+        }
     }
     void NoticeFreeOver()
     {
@@ -73,6 +86,14 @@ public class SplitManager : MonoBehaviour
         // Target‚ÉŒü‚©‚Á‚Ä’Ç‚¢‘±‚¯‚é
         overTransform.position += (overTarget - overTransform.position) * (chasePower * Time.deltaTime);
     }
+    void Avoid()
+    {
+        avoidTimer -= Time.deltaTime;
+        if (avoidTimer <= 0f) { isAvoid = false; }
+
+        // Target‚ÉŒü‚©‚Á‚Ä’Ç‚¢‘±‚¯‚é
+        overTransform.position += (overTarget - overTransform.position) * (chasePower * Time.deltaTime);
+    }
 
     // ‰Šú‰»ˆ—
     void Initialize()
@@ -82,7 +103,7 @@ public class SplitManager : MonoBehaviour
         allObjectManager.SetIsActive(overSpriteRenderer.enabled);
         allObjectManager.Initialize();
 
-        isFreeOver = true;
+        //isFreeOver = true;
         angle = 0;
     }
 
@@ -123,6 +144,13 @@ public class SplitManager : MonoBehaviour
     // Getter
     public bool GetCanHit()
     {
+        // true‚È‚ç”ð‚¯ƒtƒ‰ƒO‚ðtrue‚É‚·‚é
+        if (isFreeOver)
+        {
+            overTarget.y = overOrigin.y + avoidHeight;
+            avoidTimer = avoidTime;
+            isAvoid = true;
+        }
         return !isFreeOver;
     }
 }
