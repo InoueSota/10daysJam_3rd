@@ -9,6 +9,7 @@ public class S_Transition : MonoBehaviour
     GameObject player;
     // オブジェクト
     [SerializeField] GameObject transObj;
+    [SerializeField] GameObject back_transObj;
 
     public Camera secondaryCamera;
     // どこから始まるかポジション
@@ -136,18 +137,24 @@ public class S_Transition : MonoBehaviour
     {
         isTransNow = true;
         transObj.transform.position = SPos_In;
+        back_transObj.transform.position = SPos_In;
         //player = null;
+        back_transObj.transform.DOScale(SScale_In, easeInTime).SetEase(easeIn);
         transObj.transform.DOScale(SScale_In, easeInTime).SetEase(easeIn).OnComplete(() =>
         {
             //ここで画面切り替わる処理(画面遷移で画面が見えてない場所)
             SceneManager.LoadScene(NextSceneName);
             transObj.transform.position = EPos_Out;
+            back_transObj.transform.position = EPos_Out;
+            back_transObj.transform.DOScale(EScale_Out, easeOutTime).SetEase(easeOut);
             transObj.transform.DOScale(EScale_Out, easeOutTime).SetEase(easeOut).OnComplete(() =>
             {
                 //画面遷移が閉じる
                 isTransNow = false;
             });
         });
+
+
 
 
 
