@@ -568,4 +568,9 @@ public class PlayerMoveManager : MonoBehaviour
     {
         return isGravity;
     }
+
+    public bool GetIsCactus()
+    {
+        return isCactus;
+    }
 }

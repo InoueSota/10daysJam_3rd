@@ -6,11 +6,13 @@ public class CactusManager : MonoBehaviour
     // 自コンポーネント取得
     private AllObjectManager allObjectManager;
     private SpriteRenderer spriteRenderer;
+    private Animator animator;
 
     void Start()
     {
         allObjectManager = GetComponent<AllObjectManager>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        animator = GetComponent<Animator>();
     }
 
     // 初期化処理
@@ -51,6 +53,6 @@ public class CactusManager : MonoBehaviour
     }
     public void SetHit()
     {
-
+        animator.SetTrigger("hitTrigger");
     }
 }
