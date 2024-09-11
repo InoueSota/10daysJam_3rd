@@ -10,14 +10,14 @@ GameObject:
   m_Component:
   - component: {fileID: 6315310427582662377}
   - component: {fileID: -7867750131249883206}
-  - component: {fileID: -1374804616269790047}
+  - component: {fileID: -6533700695049329269}
   - component: {fileID: 4090162405295387848}
-  - component: {fileID: 9151859130799265340}
-  - component: {fileID: -203848690982426957}
-  - component: {fileID: 4699177220854351073}
-  - component: {fileID: 6132982011328413387}
+  - component: {fileID: 7580088826209994790}
+  - component: {fileID: -2604091165410480035}
+  - component: {fileID: -5839198326882445709}
+  - component: {fileID: -5466002990322877993}
   m_Layer: 0
-  m_Name: Bomb
+  m_Name: HardBlockDesert 1
   m_TagString: Object
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -51,9 +51,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isActive: 1
-  objectType: 5
-  hp: 1
---- !u!114 &-1374804616269790047
+  objectType: 1
+  hp: 2
+--- !u!114 &-6533700695049329269
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -62,10 +62,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 944074398774364433}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 38d3625e5f57a144181ba7b5a7e2ed26, type: 3}
+  m_Script: {fileID: 11500000, guid: 53dbc0eb174e00d47b7ebd27fef4954d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  explosionRange: 1.1
+  coolTime: 0
+  blockType: 0
 --- !u!212 &4090162405295387848
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -107,7 +108,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 610bd806f01039d4d9a16e78f86112e6, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 893f1ef190b290d49aeb2ca4b1accbb7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -118,7 +119,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &9151859130799265340
+--- !u!114 &7580088826209994790
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -127,10 +128,28 @@ MonoBehaviour:
   m_GameObject: {fileID: 944074398774364433}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 85113d115efa35445bca9a26b4cf150f, type: 3}
+  m_Script: {fileID: 11500000, guid: bf9364c36b3afeb45a0603a09b3c8c03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!61 &-203848690982426957
+  hardBlockSprites:
+  - {fileID: 21300000, guid: 0dca9e7aa1a571e4faf3ce67e3c44166, type: 3}
+  - {fileID: 21300000, guid: 893f1ef190b290d49aeb2ca4b1accbb7, type: 3}
+--- !u!114 &-2604091165410480035
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 944074398774364433}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c79cc946b1831fb4685b411f7b365011, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  particle:
+  - {fileID: 5100953819094702239, guid: c4c4ead34503c744bb610d2513066290, type: 3}
+  - {fileID: 5100953819094702239, guid: ff08378512dec4f419f42d1280b136bb, type: 3}
+--- !u!61 &-5839198326882445709
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -156,7 +175,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!50 &4699177220854351073
+--- !u!50 &-5466002990322877993
 Rigidbody2D:
   serializedVersion: 4
   m_ObjectHideFlags: 0
@@ -177,17 +196,3 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 7
---- !u!114 &6132982011328413387
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 944074398774364433}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c79cc946b1831fb4685b411f7b365011, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  particle:
-  - {fileID: 5100953819094702239, guid: 02be5a8a0b280a0469c04b594f2a5bf5, type: 3}
