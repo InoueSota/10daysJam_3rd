@@ -16,7 +16,8 @@ public class AllObjectManager : MonoBehaviour
         BOMB,
         SPLIT,
         CACTUS,
-        ICICLE
+        ICICLE,
+        DEATHWARP
     }
     [SerializeField] private ObjectType objectType;
 
@@ -59,7 +60,8 @@ public class AllObjectManager : MonoBehaviour
     public bool GetIsHitObject()
     {
         if (objectType == ObjectType.ITEM ||
-            objectType == ObjectType.GRASSPARENT)
+            objectType == ObjectType.GRASSPARENT ||
+            objectType == ObjectType.DEATHWARP)
         {
             return false;
         }

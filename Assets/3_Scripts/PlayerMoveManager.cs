@@ -53,6 +53,10 @@ public class PlayerMoveManager : MonoBehaviour
     [Header("１秒で吹っ飛ぶマス数")]
     [SerializeField] private float cactusAmount;
 
+    // DeathWarp関係
+    private bool isWarp;
+    private Vector3 warpPosition;
+
     void Start()
     {
         playerManager = GetComponent<PlayerManager>();
@@ -65,6 +69,9 @@ public class PlayerMoveManager : MonoBehaviour
         originPosition = transform.position;
 
         isCactus = false;
+
+        isWarp = false;
+        warpPosition = Vector3.zero;
     }
     public void Initialize()
     {
@@ -80,6 +87,9 @@ public class PlayerMoveManager : MonoBehaviour
     {
         if (playerManager.GetIsActive())
         {
+            // 最初にワープする
+            Warp();
+
             GetInput();
 
             nextPosition = transform.position;
@@ -475,6 +485,15 @@ public class PlayerMoveManager : MonoBehaviour
         isGravity = true;
         isCactus = false;
     }
+    void Warp()
+    {
+        if (isWarp)
+        {
+            transform.position = warpPosition;
+            warpPosition = Vector3.zero;
+            isWarp = false;
+        }
+    }
     void ClampInCamera()
     {
         // 左端を超えたか
@@ -492,6 +511,28 @@ public class PlayerMoveManager : MonoBehaviour
         }
     }
 
+    // Setter
+    public void SetDeathWarp(Vector3 _warpPosition)
+    {
+        if (warpPosition == Vector3.zero)
+        {
+            warpPosition = _warpPosition;
+            isWarp = true;
+        }
+        else
+        {
+            float nowDistance =  Vector3.Distance(warpPosition, nextPosition);
+            float nextDistance = Vector3.Distance(_warpPosition, nextPosition);
+
+            // 今のままの方が遠いなら新ワープ座標を取得する
+            if (nowDistance > nextDistance)
+            {
+                warpPosition = _warpPosition;
+            }
+        }
+    }
+
+    // Getter
     void GetInput()
     {
         isPushLeft = false;

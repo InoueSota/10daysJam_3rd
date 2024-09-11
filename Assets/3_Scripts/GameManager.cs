@@ -225,6 +225,11 @@ public class GameManager : MonoBehaviour
                     obj.GetComponent<IcicleManager>().SetIsActive(true);
 
                     break;
+                case AllObjectManager.ObjectType.DEATHWARP:
+
+                    obj.GetComponent<DeathWarpManager>().SetIsActive(true);
+
+                    break;
             }
         }
 
