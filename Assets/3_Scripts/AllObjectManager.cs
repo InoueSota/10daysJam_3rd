@@ -15,6 +15,7 @@ public class AllObjectManager : MonoBehaviour
         DRIPSTONE,
         BOMB,
         SPLIT,
+        CACTUS,
         ICICLE
     }
     [SerializeField] private ObjectType objectType;

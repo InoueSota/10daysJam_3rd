@@ -215,6 +215,11 @@ public class GameManager : MonoBehaviour
                     obj.GetComponent<SplitManager>().SetIsActive(true);
 
                     break;
+                case AllObjectManager.ObjectType.CACTUS:
+
+                    obj.GetComponent<CactusManager>().SetIsActive(true);
+
+                    break;
                 case AllObjectManager.ObjectType.ICICLE:
 
                     obj.GetComponent<IcicleManager>().SetIsActive(true);

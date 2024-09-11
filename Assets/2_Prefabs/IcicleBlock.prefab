@@ -65,7 +65,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coolTime: 0
-  blockType: 4
+  blockType: 3
 --- !u!212 &4090162405295387848
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -215,7 +215,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isActive: 1
-  objectType: 7
+  objectType: 8
   hp: 1
 --- !u!212 &4677550183919489173
 SpriteRenderer:

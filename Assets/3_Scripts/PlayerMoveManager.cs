@@ -159,7 +159,7 @@ public class PlayerMoveManager : MonoBehaviour
                     float yDoubleSize = halfSize.y + 0.5f;
 
                     // 衝突対象がサボテンだったら吹っ飛ぶようにする
-                    if (obj.GetComponent<AllObjectManager>().GetIsActive() && obj.GetComponent<AllObjectManager>().GetObjectType() == AllObjectManager.ObjectType.BLOCK && obj.GetComponent<BlockManager>().GetBlockType() == BlockManager.BlockType.CACTUS)
+                    if (obj.GetComponent<AllObjectManager>().GetIsActive() && obj.GetComponent<AllObjectManager>().GetObjectType() == AllObjectManager.ObjectType.CACTUS)
                     {
                         if (yBetween < yDoubleSize && xBetween < xDoubleSize)
                         {
@@ -178,7 +178,7 @@ public class PlayerMoveManager : MonoBehaviour
                             transform.position = nextPosition;
                             nextPosition.y = cactusTarget.y;
 
-                            CactusInitialize();
+                            CactusInitialize(obj.GetComponent<CactusManager>());
                             break;
                         }
                     }
@@ -296,7 +296,7 @@ public class PlayerMoveManager : MonoBehaviour
                     float yDoubleSize = halfSize.y + 0.51f;
 
                     // 衝突対象がサボテンだったら吹っ飛ぶようにする
-                    if (obj.GetComponent<AllObjectManager>().GetIsActive() && obj.GetComponent<AllObjectManager>().GetObjectType() == AllObjectManager.ObjectType.BLOCK && obj.GetComponent<BlockManager>().GetBlockType() == BlockManager.BlockType.CACTUS)
+                    if (obj.GetComponent<AllObjectManager>().GetIsActive() && obj.GetComponent<AllObjectManager>().GetObjectType() == AllObjectManager.ObjectType.CACTUS)
                     {
                         if (yBetween < yDoubleSize && xBetween < xDoubleSize)
                         {
@@ -304,7 +304,7 @@ public class PlayerMoveManager : MonoBehaviour
                             transform.position = nextPosition;
                             nextPosition.x = cactusTarget.x;
                             cactusDirection = Vector3.up;
-                            CactusInitialize();
+                            CactusInitialize(obj.GetComponent<CactusManager>());
                             noBlock = false;
                             break;
                         }
@@ -372,7 +372,7 @@ public class PlayerMoveManager : MonoBehaviour
             }
         }
     }
-    void CactusInitialize()
+    void CactusInitialize(CactusManager cactusManager)
     {
         while (!isCactus)
         {
@@ -452,6 +452,9 @@ public class PlayerMoveManager : MonoBehaviour
         else
         {
             transform.position = nextPosition;
+
+            // サボテンに当たった
+            cactusManager.SetHit();
 
             // 吹っ飛び開始
             transform.DOMove(cactusTarget, 0.5f).SetEase(Ease.OutSine).OnComplete(FinishCactus);

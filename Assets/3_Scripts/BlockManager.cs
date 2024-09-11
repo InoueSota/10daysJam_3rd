@@ -20,7 +20,6 @@ public class BlockManager : MonoBehaviour
         NORMAL,
         GRASS,
         DRIPSTONE,
-        CACTUS,
         ICICLE
     }
     [SerializeField] private BlockType blockType = BlockType.NORMAL;
