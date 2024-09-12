@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.ParticleSystem;
 
 public class IcicleManager : MonoBehaviour
 {
@@ -8,6 +9,7 @@ public class IcicleManager : MonoBehaviour
     private AllObjectManager allObjectManager;
     private DestructionManager destructionManager;
     private SpriteRenderer spriteRenderer;
+    private ParticleInstantiateScript particle;
 
     // 他コンポーネント取得
     private StageObjectManager stageObjectManager;
@@ -35,6 +37,7 @@ public class IcicleManager : MonoBehaviour
         allObjectManager = GetComponent<AllObjectManager>();
         destructionManager = GetComponent<DestructionManager>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        particle = GetComponent<ParticleInstantiateScript>();
         parentTransform = transform.parent.transform;
         halfSize.x = transform.localScale.x * 0.5f;
         halfSize.y = transform.localScale.y * 0.5f;
@@ -112,6 +115,7 @@ public class IcicleManager : MonoBehaviour
         spriteRenderer.enabled = false;
         allObjectManager.SetIsActive(spriteRenderer.enabled);
         isFallActive = false;
+        particle.RunParticle(0);
     }
 
     // Setter

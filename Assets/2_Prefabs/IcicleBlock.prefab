@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 4090162405295387848}
   - component: {fileID: -3820200508123021351}
   - component: {fileID: 254263317227385946}
+  - component: {fileID: 2592384084238760387}
   m_Layer: 0
   m_Name: IcicleBlock
   m_TagString: Object
@@ -107,8 +108,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 951258972, guid: c129e440588741844b101ea863da5d97, type: 3}
-  m_Color: {r: 0, g: 0.86999726, b: 1, a: 1}
+  m_Sprite: {fileID: 1733264307, guid: e2c9a85b8850a9940a789b07635f8446, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -165,6 +166,20 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &2592384084238760387
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 944074398774364433}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c79cc946b1831fb4685b411f7b365011, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  particle:
+  - {fileID: 5100953819094702239, guid: c4c4ead34503c744bb610d2513066290, type: 3}
 --- !u!1 &6532416040067846520
 GameObject:
   m_ObjectHideFlags: 0
@@ -180,6 +195,7 @@ GameObject:
   - component: {fileID: 5510491987228482123}
   - component: {fileID: 5977533394399274650}
   - component: {fileID: 81624936763482771}
+  - component: {fileID: 1907028452731104761}
   m_Layer: 0
   m_Name: Icicle
   m_TagString: Object
@@ -258,8 +274,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -1780104579, guid: c129e440588741844b101ea863da5d97, type: 3}
-  m_Color: {r: 0, g: 0.87058824, b: 1, a: 1}
+  m_Sprite: {fileID: -1869187685, guid: e2c9a85b8850a9940a789b07635f8446, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -342,3 +358,17 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &1907028452731104761
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6532416040067846520}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c79cc946b1831fb4685b411f7b365011, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  particle:
+  - {fileID: 5100953819094702239, guid: bfcc7b64c27403f439291278593f2aec, type: 3}
