@@ -19,7 +19,6 @@ public class StageClearManager : MonoBehaviour
     {
         datapath = Application.dataPath + "/TestJson.json";
     }
-
     void Start()
     {
         ClearData clearData = new ClearData();
@@ -27,12 +26,10 @@ public class StageClearManager : MonoBehaviour
         clearData.Stage2 = true;
         Save(clearData);
     }
-
-    public void Save(ClearData _clearData)
+    void Save(ClearData _clearData)
     {
         string jsonstr = JsonUtility.ToJson(_clearData);
         StreamWriter writer = new StreamWriter(datapath, false);
-
         writer.WriteLine(jsonstr);
         writer.Flush();
         writer.Close();

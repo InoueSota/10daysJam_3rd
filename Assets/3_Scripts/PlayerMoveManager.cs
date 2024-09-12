@@ -9,7 +9,6 @@ public class PlayerMoveManager : MonoBehaviour
     private PlayerAnimationManager playerAnimationManager;
     private bool isPushLeft;
     private bool isPushRight;
-    private bool isTriggerHorizontal;
     private bool isTriggerJump;
 
     // äÓñ{èÓïÒ
@@ -279,7 +278,7 @@ public class PlayerMoveManager : MonoBehaviour
                 {
                     // Xé≤îªíË
                     float xBetween = Mathf.Abs(nextPosition.x - obj.transform.position.x);
-                    float xDoubleSize = halfSize.x + 0.15f;
+                    float xDoubleSize = halfSize.x + 0.26f;
 
                     // Yé≤îªíË
                     float yBetween = Mathf.Abs(nextPosition.y - obj.transform.position.y);
@@ -585,7 +584,6 @@ public class PlayerMoveManager : MonoBehaviour
     {
         isPushLeft = false;
         isPushRight = false;
-        isTriggerHorizontal = false;
         isTriggerJump = false;
 
         if (inputManager.IsPush(InputManager.INPUTPATTERN.HORIZONTAL))
@@ -598,10 +596,6 @@ public class PlayerMoveManager : MonoBehaviour
             {
                 isPushRight = true;
             }
-        }
-        if (inputManager.IsTrgger(InputManager.INPUTPATTERN.HORIZONTAL))
-        {
-            isTriggerHorizontal = true;
         }
         if (inputManager.IsTrgger(InputManager.INPUTPATTERN.JUMP))
         {
