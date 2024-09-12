@@ -103,6 +103,7 @@ GameObject:
   - component: {fileID: 4798664925465756691}
   - component: {fileID: 5129338650721646576}
   - component: {fileID: 2426478090120762133}
+  - component: {fileID: 5298110290592678947}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -324,6 +325,7 @@ MonoBehaviour:
   cropLineManager: {fileID: 3856647538800460399}
   playerGraphic: {fileID: 6552557210357286604}
   walkParticleTimeMax: 0.05
+  isDeathWarp: 0
 --- !u!114 &2426478090120762133
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -338,6 +340,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   particle:
   - {fileID: 5788317359833529755, guid: 39af8bcace73a1f4fa7e764bc1141c4e, type: 3}
+--- !u!114 &5298110290592678947
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1471785792338881480}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62df1cb3f963d624b8280a16b1b75028, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  deathWarp: {fileID: 1012927309742499753, guid: f4dcae420c68fd74f83e90e3cda08b48, type: 3}
+  parent: {fileID: 4230771310500359404}
 --- !u!1 &1648953705512038457
 GameObject:
   m_ObjectHideFlags: 0
