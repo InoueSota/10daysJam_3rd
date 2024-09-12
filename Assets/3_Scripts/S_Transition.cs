@@ -33,6 +33,8 @@ public class S_Transition : MonoBehaviour
 
     private static S_Transition instance;
 
+    [SerializeField] SpriteRenderer transSpriteRenderer;
+    [SerializeField] Color[] transColor;
 
     void Awake()
     {
@@ -165,5 +167,8 @@ public class S_Transition : MonoBehaviour
         isTrans = true;
         NextSceneName = name;
     }
-
+    public void SetColor(int num)
+    {
+        transSpriteRenderer.color = transColor[num];
+    }
 }

@@ -262,7 +262,7 @@ public class GameManager : MonoBehaviour
     {
         playerManager.SetIsActive(_isActive);
     }
-    public void SetRestartAnimColor(Color _color)
+    public void SetColor(Color _color)
     {
         restartAnimator.GetComponent<Image>().color = _color;
     }

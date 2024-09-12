@@ -51,8 +51,8 @@ Material:
     m_Ints: []
     m_Floats:
     - _EnableExternalAlpha: 0
-    - _HideDistance: 0.3
-    - _HideOffset: -1.24
+    - _HideDistance: 0.6
+    - _HideOffset: -0.5
     - _MaxCircleSize: 0.85
     - _MoveDirection: 0
     - _MoveSpeed: 5

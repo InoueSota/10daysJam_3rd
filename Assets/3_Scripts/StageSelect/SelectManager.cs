@@ -218,12 +218,14 @@ public class SelectManager : MonoBehaviour
             selectUiManager.StartCircle();
             GlobalVariables.isClear = false;
             GlobalVariables.selectStageNumber = stageNumber;
+            transition.SetColor((int)stageGateManagers[stageNumber].GetChapter());
             transition.SetTransition(stageName[stageNumber]);
         }
         if (isTriggerCancel && !transition.isTransNow)
         {
             GlobalVariables.isClear = false;
             GlobalVariables.selectStageNumber = stageNumber;
+            transition.SetColor((int)stageGateManagers[stageNumber].GetChapter());
             transition.SetTransition("TitleScene");
         }
     }

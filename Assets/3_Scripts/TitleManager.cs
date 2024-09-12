@@ -20,6 +20,7 @@ public class TitleManager : MonoBehaviour
         clearData = new ClearData();
         clearData = clearData.LoadClearData(clearData);
         transition = GameObject.FindWithTag("trans").GetComponent<S_Transition>();
+        transition.SetColor(4);
     }
 
     void Update()

@@ -35,23 +35,23 @@ public class GameColorManager : MonoBehaviour
         if (GlobalVariables.selectStageNumber >= GlobalVariables.toCemeteryNumber)
         {
             menuColorManager.SetColor(cemeteryBrightColor, cemeteryOriginalColor, cemeteryDarkColor);
-            gameManager.SetRestartAnimColor(cemeteryDarkColor);
+            gameManager.SetColor(cemeteryDarkColor);
         } else
         if (GlobalVariables.selectStageNumber >= GlobalVariables.toDesertNumber)
         {
             menuColorManager.SetColor(desertBrightColor, desertOriginalColor, desertDarkColor);
-            gameManager.SetRestartAnimColor(desertDarkColor);
+            gameManager.SetColor(desertDarkColor);
         }
         else
         if (GlobalVariables.selectStageNumber >= GlobalVariables.toCaveNumber)
         {
             menuColorManager.SetColor(caveBrightColor, caveOriginalColor, caveDarkColor);
-            gameManager.SetRestartAnimColor(caveDarkColor);
+            gameManager.SetColor(caveDarkColor);
         }
         else
         {
             menuColorManager.SetColor(grassLandBrightColor, grassLandOriginalColor, grassLandDarkColor);
-            gameManager.SetRestartAnimColor(grassLandDarkColor);
+            gameManager.SetColor(grassLandDarkColor);
         }
     }
 }
