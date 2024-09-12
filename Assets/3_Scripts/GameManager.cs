@@ -106,12 +106,12 @@ public class GameManager : MonoBehaviour
             {
                 // 画面外のオブジェクトを破壊する
                 DestroyOutOfCameraObj();
+                stageObjectManager.SetCanCheck(true);
                 if (!menuManager.GetIsMenuActive())
                 {
-                    stageObjectManager.SetCanCheck(true);
+                    playerManager.SetIsActive(true);
                 }
                 stageObjectManager.Initialize();
-                playerManager.SetIsActive(true);
                 isStart = true;
             }
         }
@@ -272,5 +272,5 @@ public class GameManager : MonoBehaviour
     {
         return isClear;
     }
-    
+
 }

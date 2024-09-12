@@ -72,17 +72,21 @@ public class StageObjectManager : MonoBehaviour
     {
         if (canCheck)
         {
+            /* 動作中オブジェクトがあるとプレイヤーの動きを止める処理
+
             // 動作中のオブジェクトをチェックする
             dripStone.CheckMoving(dripStone, ObjectType.DRIPSTONE);
             icicle.CheckMoving(icicle, ObjectType.ICICLE);
 
-            noMovingObjects = !dripStone.isMoving;
-            noMovingObjects = !icicle.isMoving;
+            if (dripStone.isMoving || icicle.isMoving) { noMovingObjects = false; }
+            else { noMovingObjects = true; }
             playerManager.SetIsActive(noMovingObjects);
 
             //ブロックの隙間を埋める用の関数
             BlockGapFillerLoad();
             BlockGapFiller();
+
+            */
         }
     }
 
