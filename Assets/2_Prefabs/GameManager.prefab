@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4156444808033382204}
   - component: {fileID: 6021767931088967711}
   - component: {fileID: 8182826278413569486}
+  - component: {fileID: 7975614288697256979}
   - component: {fileID: 6021767931088967696}
   - component: {fileID: 2911846610945641867}
   - component: {fileID: 5757918148963960520}
@@ -53,6 +54,8 @@ MonoBehaviour:
   thisStageName: 
   nextStageName: 
   groupClear: {fileID: 0}
+  stageName: {fileID: 0}
+  menuStageName: {fileID: 0}
   playerManager: {fileID: 0}
 --- !u!114 &4156444808033382204
 MonoBehaviour:
@@ -99,6 +102,31 @@ MonoBehaviour:
   returnRect: {fileID: 0}
   restartRect: {fileID: 0}
   stageSelectRect: {fileID: 0}
+  stageNumberRect: {fileID: 0}
+--- !u!114 &7975614288697256979
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6021767931088967709}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4b9602eaf43879478d916cbfeb5c741, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  grassLandDarkColor: {r: 0.10588236, g: 0.29803923, b: 0.050980397, a: 1}
+  grassLandOriginalColor: {r: 0.16078432, g: 0.39607847, b: 0.09411766, a: 1}
+  grassLandBrightColor: {r: 0.19215688, g: 0.45882356, b: 0.11764707, a: 1}
+  caveDarkColor: {r: 0.29803923, g: 0.18957695, b: 0.050980397, a: 1}
+  caveOriginalColor: {r: 0.39607844, g: 0.25456956, b: 0.09411764, a: 1}
+  caveBrightColor: {r: 0.45882353, g: 0.3099365, b: 0.11764705, a: 1}
+  desertDarkColor: {r: 0.2888589, g: 0.29803923, b: 0.050980397, a: 1}
+  desertOriginalColor: {r: 0.39607844, g: 0.38391128, b: 0.09411764, a: 1}
+  desertBrightColor: {r: 0.45882353, g: 0.4419909, b: 0.11764705, a: 1}
+  cemeteryDarkColor: {r: 0.050980397, g: 0.29617283, b: 0.29803923, a: 1}
+  cemeteryOriginalColor: {r: 0.09411764, g: 0.38889498, b: 0.39607844, a: 1}
+  cemeteryBrightColor: {r: 0.11764705, g: 0.44552237, b: 0.45882353, a: 1}
 --- !u!114 &6021767931088967696
 MonoBehaviour:
   m_ObjectHideFlags: 0

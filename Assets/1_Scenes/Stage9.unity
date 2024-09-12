@@ -396,6 +396,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a81eee3d580c0df42b1ed12599e71bfd, type: 3}
+--- !u!114 &859384417 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3145942484633496062, guid: a81eee3d580c0df42b1ed12599e71bfd, type: 3}
+  m_PrefabInstance: {fileID: 859384416}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &966731972
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -499,6 +510,10 @@ PrefabInstance:
       propertyPath: m_PresetInfoIsWorld
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8385021364698652729, guid: 01413edb6ceb3764c8e8c5614eb5b9cd, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 2100000, guid: bc30b1e7a2bed4f44a6555062fdc4ada, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 01413edb6ceb3764c8e8c5614eb5b9cd, type: 3}
 --- !u!1 &966731973 stripped
@@ -670,16 +685,28 @@ PrefabInstance:
     m_TransformParent: {fileID: 2077500064}
     m_Modifications:
     - target: {fileID: 2021673001683523331, guid: 8412db8f3ccf46947b9e1e6403ca2603, type: 3}
+      propertyPath: stageName
+      value: 
+      objectReference: {fileID: 859384417}
+    - target: {fileID: 2021673001683523331, guid: 8412db8f3ccf46947b9e1e6403ca2603, type: 3}
       propertyPath: groupClear
       value: 
       objectReference: {fileID: 966731973}
+    - target: {fileID: 2021673001683523331, guid: 8412db8f3ccf46947b9e1e6403ca2603, type: 3}
+      propertyPath: menuStageName
+      value: 
+      objectReference: {fileID: 1884129169}
+    - target: {fileID: 2021673001683523331, guid: 8412db8f3ccf46947b9e1e6403ca2603, type: 3}
+      propertyPath: nextStageName
+      value: Stage10
+      objectReference: {fileID: 0}
     - target: {fileID: 2021673001683523331, guid: 8412db8f3ccf46947b9e1e6403ca2603, type: 3}
       propertyPath: playerManager
       value: 
       objectReference: {fileID: 1919802773}
     - target: {fileID: 2021673001683523331, guid: 8412db8f3ccf46947b9e1e6403ca2603, type: 3}
       propertyPath: thisStageName
-      value: Stage1
+      value: Stage9
       objectReference: {fileID: 0}
     - target: {fileID: 6021767931088967709, guid: 8412db8f3ccf46947b9e1e6403ca2603, type: 3}
       propertyPath: m_Name
@@ -746,6 +773,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 966731978}
     - target: {fileID: 8182826278413569486, guid: 8412db8f3ccf46947b9e1e6403ca2603, type: 3}
+      propertyPath: stageNumberRect
+      value: 
+      objectReference: {fileID: 1884129168}
+    - target: {fileID: 8182826278413569486, guid: 8412db8f3ccf46947b9e1e6403ca2603, type: 3}
       propertyPath: stageSelectRect
       value: 
       objectReference: {fileID: 966731975}
@@ -790,6 +821,22 @@ Camera:
   m_CorrespondingSourceObject: {fileID: 1927215938267834287, guid: ac0b6fa099510de40be19a801118c9b9, type: 3}
   m_PrefabInstance: {fileID: 1773075143}
   m_PrefabAsset: {fileID: 0}
+--- !u!224 &1884129168 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 2151846256069902106, guid: 01413edb6ceb3764c8e8c5614eb5b9cd, type: 3}
+  m_PrefabInstance: {fileID: 966731972}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1884129169 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5388866335792804393, guid: 01413edb6ceb3764c8e8c5614eb5b9cd, type: 3}
+  m_PrefabInstance: {fileID: 966731972}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1919802772
 PrefabInstance:
   m_ObjectHideFlags: 0

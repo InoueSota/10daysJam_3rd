@@ -246,6 +246,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f9b5c6b43b2120943b2a36eeaf8fdbc2, type: 3}
+--- !u!114 &257995527 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5388866335792804393, guid: 01413edb6ceb3764c8e8c5614eb5b9cd, type: 3}
+  m_PrefabInstance: {fileID: 1511850436}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &342032498 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 263804584632113893, guid: 01413edb6ceb3764c8e8c5614eb5b9cd, type: 3}
@@ -373,6 +384,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!224 &714457024 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 2151846256069902106, guid: 01413edb6ceb3764c8e8c5614eb5b9cd, type: 3}
+  m_PrefabInstance: {fileID: 1511850436}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &741535410 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 939796463947162589, guid: 01413edb6ceb3764c8e8c5614eb5b9cd, type: 3}
@@ -454,9 +470,21 @@ PrefabInstance:
     m_TransformParent: {fileID: 2077500064}
     m_Modifications:
     - target: {fileID: 2021673001683523331, guid: 8412db8f3ccf46947b9e1e6403ca2603, type: 3}
+      propertyPath: stageName
+      value: 
+      objectReference: {fileID: 1819325573}
+    - target: {fileID: 2021673001683523331, guid: 8412db8f3ccf46947b9e1e6403ca2603, type: 3}
       propertyPath: groupClear
       value: 
       objectReference: {fileID: 1511850437}
+    - target: {fileID: 2021673001683523331, guid: 8412db8f3ccf46947b9e1e6403ca2603, type: 3}
+      propertyPath: menuStageName
+      value: 
+      objectReference: {fileID: 257995527}
+    - target: {fileID: 2021673001683523331, guid: 8412db8f3ccf46947b9e1e6403ca2603, type: 3}
+      propertyPath: nextStageName
+      value: Stage2
+      objectReference: {fileID: 0}
     - target: {fileID: 2021673001683523331, guid: 8412db8f3ccf46947b9e1e6403ca2603, type: 3}
       propertyPath: playerManager
       value: 
@@ -529,6 +557,10 @@ PrefabInstance:
       propertyPath: menuBackImage
       value: 
       objectReference: {fileID: 430088249}
+    - target: {fileID: 8182826278413569486, guid: 8412db8f3ccf46947b9e1e6403ca2603, type: 3}
+      propertyPath: stageNumberRect
+      value: 
+      objectReference: {fileID: 714457024}
     - target: {fileID: 8182826278413569486, guid: 8412db8f3ccf46947b9e1e6403ca2603, type: 3}
       propertyPath: stageSelectRect
       value: 
@@ -616,10 +648,6 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 1927215937817763793}
-    - target: {fileID: 8182911871245206240, guid: 01413edb6ceb3764c8e8c5614eb5b9cd, type: 3}
-      propertyPath: m_SortingLayerID
-      value: 1284601981
-      objectReference: {fileID: 0}
     - target: {fileID: 8182911871245206241, guid: 01413edb6ceb3764c8e8c5614eb5b9cd, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -724,6 +752,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 2471112538353847785, guid: 01413edb6ceb3764c8e8c5614eb5b9cd, type: 3}
   m_PrefabInstance: {fileID: 1511850436}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1819325573 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3145942484633496062, guid: a81eee3d580c0df42b1ed12599e71bfd, type: 3}
+  m_PrefabInstance: {fileID: 121985302}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1919802772
 PrefabInstance:
   m_ObjectHideFlags: 0
