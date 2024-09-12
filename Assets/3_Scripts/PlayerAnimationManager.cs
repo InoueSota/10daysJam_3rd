@@ -117,4 +117,9 @@ public class PlayerAnimationManager : MonoBehaviour
     {
         return isDeathWarp;
     }
+
+    public void RunWallHitParticle(Vector3 pos,float rot)
+    {
+        particle.RunParticle(1, pos, rot);
+    }
 }

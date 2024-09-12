@@ -47,11 +47,11 @@ public class ParticleInstantiateScript : MonoBehaviour
         }
     }
 
-    public void RunParticle(int particleNum, Vector3 particlePos, Vector3 rot)
+    public void RunParticle(int particleNum, Vector3 particlePos, float rot)
     {
         if (particle[particleNum] != null)
         {
-            ParticleSystem particleObject = Instantiate(particle[particleNum], particlePos, Quaternion.EulerRotation(rot));
+            ParticleSystem particleObject = Instantiate(particle[particleNum], particlePos, Quaternion.Euler(0, 0, rot));
             if (particleParent != null)
             {
                 particleObject.gameObject.transform.parent = particleParent;
