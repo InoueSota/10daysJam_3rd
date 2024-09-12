@@ -4,12 +4,7 @@ using UnityEngine;
 [System.Serializable]
 public class ClearData
 {
-    public bool Stage1;
-    public bool Stage2;
-    public bool Stage3;
-    public bool Stage4;
-    public bool Stage5;
-    public bool Stage6;
+    public bool[] Stage;
 
     public ClearData LoadClearData(ClearData _clearData)
     {
@@ -30,39 +25,14 @@ public class ClearData
 
     public void SetClearFlag(ClearData _clearData)
     {
-        if (GlobalVariables.selectStageNumber == 0)
-        {
-            _clearData.Stage1 = true;
-        }
-        else if (GlobalVariables.selectStageNumber == 1)
-        {
-            _clearData.Stage2 = true;
-        }
-        else if (GlobalVariables.selectStageNumber == 2)
-        {
-            _clearData.Stage3 = true;
-        }
-        else if (GlobalVariables.selectStageNumber == 3)
-        {
-            _clearData.Stage4 = true;
-        }
-        else if (GlobalVariables.selectStageNumber == 4)
-        {
-            _clearData.Stage5 = true;
-        }
-        else if (GlobalVariables.selectStageNumber == 5)
-        {
-            _clearData.Stage6 = true;
-        }
+        _clearData.Stage[GlobalVariables.selectStageNumber] = true;
     }
 
     public void ResetClearFlag(ClearData _clearData)
     {
-        _clearData.Stage1 = false;
-        _clearData.Stage2 = false;
-        _clearData.Stage3 = false;
-        _clearData.Stage4 = false;
-        _clearData.Stage5 = false;
-        _clearData.Stage6 = false;
+        for (int i = 0; i < _clearData.Stage.Length; i++)
+        {
+            _clearData.Stage[i] = false;
+        }
     }
 }
