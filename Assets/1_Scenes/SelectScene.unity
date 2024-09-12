@@ -368,7 +368,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3604530283545575209, guid: 36d35ffd6a2743846a874c35f74f51c2, type: 3}
       propertyPath: chapter
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3604530283545575209, guid: 36d35ffd6a2743846a874c35f74f51c2, type: 3}
       propertyPath: stageName
@@ -945,7 +945,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3604530283545575209, guid: 36d35ffd6a2743846a874c35f74f51c2, type: 3}
       propertyPath: chapter
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3604530283545575209, guid: 36d35ffd6a2743846a874c35f74f51c2, type: 3}
       propertyPath: stageName
@@ -1211,7 +1211,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3604530283545575209, guid: 36d35ffd6a2743846a874c35f74f51c2, type: 3}
       propertyPath: chapter
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3604530283545575209, guid: 36d35ffd6a2743846a874c35f74f51c2, type: 3}
       propertyPath: stageName
@@ -1464,7 +1464,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3604530283545575209, guid: 36d35ffd6a2743846a874c35f74f51c2, type: 3}
       propertyPath: chapter
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3604530283545575209, guid: 36d35ffd6a2743846a874c35f74f51c2, type: 3}
       propertyPath: stageName
@@ -1669,7 +1669,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stageMax: 18
-  chapterSection: 0000000007000000090000000b000000
   stageNumberPrefab: {fileID: 4801203756051358010, guid: 97332d0ec2b22cf42ab1c8c7948411bc, type: 3}
   stageNumberParent: {fileID: 8241099445431098949}
   stageNamePrefab: {fileID: 1646044954251110074, guid: c99d0acd67d3be34a857e99b7166d08f, type: 3}
@@ -1684,15 +1683,15 @@ MonoBehaviour:
   - CROP
   - "\u3084\u3089\u306A\u3044\u3067\u306D"
   - "\u843D\u3068\u3057\u7A74\uFF01\uFF1F\u30D0\u30AF\u30C0\u30F3\uFF1F\uFF01"
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - "\u30B9\u30C6\u30FC\u30B810"
+  - "\u30B9\u30C6\u30FC\u30B811"
+  - "\u30B9\u30C6\u30FC\u30B812"
+  - "\u30B9\u30C6\u30FC\u30B813"
+  - "\u30B9\u30C6\u30FC\u30B814"
+  - "\u30B9\u30C6\u30FC\u30B815"
+  - "\u30B9\u30C6\u30FC\u30B816"
+  - "\u30B9\u30C6\u30FC\u30B817"
+  - "\u30B9\u30C6\u30FC\u30B818"
   stageImagePrefab: {fileID: 6755901503021616594, guid: 5e301d8e6f66a5748bbf5bd37e69225b, type: 3}
   stageImageParent: {fileID: 170178378}
   stageImageSprite:
@@ -1746,12 +1745,18 @@ MonoBehaviour:
   colorChasePower: 5
   leftTriangle: {fileID: 519337058}
   rightTriangle: {fileID: 47113597}
-  backGroundImage: {fileID: 1009725762}
+  backGroundCircleImage: {fileID: 1009725762}
+  backGroundCircleColor:
+  - {r: 0.60784316, g: 0.9058824, b: 0.5019608, a: 1}
+  - {r: 0.42352942, g: 0.2509804, b: 0.20392157, a: 1}
+  - {r: 0.754717, g: 0.64814657, b: 0.20932715, a: 1}
+  - {r: 0.35686275, g: 0.54901963, b: 0.5372549, a: 1}
+  backGroundImage: {fileID: 541212913}
   backGroundColor:
-  - {r: 0.60784316, g: 0.90588236, b: 0.5019608, a: 1}
-  - {r: 0.44705883, g: 0.27058825, b: 0.20392157, a: 1}
+  - {r: 0.50980395, g: 0.8235294, b: 0.4, a: 1}
+  - {r: 0.50980395, g: 0.32941177, b: 0.25490198, a: 1}
   - {r: 0.7169812, g: 0.58431333, b: 0.0365254, a: 1}
-  - {r: 0.29396582, g: 0.4245283, b: 0.4140976, a: 1}
+  - {r: 0.3254902, g: 0.67058825, b: 0.654902, a: 1}
   groupA: {fileID: 1146254528}
   stageNumber: {fileID: 8241099445431098949}
   stageName: {fileID: 642169485}
@@ -1775,7 +1780,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3604530283545575209, guid: 36d35ffd6a2743846a874c35f74f51c2, type: 3}
       propertyPath: chapter
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3604530283545575209, guid: 36d35ffd6a2743846a874c35f74f51c2, type: 3}
       propertyPath: stageName
@@ -2124,7 +2129,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3604530283545575209, guid: 36d35ffd6a2743846a874c35f74f51c2, type: 3}
       propertyPath: chapter
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3604530283545575209, guid: 36d35ffd6a2743846a874c35f74f51c2, type: 3}
       propertyPath: stageName
@@ -2503,7 +2508,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3604530283545575209, guid: 36d35ffd6a2743846a874c35f74f51c2, type: 3}
       propertyPath: chapter
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3604530283545575209, guid: 36d35ffd6a2743846a874c35f74f51c2, type: 3}
       propertyPath: stageName
@@ -2938,7 +2943,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3604530283545575209, guid: 36d35ffd6a2743846a874c35f74f51c2, type: 3}
       propertyPath: chapter
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3604530283545575209, guid: 36d35ffd6a2743846a874c35f74f51c2, type: 3}
       propertyPath: stageName
@@ -3194,7 +3199,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3604530283545575209, guid: 36d35ffd6a2743846a874c35f74f51c2, type: 3}
       propertyPath: chapter
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3604530283545575209, guid: 36d35ffd6a2743846a874c35f74f51c2, type: 3}
       propertyPath: stageName

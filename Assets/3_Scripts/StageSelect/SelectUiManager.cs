@@ -16,6 +16,11 @@ public class SelectUiManager : MonoBehaviour
     [SerializeField] private RectTransform rightTriangle;
     private Image rightTriangleImage;
 
+    [Header("îwåiâ~")]
+    [SerializeField] private Image backGroundCircleImage;
+    [SerializeField] private Color[] backGroundCircleColor;
+    private Color backGroundCircleTargetColor;
+
     [Header("îwåi")]
     [SerializeField] private Image backGroundImage;
     [SerializeField] private Color[] backGroundColor;
@@ -93,6 +98,8 @@ public class SelectUiManager : MonoBehaviour
     {
         backGroundTargetColor = backGroundColor[_chapterNumber];
         backGroundImage.color += (backGroundTargetColor - backGroundImage.color) * (colorChasePower * Time.deltaTime);
+        backGroundCircleTargetColor = backGroundCircleColor[_chapterNumber];
+        backGroundCircleImage.color += (backGroundCircleTargetColor - backGroundCircleImage.color) * (colorChasePower * Time.deltaTime);
         targetColor = themeColor[_chapterNumber];
         frameImage.color += (targetColor - frameImage.color) * (colorChasePower * Time.deltaTime);
     }
