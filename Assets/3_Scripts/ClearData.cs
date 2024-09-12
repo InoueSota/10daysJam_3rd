@@ -55,4 +55,14 @@ public class ClearData
             _clearData.Stage6 = true;
         }
     }
+
+    public void ResetClearFlag(ClearData _clearData)
+    {
+        _clearData.Stage1 = false;
+        _clearData.Stage2 = false;
+        _clearData.Stage3 = false;
+        _clearData.Stage4 = false;
+        _clearData.Stage5 = false;
+        _clearData.Stage6 = false;
+    }
 }

@@ -12,8 +12,8 @@ public class GameManager : MonoBehaviour
     private bool isTriggerspecial;
 
     // 他コンポーネント取得
-    private S_Transition transition;
     private ClearData clearData;
+    private S_Transition transition;
 
     // フラグ類
     private bool isStart;
