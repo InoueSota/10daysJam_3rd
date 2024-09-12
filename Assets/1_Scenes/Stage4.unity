@@ -367,6 +367,11 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 2471112538353847785, guid: 01413edb6ceb3764c8e8c5614eb5b9cd, type: 3}
   m_PrefabInstance: {fileID: 491540000}
   m_PrefabAsset: {fileID: 0}
+--- !u!95 &941042950 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 3955859226397892204, guid: 01413edb6ceb3764c8e8c5614eb5b9cd, type: 3}
+  m_PrefabInstance: {fileID: 491540000}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1182050642
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -639,6 +644,10 @@ PrefabInstance:
       propertyPath: thisStageName
       value: Stage4
       objectReference: {fileID: 0}
+    - target: {fileID: 2021673001683523331, guid: 8412db8f3ccf46947b9e1e6403ca2603, type: 3}
+      propertyPath: restartAnimator
+      value: 
+      objectReference: {fileID: 941042950}
     - target: {fileID: 6021767931088967709, guid: 8412db8f3ccf46947b9e1e6403ca2603, type: 3}
       propertyPath: m_Name
       value: GameManager

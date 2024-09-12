@@ -57,7 +57,7 @@ MonoBehaviour:
   stageName: {fileID: 0}
   menuStageName: {fileID: 0}
   playerManager: {fileID: 0}
-  restartPrefab: {fileID: 0}
+  restartAnimator: {fileID: 0}
 --- !u!114 &4156444808033382204
 MonoBehaviour:
   m_ObjectHideFlags: 0

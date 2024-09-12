@@ -35,7 +35,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private PlayerManager playerManager;
 
     [Header("リスタート演出")]
-    [SerializeField] private GameObject restartPrefab;
+    [SerializeField] private Animator restartAnimator;
 
     void Start()
     {
@@ -253,11 +253,18 @@ public class GameManager : MonoBehaviour
             // 残ってるエフェクトを消す処理
             Destroy(obj);
         }
+
+        // RestartのAnimationを開始
+        restartAnimator.Play("restart", 0, 0);
     }
 
     public void SetPlayerAcitve(bool _isActive)
     {
         playerManager.SetIsActive(_isActive);
+    }
+    public void SetRestartAnimColor(Color _color)
+    {
+        restartAnimator.GetComponent<Image>().color = _color;
     }
 
     void GetInput()

@@ -197,6 +197,11 @@ Camera:
   m_CorrespondingSourceObject: {fileID: 1927215938267834287, guid: ac0b6fa099510de40be19a801118c9b9, type: 3}
   m_PrefabInstance: {fileID: 138868016}
   m_PrefabAsset: {fileID: 0}
+--- !u!95 &241818889 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 3955859226397892204, guid: 01413edb6ceb3764c8e8c5614eb5b9cd, type: 3}
+  m_PrefabInstance: {fileID: 478754976}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &254991897
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -621,6 +626,10 @@ PrefabInstance:
       propertyPath: thisStageName
       value: Stage3
       objectReference: {fileID: 0}
+    - target: {fileID: 2021673001683523331, guid: 8412db8f3ccf46947b9e1e6403ca2603, type: 3}
+      propertyPath: restartAnimator
+      value: 
+      objectReference: {fileID: 241818889}
     - target: {fileID: 6021767931088967709, guid: 8412db8f3ccf46947b9e1e6403ca2603, type: 3}
       propertyPath: m_Name
       value: GameManager
