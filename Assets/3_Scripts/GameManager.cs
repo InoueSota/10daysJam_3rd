@@ -86,8 +86,11 @@ public class GameManager : MonoBehaviour
 
         if (isTriggerCancel && isStart && !isClear)
         {
-            SetPlayerAcitve(menuManager.GetIsMenuActive());
-            menuManager.SetIsMenuActive();
+            if (menuManager.GetIsMenuActive())
+            {
+                SetPlayerAcitve(menuManager.GetIsMenuActive());
+                menuManager.SetIsMenuActive();
+            }
             Restart();
         }
     }
