@@ -1,15 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class TitleManager : MonoBehaviour
 {
     // 入力
     private InputManager inputManager;
     private bool isTriggerJump;
-    //他コンポーネント取得
-    S_Transition transition;
+
+    // 他コンポーネント取得
+    private S_Transition transition;
+
     // 遷移シーン先名
     [SerializeField] private string nextScene;
 
@@ -32,7 +31,6 @@ public class TitleManager : MonoBehaviour
         {
             //トランジション処理
             transition.SetTransition(nextScene);
-            //SceneManager.LoadScene(nextScene);
         }
     }
 

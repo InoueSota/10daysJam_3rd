@@ -1,4 +1,3 @@
-using DG.Tweening.Core.Easing;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -14,6 +13,7 @@ public class GameManager : MonoBehaviour
 
     // 他コンポーネント取得
     private S_Transition transition;
+    private ClearData clearData;
 
     // フラグ類
     private bool isStart;
@@ -43,6 +43,8 @@ public class GameManager : MonoBehaviour
         stageObjectManager.SetPlayerManager(playerManager);
         menuManager = GetComponent<MenuManager>();
         inputManager = GetComponent<InputManager>();
+        clearData = new ClearData();
+        clearData = clearData.LoadClearData(clearData);
         if (GameObject.FindWithTag("trans"))
         {
             transition = GameObject.FindWithTag("trans").GetComponent<S_Transition>();
@@ -168,6 +170,8 @@ public class GameManager : MonoBehaviour
             // クリアフラグをtrueにする
             if (isFinish)
             {
+                clearData.SetClearFlag(clearData);
+                clearData.Save(clearData);
                 groupClear.SetActive(true);
                 GlobalVariables.isClear = true;
                 isClear = true;
@@ -248,10 +252,7 @@ public class GameManager : MonoBehaviour
         {
             // 残ってるエフェクトを消す処理
             Destroy(obj);
-
         }
-        // グローバル変数の初期化
-        GlobalVariables.isClear = false;
     }
 
     public void SetPlayerAcitve(bool _isActive)
@@ -282,5 +283,4 @@ public class GameManager : MonoBehaviour
     {
         return isClear;
     }
-
 }

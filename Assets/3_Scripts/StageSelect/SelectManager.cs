@@ -1,5 +1,3 @@
-using System;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -16,7 +14,7 @@ public class SelectManager : MonoBehaviour
     private bool isPushDown;
 
     // 他コンポーネント取得
-    S_Transition transition;
+    private S_Transition transition;
 
     [Header("ステージ最大数")]
     [SerializeField] private int stageMax;
@@ -215,11 +213,13 @@ public class SelectManager : MonoBehaviour
         if (isTriggerJump && !transition.isTransNow)
         {
             selectUiManager.StartCircle();
+            GlobalVariables.isClear = false;
             GlobalVariables.selectStageNumber = stageNumber;
             transition.SetTransition(stageName[stageNumber]);
         }
         if (isTriggerCancel && !transition.isTransNow)
         {
+            GlobalVariables.isClear = false;
             GlobalVariables.selectStageNumber = stageNumber;
             transition.SetTransition("TitleScene");
         }

@@ -12,6 +12,7 @@ public class MenuManager : MonoBehaviour
 
     // 他コンポーネント取得
     private S_Transition transition;
+    private ClearData clearData;
 
     public enum MenuType
     {
@@ -57,6 +58,7 @@ public class MenuManager : MonoBehaviour
     {
         gameManager = GetComponent<GameManager>();
         inputManager = GetComponent<InputManager>();
+        clearData = new ClearData();
         if (GameObject.FindWithTag("trans"))
         {
             transition = GameObject.FindWithTag("trans").GetComponent<S_Transition>();
@@ -149,6 +151,7 @@ public class MenuManager : MonoBehaviour
                 if (isTriggerJump && !transition.isTransNow)
                 {
                     SetIsMenuActive();
+                    clearData.Save(clearData);
                     transition.SetTransition("SelectScene");
                 }
 
