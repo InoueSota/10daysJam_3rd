@@ -340,6 +340,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   particle:
   - {fileID: 5788317359833529755, guid: 39af8bcace73a1f4fa7e764bc1141c4e, type: 3}
+  - {fileID: 5100953819094702239, guid: f9e3bccf8096231489593969d4d8706f, type: 3}
 --- !u!114 &5298110290592678947
 MonoBehaviour:
   m_ObjectHideFlags: 0
