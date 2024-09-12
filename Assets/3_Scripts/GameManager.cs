@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -11,7 +12,7 @@ public class GameManager : MonoBehaviour
     private bool isTriggerspecial;
 
     // 他コンポーネント取得
-    S_Transition transition;
+    private S_Transition transition;
 
     // フラグ類
     private bool isStart;
@@ -28,6 +29,8 @@ public class GameManager : MonoBehaviour
     // UI
     [Header("UI")]
     [SerializeField] private GameObject groupClear;
+    [SerializeField] private Text stageName;
+    [SerializeField] private Text menuStageName;
 
     // プレイヤー
     [Header("プレイヤー")]
@@ -43,11 +46,13 @@ public class GameManager : MonoBehaviour
         {
             transition = GameObject.FindWithTag("trans").GetComponent<S_Transition>();
         }
-        readyTimer = 3.25f;
+        readyTimer = 3f;
 
         // 名前代入
         GlobalVariables.retryStageName = thisStageName;
         GlobalVariables.nextStageName = nextStageName;
+        stageName.text = thisStageName;
+        menuStageName.text = thisStageName;
 
         // グローバル変数の初期化
         GlobalVariables.isClear = false;
@@ -168,7 +173,6 @@ public class GameManager : MonoBehaviour
             {
                 //トランジション処理
                 transition.SetTransition("SelectScene");
-                //SceneManager.LoadScene("SelectScene");
             }
         }
     }

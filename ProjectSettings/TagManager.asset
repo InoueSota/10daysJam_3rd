@@ -9,6 +9,8 @@ TagManager:
   - effect
   - ParticleParent
   - items
+  - StageGate
+  - Menu
   layers:
   - Default
   - TransparentFX
