@@ -32,8 +32,10 @@ public class PlayerMoveManager : MonoBehaviour
     [Header("ジャンプ")]
     [SerializeField] private float jumpDistance;
     [SerializeField] private float jumpSpeed;
+    [SerializeField] private float cropJumpCoolTime;
     private bool isJumping;
     private float jumpTarget;
+    private float cropJumpCoolTimer;
 
     [Header("滞空")]
     [SerializeField] private float hangTime;
@@ -103,6 +105,9 @@ public class PlayerMoveManager : MonoBehaviour
             ClampInCamera();
 
             transform.position = nextPosition;
+
+            // CropJump対策
+            cropJumpCoolTimer -= Time.deltaTime;
         }
     }
 
@@ -217,7 +222,7 @@ public class PlayerMoveManager : MonoBehaviour
     void Jump()
     {
         // ジャンプ開始と初期化
-        if (playerManager.GetCanJump() && !isCactus && !isJumping && !isHovering && !isGravity && isTriggerJump)
+        if (playerManager.GetCanJump() && cropJumpCoolTimer <= 0f && !isCactus && !isJumping && !isHovering && !isGravity && isTriggerJump)
         {
             foreach (GameObject obj in GameObject.FindGameObjectsWithTag("Object"))
             {
@@ -554,6 +559,10 @@ public class PlayerMoveManager : MonoBehaviour
             }
         }
     }
+    public void SetCropJumpTimer()
+    {
+        cropJumpCoolTimer = cropJumpCoolTime;
+    }
 
     // Getter
     void GetInput()
@@ -613,7 +622,7 @@ public class PlayerMoveManager : MonoBehaviour
         //移動速度を取得 
         return moveSpeed;
     }
-    public bool IsMoving()
+    public bool GetIsMoving()
     {
         if (isPushLeft || isPushRight)
         {
@@ -621,22 +630,18 @@ public class PlayerMoveManager : MonoBehaviour
         }
         return false;
     }
-
     public bool GetIsJump()
     {
         return isJumping;
     }
-
     public bool GetIsHovering()
     {
         return isHovering;
     }
-
     public bool GetIsGravity()
     {
         return isGravity;
     }
-
     public bool GetIsCactus()
     {
         return isCactus;

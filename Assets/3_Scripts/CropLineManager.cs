@@ -105,6 +105,8 @@ public class CropLineManager : MonoBehaviour
                     }
                 }
             }
+
+            playerMoveManager.SetCropJumpTimer();
         }
     }
 

@@ -30,7 +30,7 @@ public class UICropScript : MonoBehaviour
     {
         coolTime = Mathf.Clamp(coolTime, -1, 1);
 
-        if (moveManager.IsMoving())
+        if (moveManager.GetIsMoving())
         {
             //ìÆÇ¢ÇΩÇÁèoÇ≥Ç»Ç¢
             coolTime -= Time.deltaTime;

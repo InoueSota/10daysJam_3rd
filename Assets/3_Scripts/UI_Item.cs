@@ -113,7 +113,7 @@ public class UI_Item : MonoBehaviour
         //UI‚ğo‚·ˆ—
         coolTime = Mathf.Clamp(coolTime, -1, 1);
 
-        if (moveManager.IsMoving())
+        if (moveManager.GetIsMoving())
         {
             //“®‚¢‚½‚ço‚³‚È‚¢
             coolTime -= Time.deltaTime;

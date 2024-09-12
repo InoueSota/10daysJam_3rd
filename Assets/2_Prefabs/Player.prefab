@@ -159,6 +159,7 @@ MonoBehaviour:
   accelerationTime: 0.6
   jumpDistance: 2
   jumpSpeed: 10
+  cropJumpCoolTime: 0.01
   hangTime: 0.1
   hitHeadHangTime: 0.3
   gravityMax: 12

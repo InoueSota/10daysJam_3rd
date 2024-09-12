@@ -40,7 +40,7 @@ public class PlayerAnimationManager : MonoBehaviour
             playerGraphic.transform.localScale = scale;
         }
 
-        bool isWalk= player.IsMoving();
+        bool isWalk= player.GetIsMoving();
         bool isJump = player.GetIsJump();
         bool isHovering = player.GetIsHovering();
         bool isGravity = player.GetIsGravity();
