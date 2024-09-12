@@ -48,6 +48,11 @@ public class MenuManager : MonoBehaviour
     private Vector3 stageSelectRectOrigin;
     private Vector3 stageSelectRectTarget;
 
+    [Header("ステージ番号")]
+    [SerializeField] private RectTransform stageNumberRect;
+    private Vector3 stageNumberOrigin;
+    private Vector3 stageNumberTarget;
+
     void Start()
     {
         gameManager = GetComponent<GameManager>();
@@ -69,6 +74,10 @@ public class MenuManager : MonoBehaviour
         returnRectTarget = returnRectOrigin;
         restartRectTarget = restartRectOrigin;
         stageSelectRectTarget = stageSelectRectOrigin;
+
+        stageNumberOrigin = stageNumberRect.transform.localPosition;
+
+        stageNumberTarget = stageNumberOrigin;
     }
 
     void Update()
@@ -153,6 +162,7 @@ public class MenuManager : MonoBehaviour
         returnRect.transform.localPosition += (returnRectTarget - returnRect.transform.localPosition) * (chasePower * Time.deltaTime);
         restartRect.transform.localPosition += (restartRectTarget - restartRect.transform.localPosition) * (chasePower * Time.deltaTime);
         stageSelectRect.transform.localPosition += (stageSelectRectTarget - stageSelectRect.transform.localPosition) * (chasePower * Time.deltaTime);
+        stageNumberRect.transform.localPosition += (stageNumberTarget - stageNumberRect.transform.localPosition) * (chasePower * Time.deltaTime);
     }
 
     // Setter
@@ -163,12 +173,14 @@ public class MenuManager : MonoBehaviour
         {
             menuBackTargetColor = darkColor;
             menuTabTarget.x = 440f;
+            stageNumberTarget.x = -480f;
             menuType = MenuType.RETURN;
         }
         else
         {
             menuBackTargetColor = menuBackOriginColor;
             menuTabTarget.x = menuTabOrigin.x;
+            stageNumberTarget.x = stageNumberOrigin.x;
         }
     }
 

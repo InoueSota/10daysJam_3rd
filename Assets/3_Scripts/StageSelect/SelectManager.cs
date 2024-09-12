@@ -23,9 +23,6 @@ public class SelectManager : MonoBehaviour
     private int stageNumber;
     private string[] stageName;
 
-    [Header("チャプター区切り")]
-    [SerializeField] private int[] chapterSection;
-
     [Header("ステージ数テキスト")]
     [SerializeField] private GameObject stageNumberPrefab;
     [SerializeField] private Transform stageNumberParent;
@@ -156,7 +153,7 @@ public class SelectManager : MonoBehaviour
             {
                 // 現在のステージ数を参照し、チャプターを取得する
                 // 「墓地」を選択
-                if (stageNumber >= chapterSection[3])
+                if (stageNumber >= GlobalVariables.toCemeteryNumber)
                 {
                     if (isPushUp)
                     {
@@ -164,39 +161,39 @@ public class SelectManager : MonoBehaviour
                     }
                     else if (isPushDown)
                     {
-                        stageNumber = chapterSection[2];
+                        stageNumber = GlobalVariables.toDesertNumber;
                     }
                 }
                 // 「砂漠」を選択
-                else if (stageNumber >= chapterSection[2])
+                else if (stageNumber >= GlobalVariables.toDesertNumber)
                 {
                     if (isPushUp)
                     {
-                        stageNumber = chapterSection[3];
+                        stageNumber = GlobalVariables.toCemeteryNumber;
                     }
                     else if (isPushDown)
                     {
-                        stageNumber = chapterSection[1];
+                        stageNumber = GlobalVariables.toCaveNumber;
                     }
                 }
                 // 「洞窟」を選択
-                else if (stageNumber >= chapterSection[1])
+                else if (stageNumber >= GlobalVariables.toCaveNumber)
                 {
                     if (isPushUp)
                     {
-                        stageNumber = chapterSection[2];
+                        stageNumber = GlobalVariables.toDesertNumber;
                     }
                     else if (isPushDown)
                     {
-                        stageNumber = chapterSection[0];
+                        stageNumber = 0;
                     }
                 }
                 // 「草原」を選択
-                else if (stageNumber >= chapterSection[0])
+                else
                 {
                     if (isPushUp)
                     {
-                        stageNumber = chapterSection[1];
+                        stageNumber = GlobalVariables.toCaveNumber;
                     }
                     else if (isPushDown)
                     {

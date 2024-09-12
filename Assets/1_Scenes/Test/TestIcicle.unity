@@ -587,6 +587,18 @@ PrefabInstance:
       propertyPath: thisStageName
       value: Stage1
       objectReference: {fileID: 0}
+    - target: {fileID: 5757918148963960520, guid: 8412db8f3ccf46947b9e1e6403ca2603, type: 3}
+      propertyPath: fireWorksTime
+      value: 0.415
+      objectReference: {fileID: 0}
+    - target: {fileID: 5757918148963960520, guid: 8412db8f3ccf46947b9e1e6403ca2603, type: 3}
+      propertyPath: fireWorksTimeMax
+      value: 0.415
+      objectReference: {fileID: 0}
+    - target: {fileID: 5757918148963960520, guid: 8412db8f3ccf46947b9e1e6403ca2603, type: 3}
+      propertyPath: fireWorksTimeMin
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6021767931088967709, guid: 8412db8f3ccf46947b9e1e6403ca2603, type: 3}
       propertyPath: m_Name
       value: GameManager
@@ -692,11 +704,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7724256103582310173, guid: 716df6b7c4fd5374cbe5ec9002b00ac6, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 1.36
       objectReference: {fileID: 0}
     - target: {fileID: 7724256103582310173, guid: 716df6b7c4fd5374cbe5ec9002b00ac6, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4
+      value: 3.92
       objectReference: {fileID: 0}
     - target: {fileID: 7724256103582310173, guid: 716df6b7c4fd5374cbe5ec9002b00ac6, type: 3}
       propertyPath: m_LocalPosition.z

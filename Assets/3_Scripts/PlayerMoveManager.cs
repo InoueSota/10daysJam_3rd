@@ -6,6 +6,7 @@ public class PlayerMoveManager : MonoBehaviour
     // 自コンポーネント取得
     private PlayerManager playerManager;
     private InputManager inputManager;
+    private PlayerAnimationManager playerAnimationManager;
     private bool isPushLeft;
     private bool isPushRight;
     private bool isTriggerHorizontal;
@@ -64,6 +65,7 @@ public class PlayerMoveManager : MonoBehaviour
     {
         playerManager = GetComponent<PlayerManager>();
         inputManager = GetComponent<InputManager>();
+        playerAnimationManager = GetComponent<PlayerAnimationManager>();
 
         halfSize.x = transform.localScale.x * 0.5f;
         halfSize.y = transform.localScale.y * 0.5f;
@@ -502,6 +504,18 @@ public class PlayerMoveManager : MonoBehaviour
     }
     void FinishCactus()
     {
+        // ブロックとプレイヤーの間座標
+        Vector3 betweenPosition = transform.position + cactusDirection * 0.5f;
+
+        //
+        // betweenPositionを使ってやれや！
+        // ちなみに「cactusDirection」は、吹っ飛んでる方向です
+        //
+
+        float rot = Mathf.Atan2(cactusDirection.y, cactusDirection.x) * Mathf.Rad2Deg;
+
+        playerAnimationManager.RunWallHitParticle(betweenPosition, rot);
+
         gravityPower = 0f;
         isGravity = true;
         isCactus = false;

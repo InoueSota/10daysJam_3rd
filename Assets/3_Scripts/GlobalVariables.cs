@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class GlobalVariables : MonoBehaviour
@@ -13,4 +11,9 @@ public class GlobalVariables : MonoBehaviour
 
     // ステージ選択の番号
     public static int selectStageNumber = 0;
+
+    // チャプターが切り替わるステージ番号
+    public static int toCaveNumber = 7;
+    public static int toDesertNumber = 9;
+    public static int toCemeteryNumber = 11;
 }

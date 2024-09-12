@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices.WindowsRuntime;
 using DG.Tweening.Core.Easing;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -19,6 +20,8 @@ public class PlayerAnimationManager : MonoBehaviour
     ParticleInstantiateScript particle;
     [SerializeField] float walkParticleTimeMax = 0.5f;
     float walkParticleTime = 0.0f;
+
+    [SerializeField] bool isDeathWarp = false;
 
     // Start is called before the first frame update
     void Start()
@@ -83,6 +86,9 @@ public class PlayerAnimationManager : MonoBehaviour
             animator.SetBool("isDamage", false);
         }
 
+
+        animator.SetBool("isDeathWarp", isDeathWarp);
+
         animator.SetBool("isClear", isClear);
 
 
@@ -105,5 +111,15 @@ public class PlayerAnimationManager : MonoBehaviour
             walkParticleTime = 0;
         }
 
+    }
+
+    public bool GetIsDeathWarp()
+    {
+        return isDeathWarp;
+    }
+
+    public void RunWallHitParticle(Vector3 pos,float rot)
+    {
+        particle.RunParticle(1, pos, rot);
     }
 }
