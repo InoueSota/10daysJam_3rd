@@ -57,6 +57,7 @@ MonoBehaviour:
   stageName: {fileID: 0}
   menuStageName: {fileID: 0}
   playerManager: {fileID: 0}
+  restartPrefab: {fileID: 0}
 --- !u!114 &4156444808033382204
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -165,3 +166,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32e237e80fa01814cb461723a159d914, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fireWorksTime: 0.415
+  fireWorksTimeMax: 0.415
+  fireWorksTimeMin: 0
