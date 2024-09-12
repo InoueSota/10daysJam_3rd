@@ -128,15 +128,22 @@ public class PlayerMoveManager : MonoBehaviour
         }
         else
         {
+            acceleration = 0f;
+            canAcceleration = false;
             moveSpeed = 0f;
         }
     }
     void Acceleration()
     {
-        if (GetIsGround() && isTriggerHorizontal && !isTriggerJump)
+        if (!canAcceleration && GetIsGround())
         {
             accelerationTimer = accelerationTime;
             canAcceleration = true;
+        }
+        else if (canAcceleration && !GetIsGround())
+        {
+            acceleration = 0f;
+            canAcceleration = false;
         }
 
         if (canAcceleration)
@@ -238,8 +245,7 @@ public class PlayerMoveManager : MonoBehaviour
 
                     if (obj.GetComponent<AllObjectManager>().GetIsActive() && obj.GetComponent<AllObjectManager>().GetIsHitObject())
                     {
-                        acceleration = 0f;
-                        canAcceleration = false;
+
                         jumpTarget = nextPosition.y + jumpDistance;
                         isJumping = true;
                         break;
@@ -390,8 +396,6 @@ public class PlayerMoveManager : MonoBehaviour
                         if (yBetween <= yDoubleSize && xBetween < xDoubleSize)
                         {
                             nextPosition.y = obj.transform.position.y + 0.5f + halfSize.y;
-                            accelerationTimer = accelerationTime;
-                            canAcceleration = true;
                             isGravity = false;
                             break;
                         }
@@ -491,8 +495,6 @@ public class PlayerMoveManager : MonoBehaviour
             transform.DOMove(cactusTarget, cactusTime).SetEase(Ease.OutSine).OnComplete(FinishCactus);
 
             // ‚Á”ò‚ÑˆÈŠO‚Ìƒtƒ‰ƒO—Þ‚ð‰Šú‰»‚·‚é
-            acceleration = 0f;
-            canAcceleration = false;
             isJumping = false;
             isHovering = false;
             isGravity = false;
