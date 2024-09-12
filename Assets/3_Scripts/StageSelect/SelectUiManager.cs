@@ -130,6 +130,7 @@ public class SelectUiManager : MonoBehaviour
     }
     public void StartCircle()
     {
+        startCircleAnimator.GetComponent<Image>().color = frameImage.color;
         startCircleAnimator.SetTrigger("Start");
     }
 }

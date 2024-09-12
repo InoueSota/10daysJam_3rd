@@ -1,3 +1,4 @@
+using DG.Tweening.Core.Easing;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -21,20 +22,20 @@ public class GameManager : MonoBehaviour
     // 時間
     private float readyTimer;
 
-    // 名前
     [Header("名前")]
     [SerializeField] private string thisStageName;
     [SerializeField] private string nextStageName;
 
-    // UI
     [Header("UI")]
     [SerializeField] private GameObject groupClear;
     [SerializeField] private Text stageName;
     [SerializeField] private Text menuStageName;
 
-    // プレイヤー
     [Header("プレイヤー")]
     [SerializeField] private PlayerManager playerManager;
+
+    [Header("リスタート演出")]
+    [SerializeField] private GameObject restartPrefab;
 
     void Start()
     {
@@ -83,8 +84,10 @@ public class GameManager : MonoBehaviour
         Ready();
         Clear();
 
-        if (isTriggerCancel && isStart && !isClear && !menuManager.GetIsMenuActive())
+        if (isTriggerCancel && isStart && !isClear)
         {
+            SetPlayerAcitve(menuManager.GetIsMenuActive());
+            menuManager.SetIsMenuActive();
             Restart();
         }
     }
