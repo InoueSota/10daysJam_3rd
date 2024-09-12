@@ -56,8 +56,10 @@ public class PlayerMoveManager : MonoBehaviour
     [Header("１秒で吹っ飛ぶマス数")]
     [SerializeField] private float cactusAmount;
 
-    // DeathWarp関係
+    [Header("１秒で移動するマス数")]
+    [SerializeField] private float warpAmount;
     private bool isWarp;
+    private bool isWarping;
     private Vector3 warpPosition;
 
     void Start()
@@ -84,6 +86,9 @@ public class PlayerMoveManager : MonoBehaviour
         isHovering = false;
         isGravity = false;
         isCactus = false;
+        isWarp = false;
+        isWarping = false;
+        warpPosition = Vector3.zero;
         transform.DOKill();
     }
 
@@ -114,7 +119,7 @@ public class PlayerMoveManager : MonoBehaviour
 
     void CheckDirection()
     {
-        if (!isCactus && (isPushLeft || isPushRight))
+        if (!isWarping && !isCactus && (isPushLeft || isPushRight))
         {
             moveSpeed = maxSpeed + acceleration;
 
@@ -230,7 +235,7 @@ public class PlayerMoveManager : MonoBehaviour
     void Jump()
     {
         // ジャンプ開始と初期化
-        if (playerManager.GetCanJump() && cropJumpCoolTimer <= 0f && !isCactus && !isJumping && !isHovering && !isGravity && isTriggerJump)
+        if (playerManager.GetCanJump() && cropJumpCoolTimer <= 0f && !isWarping && !isCactus && !isJumping && !isHovering && !isGravity && isTriggerJump)
         {
             foreach (GameObject obj in GameObject.FindGameObjectsWithTag("Object"))
             {
@@ -311,7 +316,7 @@ public class PlayerMoveManager : MonoBehaviour
     {
         if (!isGravity)
         {
-            if (!isCactus && !isJumping && !isHovering)
+            if (!isWarping && !isCactus && !isJumping && !isHovering)
             {
                 // ブロックとの衝突判定
                 bool noBlock = true;
@@ -523,10 +528,23 @@ public class PlayerMoveManager : MonoBehaviour
     {
         if (isWarp)
         {
-            transform.position = warpPosition;
-            warpPosition = Vector3.zero;
+            // ワープ以外のフラグ類を初期化する
+            isJumping = false;
+            isHovering = false;
+            isGravity = false;
+
+            // 距離によって移動速度が変わらないように調整
+            float warpTime = Vector3.Distance(nextPosition, warpPosition) / warpAmount;
+            // ワープ開始
+            transform.DOMove(warpPosition, warpTime).SetEase(Ease.OutCirc).OnComplete(FinishWarp);
+            isWarping = true;
             isWarp = false;
         }
+    }
+    void FinishWarp()
+    {
+        warpPosition = Vector3.zero;
+        isWarping = false;
     }
     void ClampInCamera()
     {

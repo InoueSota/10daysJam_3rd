@@ -15,6 +15,7 @@ public class SelectManager : MonoBehaviour
 
     // 他コンポーネント取得
     private S_Transition transition;
+    private ClearData clearData;
 
     [Header("ステージ最大数")]
     [SerializeField] private int stageMax;
@@ -57,6 +58,8 @@ public class SelectManager : MonoBehaviour
     {
         selectUiManager = GetComponent<SelectUiManager>();
         inputManager = GetComponent<InputManager>();
+        clearData = new ClearData();
+        clearData = clearData.LoadClearData(clearData);
 
         // ステージ遷移先に関する情報の初期化
         stageName = new string[stageMax];

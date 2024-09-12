@@ -35,4 +35,9 @@ public class ClearData
             _clearData.Stage[i] = false;
         }
     }
+
+    public bool GetClearFlag(ClearData _clearData, int _stageNum)
+    {
+        return _clearData.Stage[_stageNum];
+    }
 }
