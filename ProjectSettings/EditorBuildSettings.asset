@@ -21,11 +21,11 @@ EditorBuildSettings:
     path: Assets/1_Scenes/Stage3.unity
     guid: 43da4ee6c0b91fb47afdbbae5fea3a56
   - enabled: 1
-    path: Assets/1_Scenes/Stage5.unity
-    guid: a6103bf42faf0fb4f9664bd7a797f6d7
-  - enabled: 1
     path: Assets/1_Scenes/Stage4.unity
     guid: 621ede048d20bbf4abe47ab05605f170
+  - enabled: 1
+    path: Assets/1_Scenes/Stage5.unity
+    guid: a6103bf42faf0fb4f9664bd7a797f6d7
   - enabled: 1
     path: Assets/1_Scenes/Stage6.unity
     guid: c2d39443826d0c6408b101df9a4b7316
@@ -33,17 +33,20 @@ EditorBuildSettings:
     path: Assets/1_Scenes/Stage7.unity
     guid: cc36cd412824cb34db639eb77d266a10
   - enabled: 1
-    path: Assets/1_Scenes/Stage11.unity
-    guid: c5b9f4e6d7b230e408fcfdea4a6aa5dd
+    path: Assets/1_Scenes/Stage8.unity
+    guid: 3be78ab8bbe434741ac9bba7f6f63845
   - enabled: 1
     path: Assets/1_Scenes/Stage9.unity
     guid: 1f2d0d2c611715e4683a30eb833b24c2
   - enabled: 1
-    path: Assets/1_Scenes/Stage8.unity
-    guid: 3be78ab8bbe434741ac9bba7f6f63845
-  - enabled: 1
     path: Assets/1_Scenes/Stage10.unity
     guid: 9a069864a60835c419e925b4ac69f75f
+  - enabled: 1
+    path: Assets/1_Scenes/Stage11.unity
+    guid: c5b9f4e6d7b230e408fcfdea4a6aa5dd
+  - enabled: 1
+    path: Assets/1_Scenes/Stage12.unity
+    guid: 8a89ae67f9fc4af4eae33bf3052bad01
   - enabled: 1
     path: Assets/1_Scenes/Stage13.unity
     guid: a6752cde79f7ad247a076cbe118de72d
@@ -51,14 +54,11 @@ EditorBuildSettings:
     path: Assets/1_Scenes/Stage14.unity
     guid: c744831545fc74045b6268199c8f7c14
   - enabled: 1
-    path: Assets/1_Scenes/Stage12.unity
-    guid: 8a89ae67f9fc4af4eae33bf3052bad01
+    path: Assets/1_Scenes/Stage15.unity
+    guid: 4c7f80757551e0a4d8cba22558f976f5
   - enabled: 1
     path: Assets/1_Scenes/Stage16.unity
     guid: 287c3a0962c2d8444af15abcfa6c629a
-  - enabled: 1
-    path: Assets/1_Scenes/Stage15.unity
-    guid: 4c7f80757551e0a4d8cba22558f976f5
   - enabled: 1
     path: Assets/1_Scenes/Stage17.unity
     guid: b0b3fed7088801e44afd5feba5912d30
@@ -81,10 +81,10 @@ EditorBuildSettings:
     path: Assets/1_Scenes/Stage23.unity
     guid: f3cea96add873e948a6d464c4003b12e
   - enabled: 1
-    path: Assets/1_Scenes/Stage25.unity
+    path: Assets/1_Scenes/Stage24.unity
     guid: 4f027ef6dae34e14b8ca33374e36f958
   - enabled: 1
-    path: Assets/1_Scenes/Stage24.unity
+    path: Assets/1_Scenes/Stage25.unity
     guid: f5a6565c17071ce4f9d7938a72f1a112
   - enabled: 1
     path: Assets/1_Scenes/Stage26.unity
