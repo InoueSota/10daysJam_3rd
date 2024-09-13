@@ -36,8 +36,31 @@ public class ClearData
         }
     }
 
+    public void SetAllClear(ClearData _clearData)
+    {
+        for (int i = 0; i < _clearData.Stage.Length; i++)
+        {
+            _clearData.Stage[i] = true;
+        }
+    }
+
     public bool GetClearFlag(ClearData _clearData, int _stageNum)
     {
         return _clearData.Stage[_stageNum];
+    }
+    public bool GetAllClear(ClearData _clearData)
+    {
+        bool isAllClear = true;
+
+        for (int i = 0; i < _clearData.Stage.Length; i++)
+        {
+            if (!_clearData.Stage[i])
+            {
+                isAllClear = false;
+                break;
+            }
+        }
+
+        return isAllClear;
     }
 }
