@@ -67,6 +67,7 @@ public class UICropScript : MonoBehaviour
     {
         //“®‚«‚Æ‚ß‚é
         DOTween.KillAll();
+        //DOTween.Kill(this);
         isOne = false;
         coolTime = 1.2f;
         transform.localScale = Vector3.one;
