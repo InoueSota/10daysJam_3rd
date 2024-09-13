@@ -54,6 +54,10 @@ public class SelectManager : MonoBehaviour
     [SerializeField] private string[] themeTitle;
     private string[] chapterTitle;
 
+    [Header("‰¹")]
+    [SerializeField] AudioSource audioSource;
+    [SerializeField] AudioClip audioClip;
+
     void Start()
     {
         selectUiManager = GetComponent<SelectUiManager>();
@@ -220,6 +224,7 @@ public class SelectManager : MonoBehaviour
             GlobalVariables.selectStageNumber = stageNumber;
             transition.SetColor((int)stageGateManagers[stageNumber].GetChapter());
             transition.SetTransition(stageName[stageNumber]);
+            audioSource.PlayOneShot(audioClip);
         }
         if (isTriggerCancel && !transition.isTransNow)
         {
@@ -227,6 +232,8 @@ public class SelectManager : MonoBehaviour
             GlobalVariables.selectStageNumber = stageNumber;
             transition.SetColor((int)stageGateManagers[stageNumber].GetChapter());
             transition.SetTransition("TitleScene");
+            audioSource.PlayOneShot(audioClip);
+
         }
     }
     void UiManager()

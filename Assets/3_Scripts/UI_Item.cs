@@ -16,7 +16,8 @@ public class UI_Item : MonoBehaviour
     [SerializeField] List<GameObject> DestoryObjs;
     //仮ではめるプレハブ
     [SerializeField] GameObject UI_itemEffedtPrefab;
-
+    [SerializeField] AudioSource audioSource;
+    [SerializeField] AudioClip clip;
 
     //
     //プレイヤー
@@ -56,7 +57,7 @@ public class UI_Item : MonoBehaviour
 
         if (items.Count >= 3 && !isOne_Comp)
         {
-           
+            audioSource.PlayOneShot(clip);
                 Debug.Log("アイテムコンプリート");
             
             //アイテムがすべて集まった時

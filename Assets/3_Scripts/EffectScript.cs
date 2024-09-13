@@ -17,11 +17,18 @@ public class EffectScript : MonoBehaviour
     [SerializeField] bool isFeed;
     [Header("オンにするとオブジェクトを保持する")]
     [SerializeField] bool isNotDestroy;
+
+    [SerializeField] AudioSource audioSource;
+    [SerializeField] AudioClip audioClip;
+
     // Start is called before the first frame update
     void Start()
     {
-
-        transform.DOScale(easeInScale, secondIn).SetEase(easeIn).OnComplete(() =>
+        if (audioSource&&audioClip)
+        {
+            audioSource.PlayOneShot(audioClip);
+        }
+            transform.DOScale(easeInScale, secondIn).SetEase(easeIn).OnComplete(() =>
         {
             transform.DOScale(easeOutScale, secondOut).SetEase(easeOut).OnComplete(() =>
             {

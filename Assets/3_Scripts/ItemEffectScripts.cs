@@ -27,6 +27,13 @@ public class ItemEffectScripts : MonoBehaviour
     [SerializeField] float easehahentime;
     bool isOne;
 
+    //‰¹ŠÖŒW
+
+    [SerializeField] AudioSource audioSource;
+    [SerializeField] AudioSource audioSource2;
+    [SerializeField] AudioClip clip;
+    [SerializeField] AudioClip clip2;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -43,6 +50,9 @@ public class ItemEffectScripts : MonoBehaviour
         
         if (!item.GetIsActive()&& !isOne && item.GetHp() <= 0)
         {
+            audioSource.PlayOneShot(clip);
+            audioSource2.PlayOneShot(clip2);
+
             Debug.Log("breakitem");
             //front
             front.transform.DOScale(easeScale, easeTime).SetEase(Ease_In).OnComplete(() =>

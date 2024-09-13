@@ -14,6 +14,10 @@ public class TitleManager : MonoBehaviour
     // 遷移シーン先名
     [SerializeField] private string nextScene;
 
+    //音関係
+    [SerializeField] AudioSource audioSource;
+    [SerializeField] AudioClip clip;
+
     void Start()
     {
         inputManager = GetComponent<InputManager>();
@@ -42,6 +46,7 @@ public class TitleManager : MonoBehaviour
         {
             //トランジション処理
             transition.SetTransition(nextScene);
+            audioSource.PlayOneShot(clip);
         }
     }
 
