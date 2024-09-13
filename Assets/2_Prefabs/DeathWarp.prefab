@@ -178,7 +178,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   flowSpeed: 5
-  flowHight: 1
+  flowHight: 0.3
   alphaSpeed: 2
   alphaNum: 0.6
   deathWarpSprite: {fileID: 8426952916680214154}
