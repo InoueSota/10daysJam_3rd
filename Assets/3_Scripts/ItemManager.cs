@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SocialPlatforms;
 
 public class ItemManager : MonoBehaviour
 {
@@ -20,6 +21,9 @@ public class ItemManager : MonoBehaviour
     //エフェクト
     [SerializeField] GameObject GetEffect;
 
+    // 他オブジェクト取得
+    private Transform playerTransform;
+
     void Start()
     {
         allObjectManager = GetComponent<AllObjectManager>();
@@ -30,6 +34,14 @@ public class ItemManager : MonoBehaviour
         //初期位置保存
         originPos = transform.position;
         angle = 0;
+
+        // プレイヤーの位置を取得
+        playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
+    }
+
+    void Update()
+    {
+        NoticeBreak();
     }
 
     private void FixedUpdate()
@@ -49,6 +61,19 @@ public class ItemManager : MonoBehaviour
         fakeItem.SetActive(true);
         //UIの初期化処理
         ui_Item.Initialize();
+    }
+
+    void NoticeBreak()
+    {
+        if (allObjectManager.GetIsActive())
+        {
+            float yBetween = Mathf.Abs(transform.position.y - playerTransform.position.y + 1f);
+
+            if (yBetween < 0.4f)
+            {
+                Debug.Log("近い");
+            }
+        }
     }
 
     // 消滅処理
