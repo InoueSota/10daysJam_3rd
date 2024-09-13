@@ -167,6 +167,7 @@ MonoBehaviour:
   addGravity: 25
   cactusAmount: 16
   warpAmount: 10
+  warpEase: 28
 --- !u!114 &6061526980565390764
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -326,7 +327,6 @@ MonoBehaviour:
   cropLineManager: {fileID: 3856647538800460399}
   playerGraphic: {fileID: 6552557210357286604}
   walkParticleTimeMax: 0.05
-  isDeathWarp: 0
 --- !u!114 &2426478090120762133
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -60,6 +60,7 @@ public class PlayerMoveManager : MonoBehaviour
     [SerializeField] private float warpAmount;
     private bool isWarp;
     private bool isWarping;
+    [SerializeField] Ease warpEase;
     private Vector3 warpPosition;
 
     void Start()
@@ -536,7 +537,7 @@ public class PlayerMoveManager : MonoBehaviour
             // 距離によって移動速度が変わらないように調整
             float warpTime = Vector3.Distance(nextPosition, warpPosition) / warpAmount;
             // ワープ開始
-            transform.DOMove(warpPosition, warpTime).SetEase(Ease.OutCirc).OnComplete(FinishWarp);
+            transform.DOMove(warpPosition, warpTime).SetEase(warpEase).OnComplete(FinishWarp);
             isWarping = true;
             isWarp = false;
         }
@@ -673,5 +674,10 @@ public class PlayerMoveManager : MonoBehaviour
     public bool GetIsCactus()
     {
         return isCactus;
+    }
+
+    public bool GetIsWarping()
+    {
+        return isWarping; 
     }
 }

@@ -5,6 +5,8 @@ public class DeathWarpManager : MonoBehaviour
     // 自コンポーネント取得
     private AllObjectManager allObjectManager;
     private SpriteRenderer spriteRenderer;
+    private ParticleInstantiateScript particle;
+    private DeathWarpAnimationManager deathWarpAnimationManager;
 
     // 他オブジェクト取得
     private PlayerMoveManager playerMoveManager;
@@ -14,11 +16,14 @@ public class DeathWarpManager : MonoBehaviour
         playerMoveManager = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMoveManager>();
         allObjectManager = GetComponent<AllObjectManager>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        particle = GetComponent<ParticleInstantiateScript>();
+        deathWarpAnimationManager = GetComponent<DeathWarpAnimationManager>();
     }
 
     // 初期化処理
     void Initialize()
     {
+        deathWarpAnimationManager.Initialize();
         spriteRenderer.enabled = true;
         allObjectManager.SetIsActive(spriteRenderer.enabled);
         allObjectManager.Initialize();
@@ -29,6 +34,8 @@ public class DeathWarpManager : MonoBehaviour
     {
         spriteRenderer.enabled = false;
         allObjectManager.SetIsActive(spriteRenderer.enabled);
+        //deathWarpAnimationManager.Disappear();
+        particle.RunParticle(0);
     }
 
     // Setter

@@ -13,6 +13,7 @@ public class AutoActiveChanger : MonoBehaviour
     bool isActive;
 
     [SerializeField] bool particleClear = false;
+    [SerializeField] bool dummyDestroy = false;
 
     // Start is called before the first frame update
     void Start()
@@ -38,6 +39,7 @@ public class AutoActiveChanger : MonoBehaviour
                 if (spriteRenderer != null)
                 {
                     spriteRenderer.enabled = true;
+                   
                 }
             }
             else
@@ -52,7 +54,7 @@ public class AutoActiveChanger : MonoBehaviour
                 }
                 if (spriteRenderer != null)
                 {
-                    spriteRenderer.enabled = false;
+                   spriteRenderer.enabled = false;
                 }
             }
         }

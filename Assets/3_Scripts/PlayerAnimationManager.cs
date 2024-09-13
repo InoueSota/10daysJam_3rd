@@ -21,7 +21,7 @@ public class PlayerAnimationManager : MonoBehaviour
     [SerializeField] float walkParticleTimeMax = 0.5f;
     float walkParticleTime = 0.0f;
 
-    [SerializeField] bool isDeathWarp = false;
+    bool isDeathWarp = false;
 
     // Start is called before the first frame update
     void Start()
@@ -50,6 +50,7 @@ public class PlayerAnimationManager : MonoBehaviour
         bool isCropping = cropLineManager.GetIsCropping();
         bool isCactus = player.GetIsCactus();
         bool isClear = gameManager.GetIsClear();
+        isDeathWarp = player.GetIsWarping();
 
         animator.SetBool("isWalk", isWalk);
 
