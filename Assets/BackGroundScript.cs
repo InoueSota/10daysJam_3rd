@@ -34,7 +34,7 @@ public class BackGroundScript : MonoBehaviour
         for (int i = 0; i < backGround.Length; i++)
         {
             backGround[i].transform.localPosition = cameraPosPer * backGround[i].movePer;
-            Debug.Log(cameraPosPer * backGround[i].movePer);
+            
         }
 
     }

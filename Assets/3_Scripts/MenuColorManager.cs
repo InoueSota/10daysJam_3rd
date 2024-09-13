@@ -18,8 +18,8 @@ public class MenuColorManager : MonoBehaviour
         stageNumberBack.color = _darkColor;
         stageNumberFrame.color = _originalColor;
         tabFrame.color = _darkColor;
-        tabBackGround.color = new(_originalColor.r, _originalColor.g, _originalColor.b, 0.8f);
-        tabBackGroundCircle.color = _brightColor;
+        tabBackGroundCircle.color = _originalColor;
+        tabBackGround.color = _brightColor;
         returnBackGround.color = _darkColor;
         restartBackGround.color = _darkColor;
         stageSelectBackGround.color = _darkColor;

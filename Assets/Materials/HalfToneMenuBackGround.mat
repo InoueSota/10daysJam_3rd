@@ -53,7 +53,7 @@ Material:
     - _EnableExternalAlpha: 0
     - _HideDistance: 0
     - _HideOffset: 0
-    - _MaxCircleSize: 0.2
+    - _MaxCircleSize: 0.5
     - _MoveDirection: 0
     - _MoveSpeed: 0.05
     - _Rotation: 0

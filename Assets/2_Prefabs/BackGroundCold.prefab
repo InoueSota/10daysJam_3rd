@@ -53,7 +53,7 @@ MonoBehaviour:
   cameraBasePos: {x: 0, y: 0.34375, z: 0}
   backGround:
   - transform: {fileID: 7956775370024974929}
-    movePer: 1
+    movePer: 0.974
   - transform: {fileID: 5228660959630398711}
     movePer: 0.739
   - transform: {fileID: 7298735450952179047}

@@ -36,6 +36,9 @@ public class SelectManager : MonoBehaviour
     [SerializeField] private Transform stageImageParent;
     [SerializeField] private Sprite[] stageImageSprite;
 
+    [Header("ステージの難易度")]
+    [SerializeField] private int[] stageDifficulty;
+
     [Header("ステージ選択間隔の時間")]
     [SerializeField] private float selectIntervalTime;
     private float selectIntervalTimer;
