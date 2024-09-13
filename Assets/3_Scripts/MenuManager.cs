@@ -53,6 +53,14 @@ public class MenuManager : MonoBehaviour
     private Vector3 stageNumberOrigin;
     private Vector3 stageNumberTarget;
 
+    [Header("–Ú“I")]
+    [SerializeField] private RectTransform purposeTitleRect;
+    private Vector3 purposeTitleOrigin;
+    private Vector3 purposeTitleTarget;
+    [SerializeField] private RectTransform purposeRect;
+    private Vector3 purposeOrigin;
+    private Vector3 purposeTarget;
+
     void Start()
     {
         gameManager = GetComponent<GameManager>();
@@ -78,6 +86,12 @@ public class MenuManager : MonoBehaviour
         stageNumberOrigin = stageNumberRect.transform.localPosition;
 
         stageNumberTarget = stageNumberOrigin;
+
+        purposeTitleOrigin = purposeTitleRect.transform.localPosition;
+        purposeOrigin = purposeRect.transform.localPosition;
+
+        purposeTitleTarget = purposeTitleOrigin;
+        purposeTarget = purposeOrigin;
     }
 
     void Update()
@@ -163,6 +177,8 @@ public class MenuManager : MonoBehaviour
         restartRect.transform.localPosition += (restartRectTarget - restartRect.transform.localPosition) * (chasePower * Time.deltaTime);
         stageSelectRect.transform.localPosition += (stageSelectRectTarget - stageSelectRect.transform.localPosition) * (chasePower * Time.deltaTime);
         stageNumberRect.transform.localPosition += (stageNumberTarget - stageNumberRect.transform.localPosition) * (chasePower * Time.deltaTime);
+        purposeTitleRect.transform.localPosition += (purposeTitleTarget - purposeTitleRect.transform.localPosition) * (chasePower * Time.deltaTime);
+        purposeRect.transform.localPosition += (purposeTarget- purposeRect.transform.localPosition) * (chasePower * Time.deltaTime);
     }
 
     // Setter
@@ -174,6 +190,8 @@ public class MenuManager : MonoBehaviour
             menuBackTargetColor = darkColor;
             menuTabTarget.x = 440f;
             stageNumberTarget.x = -480f;
+            purposeTitleTarget.x = -480f;
+            purposeTarget.y = -200f;
             menuType = MenuType.RETURN;
         }
         else
@@ -181,6 +199,8 @@ public class MenuManager : MonoBehaviour
             menuBackTargetColor = menuBackOriginColor;
             menuTabTarget.x = menuTabOrigin.x;
             stageNumberTarget.x = stageNumberOrigin.x;
+            purposeTitleTarget.x = purposeTitleOrigin.x;
+            purposeTarget.y = purposeOrigin.y;
         }
     }
 

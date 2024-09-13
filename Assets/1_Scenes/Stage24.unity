@@ -721,6 +721,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 966731974}
     - target: {fileID: 8182826278413569486, guid: 8412db8f3ccf46947b9e1e6403ca2603, type: 3}
+      propertyPath: purposeRect
+      value: 
+      objectReference: {fileID: 1833311439}
+    - target: {fileID: 8182826278413569486, guid: 8412db8f3ccf46947b9e1e6403ca2603, type: 3}
       propertyPath: restartRect
       value: 
       objectReference: {fileID: 966731976}
@@ -736,6 +740,10 @@ PrefabInstance:
       propertyPath: stageSelectRect
       value: 
       objectReference: {fileID: 966731975}
+    - target: {fileID: 8182826278413569486, guid: 8412db8f3ccf46947b9e1e6403ca2603, type: 3}
+      propertyPath: purposeTitleRect
+      value: 
+      objectReference: {fileID: 1833311438}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8412db8f3ccf46947b9e1e6403ca2603, type: 3}
 --- !u!4 &1428186354 stripped
@@ -833,6 +841,16 @@ PrefabInstance:
 Camera:
   m_CorrespondingSourceObject: {fileID: 1927215938267834287, guid: ac0b6fa099510de40be19a801118c9b9, type: 3}
   m_PrefabInstance: {fileID: 1773075143}
+  m_PrefabAsset: {fileID: 0}
+--- !u!224 &1833311438 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 6591399312772912283, guid: 01413edb6ceb3764c8e8c5614eb5b9cd, type: 3}
+  m_PrefabInstance: {fileID: 966731972}
+  m_PrefabAsset: {fileID: 0}
+--- !u!224 &1833311439 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 1845020740077017157, guid: 01413edb6ceb3764c8e8c5614eb5b9cd, type: 3}
+  m_PrefabInstance: {fileID: 966731972}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1919802772
 PrefabInstance:

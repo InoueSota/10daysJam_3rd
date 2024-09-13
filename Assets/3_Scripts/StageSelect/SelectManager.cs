@@ -89,6 +89,7 @@ public class SelectManager : MonoBehaviour
             GameObject stageImage = Instantiate(stageImagePrefab, new(stageGateTransform.position.x, stageGateTransform.position.y - 3.5f, stageGateTransform.position.z), Quaternion.identity);
             stageImage.transform.SetParent(stageImageParent);
             stageImage.GetComponent<Image>().sprite = stageImageSprite[i - 1];
+            stageImage.GetComponent<StageImageManager>().Initialize(clearData.Stage[i - 1], stageDifficulty[i - 1], (int)stageGateManagers[i - 1].GetChapter());
 
             // ステージ名取得
             stageName[i - 1] = "Stage" + i.ToString();
@@ -160,8 +161,20 @@ public class SelectManager : MonoBehaviour
             else if (isPushUp || isPushDown)
             {
                 // 現在のステージ数を参照し、チャプターを取得する
+                // 「墓地」よりも少し先を選択
+                if (stageNumber >= GlobalVariables.toCemeteryNumber + 1)
+                {
+                    if (isPushUp)
+                    {
+                        stageNumber = stageMax - 1;
+                    }
+                    else if (isPushDown)
+                    {
+                        stageNumber = GlobalVariables.toCemeteryNumber;
+                    }
+                }
                 // 「墓地」を選択
-                if (stageNumber >= GlobalVariables.toCemeteryNumber)
+                else if (stageNumber >= GlobalVariables.toCemeteryNumber)
                 {
                     if (isPushUp)
                     {

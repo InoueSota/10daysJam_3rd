@@ -407,6 +407,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!224 &877355597 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 6591399312772912283, guid: 01413edb6ceb3764c8e8c5614eb5b9cd, type: 3}
+  m_PrefabInstance: {fileID: 966731972}
+  m_PrefabAsset: {fileID: 0}
+--- !u!224 &877355598 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 1845020740077017157, guid: 01413edb6ceb3764c8e8c5614eb5b9cd, type: 3}
+  m_PrefabInstance: {fileID: 966731972}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &966731972
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -765,6 +775,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 966731974}
     - target: {fileID: 8182826278413569486, guid: 8412db8f3ccf46947b9e1e6403ca2603, type: 3}
+      propertyPath: purposeRect
+      value: 
+      objectReference: {fileID: 877355598}
+    - target: {fileID: 8182826278413569486, guid: 8412db8f3ccf46947b9e1e6403ca2603, type: 3}
       propertyPath: restartRect
       value: 
       objectReference: {fileID: 966731976}
@@ -780,6 +794,10 @@ PrefabInstance:
       propertyPath: stageSelectRect
       value: 
       objectReference: {fileID: 966731975}
+    - target: {fileID: 8182826278413569486, guid: 8412db8f3ccf46947b9e1e6403ca2603, type: 3}
+      propertyPath: purposeTitleRect
+      value: 
+      objectReference: {fileID: 877355597}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8412db8f3ccf46947b9e1e6403ca2603, type: 3}
 --- !u!4 &1428186354 stripped
