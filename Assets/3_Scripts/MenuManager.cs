@@ -24,6 +24,11 @@ public class MenuManager : MonoBehaviour
     // メニュー画面のアクティブフラグ
     private bool isMenuActive;
 
+    [Header("初手専用")]
+    [SerializeField] private float intervalTime;
+    private float intervalTimer;
+    private bool isFinishStart;
+
     [Header("メニュー画面背景")]
     [SerializeField] private Image menuBackImage;
     [SerializeField] private Color darkColor;
@@ -69,6 +74,10 @@ public class MenuManager : MonoBehaviour
         {
             transition = GameObject.FindWithTag("trans").GetComponent<S_Transition>();
         }
+
+        intervalTimer = intervalTime;
+        isFinishStart = false;
+
         menuBackOriginColor = new(darkColor.r, darkColor.g, darkColor.b, 0f);
         menuBackTargetColor = menuBackOriginColor;
         menuBackImage.color = menuBackTargetColor;
@@ -98,11 +107,25 @@ public class MenuManager : MonoBehaviour
     {
         GetInput();
 
+        StartAnimation();
         if (isMenuActive)
         {
             ChangeMenuType();
         }
         Menu();
+    }
+    void StartAnimation()
+    {
+        if (!isFinishStart)
+        {
+            intervalTimer -= Time.deltaTime;
+            if (intervalTimer <= 0f)
+            {
+                purposeTitleTarget.x = -815f;
+                purposeTarget.y = -380f;
+                isFinishStart = true;
+            }
+        }
     }
     void ChangeMenuType()
     {
@@ -178,7 +201,7 @@ public class MenuManager : MonoBehaviour
         stageSelectRect.transform.localPosition += (stageSelectRectTarget - stageSelectRect.transform.localPosition) * (chasePower * Time.deltaTime);
         stageNumberRect.transform.localPosition += (stageNumberTarget - stageNumberRect.transform.localPosition) * (chasePower * Time.deltaTime);
         purposeTitleRect.transform.localPosition += (purposeTitleTarget - purposeTitleRect.transform.localPosition) * (chasePower * Time.deltaTime);
-        purposeRect.transform.localPosition += (purposeTarget- purposeRect.transform.localPosition) * (chasePower * Time.deltaTime);
+        purposeRect.transform.localPosition += (purposeTarget - purposeRect.transform.localPosition) * (chasePower * Time.deltaTime);
     }
 
     // Setter
@@ -190,8 +213,11 @@ public class MenuManager : MonoBehaviour
             menuBackTargetColor = darkColor;
             menuTabTarget.x = 440f;
             stageNumberTarget.x = -480f;
-            purposeTitleTarget.x = -480f;
-            purposeTarget.y = -200f;
+            if (isFinishStart)
+            {
+                purposeTitleTarget.x = purposeTitleOrigin.x;
+                purposeTarget.y = purposeOrigin.y;
+            }
             menuType = MenuType.RETURN;
         }
         else
@@ -199,8 +225,11 @@ public class MenuManager : MonoBehaviour
             menuBackTargetColor = menuBackOriginColor;
             menuTabTarget.x = menuTabOrigin.x;
             stageNumberTarget.x = stageNumberOrigin.x;
-            purposeTitleTarget.x = purposeTitleOrigin.x;
-            purposeTarget.y = purposeOrigin.y;
+            if (isFinishStart)
+            {
+                purposeTitleTarget.x = -815f;
+                purposeTarget.y = -380f;
+            }
         }
     }
 
