@@ -2165,7 +2165,7 @@ MonoBehaviour:
   - "\u843D\u6C37\u6CE8\u610F\uFF01\uFF01"
   - "\u3086\u304C\u3080\u304F\u3046\u304B\u3093"
   - "\u901A\u308A\u306C\u3051\u30EF\u30FC\u30D7\u30EB\u30FC\u30D7"
-  - "\u304A\u3082\u3044\u3064\u304B\u306A\u3044\u306F\u304B\u306A\u3044"
+  - "\u5E7D\u970A\u306E\u4E00\u4EBA\u66AE\u3089\u3057"
   - "\u3053\u308C\u304C\u6700\u5F8C\u3060\uFF01\u30C1\u30FC\u30E0 \u30AB\u30DB\u30B4\u30FC\u30B9\u30C8"
   stageImagePrefab: {fileID: 6755901503021616594, guid: 5e301d8e6f66a5748bbf5bd37e69225b, type: 3}
   stageImageParent: {fileID: 170178378}
@@ -2185,21 +2185,21 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 2f2f9a88ea9c6bd4dba2d7e7244b79c5, type: 3}
   - {fileID: 21300000, guid: 3b9c851193c4e2b4f82c9503e28a4bdc, type: 3}
   - {fileID: 21300000, guid: b331e5852bb6c444c98aeef37803c820, type: 3}
-  - {fileID: 21300000, guid: b331e5852bb6c444c98aeef37803c820, type: 3}
-  - {fileID: 21300000, guid: b331e5852bb6c444c98aeef37803c820, type: 3}
-  - {fileID: 21300000, guid: b331e5852bb6c444c98aeef37803c820, type: 3}
-  - {fileID: 21300000, guid: b331e5852bb6c444c98aeef37803c820, type: 3}
-  - {fileID: 21300000, guid: b331e5852bb6c444c98aeef37803c820, type: 3}
-  - {fileID: 21300000, guid: b331e5852bb6c444c98aeef37803c820, type: 3}
-  - {fileID: 21300000, guid: b331e5852bb6c444c98aeef37803c820, type: 3}
-  - {fileID: 21300000, guid: b331e5852bb6c444c98aeef37803c820, type: 3}
-  - {fileID: 21300000, guid: b331e5852bb6c444c98aeef37803c820, type: 3}
-  - {fileID: 21300000, guid: b331e5852bb6c444c98aeef37803c820, type: 3}
-  - {fileID: 21300000, guid: b331e5852bb6c444c98aeef37803c820, type: 3}
-  - {fileID: 21300000, guid: b331e5852bb6c444c98aeef37803c820, type: 3}
-  - {fileID: 21300000, guid: b331e5852bb6c444c98aeef37803c820, type: 3}
-  - {fileID: 21300000, guid: b331e5852bb6c444c98aeef37803c820, type: 3}
-  - {fileID: 21300000, guid: b331e5852bb6c444c98aeef37803c820, type: 3}
+  - {fileID: 21300000, guid: 75d208c41c1a5914a803a913819b5ea4, type: 3}
+  - {fileID: 21300000, guid: 7f98cec84f9e9964d89af44bfad82917, type: 3}
+  - {fileID: 21300000, guid: e49cc6453f264cc46886e641447b5756, type: 3}
+  - {fileID: 21300000, guid: c22f2fd046ec1774c9ea094163a178e3, type: 3}
+  - {fileID: 21300000, guid: 31a103ce7730e554ba8381b0fde488ce, type: 3}
+  - {fileID: 21300000, guid: 8bcb3e066c398a446abad6d956a19cd7, type: 3}
+  - {fileID: 21300000, guid: 98a80bcb4e9d6e241b1c2881ffbd1028, type: 3}
+  - {fileID: 21300000, guid: 1efd35e2514c3924db4ec93bbb05b89b, type: 3}
+  - {fileID: 21300000, guid: d6df4a3f5c293934c80c7da7243c60d6, type: 3}
+  - {fileID: 21300000, guid: 77c11d458a5579144bc85a8ec9ba3d00, type: 3}
+  - {fileID: 21300000, guid: 4461d9110cfb6e4438d4affd8cc66cda, type: 3}
+  - {fileID: 21300000, guid: a91f282430e8a9243a07d3abf882981d, type: 3}
+  - {fileID: 21300000, guid: 49837d2d296547a4bb14a843e18098ac, type: 3}
+  - {fileID: 21300000, guid: eb1eae408c251264aabb6e79e8852f55, type: 3}
+  - {fileID: 21300000, guid: 6fc05b320de42dd4dbd21bc302b6a7e8, type: 3}
   stageDifficulty: 010000000200000002000000010000000200000003000000020000000100000001000000020000000300000003000000040000000200000003000000030000000100000002000000030000000200000003000000010000000100000003000000050000000100000002000000030000000400000005000000
   selectIntervalTime: 0.5
   stageGateSpace: 15
