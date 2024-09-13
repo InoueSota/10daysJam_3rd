@@ -54,6 +54,7 @@ MonoBehaviour:
   thisStageName: 
   nextStageName: 
   groupClear: {fileID: 0}
+  stageName: {fileID: 0}
   menuStageName: {fileID: 0}
   playerManager: {fileID: 0}
   restartAnimator: {fileID: 0}
@@ -94,7 +95,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4269d3d67648d254cb711731a36e6f33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  intervalTime: 2
+  intervalTime: 3
   menuBackImage: {fileID: 0}
   darkColor: {r: 0, g: 0, b: 0, a: 0.5019608}
   menuTabRect: {fileID: 0}
