@@ -70,7 +70,7 @@ public class IcicleManager : MonoBehaviour
             {
                 AllObjectManager hitAllObjectManager = obj.GetComponent<AllObjectManager>();
 
-                if (obj != gameObject && hitAllObjectManager.GetIsActive() && hitAllObjectManager.GetObjectType() != AllObjectManager.ObjectType.ITEM)
+                if (obj != gameObject && hitAllObjectManager.GetIsActive())
                 {
                     // XŽ²”»’è
                     float xBetween = Mathf.Abs(nextPosition.x - obj.transform.position.x);
