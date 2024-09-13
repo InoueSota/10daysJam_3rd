@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
     private StageObjectManager stageObjectManager;
     private MenuManager menuManager;
     private InputManager inputManager;
+    private ResetAudioManager resetAudioManager;
     private bool isTriggerCancel;
     private bool isTriggerReset;
     private bool isTriggerspecial;
@@ -43,6 +44,7 @@ public class GameManager : MonoBehaviour
         stageObjectManager.SetPlayerManager(playerManager);
         menuManager = GetComponent<MenuManager>();
         inputManager = GetComponent<InputManager>();
+        resetAudioManager = GetComponent<ResetAudioManager>();
         clearData = new ClearData();
         clearData = clearData.LoadClearData(clearData);
         if (GameObject.FindWithTag("trans"))
@@ -190,6 +192,8 @@ public class GameManager : MonoBehaviour
     {
         // プレイヤー初期化
         playerManager.Initialize();
+
+        resetAudioManager.PlaySound();
 
         // ステージオブジェクト初期化
         stageObjectManager.Initialize();
