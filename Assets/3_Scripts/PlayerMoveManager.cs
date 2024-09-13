@@ -7,6 +7,7 @@ public class PlayerMoveManager : MonoBehaviour
     private PlayerManager playerManager;
     private InputManager inputManager;
     private PlayerAnimationManager playerAnimationManager;
+    private AudioSource audioSource;
     private bool isPushLeft;
     private bool isPushRight;
     private bool isTriggerJump;
@@ -68,6 +69,7 @@ public class PlayerMoveManager : MonoBehaviour
         playerManager = GetComponent<PlayerManager>();
         inputManager = GetComponent<InputManager>();
         playerAnimationManager = GetComponent<PlayerAnimationManager>();
+        audioSource = GetComponent<AudioSource>();
 
         halfSize.x = transform.localScale.x * 0.5f;
         halfSize.y = transform.localScale.y * 0.5f;
@@ -252,7 +254,7 @@ public class PlayerMoveManager : MonoBehaviour
 
                     if (obj.GetComponent<AllObjectManager>().GetIsActive() && obj.GetComponent<AllObjectManager>().GetIsHitObject())
                     {
-
+                        audioSource.Play();
                         jumpTarget = nextPosition.y + jumpDistance;
                         isJumping = true;
                         break;

@@ -10,6 +10,7 @@ public class ItemManager : MonoBehaviour
     private AllObjectManager allObjectManager;
     private SpriteRenderer spriteRenderer;
     private ItemEffectScripts sitemEffectScripts;
+    private ItemParticleManager particleManager;
     [SerializeField] UI_Item ui_Item;
     //óhÇÁÇ∑óp
     private Vector3 originPos;
@@ -29,6 +30,7 @@ public class ItemManager : MonoBehaviour
         allObjectManager = GetComponent<AllObjectManager>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         sitemEffectScripts = GetComponent<ItemEffectScripts>();
+        particleManager = GetComponent<ItemParticleManager>();
         ui_Item = GameObject.FindWithTag("items").GetComponent<UI_Item>();
 
         //èâä˙à íuï€ë∂
@@ -71,7 +73,11 @@ public class ItemManager : MonoBehaviour
 
             if (yBetween < 0.4f)
             {
-                Debug.Log("ãﬂÇ¢");
+                particleManager.RunParticle();
+            }
+            else
+            {
+                particleManager.Reset();
             }
         }
     }
