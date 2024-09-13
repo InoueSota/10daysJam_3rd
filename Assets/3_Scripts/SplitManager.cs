@@ -108,6 +108,7 @@ public class SplitManager : MonoBehaviour
         underSpriteRenderer.enabled = true;
         allObjectManager.SetIsActive(overSpriteRenderer.enabled);
         allObjectManager.Initialize();
+        isAvoid = false;
 
         angle = 0;
     }
