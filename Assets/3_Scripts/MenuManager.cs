@@ -24,6 +24,11 @@ public class MenuManager : MonoBehaviour
     // メニュー画面のアクティブフラグ
     private bool isMenuActive;
 
+    [Header("初手専用")]
+    [SerializeField] private float intervalTime;
+    private float intervalTimer;
+    private bool isFinishStart;
+
     [Header("メニュー画面背景")]
     [SerializeField] private Image menuBackImage;
     [SerializeField] private Color darkColor;
@@ -53,6 +58,14 @@ public class MenuManager : MonoBehaviour
     private Vector3 stageNumberOrigin;
     private Vector3 stageNumberTarget;
 
+    [Header("目的")]
+    [SerializeField] private RectTransform purposeTitleRect;
+    private Vector3 purposeTitleOrigin;
+    private Vector3 purposeTitleTarget;
+    [SerializeField] private RectTransform purposeRect;
+    private Vector3 purposeOrigin;
+    private Vector3 purposeTarget;
+
     void Start()
     {
         gameManager = GetComponent<GameManager>();
@@ -61,6 +74,10 @@ public class MenuManager : MonoBehaviour
         {
             transition = GameObject.FindWithTag("trans").GetComponent<S_Transition>();
         }
+
+        intervalTimer = intervalTime;
+        isFinishStart = false;
+
         menuBackOriginColor = new(darkColor.r, darkColor.g, darkColor.b, 0f);
         menuBackTargetColor = menuBackOriginColor;
         menuBackImage.color = menuBackTargetColor;
@@ -78,17 +95,37 @@ public class MenuManager : MonoBehaviour
         stageNumberOrigin = stageNumberRect.transform.localPosition;
 
         stageNumberTarget = stageNumberOrigin;
+
+        purposeTitleOrigin = purposeTitleRect.transform.localPosition;
+        purposeOrigin = purposeRect.transform.localPosition;
+
+        purposeTitleTarget = purposeTitleOrigin;
+        purposeTarget = purposeOrigin;
     }
 
     void Update()
     {
         GetInput();
 
+        StartAnimation();
         if (isMenuActive)
         {
             ChangeMenuType();
         }
         Menu();
+    }
+    void StartAnimation()
+    {
+        if (!isFinishStart)
+        {
+            intervalTimer -= Time.deltaTime;
+            if (intervalTimer <= 0f)
+            {
+                purposeTitleTarget.x = -815f;
+                purposeTarget.y = -380f;
+                isFinishStart = true;
+            }
+        }
     }
     void ChangeMenuType()
     {
@@ -163,6 +200,8 @@ public class MenuManager : MonoBehaviour
         restartRect.transform.localPosition += (restartRectTarget - restartRect.transform.localPosition) * (chasePower * Time.deltaTime);
         stageSelectRect.transform.localPosition += (stageSelectRectTarget - stageSelectRect.transform.localPosition) * (chasePower * Time.deltaTime);
         stageNumberRect.transform.localPosition += (stageNumberTarget - stageNumberRect.transform.localPosition) * (chasePower * Time.deltaTime);
+        purposeTitleRect.transform.localPosition += (purposeTitleTarget - purposeTitleRect.transform.localPosition) * (chasePower * Time.deltaTime);
+        purposeRect.transform.localPosition += (purposeTarget - purposeRect.transform.localPosition) * (chasePower * Time.deltaTime);
     }
 
     // Setter
@@ -174,6 +213,11 @@ public class MenuManager : MonoBehaviour
             menuBackTargetColor = darkColor;
             menuTabTarget.x = 440f;
             stageNumberTarget.x = -480f;
+            if (isFinishStart)
+            {
+                purposeTitleTarget.x = purposeTitleOrigin.x;
+                purposeTarget.y = purposeOrigin.y;
+            }
             menuType = MenuType.RETURN;
         }
         else
@@ -181,6 +225,11 @@ public class MenuManager : MonoBehaviour
             menuBackTargetColor = menuBackOriginColor;
             menuTabTarget.x = menuTabOrigin.x;
             stageNumberTarget.x = stageNumberOrigin.x;
+            if (isFinishStart)
+            {
+                purposeTitleTarget.x = -815f;
+                purposeTarget.y = -380f;
+            }
         }
     }
 

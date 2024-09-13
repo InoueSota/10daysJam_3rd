@@ -312,6 +312,16 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!224 &837366677 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 6591399312772912283, guid: 01413edb6ceb3764c8e8c5614eb5b9cd, type: 3}
+  m_PrefabInstance: {fileID: 1528018549}
+  m_PrefabAsset: {fileID: 0}
+--- !u!224 &837366678 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 1845020740077017157, guid: 01413edb6ceb3764c8e8c5614eb5b9cd, type: 3}
+  m_PrefabInstance: {fileID: 1528018549}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &956249593
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -590,6 +600,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1528018551}
     - target: {fileID: 8182826278413569486, guid: 8412db8f3ccf46947b9e1e6403ca2603, type: 3}
+      propertyPath: purposeRect
+      value: 
+      objectReference: {fileID: 837366678}
+    - target: {fileID: 8182826278413569486, guid: 8412db8f3ccf46947b9e1e6403ca2603, type: 3}
       propertyPath: restartRect
       value: 
       objectReference: {fileID: 1528018553}
@@ -605,6 +619,10 @@ PrefabInstance:
       propertyPath: stageSelectRect
       value: 
       objectReference: {fileID: 1528018552}
+    - target: {fileID: 8182826278413569486, guid: 8412db8f3ccf46947b9e1e6403ca2603, type: 3}
+      propertyPath: purposeTitleRect
+      value: 
+      objectReference: {fileID: 837366677}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8412db8f3ccf46947b9e1e6403ca2603, type: 3}
 --- !u!4 &1428186354 stripped

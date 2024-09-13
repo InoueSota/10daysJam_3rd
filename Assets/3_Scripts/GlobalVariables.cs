@@ -14,6 +14,6 @@ public class GlobalVariables : MonoBehaviour
 
     // チャプターが切り替わるステージ番号
     public static int toCaveNumber = 7;
-    public static int toDesertNumber = 17;
-    public static int toCemeteryNumber = 20;
+    public static int toDesertNumber = 16;
+    public static int toCemeteryNumber = 25;
 }

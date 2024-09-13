@@ -6,6 +6,10 @@ public class MenuColorManager : MonoBehaviour
     [Header("ImageŽæ“¾")]
     [SerializeField] private Image stageNumberBack;
     [SerializeField] private Image stageNumberFrame;
+    [SerializeField] private Image purposeTitleFrameBack;
+    [SerializeField] private Image purposeTitleFrame;
+    [SerializeField] private Image purposeFrameBack;
+    [SerializeField] private Image purposeFrame;
     [SerializeField] private Image tabBackGround;
     [SerializeField] private Image tabBackGroundCircle;
     [SerializeField] private Image tabFrame;
@@ -17,6 +21,10 @@ public class MenuColorManager : MonoBehaviour
     {
         stageNumberBack.color = _darkColor;
         stageNumberFrame.color = _originalColor;
+        purposeTitleFrameBack.color = _darkColor;
+        purposeTitleFrame.color = _originalColor;
+        purposeFrameBack.color = _darkColor;
+        purposeFrame.color = _originalColor;
         tabFrame.color = _darkColor;
         tabBackGroundCircle.color = _originalColor;
         tabBackGround.color = _brightColor;

@@ -128,6 +128,16 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 2151846256069902106, guid: 01413edb6ceb3764c8e8c5614eb5b9cd, type: 3}
   m_PrefabInstance: {fileID: 966731972}
   m_PrefabAsset: {fileID: 0}
+--- !u!224 &482579278 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 6591399312772912283, guid: 01413edb6ceb3764c8e8c5614eb5b9cd, type: 3}
+  m_PrefabInstance: {fileID: 966731972}
+  m_PrefabAsset: {fileID: 0}
+--- !u!224 &482579279 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 1845020740077017157, guid: 01413edb6ceb3764c8e8c5614eb5b9cd, type: 3}
+  m_PrefabInstance: {fileID: 966731972}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &619394800
 GameObject:
   m_ObjectHideFlags: 0
@@ -709,6 +719,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 966731975}
     - target: {fileID: 8182826278413569486, guid: 8412db8f3ccf46947b9e1e6403ca2603, type: 3}
+      propertyPath: purposeRect
+      value: 
+      objectReference: {fileID: 482579279}
+    - target: {fileID: 8182826278413569486, guid: 8412db8f3ccf46947b9e1e6403ca2603, type: 3}
       propertyPath: restartRect
       value: 
       objectReference: {fileID: 966731977}
@@ -724,6 +738,10 @@ PrefabInstance:
       propertyPath: stageSelectRect
       value: 
       objectReference: {fileID: 1565243150}
+    - target: {fileID: 8182826278413569486, guid: 8412db8f3ccf46947b9e1e6403ca2603, type: 3}
+      propertyPath: purposeTitleRect
+      value: 
+      objectReference: {fileID: 482579278}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8412db8f3ccf46947b9e1e6403ca2603, type: 3}
 --- !u!4 &1428186354 stripped
