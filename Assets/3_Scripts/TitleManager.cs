@@ -2,10 +2,18 @@ using UnityEngine;
 
 public class TitleManager : MonoBehaviour
 {
-    // 入力
+    // 自コンポーネント取得
+    private ParticleInstantiateScript particle;
     private InputManager inputManager;
     private bool isTriggerJump;
     private bool isTriggerCancel;
+
+    // スタンプ
+    [SerializeField] private GameObject stampObj;
+
+    // 花火
+    [SerializeField] float fireWorksTime = 1, fireWorksTimeMax = 1, fireWorksTimeMin = 0.4f;
+    private bool isAllClear;
 
     // 他コンポーネント取得
     private ClearData clearData;
@@ -20,9 +28,18 @@ public class TitleManager : MonoBehaviour
 
     void Start()
     {
+        particle = GetComponent<ParticleInstantiateScript>();
         inputManager = GetComponent<InputManager>();
         clearData = new ClearData();
         clearData = clearData.LoadClearData(clearData);
+
+        // 全クリか判断する
+        if (clearData.GetAllClear(clearData))
+        {
+            isAllClear = true;
+            stampObj.SetActive(isAllClear);
+        }
+
         transition = GameObject.FindWithTag("trans").GetComponent<S_Transition>();
         transition.SetColor(4);
     }
@@ -31,9 +48,26 @@ public class TitleManager : MonoBehaviour
     {
         GetInput();
 
+        if (isAllClear)
+        {
+            AllClear();
+        }
+
         ChangeScene();
     }
 
+    void AllClear()
+    {
+        if (fireWorksTime <= 0)
+        {
+            particle.RunParticle(0, new Vector3(Random.Range(-9f, 9f), Random.Range(-4f, 4f), 0.0f));
+            fireWorksTime += fireWorksTimeMax;
+        }
+        else
+        {
+            fireWorksTime -= Time.deltaTime;
+        }
+    }
     void ChangeScene()
     {
         if (isTriggerCancel)
