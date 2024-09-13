@@ -54,6 +54,8 @@ MonoBehaviour:
   secondOut: 0.3
   isFeed: 0
   isNotDestroy: 1
+  audioSource: {fileID: 0}
+  audioClip: {fileID: 0}
 --- !u!212 &77538635182540681
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -94,7 +96,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1284601981
   m_SortingLayer: 1
-  m_SortingOrder: 28
+  m_SortingOrder: 9
   m_Sprite: {fileID: 1627000453, guid: a3d15cb71c5cd3942a942af0950df720, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
