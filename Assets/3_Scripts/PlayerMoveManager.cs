@@ -623,7 +623,7 @@ public class PlayerMoveManager : MonoBehaviour
     }
     public bool GetIsGround()
     {
-        if (isJumping || isHovering || isGravity || isCactus)
+        if (isJumping || isHovering || isGravity || isCactus || isWarp || isWarping)
         {
             return false;
         }
