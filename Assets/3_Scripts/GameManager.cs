@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
@@ -56,8 +57,8 @@ public class GameManager : MonoBehaviour
         // 名前代入
         GlobalVariables.retryStageName = thisStageName;
         GlobalVariables.nextStageName = nextStageName;
-        stageName.text = thisStageName;
-        menuStageName.text = thisStageName;
+        stageName.text = SceneManager.GetActiveScene().name;
+        menuStageName.text = SceneManager.GetActiveScene().name;
 
         // グローバル変数の初期化
         GlobalVariables.isClear = false;
