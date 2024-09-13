@@ -84,9 +84,17 @@ public class IcicleManager : MonoBehaviour
                     {
                         if (nextPosition.y > obj.transform.position.y)
                         {
-                            destructionManager.Destruction(obj);
-                            Damage();
-                            break;
+                            if (hitAllObjectManager.GetObjectType() != AllObjectManager.ObjectType.ITEM)
+                            {
+                                destructionManager.Destruction(obj);
+                                Damage();
+                                break;
+                            }
+                            else
+                            {
+                                destructionManager.Destruction(obj);
+                                break;
+                            }
                         }
                     }
                 }
