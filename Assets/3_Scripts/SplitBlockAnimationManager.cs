@@ -8,24 +8,33 @@ public class SplitBlockAnimationManager : MonoBehaviour
     SplitManager splitManager;
     [SerializeField] Sprite[] sprites;
     [SerializeField] SpriteRenderer overRenderer = null;
+    AudioSource audio;
+
+    bool isAvoid = false;
 
     // Start is called before the first frame update
     void Start()
     {
         splitManager = GetComponent<SplitManager>();
+        audio = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
     void Update()
     {
-
-        if (splitManager.GetAVoid() == true)
+        bool preAvoid = isAvoid;
+        isAvoid = splitManager.GetAVoid();
+        if (isAvoid != preAvoid)
         {
-            overRenderer.sprite = sprites[1];
-        }
-        else
-        {
-            overRenderer.sprite = sprites[0];
+            if (isAvoid == true)
+            {
+                overRenderer.sprite = sprites[1];
+                audio.Play();
+            }
+            else
+            {
+                overRenderer.sprite = sprites[0];
+            }
         }
     }
 }

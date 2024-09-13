@@ -456,6 +456,7 @@ GameObject:
   - component: {fileID: 1312384028372350824}
   - component: {fileID: 6085221506125764982}
   - component: {fileID: 1832061755646047091}
+  - component: {fileID: 8871503086296389671}
   m_Layer: 0
   m_Name: Line
   m_TagString: Untagged
@@ -603,7 +604,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85113d115efa35445bca9a26b4cf150f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!82 &8871503086296389671
+--- !u!114 &6085221506125764982
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1724889177994435730}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34628ea4d4550f945bc06666e1aef218, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioSource: {fileID: 1832061755646047091}
+  audioSource2: {fileID: 5388394020567051975}
+  soundCrop: {fileID: 8300000, guid: e3469eef12ad6b64489f05af3d0359f0, type: 3}
+  soundCropMiss: {fileID: 8300000, guid: 9e881e4462c5f00438181c64fe59b872, type: 3}
+--- !u!82 &1832061755646047091
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -614,14 +631,14 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 0
-  m_Volume: 0.25
+  m_PlayOnAwake: 1
+  m_Volume: 0.15
   m_Pitch: 3
   Loop: 0
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
-  Priority: 64
+  Priority: 256
   DopplerLevel: 1
   MinDistance: 1
   MaxDistance: 500
@@ -699,23 +716,7 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &6085221506125764982
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1724889177994435730}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 34628ea4d4550f945bc06666e1aef218, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  audioSource: {fileID: 1832061755646047091}
-  audioSource2: {fileID: 5388394020567051975}
-  soundCrop: {fileID: 8300000, guid: e3469eef12ad6b64489f05af3d0359f0, type: 3}
-  soundCropMiss: {fileID: 8300000, guid: 9e881e4462c5f00438181c64fe59b872, type: 3}
---- !u!82 &1832061755646047091
+--- !u!82 &8871503086296389671
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -726,14 +727,14 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
-  m_Volume: 0.15
+  m_PlayOnAwake: 0
+  m_Volume: 0.25
   m_Pitch: 3
   Loop: 0
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
-  Priority: 256
+  Priority: 64
   DopplerLevel: 1
   MinDistance: 1
   MaxDistance: 500
