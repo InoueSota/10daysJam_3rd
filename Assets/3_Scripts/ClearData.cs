@@ -6,9 +6,11 @@ public class ClearData
 {
     public bool[] Stage;
 
+    string datapath = "/StreamingAssets/ClearData.json";
+
     public ClearData LoadClearData(ClearData _clearData)
     {
-        StreamReader reader = new StreamReader("Assets/Resources/ClearData.json");
+        StreamReader reader = new StreamReader(Application.dataPath + datapath);
         string datastr = reader.ReadToEnd();
         reader.Close();
         return JsonUtility.FromJson<ClearData>(datastr);
@@ -17,7 +19,7 @@ public class ClearData
     public void Save(ClearData _clearData)
     {
         string jsonstr = JsonUtility.ToJson(_clearData);
-        StreamWriter writer = new StreamWriter("Assets/Resources/ClearData.json", false);
+        StreamWriter writer = new StreamWriter(Application.dataPath + datapath, false);
         writer.WriteLine(jsonstr);
         writer.Flush();
         writer.Close();
