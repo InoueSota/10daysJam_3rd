@@ -7,7 +7,7 @@ public class PlayerManager : MonoBehaviour
     private PlayerHitManager hitManager;
     [SerializeField] private UICropScript ui_Crop;
     // ˆÚ“®ƒtƒ‰ƒO
-    [SerializeField] private bool isActive;
+    private bool isActive;
     private bool canJump = true;
 
     void Start()

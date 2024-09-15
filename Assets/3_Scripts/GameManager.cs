@@ -169,7 +169,6 @@ public class GameManager : MonoBehaviour
                 }
             }
 
-
             // クリアフラグをtrueにする
             if (isFinish)
             {
@@ -184,7 +183,7 @@ public class GameManager : MonoBehaviour
         {
             if (isTriggerspecial && !transition.isTransNow)
             {
-                //トランジション処理
+                // トランジション処理
                 transition.SetTransition("SelectScene");
             }
         }
