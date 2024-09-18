@@ -8,11 +8,13 @@ public class CantClearManager : MonoBehaviour
 
     [SerializeField] bool cantClear = false;
     [SerializeField] RectTransform cantClearObj;
+    Vector3 originPosition;
 
     // Start is called before the first frame update
     void Start()
     {
         cantClearObj = GetComponent<RectTransform>();
+        originPosition = cantClearObj.localPosition;
 
         foreach (GameObject obj in GameObject.FindGameObjectsWithTag("Object"))
         {
@@ -28,15 +30,14 @@ public class CantClearManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Vector3 pos = originPosition;
 
-        Vector3 pos = Vector3.zero;
-        pos.x = 1280;
-        if (cantClear == false)
+        if (cantClear == true)
         {
-            pos.y = -100;
+            pos.y += 100;
         }
 
-        cantClearObj.position = pos;
+        cantClearObj.localPosition = pos;
     }
 
     public void SetCantClear(bool cant)
