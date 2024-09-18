@@ -59,7 +59,7 @@ public class SelectManager : MonoBehaviour
 
     [Header("音")]
     [SerializeField] AudioSource audioSource;
-    [SerializeField] AudioClip audioClip;
+    [SerializeField] AudioClip[] audioClip;
 
     void Start()
     {
@@ -156,6 +156,7 @@ public class SelectManager : MonoBehaviour
                     stageNumber--;
                 }
                 selectUiManager.StartTriangleRotate(true);
+                audioSource.PlayOneShot(audioClip[1], 0.25f);
             }
             // ステージ番号を加算する
             else if (isPushRight)
@@ -170,6 +171,7 @@ public class SelectManager : MonoBehaviour
                     stageNumber++;
                 }
                 selectUiManager.StartTriangleRotate(false);
+                audioSource.PlayOneShot(audioClip[1], 0.25f);
             }
             else if (isPushUp || isPushDown)
             {
@@ -237,6 +239,7 @@ public class SelectManager : MonoBehaviour
             }
             selectCameraManager.SetTargetPosition(stageGateManagers[stageNumber].transform.position.x);
             selectIntervalTimer = selectIntervalTime;
+            audioSource.PlayOneShot(audioClip[1], 0.25f);
         }
     }
     void ChangeChapter()
@@ -253,15 +256,14 @@ public class SelectManager : MonoBehaviour
 
             transition.SetColor((int)stageGateManagers[stageNumber].GetChapter());
             transition.SetTransition(stageName[stageNumber]);
-            audioSource.PlayOneShot(audioClip);
+            audioSource.PlayOneShot(audioClip[0]);
         }
         if (isTriggerCancel && !transition.isTransNow)
         {
             GlobalVariables.selectStageNumber = stageNumber;
             transition.SetColor((int)stageGateManagers[stageNumber].GetChapter());
             transition.SetTransition("TitleScene");
-            audioSource.PlayOneShot(audioClip);
-
+            audioSource.PlayOneShot(audioClip[0]);
         }
     }
     void UiManager()
