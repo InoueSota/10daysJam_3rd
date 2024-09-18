@@ -11,6 +11,7 @@ public class BombManager : MonoBehaviour
     private DestructionManager destructionManager;
     private SpriteRenderer spriteRenderer;
     private ParticleInstantiateScript particle;
+    private BoxCollider2D boxCollider2D;
 
     // äÓñ{èÓïÒ
     private Vector3 originScale;
@@ -25,6 +26,7 @@ public class BombManager : MonoBehaviour
         destructionManager = GetComponent<DestructionManager>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         particle = GetComponent<ParticleInstantiateScript>();
+        boxCollider2D = GetComponent<BoxCollider2D>();
 
         originScale = transform.localScale;
         originRotate = transform.localRotation;
@@ -56,6 +58,7 @@ public class BombManager : MonoBehaviour
     void Initialize()
     {
         spriteRenderer.enabled = true;
+        boxCollider2D.enabled = true;
         allObjectManager.SetIsActive(spriteRenderer.enabled);
         allObjectManager.Initialize();
 
@@ -68,6 +71,7 @@ public class BombManager : MonoBehaviour
     void Disappear()
     {
         spriteRenderer.enabled = false;
+        boxCollider2D.enabled = false;
         allObjectManager.SetIsActive(spriteRenderer.enabled);
         particle.RunParticle(0);
     }

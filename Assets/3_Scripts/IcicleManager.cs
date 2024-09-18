@@ -10,6 +10,7 @@ public class IcicleManager : MonoBehaviour
     private DestructionManager destructionManager;
     private SpriteRenderer spriteRenderer;
     private ParticleInstantiateScript particle;
+    private BoxCollider2D boxCollider2D;
 
     // 他コンポーネント取得
     private StageObjectManager stageObjectManager;
@@ -38,6 +39,7 @@ public class IcicleManager : MonoBehaviour
         destructionManager = GetComponent<DestructionManager>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         particle = GetComponent<ParticleInstantiateScript>();
+        boxCollider2D = GetComponent<BoxCollider2D>();
         parentTransform = transform.parent.transform;
         halfSize.x = transform.localScale.x * 0.5f;
         halfSize.y = transform.localScale.y * 0.5f;
@@ -106,6 +108,7 @@ public class IcicleManager : MonoBehaviour
     void Initialize()
     {
         spriteRenderer.enabled = true;
+        boxCollider2D.enabled = true;
         allObjectManager.SetIsActive(spriteRenderer.enabled);
         allObjectManager.Initialize();
 
@@ -121,6 +124,7 @@ public class IcicleManager : MonoBehaviour
     void Disappear()
     {
         spriteRenderer.enabled = false;
+        boxCollider2D.enabled = false;
         allObjectManager.SetIsActive(spriteRenderer.enabled);
         isFallActive = false;
         particle.RunParticle(0);
