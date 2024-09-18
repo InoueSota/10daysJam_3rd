@@ -6,6 +6,7 @@ public class SplitManager : MonoBehaviour
     // 自コンポーネント取得
     private AllObjectManager allObjectManager;
     private ParticleInstantiateScript particle;
+    private BoxCollider2D boxCollider2D;
 
     [Header("子オブジェクト取得")]
     [SerializeField] private GameObject overObj;
@@ -39,6 +40,7 @@ public class SplitManager : MonoBehaviour
     {
         allObjectManager = GetComponent<AllObjectManager>();
         particle = GetComponent<ParticleInstantiateScript>();
+        boxCollider2D = GetComponent<BoxCollider2D>();
 
         // 子オブジェクト初期化
         overSpriteRenderer = overObj.GetComponent<SpriteRenderer>();
@@ -104,6 +106,7 @@ public class SplitManager : MonoBehaviour
     // 初期化処理
     void Initialize()
     {
+        boxCollider2D.enabled = true;
         overSpriteRenderer.enabled = true;
         underSpriteRenderer.enabled = true;
         allObjectManager.SetIsActive(overSpriteRenderer.enabled);
@@ -116,6 +119,7 @@ public class SplitManager : MonoBehaviour
     // 消滅処理
     void Disappear()
     {
+        boxCollider2D.enabled = false;
         overSpriteRenderer.enabled = false;
         underSpriteRenderer.enabled = false;
         allObjectManager.SetIsActive(false);

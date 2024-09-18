@@ -9,6 +9,7 @@ public class CactusManager : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     private Animator animator;
     private ParticleInstantiateScript particle;
+    private BoxCollider2D boxCollider2D;
 
     void Start()
     {
@@ -16,12 +17,14 @@ public class CactusManager : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
         particle = GetComponent<ParticleInstantiateScript>();
+        boxCollider2D = GetComponent<BoxCollider2D>();
     }
 
     // ‰Šú‰»ˆ—
     void Initialize()
     {
         spriteRenderer.enabled = true;
+        boxCollider2D.enabled = true;
         allObjectManager.SetIsActive(spriteRenderer.enabled);
         allObjectManager.Initialize();
     }
@@ -31,6 +34,7 @@ public class CactusManager : MonoBehaviour
     {
         particle.RunParticle(1);
         spriteRenderer.enabled = false;
+        boxCollider2D.enabled = false;
         allObjectManager.SetIsActive(spriteRenderer.enabled);
     }
 
