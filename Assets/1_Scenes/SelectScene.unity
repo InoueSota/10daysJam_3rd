@@ -2213,7 +2213,9 @@ MonoBehaviour:
   - "\u3055\u3089\u3055\u3089\u7802\u6F20"
   - "\u51CD\u3066\u3064\u304F\u5893\u5730"
   audioSource: {fileID: 1090858778}
-  audioClip: {fileID: 8300000, guid: a04fb374b7bacf445bbc01133ad6624e, type: 3}
+  audioClip:
+  - {fileID: 8300000, guid: a04fb374b7bacf445bbc01133ad6624e, type: 3}
+  - {fileID: 8300000, guid: 514c52bd2cde7ea41b888048b296cd81, type: 3}
 --- !u!114 &1090858777
 MonoBehaviour:
   m_ObjectHideFlags: 0

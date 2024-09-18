@@ -24,6 +24,7 @@ public class ItemManager : MonoBehaviour
 
     // 他オブジェクト取得
     private Transform playerTransform;
+    [SerializeField] CantClearManager cantClear;
 
     void Start()
     {
@@ -61,6 +62,7 @@ public class ItemManager : MonoBehaviour
         allObjectManager.Initialize();
         sitemEffectScripts.Initialized();
         fakeItem.SetActive(true);
+        cantClear.SetCantClear(false);
         //UIの初期化処理
         ui_Item.Initialize();
     }
@@ -97,6 +99,10 @@ public class ItemManager : MonoBehaviour
         if (allObjectManager.GetIsActive() && allObjectManager.GetHp() <= 0)
         {
             SetIsActive(false);
+            if(cantClear != null)
+            {
+                cantClear.SetCantClear(true);
+            }
         }
     }
     public void SetIsActive(bool _isActive)
@@ -122,5 +128,10 @@ public class ItemManager : MonoBehaviour
         ui_Item.addList();
 
     }
-    
+
+    public void SetCantClearManager(CantClearManager cantClearManager_)
+    {
+        cantClear = cantClearManager_;
+    }
+
 }

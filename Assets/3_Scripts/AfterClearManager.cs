@@ -11,6 +11,7 @@ public class AfterClearManager : MonoBehaviour
 
     // 自コンポーネント取得
     private InputManager inputManager;
+    private AudioSource audio;
 
     // 入力
     private bool isTriggerDecide;
@@ -52,6 +53,9 @@ public class AfterClearManager : MonoBehaviour
     private Vector3 selectOrigin;
     private Vector3 selectTarget;
 
+    [Header("音")]
+    [SerializeField] private AudioClip[]  sound;
+
     // 選択肢
     private enum Choices
     {
@@ -68,6 +72,7 @@ public class AfterClearManager : MonoBehaviour
 
         // コンポーネント取得
         inputManager = GetComponent<InputManager>();
+        audio = GetComponent<AudioSource>();
         if (GameObject.FindWithTag("trans"))
         {
             transition = GameObject.FindWithTag("trans").GetComponent<S_Transition>();
@@ -118,16 +123,19 @@ public class AfterClearManager : MonoBehaviour
                         {
                             ToSelectInitialize();
                             choices = Choices.STAGESELECT;
+                            audio.PlayOneShot(sound[0], 0.25f);
                         }
                         else if (isTriggerDown)
                         {
                             ToNextInitialize();
                             choices = Choices.NEXTSTAGE;
+                            audio.PlayOneShot(sound[0], 0.25f);
                         }
 
                         // 遷移
                         if (isTriggerDecide && !transition.isTransNow)
                         {
+                            audio.PlayOneShot(sound[1]);
                             transition.SetTransition(SceneManager.GetActiveScene().name);
                         }
 
@@ -139,16 +147,19 @@ public class AfterClearManager : MonoBehaviour
                         {
                             ToRetryInitialize();
                             choices = Choices.RETRY;
+                            audio.PlayOneShot(sound[0], 0.25f);
                         }
                         else if (isTriggerDown)
                         {
                             ToSelectInitialize();
                             choices = Choices.STAGESELECT;
+                            audio.PlayOneShot(sound[0], 0.25f);
                         }
 
                         // 遷移
                         if (isTriggerDecide && !transition.isTransNow)
                         {
+                            audio.PlayOneShot(sound[1]);
                             GlobalVariables.selectStageNumber++;
                             transition.SetTransition(GlobalVariables.nextStageName);
                         }
@@ -161,16 +172,19 @@ public class AfterClearManager : MonoBehaviour
                         {
                             ToNextInitialize();
                             choices = Choices.NEXTSTAGE;
+                            audio.PlayOneShot(sound[0], 0.25f);
                         }
                         else if (isTriggerDown)
                         {
                             ToRetryInitialize();
                             choices = Choices.RETRY;
+                            audio.PlayOneShot(sound[0], 0.25f);
                         }
 
                         // 遷移
                         if (isTriggerDecide && !transition.isTransNow)
                         {
+                            audio.PlayOneShot(sound[1]);
                             transition.SetTransition("SelectScene");
                         }
 
