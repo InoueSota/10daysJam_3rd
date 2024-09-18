@@ -102,6 +102,10 @@ public class PlayerMoveManager : MonoBehaviour
             // Å‰‚Éƒ[ƒv‚·‚é
             Warp();
 
+            isPushLeft = false;
+            isPushRight = false;
+            isTriggerJump = false;
+
             if (playerManager.GetCanGetInput())
             {
                 GetInput();
