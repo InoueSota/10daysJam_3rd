@@ -9,7 +9,7 @@ public class UI_Item : MonoBehaviour
     //アイテムマネージャー
     [SerializeField] UICropScript ui_crop_script;
     //取得したアイテム格納
-    [SerializeField] List<bool> items;
+    [SerializeField]public List<bool> items;
     [SerializeField] List<bool> isOne;
     //アイテムはめるUIポジション[0][1][2]
     [SerializeField] List<GameObject> itemPostions;

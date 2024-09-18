@@ -976,7 +976,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 007e0b05bd30b9244add25b22f35e11a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ui_crop_script: {fileID: 0}
+  ui_crop_script: {fileID: 4179638356995153019}
   items: 
   isOne: 000000
   itemPostions:

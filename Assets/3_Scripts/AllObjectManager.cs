@@ -43,11 +43,15 @@ public class AllObjectManager : MonoBehaviour
     {
         isActive = _isActive;
     }
-    
+
     // Getter
     public int GetHp()
     {
         return hp;
+    }
+    public void SetHp(int num)
+    {
+        hp = num;
     }
     public bool GetIsActive()
     {

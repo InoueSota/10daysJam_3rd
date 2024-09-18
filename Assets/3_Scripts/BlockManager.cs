@@ -46,7 +46,7 @@ public class BlockManager : MonoBehaviour
         }
     }
     // 初期化処理
-    void Initialize()
+    public void Initialize()
     {
 
         //全ての実行を止める方法
@@ -76,21 +76,21 @@ public class BlockManager : MonoBehaviour
             particle.RunParticle(0);
         }
 
-        //Sequenceのインスタンスを作成
-        var sequence = DOTween.Sequence();
+        ////Sequenceのインスタンスを作成
+        //var sequence = DOTween.Sequence();
 
-        //Appendで動作を追加していく
-        sequence.Append(transform.DOScale(Vector3.zero, 0.5f).SetEase(Ease.OutBack));
-        //Joinはひとつ前の動作と同時に実行される
-        sequence.Join(this.transform.DORotate(Vector3.forward * 180, 0.5f, RotateMode.LocalAxisAdd).SetEase(Ease.InBack));
-        //sequence.Join(this.GetComponent<SpriteRenderer>().DOFade(endValue: 0, duration: 0.5f).SetEase(Ease.InQuad));
+        ////Appendで動作を追加していく
+        //sequence.Append(transform.DOScale(Vector3.zero, 0.5f).SetEase(Ease.OutBack));
+        ////Joinはひとつ前の動作と同時に実行される
+        //sequence.Join(this.transform.DORotate(Vector3.forward * 180, 0.5f, RotateMode.LocalAxisAdd).SetEase(Ease.InBack));
+        ////sequence.Join(this.GetComponent<SpriteRenderer>().DOFade(endValue: 0, duration: 0.5f).SetEase(Ease.InQuad));
 
-        sequence.Play().OnComplete(() =>
-        {
+        //sequence.Play().OnComplete(() =>
+        //{
+        //});
+
             boxCollider2D.enabled = false;
             spriteRenderer.enabled = false;
-        });
-
     }
 
     // Setter

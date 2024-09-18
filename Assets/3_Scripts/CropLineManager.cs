@@ -16,6 +16,7 @@ public class CropLineManager : MonoBehaviour
 
     // 他コンポーネント取得
     private PlayerMoveManager playerMoveManager;
+    private UndoManager undoManager;
     // [SerializeField] private CropEffect cropEffect;
     // カメラ関係
     private Transform cameraTransform;
@@ -27,6 +28,8 @@ public class CropLineManager : MonoBehaviour
 
     void Start()
     {
+        undoManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<UndoManager>();
+
         cropsound = GetComponent<CropSound>();
         destructionManager = GetComponent<DestructionManager>();
         spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
@@ -64,10 +67,12 @@ public class CropLineManager : MonoBehaviour
                 obj.GetComponent<BlockManager>().SetNum(i * 0.025867f);
             }
         */
-
         if (isTriggerSpecial && playerMoveManager.GetIsGround())
         {
             isCroping = true;
+            
+            //Undo用
+            undoManager.UndoSave();
 
             foreach (GameObject obj in GameObject.FindGameObjectsWithTag("Object"))
             {
@@ -80,11 +85,15 @@ public class CropLineManager : MonoBehaviour
 
                     if (yBetween < 0.2f)
                     {
+                        
+
                         // Crop時に当たるかどうか判定が入るオブジェクト
                         if (hitAllObjectManager.GetIsJudgeObject())
                         {
+                            
                             if (obj.GetComponent<SplitManager>() && obj.GetComponent<SplitManager>().GetCanHit())
                             {
+                                
                                 // ブロック壊したら
                                 isBlockBreak = true;
                                 // ダメージを与える

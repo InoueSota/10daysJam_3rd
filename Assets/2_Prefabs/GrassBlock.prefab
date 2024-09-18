@@ -314,6 +314,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: GrassParent
       objectReference: {fileID: 0}
+    - target: {fileID: 6860914217792977975, guid: a71f2cadcace2824eb57088cef5d5df7, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a71f2cadcace2824eb57088cef5d5df7, type: 3}
 --- !u!4 &4612426063429934877 stripped
