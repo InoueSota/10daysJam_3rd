@@ -54,7 +54,7 @@ public class AfterClearManager : MonoBehaviour
     private Vector3 selectTarget;
 
     [Header("‰¹")]
-    [SerializeField] private AudioClip[]  sound;
+    [SerializeField] private AudioClip[] sound;
 
     // ‘I‘ðŽˆ
     private enum Choices
@@ -161,6 +161,7 @@ public class AfterClearManager : MonoBehaviour
                         {
                             audio.PlayOneShot(sound[1]);
                             GlobalVariables.selectStageNumber++;
+                            transition.SetColor(GlobalVariables.stageChapterNumber[GlobalVariables.selectStageNumber + 1]);
                             transition.SetTransition(GlobalVariables.nextStageName);
                         }
 
