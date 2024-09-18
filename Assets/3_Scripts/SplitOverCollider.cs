@@ -25,11 +25,11 @@ public class SplitOverCollider : MonoBehaviour
         {
             AllObjectManager allObjectManager = collision.GetComponent<AllObjectManager>();
 
-            if (allObjectManager.GetObjectType() != AllObjectManager.ObjectType.ITEM && allObjectManager.GetIsActive())
+            if (allObjectManager.GetIsHitObject() && allObjectManager.GetIsActive())
             {
                 splitManager.SetIsFreeOver(false);
             }
-            else if (allObjectManager.GetObjectType() != AllObjectManager.ObjectType.ITEM && !allObjectManager.GetIsActive())
+            else if (allObjectManager.GetIsHitObject() && !allObjectManager.GetIsActive())
             {
                 splitManager.SetIsFreeOver(true);
             }

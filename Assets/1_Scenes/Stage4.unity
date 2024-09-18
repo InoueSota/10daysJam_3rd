@@ -506,7 +506,7 @@ PrefabInstance:
       objectReference: {fileID: 579387737}
     - target: {fileID: 2021673001683523331, guid: 8412db8f3ccf46947b9e1e6403ca2603, type: 3}
       propertyPath: nextStageName
-      value: Stage6
+      value: Stage5
       objectReference: {fileID: 0}
     - target: {fileID: 2021673001683523331, guid: 8412db8f3ccf46947b9e1e6403ca2603, type: 3}
       propertyPath: playerManager
@@ -514,7 +514,7 @@ PrefabInstance:
       objectReference: {fileID: 1919802773}
     - target: {fileID: 2021673001683523331, guid: 8412db8f3ccf46947b9e1e6403ca2603, type: 3}
       propertyPath: thisStageName
-      value: Stage5
+      value: Stage4
       objectReference: {fileID: 0}
     - target: {fileID: 2021673001683523331, guid: 8412db8f3ccf46947b9e1e6403ca2603, type: 3}
       propertyPath: restartAnimator

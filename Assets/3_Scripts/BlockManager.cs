@@ -10,6 +10,7 @@ public class BlockManager : MonoBehaviour
     private AllObjectManager allObjectManager;
     private SpriteRenderer spriteRenderer;
     private ParticleInstantiateScript particle;
+    private BoxCollider2D boxCollider2D;
 
     // äÓñ{èÓïÒ
     private Vector3 originScale;
@@ -29,6 +30,7 @@ public class BlockManager : MonoBehaviour
         allObjectManager = GetComponent<AllObjectManager>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         particle = GetComponent<ParticleInstantiateScript>();
+        boxCollider2D = GetComponent<BoxCollider2D>();
 
         originScale = transform.localScale;
         originRotate = transform.localRotation;
@@ -51,6 +53,7 @@ public class BlockManager : MonoBehaviour
         //DOTween.KillAll();
         //DOTween.Kill(this);
         spriteRenderer.enabled = true;
+        boxCollider2D.enabled = true;
         allObjectManager.SetIsActive(spriteRenderer.enabled);
         allObjectManager.Initialize();
 
@@ -84,6 +87,7 @@ public class BlockManager : MonoBehaviour
 
         sequence.Play().OnComplete(() =>
         {
+            boxCollider2D.enabled = false;
             spriteRenderer.enabled = false;
         });
 

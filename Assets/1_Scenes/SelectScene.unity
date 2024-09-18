@@ -2213,7 +2213,9 @@ MonoBehaviour:
   - "\u3055\u3089\u3055\u3089\u7802\u6F20"
   - "\u51CD\u3066\u3064\u304F\u5893\u5730"
   audioSource: {fileID: 1090858778}
-  audioClip: {fileID: 8300000, guid: a04fb374b7bacf445bbc01133ad6624e, type: 3}
+  audioClip:
+  - {fileID: 8300000, guid: a04fb374b7bacf445bbc01133ad6624e, type: 3}
+  - {fileID: 8300000, guid: 514c52bd2cde7ea41b888048b296cd81, type: 3}
 --- !u!114 &1090858777
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2269,8 +2271,8 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
-  m_Pitch: 1
+  m_Volume: 0.8
+  m_Pitch: 2.8
   Loop: 0
   Mute: 0
   Spatialize: 0
@@ -2997,7 +2999,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 5a2ebb782cd14e845aea3101270c00d1, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.15
+  m_Volume: 0.05
   m_Pitch: 1
   Loop: 1
   Mute: 0

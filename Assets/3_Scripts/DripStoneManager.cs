@@ -9,6 +9,7 @@ public class DripStoneManager : MonoBehaviour
     private AllObjectManager allObjectManager;
     private SpriteRenderer spriteRenderer;
     private ParticleInstantiateScript particle;
+    private BoxCollider2D boxCollider2D;
 
     // 他コンポーネント取得
     private StageObjectManager stageObjectManager;
@@ -36,6 +37,7 @@ public class DripStoneManager : MonoBehaviour
         allObjectManager = GetComponent<AllObjectManager>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         particle = GetComponent<ParticleInstantiateScript>();
+        boxCollider2D = GetComponent<BoxCollider2D>();
         parentTransform = transform.parent.transform;
         halfSize.x = transform.localScale.x * 0.5f;
         halfSize.y = transform.localScale.y * 0.5f;
@@ -147,6 +149,7 @@ public class DripStoneManager : MonoBehaviour
     void Initialize()
     {
         spriteRenderer.enabled = true;
+        boxCollider2D.enabled = true;
         allObjectManager.SetIsActive(spriteRenderer.enabled);
         allObjectManager.Initialize();
 
@@ -162,6 +165,7 @@ public class DripStoneManager : MonoBehaviour
     void Disappear()
     {
         spriteRenderer.enabled = false;
+        boxCollider2D.enabled = false;
         allObjectManager.SetIsActive(spriteRenderer.enabled);
         particle.RunParticle(0);
         isFallActive = false;
