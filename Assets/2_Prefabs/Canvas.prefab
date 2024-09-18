@@ -5659,7 +5659,6 @@ GameObject:
   - component: {fileID: 7358658073858963105}
   - component: {fileID: 6119498571386808177}
   - component: {fileID: 9156132158700274079}
-  - component: {fileID: 1139393707883015244}
   m_Layer: 5
   m_Name: Text - ResstartButton
   m_TagString: Untagged
@@ -5745,20 +5744,6 @@ MonoBehaviour:
   m_EffectColor: {r: 1, g: 1, b: 1, a: 1}
   m_EffectDistance: {x: 1.5, y: -1.5}
   m_UseGraphicAlpha: 1
---- !u!114 &1139393707883015244
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7689087317169008893}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e054dd17fffb0d64e8ac9c0be9e71ece, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cantClear: 0
-  cantClearObj: {fileID: 0}
 --- !u!1 &7692995009917921100
 GameObject:
   m_ObjectHideFlags: 0
