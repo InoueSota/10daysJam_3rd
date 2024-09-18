@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ClearEffectManager : MonoBehaviour
@@ -10,7 +8,7 @@ public class ClearEffectManager : MonoBehaviour
 
     bool isClear = false;
 
-    [SerializeField] float fireWorksTime = 1, fireWorksTimeMax = 1, fireWorksTimeMin = 0.4f;
+    [SerializeField] float fireWorksTime = 1, fireWorksTimeMax = 1/*, fireWorksTimeMin = 0.4f*/;
 
     // Start is called before the first frame update
     void Start()

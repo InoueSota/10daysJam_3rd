@@ -71,6 +71,12 @@ public class SelectManager : MonoBehaviour
         // ステージ遷移先に関する情報の初期化
         stageName = new string[stageMax];
         stageGateManagers = new StageGateManager[stageMax];
+        // GlovalVariables
+        GlobalVariables.isClear = new bool[stageMax];
+        GlobalVariables.stageDifficulty = new int[stageMax];
+        GlobalVariables.stageChapterNumber = new int[stageMax];
+        GlobalVariables.stageSprite = new Sprite[stageMax];
+        GlobalVariables.stageTitle = new string[stageMax];
         for (int i = 1; i < stageMax + 1; i++)
         {
             // ゲートの子オブジェクト取得
@@ -94,6 +100,13 @@ public class SelectManager : MonoBehaviour
             // ステージ名取得
             stageName[i - 1] = "Stage" + i.ToString();
             stageNumberText.GetComponent<Text>().text = stageName[i - 1];
+
+            // GlobalVariables の初期化
+            GlobalVariables.isClear[i - 1] = clearData.Stage[i - 1];
+            GlobalVariables.stageDifficulty[i - 1] = stageDifficulty[i - 1];
+            GlobalVariables.stageChapterNumber[i - 1] = (int)stageGateManagers[i - 1].GetChapter();
+            GlobalVariables.stageSprite[i - 1] = stageImageSprite[i - 1];
+            GlobalVariables.stageTitle[i - 1] = stageNames[i - 1];
         }
 
         // GlobalVariablesから変数を取得する
@@ -236,15 +249,14 @@ public class SelectManager : MonoBehaviour
         if (isTriggerJump && !transition.isTransNow)
         {
             selectUiManager.StartCircle();
-            GlobalVariables.isClear = false;
             GlobalVariables.selectStageNumber = stageNumber;
+
             transition.SetColor((int)stageGateManagers[stageNumber].GetChapter());
             transition.SetTransition(stageName[stageNumber]);
             audioSource.PlayOneShot(audioClip);
         }
         if (isTriggerCancel && !transition.isTransNow)
         {
-            GlobalVariables.isClear = false;
             GlobalVariables.selectStageNumber = stageNumber;
             transition.SetColor((int)stageGateManagers[stageNumber].GetChapter());
             transition.SetTransition("TitleScene");

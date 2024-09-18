@@ -1,11 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class BackGroundScript : MonoBehaviour
 {
-
-    GameObject camera;
+    private GameObject mainCamera;
 
     [SerializeField] Vector3 cameraBasePos = new Vector3(0f,0.34375f,0f);
 
@@ -17,16 +14,14 @@ public class BackGroundScript : MonoBehaviour
 
     [SerializeField] BackGroundData[] backGround;
 
-    // Start is called before the first frame update
     void Start()
     {
-        camera = GameObject.FindGameObjectWithTag("MainCamera");
+        mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
     }
 
-    // Update is called once per frame
     void Update()
     {
-        Vector3 cameraPos = camera.transform.position;
+        Vector3 cameraPos = mainCamera.transform.position;
         cameraPos.z = 0f;
 
         Vector3 cameraPosPer = cameraPos - cameraBasePos;
@@ -36,6 +31,5 @@ public class BackGroundScript : MonoBehaviour
             backGround[i].transform.localPosition = cameraPosPer * backGround[i].movePer;
             
         }
-
     }
 }

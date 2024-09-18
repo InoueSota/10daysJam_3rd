@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
@@ -10,11 +11,10 @@ public class GameManager : MonoBehaviour
     private ResetAudioManager resetAudioManager;
     private bool isTriggerCancel;
     private bool isTriggerReset;
-    private bool isTriggerspecial;
 
     // 他コンポーネント取得
+    [SerializeField] private AfterClearManager afterClearManager;
     private ClearData clearData;
-    private S_Transition transition;
 
     // フラグ類
     private bool isStart;
@@ -28,7 +28,6 @@ public class GameManager : MonoBehaviour
     [SerializeField] private string nextStageName;
 
     [Header("UI")]
-    [SerializeField] private GameObject groupClear;
     [SerializeField] private Text stageName;
     [SerializeField] private Text menuStageName;
 
@@ -47,20 +46,13 @@ public class GameManager : MonoBehaviour
         resetAudioManager = GetComponent<ResetAudioManager>();
         clearData = new ClearData();
         clearData = clearData.LoadClearData(clearData);
-        if (GameObject.FindWithTag("trans"))
-        {
-            transition = GameObject.FindWithTag("trans").GetComponent<S_Transition>();
-        }
         readyTimer = 3f;
 
         // 名前代入
         GlobalVariables.retryStageName = thisStageName;
         GlobalVariables.nextStageName = nextStageName;
-        stageName.text = thisStageName;
-        menuStageName.text = thisStageName;
-
-        // グローバル変数の初期化
-        GlobalVariables.isClear = false;
+        stageName.text = SceneManager.GetActiveScene().name;
+        menuStageName.text = SceneManager.GetActiveScene().name;
     }
     void DestroyOutOfCameraObj()
     {
@@ -82,6 +74,9 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
+        isTriggerReset = false;
+        isTriggerCancel = false;
+
         GetInput();
 
         Menu();
@@ -126,6 +121,7 @@ public class GameManager : MonoBehaviour
                 {
                     playerManager.SetIsActive(true);
                 }
+                playerManager.SetCanGetInput(true);
                 stageObjectManager.Initialize();
                 isStart = true;
             }
@@ -168,23 +164,14 @@ public class GameManager : MonoBehaviour
                 }
             }
 
-
             // クリアフラグをtrueにする
             if (isFinish)
             {
                 clearData.SetClearFlag(clearData);
                 clearData.Save(clearData);
-                groupClear.SetActive(true);
-                GlobalVariables.isClear = true;
+                afterClearManager.Initialize();
+                playerManager.SetCanGetInput(false);
                 isClear = true;
-            }
-        }
-        else
-        {
-            if (isTriggerspecial && !transition.isTransNow)
-            {
-                //トランジション処理
-                transition.SetTransition("SelectScene");
             }
         }
     }
@@ -273,17 +260,9 @@ public class GameManager : MonoBehaviour
 
     void GetInput()
     {
-        isTriggerReset = false;
-        isTriggerspecial = false;
-        isTriggerCancel = false;
-
         if (inputManager.IsTrgger(InputManager.INPUTPATTERN.RESET))
         {
             isTriggerReset = true;
-        }
-        if (inputManager.IsTrgger(InputManager.INPUTPATTERN.SPECIAL))
-        {
-            isTriggerspecial = true;
         }
         if (inputManager.IsTrgger(InputManager.INPUTPATTERN.CANCEL))
         {

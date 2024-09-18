@@ -12,7 +12,7 @@ public class TitleManager : MonoBehaviour
     [SerializeField] private GameObject stampObj;
 
     // 花火
-    [SerializeField] float fireWorksTime = 1, fireWorksTimeMax = 1, fireWorksTimeMin = 0.4f;
+    [SerializeField] float fireWorksTime = 1, fireWorksTimeMax = 1/*, fireWorksTimeMin = 0.4f*/;
     private bool isAllClear;
 
     // 他コンポーネント取得
