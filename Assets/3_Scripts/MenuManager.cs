@@ -82,22 +82,22 @@ public class MenuManager : MonoBehaviour
         menuBackTargetColor = menuBackOriginColor;
         menuBackImage.color = menuBackTargetColor;
 
-        menuTabOrigin = menuTabRect.transform.localPosition;
-        returnRectOrigin = returnRect.transform.localPosition;
-        restartRectOrigin = restartRect.transform.localPosition;
-        stageSelectRectOrigin = stageSelectRect.transform.localPosition;
+        menuTabOrigin = menuTabRect.localPosition;
+        returnRectOrigin = returnRect.localPosition;
+        restartRectOrigin = restartRect.localPosition;
+        stageSelectRectOrigin = stageSelectRect.localPosition;
 
         menuTabTarget = menuTabOrigin;
         returnRectTarget = returnRectOrigin;
         restartRectTarget = restartRectOrigin;
         stageSelectRectTarget = stageSelectRectOrigin;
 
-        stageNumberOrigin = stageNumberRect.transform.localPosition;
+        stageNumberOrigin = stageNumberRect.localPosition;
 
         stageNumberTarget = stageNumberOrigin;
 
-        purposeTitleOrigin = purposeTitleRect.transform.localPosition;
-        purposeOrigin = purposeRect.transform.localPosition;
+        purposeTitleOrigin = purposeTitleRect.localPosition;
+        purposeOrigin = purposeRect.localPosition;
 
         purposeTitleTarget = purposeTitleOrigin;
         purposeTarget = purposeOrigin;
@@ -194,14 +194,17 @@ public class MenuManager : MonoBehaviour
     }
     void Menu()
     {
-        menuBackImage.color += (menuBackTargetColor - menuBackImage.color) * (chasePower * Time.deltaTime);
-        menuTabRect.transform.localPosition += (menuTabTarget - menuTabRect.transform.localPosition) * (chasePower * Time.deltaTime);
-        returnRect.transform.localPosition += (returnRectTarget - returnRect.transform.localPosition) * (chasePower * Time.deltaTime);
-        restartRect.transform.localPosition += (restartRectTarget - restartRect.transform.localPosition) * (chasePower * Time.deltaTime);
-        stageSelectRect.transform.localPosition += (stageSelectRectTarget - stageSelectRect.transform.localPosition) * (chasePower * Time.deltaTime);
-        stageNumberRect.transform.localPosition += (stageNumberTarget - stageNumberRect.transform.localPosition) * (chasePower * Time.deltaTime);
-        purposeTitleRect.transform.localPosition += (purposeTitleTarget - purposeTitleRect.transform.localPosition) * (chasePower * Time.deltaTime);
-        purposeRect.transform.localPosition += (purposeTarget - purposeRect.transform.localPosition) * (chasePower * Time.deltaTime);
+        // デルタタイム対応
+        float deltaChasePower = chasePower * Time.deltaTime;
+
+        menuBackImage.color += (menuBackTargetColor - menuBackImage.color) * deltaChasePower;
+        menuTabRect.localPosition += (menuTabTarget - menuTabRect.localPosition) * deltaChasePower;
+        returnRect.localPosition += (returnRectTarget - returnRect.localPosition) * deltaChasePower;
+        restartRect.localPosition += (restartRectTarget - restartRect.localPosition) * deltaChasePower;
+        stageSelectRect.localPosition += (stageSelectRectTarget - stageSelectRect.localPosition) * deltaChasePower;
+        stageNumberRect.localPosition += (stageNumberTarget - stageNumberRect.localPosition) * deltaChasePower;
+        purposeTitleRect.localPosition += (purposeTitleTarget - purposeTitleRect.localPosition) * deltaChasePower;
+        purposeRect.localPosition += (purposeTarget - purposeRect.localPosition) * deltaChasePower;
     }
 
     // Setter

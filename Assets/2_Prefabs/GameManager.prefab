@@ -55,7 +55,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   thisStageName: 
   nextStageName: 
-  groupClear: {fileID: 0}
   stageName: {fileID: 0}
   menuStageName: {fileID: 0}
   playerManager: {fileID: 0}
@@ -173,7 +172,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fireWorksTime: 0.415
   fireWorksTimeMax: 0.415
-  fireWorksTimeMin: 0
 --- !u!114 &697698918154913217
 MonoBehaviour:
   m_ObjectHideFlags: 0
