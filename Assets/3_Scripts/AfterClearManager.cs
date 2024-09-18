@@ -161,7 +161,7 @@ public class AfterClearManager : MonoBehaviour
                         {
                             audio.PlayOneShot(sound[1]);
                             GlobalVariables.selectStageNumber++;
-                            transition.SetColor(GlobalVariables.stageChapterNumber[GlobalVariables.selectStageNumber + 1]);
+                            transition.SetColor(GlobalVariables.stageChapterNumber[GlobalVariables.selectStageNumber]);
                             transition.SetTransition(GlobalVariables.nextStageName);
                         }
 
