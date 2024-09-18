@@ -8,18 +8,24 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] private UICropScript ui_Crop;
     // ˆÚ“®ƒtƒ‰ƒO
     private bool isActive;
+    private bool canGetInput;
     private bool canJump = true;
 
     void Start()
     {
         moveManager = GetComponent<PlayerMoveManager>();
         hitManager = GetComponent<PlayerHitManager>();
+        canGetInput = false;
     }
 
     // Setter
     public void SetIsActive(bool _isActive)
     {
         isActive = _isActive;
+    }
+    public void SetCanGetInput(bool _canGetInput)
+    {
+        canGetInput = _canGetInput;
     }
     public void SetCanJump(bool _canJump)
     {
@@ -35,6 +41,10 @@ public class PlayerManager : MonoBehaviour
     public bool GetIsActive()
     {
         return isActive;
+    }
+    public bool GetCanGetInput()
+    {
+        return canGetInput;
     }
     public bool GetCanJump()
     {

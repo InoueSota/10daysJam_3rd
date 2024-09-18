@@ -102,7 +102,10 @@ public class PlayerMoveManager : MonoBehaviour
             // Å‰‚Éƒ[ƒv‚·‚é
             Warp();
 
-            GetInput();
+            if (playerManager.GetCanGetInput())
+            {
+                GetInput();
+            }
 
             nextPosition = transform.position;
 
