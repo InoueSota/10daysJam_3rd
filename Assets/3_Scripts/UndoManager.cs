@@ -61,11 +61,11 @@ public class UndoManager : MonoBehaviour
                 list_Scale[i] = list_AllObjects[i].gameObject.transform.localScale;
             }
         }
+        //ここで一回やっとかないとなんかうまくいかん
+        uI_Items = new List<bool>(itemsScript.items); 
+        uI_Items_isOne = new List<bool>(itemsScript.isOne);
 
-        uI_Items = new List<bool>(itemsScript.items); // リストのコピー
-        uI_Items_isOne = new List<bool>(itemsScript.isOne); // リストのコピー
-
-        // 新しい状態を作成 (ディープコピー)
+      //ここで全体のスタックに加えて状態を保存してるよ！！！！！！！！！！！！！！
         UndoState newState = new UndoState
         {
             // ブロック関連
@@ -162,10 +162,10 @@ public class UndoManager : MonoBehaviour
             }
         }
 
-        uI_Items = new List<bool>(itemsScript.items); // リストのコピー
-        uI_Items_isOne = new List<bool>(itemsScript.isOne); // リストのコピー
+        uI_Items = new List<bool>(itemsScript.items); 
+        uI_Items_isOne = new List<bool>(itemsScript.isOne); 
 
-        // 新しい状態を作成 (ディープコピー)
+       
         UndoState newState = new UndoState
         {
             // ブロック関連
