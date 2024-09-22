@@ -12,6 +12,9 @@ public class PlayerMoveManager : MonoBehaviour
     private bool isPushRight;
     private bool isTriggerJump;
 
+    //Undo用
+    public Vector3 lastGroundpos;
+
     // 基本情報
     private Vector2 halfSize;
     private Vector2 cameraHalfSize;
@@ -238,6 +241,8 @@ public class PlayerMoveManager : MonoBehaviour
                             break;
                         }
                     }
+                    //ここが設置判定か・・・？？
+                    lastGroundpos=transform.position;
                 }
             }
         }

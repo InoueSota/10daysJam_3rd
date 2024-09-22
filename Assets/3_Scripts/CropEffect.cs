@@ -74,7 +74,7 @@ public class CropEffect : MonoBehaviour
                 cropSound.SoundCrop();
                 front.transform.DOScale(frontEaseScale, frontEaseTime).SetEase(frontEase_In).OnComplete(() =>
                 {
-                    Debug.Log("complate");
+                    //Debug.Log("complate");
                     front.transform.DOScale(new Vector3(1.3f, 0, 0), frontEaseOutTime).SetEase(frontEase_Out).OnComplete(() =>
                     {
                         isOne = false;

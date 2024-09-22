@@ -2,6 +2,7 @@ using DG.Tweening;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class UI_Item : MonoBehaviour
@@ -10,10 +11,10 @@ public class UI_Item : MonoBehaviour
     [SerializeField] UICropScript ui_crop_script;
     //取得したアイテム格納
     [SerializeField]public List<bool> items;
-    [SerializeField] List<bool> isOne;
+    [SerializeField]public List<bool> isOne;
     //アイテムはめるUIポジション[0][1][2]
     [SerializeField] List<GameObject> itemPostions;
-    [SerializeField] List<GameObject> DestoryObjs;
+    [SerializeField] public List<GameObject> DestoryObjs;
     //仮ではめるプレハブ
     [SerializeField] GameObject UI_itemEffedtPrefab;
     [SerializeField] AudioSource audioSource;
@@ -33,6 +34,7 @@ public class UI_Item : MonoBehaviour
     [SerializeField] Ease TypeEase_Out;
     private bool isOne_;
     private bool isOne_Comp;
+    private int ItemsCount;
 
     //サイン波
     //揺らす用
@@ -47,15 +49,18 @@ public class UI_Item : MonoBehaviour
         Player = GameObject.FindWithTag("Player");
         moveManager = Player.GetComponent<PlayerMoveManager>();
         spriteRenderer = this.gameObject.GetComponent<SpriteRenderer>();
+        //items = new List<bool> {false,false,false };
         items.Clear();
+        ItemsCount = 0;
     }
 
     // Update is called once per frame
     void Update()
     {
+        ItemsCount = items.Count(item => item);
 
-
-        if (items.Count >= 3 && !isOne_Comp)
+        Debug.Log(ItemsCount);
+        if (ItemsCount >= 3 && !isOne_Comp)
         {
             audioSource.PlayOneShot(clip);
                 Debug.Log("アイテムコンプリート");
@@ -67,7 +72,7 @@ public class UI_Item : MonoBehaviour
             });
             isOne_Comp = true;
         }
-        else if (items.Count < 3)
+        else if (ItemsCount < 3)
         {
             //アイテムがすべて集まってないとき
             //UI出す処理
@@ -86,17 +91,18 @@ public class UI_Item : MonoBehaviour
                 gameObject.transform.localPosition = Vector3.zero;
                 DestoryObjs.Add(gameObject);
             }
+            
         }
 
-
-
+        UndoUIItems();
+        Debug.Log("アイテムカウント："+ItemsCount);
 
 
     }
 
     private void FixedUpdate()
     {
-        if (items.Count >= 3 && isOne_Comp)
+        if (ItemsCount >= 3 && isOne_Comp)
         {
           
             for (int i = 0; i < items.Count; i++)
@@ -176,5 +182,41 @@ public class UI_Item : MonoBehaviour
         isOne_Comp = false;
         transform.DOScale(Vector3.one, 0.3f).SetEase(Ease.OutElastic);
     }
+    public void UndoUIItems()
+    {
+        // Step 1: アイテムの状態を確認し、false ならオブジェクトを削除する
+        for (int i = 0; i < items.Count; i++)
+        {
+            if (i < DestoryObjs.Count) // オブジェクトが存在するか確認
+            {
+                // アイテムが false なら、そのオブジェクトを削除
+                if (!items[i])
+                {
+                    Debug.Log($"アイテム {i} を削除します");
+                    Destroy(DestoryObjs[i]);  // オブジェクトを削除
+                    DestoryObjs[i] = null;    // リスト内の参照をクリア
+                }
+            }
+        }
 
+        // Step 2: `null` になったオブジェクトをリストから削除
+        DestoryObjs.RemoveAll(obj => obj == null);
+
+        // Step 3: 余分なオブジェクトがある場合、削除する
+        if (DestoryObjs.Count > items.Count)
+        {
+            int excessCount = DestoryObjs.Count - items.Count;
+            Debug.Log($"余分なオブジェクトが {excessCount} 個あります。削除します。");
+
+            // リストの後ろから余分なオブジェクトを削除
+            for (int i = 0; i < excessCount; i++)
+            {
+                int lastIndex = DestoryObjs.Count - 1; // 最後の要素のインデックス
+                Destroy(DestoryObjs[lastIndex]);        // 最後のオブジェクトを削除
+                DestoryObjs.RemoveAt(lastIndex);        // リストから削除
+            }
+        }
+
+        Debug.Log("アイテムリストの更新が完了しました。");
+    }
 }
