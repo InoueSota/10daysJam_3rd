@@ -127,6 +127,13 @@ public class PlayerMoveManager : MonoBehaviour
 
             // CropJump対策
             cropJumpCoolTimer -= Time.deltaTime;
+
+            //ここが設置判定か・・・？？
+            if (GetIsGround())
+            {
+                lastGroundpos = transform.position;
+
+            }
         }
     }
 
@@ -241,8 +248,7 @@ public class PlayerMoveManager : MonoBehaviour
                             break;
                         }
                     }
-                    //ここが設置判定か・・・？？
-                    lastGroundpos=transform.position;
+
                 }
             }
         }
@@ -692,6 +698,6 @@ public class PlayerMoveManager : MonoBehaviour
 
     public bool GetIsWarping()
     {
-        return isWarping; 
+        return isWarping;
     }
 }
